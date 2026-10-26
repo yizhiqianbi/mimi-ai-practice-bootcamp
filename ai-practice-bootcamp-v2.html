@@ -1,0 +1,990 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>AI 实战训练营｜Codex × WorkBuddy × Grokbot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#05070c;
+  --ink:#f3f6fc;
+  --ink2:#c6cedd;
+  --muted:#8a94a9;
+  --dim:#4b556b;
+  --line:rgba(255,255,255,.11);
+  --line2:rgba(255,255,255,.06);
+  --blue:#4d7bff;
+  --blue2:#8eabff;
+  --cobalt:#2a5cff;
+  --paper:#f3f5f9;
+  --sans:"Inter","PingFang SC","Noto Sans SC","Noto Sans CJK SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  --mono:"JetBrains Mono","SFMono-Regular",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:var(--sans);color:var(--ink);-webkit-font-smoothing:antialiased}
+ul{list-style:none}
+
+/* stage */
+.viewport{position:fixed;inset:0;overflow:hidden;background:#000}
+.stage{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0}
+.slide{position:absolute;inset:0;overflow:hidden;visibility:hidden;opacity:0;transition:opacity .45s ease,visibility .45s;
+  background:radial-gradient(1100px 680px at 88% -12%,rgba(59,108,255,.16),transparent 62%),radial-gradient(900px 620px at -8% 112%,rgba(59,108,255,.08),transparent 60%),var(--bg)}
+.slide.active{visibility:visible;opacity:1;z-index:2}
+.slide.paper{--ink:#0d1220;--ink2:#35405a;--muted:#67728c;--dim:#a3acbf;--line:rgba(13,18,32,.12);--line2:rgba(13,18,32,.07);--blue:#2a5cff;--blue2:#2a5cff;
+  background:radial-gradient(1000px 600px at 92% -10%,rgba(42,92,255,.10),transparent 60%),var(--paper);color:var(--ink)}
+.slide.cobalt{--ink:#fff;--ink2:rgba(255,255,255,.82);--muted:rgba(255,255,255,.62);--line:rgba(255,255,255,.22);--blue:#fff;--blue2:#dfe6ff;
+  background:radial-gradient(900px 700px at 80% 20%,rgba(140,170,255,.45),transparent 60%),linear-gradient(135deg,#2a5cff 0%,#1d3bd6 45%,#0f1a6b 100%)}
+.inner{position:absolute;inset:132px 140px 124px;display:flex;flex-direction:column}
+
+/* chrome */
+.chrome-top{position:absolute;top:52px;left:140px;right:140px;display:flex;justify-content:space-between;align-items:center;font:500 15px/1 var(--mono);letter-spacing:.18em;text-transform:uppercase;color:var(--muted);z-index:3}
+.chrome-top b{color:var(--ink);font-weight:500}
+.chrome-top .sec{display:flex;align-items:center;gap:12px}
+.chrome-top .sec::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--blue)}
+.chrome-bot{position:absolute;bottom:50px;left:140px;right:140px;display:flex;justify-content:space-between;align-items:center;z-index:3}
+.ticks{display:flex;gap:5px}
+.ticks i{display:block;width:16px;height:3px;border-radius:2px;background:var(--line)}
+.ticks i.done{background:var(--dim)}
+.ticks i.now{background:var(--blue);width:34px}
+.pageno{font:500 16px/1 var(--mono);letter-spacing:.12em;color:var(--muted)}
+.pageno b{color:var(--ink);font-weight:500}
+.slide.bare .chrome-top,.slide.bare .chrome-bot{display:none}
+
+/* type */
+.eb{display:flex;align-items:center;gap:14px;font:500 18px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--blue2)}
+.eb::before{content:"";width:34px;height:2px;background:var(--blue)}
+.h-hero{font-size:172px;line-height:1;font-weight:900;letter-spacing:-.02em}
+.h-xl{font-size:100px;line-height:1.08;font-weight:800;letter-spacing:-.015em}
+.h-l{font-size:66px;line-height:1.14;font-weight:800;letter-spacing:-.01em}
+.h-m{font-size:42px;line-height:1.22;font-weight:700}
+.h-s{font-size:30px;line-height:1.3;font-weight:700}
+.lead{font-size:28px;line-height:1.55;color:var(--ink2)}
+.body{font-size:24px;line-height:1.55;color:var(--ink2)}
+.small{font-size:20px;line-height:1.5;color:var(--muted)}
+.mono{font-family:var(--mono)}
+.hl{color:var(--blue)}
+.mt-s{margin-top:20px}.mt-m{margin-top:36px}.mt-l{margin-top:56px}.mt-auto{margin-top:auto}
+
+/* components */
+.panel{background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015));border:1px solid var(--line);border-radius:22px}
+.paper .panel{background:#fff;box-shadow:0 24px 48px -30px rgba(13,18,32,.25)}
+.chip{display:inline-flex;align-items:center;height:46px;padding:0 18px;border-radius:999px;border:1px solid var(--line);font-size:20px;color:var(--ink2);background:rgba(255,255,255,.03);white-space:nowrap}
+.chip.on{border-color:rgba(77,123,255,.65);background:rgba(59,108,255,.16);color:#dce5ff}
+.paper .chip{background:#fff}
+.chips{display:flex;flex-wrap:wrap;gap:10px}
+.rule{height:1px;background:var(--line)}
+
+/* pipeline */
+.flow{display:grid;grid-template-columns:repeat(var(--n,5),1fr);position:relative}
+.flow::before{content:"";position:absolute;top:16px;left:16px;right:60px;height:2px;background:linear-gradient(90deg,var(--blue),rgba(77,123,255,.12))}
+.flow .st{position:relative;padding-right:30px}
+.flow .dot{width:34px;height:34px;border-radius:50%;border:2px solid var(--blue);background:var(--bg);display:grid;place-items:center;margin-bottom:26px;position:relative}
+.paper .flow .dot{background:var(--paper)}
+.flow .dot::after{content:"";width:10px;height:10px;border-radius:50%;background:var(--blue)}
+.flow .n{font:500 16px/1 var(--mono);letter-spacing:.14em;color:var(--blue2)}
+.flow h4{font-size:36px;line-height:1.25;font-weight:700;margin:12px 0 10px}
+.flow p{font-size:22px;line-height:1.5;color:var(--muted)}
+
+/* module divider */
+.bignum{position:absolute;right:120px;top:40px;font-size:520px;line-height:1;font-weight:900;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:2px rgba(77,123,255,.45);pointer-events:none}
+.tri{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border-top:1px solid var(--line)}
+.tri>div{padding:34px 40px 0 0}
+.tri>div+div{padding-left:40px;border-left:1px solid var(--line)}
+.tri .lab{font:500 16px/1 var(--mono);letter-spacing:.2em;color:var(--blue2);margin-bottom:20px}
+.tri li{font-size:25px;line-height:1.5;color:var(--ink2)}
+.tri li::before{content:"— ";color:var(--dim)}
+
+/* workshop */
+.ws{display:grid;grid-template-columns:1fr 620px;gap:72px;height:100%}
+.steps{display:grid;gap:40px}
+.step{display:grid;grid-template-columns:64px 1fr;gap:26px;align-items:start}
+.step .k{width:56px;height:56px;border-radius:14px;border:1.5px solid var(--blue);display:grid;place-items:center;font:600 24px/1 var(--mono);color:var(--blue2)}
+.step h4{font-size:34px;line-height:1.3;font-weight:700}
+.step p{font-size:23px;line-height:1.5;color:var(--ink2);margin-top:6px}
+.step .chk{font-size:20px;color:var(--blue2);margin-top:8px}
+.take{background:#f3f5f9;color:#0d1220;border-radius:28px;padding:52px 50px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.take::before{content:"";position:absolute;right:-120px;top:-120px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(42,92,255,.18),transparent 70%)}
+.take .lab{font:500 16px/1 var(--mono);letter-spacing:.2em;color:#2a5cff}
+.take h3{font-size:46px;font-weight:800;margin:18px 0 34px}
+.take li{display:grid;grid-template-columns:40px 1fr;gap:16px;padding:20px 0;border-top:1px solid rgba(13,18,32,.1)}
+.take li::before{content:"✓";width:34px;height:34px;border-radius:50%;background:#2a5cff;color:#fff;display:grid;place-items:center;font-size:18px;font-weight:700;margin-top:2px}
+.take li b{display:block;font-size:26px;line-height:1.35}
+.take li span{display:block;font-size:18px;color:#67728c;margin-top:4px}
+.take .prep{margin-top:auto;font-size:18px;line-height:1.5;color:#67728c;padding-top:22px;border-top:1px dashed rgba(13,18,32,.2)}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(22px)}
+.slide.active .rv{animation:rv .7s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(var(--i,0) * 70ms + 80ms)}
+@keyframes rv{to{opacity:1;transform:none}}
+
+/* notes + controls */
+.notes{display:none}
+.notes-panel{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);width:min(1100px,92vw);max-height:38vh;overflow:auto;z-index:50;display:none;
+  background:rgba(10,13,22,.94);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:22px 26px;color:#dfe5f1;font-size:17px;line-height:1.75;backdrop-filter:blur(14px)}
+.notes-panel.show{display:block}
+.notes-panel .t{font:500 12px/1 var(--mono);letter-spacing:.2em;color:#8eabff;margin-bottom:12px}
+.ctrl{position:fixed;right:20px;bottom:20px;z-index:40;display:flex;gap:6px;opacity:0;transition:opacity .25s}
+body:hover .ctrl{opacity:1}
+.ctrl button{width:40px;height:40px;border-radius:10px;border:1px solid rgba(255,255,255,.16);background:rgba(10,13,22,.8);color:#dfe5f1;font:500 14px var(--mono);cursor:pointer}
+.ctrl button:hover{border-color:#4d7bff}
+
+@media print{
+  @page{size:1920px 1080px;margin:0}
+  html,body{overflow:visible;height:auto;background:#000}
+  .viewport{position:static}
+  .stage{position:static;transform:none!important}
+  .slide{position:relative;visibility:visible;opacity:1;width:1920px;height:1080px;page-break-after:always;break-after:page}
+  .rv{opacity:1;transform:none;animation:none!important}
+  .ctrl,.notes-panel{display:none!important}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}.slide.active .rv{animation:none}}
+
+/* ---------- slide specific ---------- */
+/* cover */
+.cover .lens{position:absolute;right:40px;top:-30px;height:1140px;filter:saturate(1.08);-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 30%,#000 82%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 30%,#000 82%,transparent 100%)}
+.cover .glow{position:absolute;right:120px;top:180px;width:760px;height:760px;border-radius:50%;background:radial-gradient(circle,rgba(59,108,255,.28),transparent 65%)}
+.cover .brand{font-size:28px;font-weight:600;letter-spacing:.01em;color:var(--ink2)}
+.cover .brand em{font-style:normal;color:var(--blue);margin:0 14px}
+.cover .meta{display:flex;gap:64px;align-items:flex-end}
+.cover .meta .date{font-size:64px;font-weight:800;color:var(--blue);letter-spacing:-.01em;line-height:1}
+.cover .meta .k{font-size:24px;color:var(--ink2);line-height:1.5}
+.cover .meta .k small{display:block;font:500 14px/1 var(--mono);letter-spacing:.2em;color:var(--muted);margin-bottom:10px}
+
+/* pain list */
+.pain li{display:grid;grid-template-columns:90px 1fr;align-items:baseline;padding:30px 0;border-top:1px solid var(--line)}
+.pain li:last-child{border-bottom:1px solid var(--line)}
+.pain .n{font:500 20px/1 var(--mono);color:var(--blue2)}
+.pain b{font-size:38px;font-weight:800;display:block}
+.pain span{display:block;font-size:23px;color:var(--muted);margin-top:8px}
+
+/* overview matrix */
+.strip{display:flex;align-items:center;gap:22px;height:62px;padding:0 28px;border:1px dashed var(--line);border-radius:14px;font-size:22px;color:var(--ink2)}
+.strip .tag{font:500 15px/1 var(--mono);letter-spacing:.18em;color:var(--blue2)}
+.matrix{display:grid;grid-template-columns:250px 1.15fr 1.15fr .9fr;border-radius:20px;overflow:hidden;border:1px solid var(--line)}
+.matrix>div{padding:26px 28px;border-top:1px solid var(--line2);font-size:22px;line-height:1.5;color:var(--ink2)}
+.matrix>div:nth-child(-n+4){border-top:0;font:500 15px/1 var(--mono);letter-spacing:.2em;color:var(--muted);padding:20px 28px;background:rgba(255,255,255,.03)}
+.matrix .mod{background:rgba(59,108,255,.08)}
+.matrix .mod .no{font:500 15px/1 var(--mono);color:var(--blue2);letter-spacing:.18em}
+.matrix .mod b{display:block;font-size:34px;color:var(--ink);margin-top:10px}
+.matrix .ws-tag{display:inline-block;font:500 14px/1 var(--mono);letter-spacing:.1em;color:#fff;background:var(--cobalt);border-radius:6px;padding:6px 8px;margin-right:8px;vertical-align:2px}
+.matrix .out{color:var(--ink);font-weight:600}
+
+/* roadmap */
+.days{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.day .dh{display:flex;align-items:baseline;gap:18px;padding-bottom:22px;border-bottom:2px solid var(--blue)}
+.day .dh b{font-size:44px;font-weight:800}
+.day .dh span{font-size:22px;color:var(--muted)}
+.slot{display:grid;grid-template-columns:110px 1fr;gap:20px;padding:42px 0;border-bottom:1px solid var(--line)}
+.slot .tm{font:500 20px/1.9 var(--mono);color:var(--blue2);letter-spacing:.1em}
+.slot h4{font-size:36px;font-weight:700;line-height:1.3}
+.slot p{font-size:23px;color:var(--muted);margin-top:10px}
+.slot .badge{display:inline-block;margin-left:12px;font:500 14px/1 var(--mono);letter-spacing:.08em;padding:7px 10px;border-radius:6px;background:var(--cobalt);color:#fff;vertical-align:5px}
+
+/* AI landscape */
+.land{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;flex:1}
+.land .col{padding:32px 26px;display:flex;flex-direction:column}
+.land .col.core{background:linear-gradient(180deg,rgba(59,108,255,.24),rgba(59,108,255,.05));border-color:rgba(77,123,255,.6)}
+.land .no{font-size:72px;line-height:1;font-weight:900;color:transparent;-webkit-text-stroke:1.5px var(--blue2)}
+.land h4{font-size:34px;font-weight:800;margin:30px 0 14px;line-height:1.25}
+.land p{font-size:22px;line-height:1.5;color:var(--muted)}
+.land .chips{margin-top:auto;gap:8px}
+.land .chip{height:40px;font-size:18px;padding:0 14px}
+.land .core-tag{font:500 13px/1 var(--mono);letter-spacing:.14em;color:#fff;background:var(--cobalt);padding:6px 9px;border-radius:5px;align-self:flex-start;margin-bottom:-4px;margin-top:14px}
+
+/* tools trio */
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.trio .panel{padding:34px 36px}
+.trio .r{font:500 15px/1 var(--mono);letter-spacing:.2em;color:var(--blue2)}
+.trio b{display:block;font-size:40px;font-weight:800;margin:16px 0 10px}
+.trio p{font-size:23px;line-height:1.5;color:var(--ink2)}
+
+/* files -> kb */
+.kb{display:grid;grid-template-columns:640px 120px 1fr;align-items:center;height:400px}
+.pile{position:relative;height:100%}
+.pile .f{position:absolute;display:flex;align-items:center;gap:12px;padding:14px 20px;border-radius:12px;background:#111725;border:1px solid var(--line);font:400 19px/1 var(--mono);color:var(--ink2);white-space:nowrap;box-shadow:0 18px 40px -20px rgba(0,0,0,.8)}
+.pile .f::before{content:"";width:14px;height:18px;border-radius:3px;background:var(--dim)}
+.arrow{display:grid;place-items:center;font-size:56px;color:var(--blue)}
+.tree{padding:30px 36px;font:400 21px/1.85 var(--mono);color:var(--ink2)}
+.tree .d{color:var(--ink)}
+.tree .c{color:var(--dim)}
+.tree .x{color:var(--blue2)}
+
+/* daily + assets */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:28px;flex:1}
+.two .panel{padding:40px 44px;display:flex;flex-direction:column}
+.report{margin-top:30px;border-radius:16px;background:#0c111c;border:1px solid var(--line);padding:26px 30px;font-size:24px;flex:1;display:flex;flex-direction:column;justify-content:space-around;line-height:1.6}
+.report .row{display:grid;grid-template-columns:100px 1fr;padding:14px 0;border-top:1px solid var(--line2)}
+.report .row:first-of-type{border-top:0}
+.report .row b{font:500 18px/1.9 var(--mono);color:var(--blue2);letter-spacing:.1em}
+.report .row span{color:var(--ink2)}
+.src{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.asset-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:30px;flex:1}
+.asset-grid div{padding:30px 30px;display:flex;flex-direction:column;justify-content:center;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.02)}
+.asset-grid b{display:block;font-size:32px;font-weight:700}
+.asset-grid span{display:block;font-size:21px;color:var(--muted);margin-top:6px;line-height:1.45}
+
+/* ppt */
+.acts{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.acts div{padding:40px 38px;border-radius:18px;border:1px solid var(--line);background:#fff}
+.acts b{display:block;font-size:52px;font-weight:800}
+.acts span{display:block;font-size:22px;color:var(--muted);margin-top:8px;line-height:1.45}
+.vsteps li{display:grid;grid-template-columns:60px 1fr;gap:18px;padding:var(--pad,28px) 0;border-top:1px solid var(--line)}
+.vsteps .n{font:600 20px/1.5 var(--mono);color:var(--blue)}
+.vsteps b{font-size:32px;font-weight:700;display:block}
+.vsteps span{font-size:22px;color:var(--muted);display:block;margin-top:4px}
+
+/* poster */
+.poster-wrap{display:grid;grid-template-columns:560px 1fr;gap:90px;height:100%}
+.poster-img{height:100%;border-radius:18px;overflow:hidden;border:1px solid var(--line);box-shadow:0 40px 80px -30px rgba(0,0,0,.9);position:relative}
+.poster-img img{width:100%;height:100%;object-fit:cover;object-position:top}
+.layers li{display:grid;grid-template-columns:56px 1fr;gap:16px;padding:22px 0;border-top:1px solid var(--line)}
+.layers .n{width:40px;height:40px;border-radius:50%;background:var(--cobalt);display:grid;place-items:center;font:600 17px/1 var(--mono);color:#fff}
+.layers b{font-size:30px;font-weight:700;display:block}
+.layers span{font-size:21px;color:var(--muted);display:block;margin-top:4px}
+
+/* video timeline */
+.vt{display:grid;grid-template-columns:5fr 12fr 25fr 12fr 8fr;gap:6px}
+.vt div{height:200px;border-radius:14px;padding:22px 22px;display:flex;flex-direction:column;justify-content:space-between;background:rgba(59,108,255,.12);border:1px solid rgba(77,123,255,.3)}
+.vt div:first-child{background:var(--cobalt);border-color:var(--cobalt)}
+.vt div:last-child{background:#fff;color:#0d1220;border-color:#fff}
+.vt .tm{font:500 15px/1 var(--mono);letter-spacing:.06em;opacity:.8}
+.vt b{font-size:34px;font-weight:800;white-space:nowrap}
+.vt-axis{display:flex;justify-content:space-between;font:500 15px/1 var(--mono);color:var(--muted);margin-top:14px}
+.pipe{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.pipe .chip{height:60px;font-size:24px;padding:0 26px}
+.pipe i{font-style:normal;color:var(--blue);font-size:24px}
+
+/* seo vs geo */
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:24px;overflow:hidden;border:1px solid var(--line)}
+.vs>div{padding:48px 56px}
+.vs>div+div{background:linear-gradient(160deg,rgba(59,108,255,.22),rgba(59,108,255,.04));border-left:1px solid var(--line)}
+.vs .big{font-size:76px;font-weight:900;letter-spacing:-.01em;line-height:1}
+.vs .full{font:500 16px/1 var(--mono);letter-spacing:.12em;color:var(--muted);margin-top:14px}
+.vs dl{margin-top:30px}
+.vs dt{font:500 15px/1 var(--mono);letter-spacing:.2em;color:var(--blue2);margin-top:22px}
+.vs dd{font-size:26px;line-height:1.5;color:var(--ink2);margin-top:8px}
+
+/* growth loop */
+.loop{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;flex:1}
+.loop .panel{padding:30px 26px;display:flex;flex-direction:column;position:relative}
+.loop .panel:not(:last-child)::after{content:"→";position:absolute;right:-16px;top:34px;width:18px;text-align:center;color:var(--blue);font-size:22px;z-index:2}
+.loop .no{font:500 15px/1 var(--mono);letter-spacing:.16em;color:var(--blue2)}
+.loop h4{font-size:42px;font-weight:800;margin:20px 0 6px}
+.loop .sub{font-size:22px;color:var(--blue2);font-weight:600}
+.loop ul{margin-top:30px}
+.loop li{font-size:23px;line-height:1.5;color:var(--ink2);padding:16px 0;border-top:1px solid var(--line2)}
+
+/* reliability */
+.contract{padding:34px 40px;font:400 21px/1.9 var(--mono);background:#0d1220!important;color:#c6cedd;border:0!important}
+.contract .k{color:#8eabff}
+.contract .c{color:#5d6780}
+.std{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-top:2px solid var(--ink)}
+.std div{padding:36px 24px 0 0}
+.std div+div{padding-left:24px;border-left:1px solid var(--line)}
+.std .n{font:500 16px/1 var(--mono);color:var(--blue)}
+.std b{display:block;font-size:60px;font-weight:900;margin:18px 0 14px}
+.std span{font-size:22px;line-height:1.5;color:var(--muted)}
+.red li{display:grid;grid-template-columns:44px 1fr;gap:14px;padding:24px 0;border-top:1px solid var(--line);font-size:26px;line-height:1.45;color:var(--ink2)}
+.red li::before{content:"×";width:32px;height:32px;border-radius:8px;border:1.5px solid #e5484d;color:#e5484d;display:grid;place-items:center;font-size:20px;font-weight:700;margin-top:2px}
+
+/* closing outputs */
+.outs{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.outs .panel{padding:36px 34px}
+.outs .no{font:500 15px/1 var(--mono);letter-spacing:.16em;color:var(--blue2)}
+.outs b{display:block;font-size:36px;font-weight:800;margin:18px 0 18px}
+.outs li{font-size:23px;line-height:1.45;color:var(--ink2);padding:14px 0;border-top:1px solid var(--line2)}
+.qs{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.qs div{font-size:28px;line-height:1.4;font-weight:600;padding-top:18px;border-top:2px solid var(--blue)}
+.qs span{display:block;font:500 15px/1 var(--mono);color:var(--blue2);margin-bottom:12px;letter-spacing:.14em}
+</style>
+</head>
+<body>
+<div class="viewport"><div class="stage" id="stage">
+
+<!-- 01 封面 -->
+<section class="slide cover bare" data-sec="开场">
+  <div class="glow"></div>
+  <img class="lens rv" src="assets/lens.png" alt="">
+  <div class="inner" style="inset:96px 140px 96px">
+    <div class="eb rv">MIMI / AI Practice Series</div>
+    <div class="brand rv mt-m">Codex<em>×</em>WorkBuddy<em>×</em>Grokbot</div>
+    <h1 class="h-hero rv" style="margin-top:120px"><span class="hl">AI</span> 实战训练营</h1>
+    <div class="h-m rv" style="margin-top:34px;font-weight:500;color:var(--ink2)">把 AI 变成自己的工作系统</div>
+    <div class="meta rv mt-auto">
+      <div class="date">10.24 — 10.25</div>
+      <div class="k"><small>WHERE</small>深圳 · 线下小班</div>
+      <div class="k"><small>FORMAT</small>两天一夜 · 现场指导</div>
+    </div>
+  </div>
+  <aside class="notes">欢迎大家来到 AI 实战训练营。接下来两天，我们不把 AI 当成聊天工具，而是放进真实工作里：整理文件、做 PPT、做海报、做口播视频、搭网站并上线。重点不是记住多少提示词，而是两天后每个人都带走一套自己的工作系统和几份能继续用的成果。</aside>
+</section>
+
+<!-- 02 为什么 -->
+<section class="slide" data-sec="开场">
+  <div class="inner">
+    <div style="display:grid;grid-template-columns:860px 1fr;gap:80px;height:100%">
+      <div style="display:flex;flex-direction:column">
+        <div class="eb rv">开场 · Why</div>
+        <h2 class="h-l rv mt-m">你已经试过 AI，<br>为什么工作方式<br>还没变？</h2>
+        <p class="lead rv mt-m" style="max-width:720px">问题通常不在模型不够强，而在这四个断点。这两天要做的，就是把它们一个个接上。</p>
+      </div>
+      <ul class="pain" style="align-self:center">
+        <li class="rv"><span class="n">01</span><div><b>信息太散</b><span>文件、聊天、网页、表格散落在不同地方</span></div></li>
+        <li class="rv"><span class="n">02</span><div><b>重复劳动</b><span>每天都在做同样的整理、汇总和改写</span></div></li>
+        <li class="rv"><span class="n">03</span><div><b>不会交付</b><span>有答案，却没有能交给别人的文件和结果</span></div></li>
+        <li class="rv"><span class="n">04</span><div><b>无法复用</b><span>一次对话结束，下一次还得从头再来</span></div></li>
+      </ul>
+    </div>
+  </div>
+  <aside class="notes">很多人已经试过 AI，但工作方式没有改变。原因通常不是模型不够强，而是任务没有被拆开，资料没有准备好，结果没有经过核验，最后也没有沉淀成下一次可以复用的流程。我们今天要解决的，正是这四个断点。</aside>
+</section>
+
+<!-- 03 观点 -->
+<section class="slide cobalt" data-sec="开场">
+  <div class="inner" style="justify-content:center">
+    <div class="eb rv">Core Idea</div>
+    <h2 class="h-xl rv mt-m" style="font-size:118px">AI 的价值不在聊天，<br>而在把事情做完。</h2>
+    <p class="lead rv mt-l" style="font-size:32px">这两天的目标：从「会问 AI」，升级到「能用 AI 完成工作」。</p>
+  </div>
+  <aside class="notes">这页只讲一句话：AI 的价值不在聊天，而在把事情做完。会问问题不稀奇，能把一个真实任务交付出来，才是这两天要练的能力。</aside>
+</section>
+
+<!-- 04 纵览 -->
+<section class="slide" data-sec="课程纵览">
+  <div class="inner">
+    <div class="eb rv">Overview</div>
+    <h2 class="h-l rv mt-s" style="font-size:58px">一张图看懂这两天：三个模块，四个现场作业</h2>
+    <div class="strip rv mt-m"><span class="tag">起点</span>先认识今天有哪些 AI，以及怎么把它们放进同一个工作台</div>
+    <div class="matrix rv mt-s">
+      <div>模块</div><div>讲什么</div><div>现场做</div><div>带走什么</div>
+      <div class="mod"><span class="no">MODULE 01</span><b>工作系统</b></div>
+      <div>文件整理成知识库 · 每天日报 · 资产整理</div>
+      <div><span class="ws-tag">作业一</span>整理文件 + 知识库 + 个人邮件助理</div>
+      <div class="out">一套个人知识库与邮件助理</div>
+      <div class="mod"><span class="no">MODULE 02</span><b>内容表达</b></div>
+      <div>PPT 与商业表达 · 海报与视觉资产 · 口播与短视频</div>
+      <div><span class="ws-tag">作业二</span>PPT + 海报<br><span class="ws-tag">作业三</span>数字人口播视频</div>
+      <div class="out">一份 PPT、一张海报、一条口播视频</div>
+      <div class="mod"><span class="no">MODULE 03</span><b>业务增长</b></div>
+      <div>GEO / SEO · 网站与部署 · B2B 获客 · 自动客服 · 收费交付</div>
+      <div><span class="ws-tag">作业四</span>做网站并上线部署</div>
+      <div class="out">一个能访问、能收线索的网站</div>
+    </div>
+    <div class="strip rv mt-s"><span class="tag">终点</span>把所有成果变成可靠结果：可用、可改、可复用、可追溯、能交接</div>
+  </div>
+  <aside class="notes">这是整门课的地图。开头先认识今天的 AI 工具，然后进入三个模块：工作系统、内容表达、业务增长。每个模块都按同样的节奏走：先讲方法，再现场做，最后带走一个真实成果。四个现场作业分别对应：整理文件与知识库和邮件助理、PPT 与海报、数字人口播视频、网站上线。最后我们讲怎么让这些结果变得可靠。</aside>
+</section>
+
+<!-- 05 路线图 -->
+<section class="slide" data-sec="课程纵览">
+  <div class="inner">
+    <div class="eb rv">Roadmap</div>
+    <h2 class="h-l rv mt-s">两天一夜的节奏</h2>
+    <div class="days mt-m">
+      <div class="day rv">
+        <div class="dh"><b>Day 1</b><span>认识 AI，搭好工作系统</span></div>
+        <div class="slot"><div class="tm">上午</div><div><h4>开场 · AI 全景 · 工作台</h4><p>今天有哪些 AI，怎么组合成工作台</p></div></div>
+        <div class="slot"><div class="tm">下午</div><div><h4>模块一 · 工作系统<span class="badge">作业一</span></h4><p>文件变知识库、每天日报、资产整理、邮件助理</p></div></div>
+        <div class="slot"><div class="tm">晚上</div><div><h4>模块二 · PPT 与海报<span class="badge">作业二</span></h4><p>商业表达与视觉资产，现场完成 PPT 和海报</p></div></div>
+      </div>
+      <div class="day rv">
+        <div class="dh"><b>Day 2</b><span>做内容，做增长，交结果</span></div>
+        <div class="slot"><div class="tm">上午</div><div><h4>模块二 · 口播与短视频<span class="badge">作业三</span></h4><p>脚本、数字人、剪辑，完成一条口播视频</p></div></div>
+        <div class="slot"><div class="tm">下午</div><div><h4>模块三 · 业务增长<span class="badge">作业四</span></h4><p>GEO / SEO、获客、客服、收费，网站上线</p></div></div>
+        <div class="slot"><div class="tm">结营</div><div><h4>可靠结果 · 成果展示</h4><p>交付标准、可靠边界、每人 3 分钟展示</p></div></div>
+      </div>
+    </div>
+    <p class="small rv mt-auto">* 具体时段会根据场地和学员进度现场调整</p>
+  </div>
+  <aside class="notes">第一天先解决“怎么工作”：认识 AI、配置工作台、整理资料、建立知识库和邮件助理，晚上开始做 PPT 和海报。第二天解决“怎么产出和增长”：上午做口播视频，下午讲业务增长并把网站真正部署上线，最后统一讲可靠交付并做成果展示。</aside>
+</section>
+
+<!-- 06 AI 全景 -->
+<section class="slide" data-sec="AI 全景">
+  <div class="inner">
+    <div class="eb rv">AI Landscape</div>
+    <h2 class="h-l rv mt-s">先看清楚：今天有哪些 AI？</h2>
+    <p class="lead rv mt-s">按“能帮你做什么”来分类，而不是按品牌去记。</p>
+    <div class="land mt-m">
+      <div class="panel col rv"><span class="no">01</span><h4>对话与写作</h4><p>回答、改写、总结、分析，最通用的入口</p>
+        <div class="chips"><span class="chip">ChatGPT</span><span class="chip">Claude</span><span class="chip">Gemini</span><span class="chip">DeepSeek</span><span class="chip">Kimi</span><span class="chip">豆包</span></div></div>
+      <div class="panel col core rv"><span class="no">02</span><h4>智能体与工作台</h4><p>读文件、调工具、连续执行，真正“干活”的一类</p>
+        <div class="chips"><span class="chip on">Codex</span><span class="chip on">WorkBuddy</span><span class="chip on">Grokbot</span><span class="chip">Claude Code</span><span class="chip">Cursor</span></div>
+        <span class="core-tag">本课主线</span></div>
+      <div class="panel col rv"><span class="no">03</span><h4>搜索与研究</h4><p>带来源地查资料，查人、查公司、看行业</p>
+        <div class="chips"><span class="chip">Perplexity</span><span class="chip">秘塔 AI 搜索</span><span class="chip">Deep Research</span></div></div>
+      <div class="panel col rv"><span class="no">04</span><h4>图像与视觉</h4><p>海报、产品图、主视觉和风格化素材</p>
+        <div class="chips"><span class="chip">GPT 图像</span><span class="chip">Midjourney</span><span class="chip">即梦</span></div></div>
+      <div class="panel col rv"><span class="no">05</span><h4>视频与数字人</h4><p>口播、数字人、短视频生成与剪辑</p>
+        <div class="chips"><span class="chip">可灵</span><span class="chip">HeyGen</span><span class="chip">剪映</span><span class="chip">Remotion</span></div></div>
+    </div>
+  </div>
+  <aside class="notes">先给大家一张 AI 全景图。不要按品牌记，按能力分五类：对话写作、智能体与工作台、搜索研究、图像视觉、视频与数字人。这门课的主线是第二类：能读文件、调用工具、连续执行任务的智能体工作台，其余几类作为它的“手和眼”。（工具清单请在课前按最新版本确认）</aside>
+</section>
+
+<!-- 07 工作台 -->
+<section class="slide" data-sec="AI 全景">
+  <div class="inner">
+    <div class="eb rv">From Prompt to System</div>
+    <h2 class="h-l rv mt-s">工具会换，工作系统不会。</h2>
+    <p class="lead rv mt-s">一个好结果不是一句神奇提示词，而是一条能重复运行的小型生产线。</p>
+    <div class="flow rv mt-l" style="--n:5">
+      <div class="st"><div class="dot"></div><span class="n">01 INPUT</span><h4>输入</h4><p>目标、资料、角色、限制</p></div>
+      <div class="st"><div class="dot"></div><span class="n">02 WORKSPACE</span><h4>工作台</h4><p>AI 工具 + 本地文件 + 办公软件</p></div>
+      <div class="st"><div class="dot"></div><span class="n">03 SKILL</span><h4>Skill</h4><p>把步骤、工具和格式写成可复用的能力</p></div>
+      <div class="st"><div class="dot"></div><span class="n">04 CHECK</span><h4>核验</h4><p>事实、来源、格式逐项检查</p></div>
+      <div class="st"><div class="dot"></div><span class="n">05 OUTPUT</span><h4>交付</h4><p>别人能直接用的文件或系统</p></div>
+    </div>
+    <div class="trio mt-auto">
+      <div class="panel rv"><span class="r">EXECUTE</span><b>Codex</b><p>处理文件、网页、代码和复杂任务，把结果落成文件</p></div>
+      <div class="panel rv"><span class="r">CONNECT</span><b>WorkBuddy</b><p>接入日常办公和团队协作，让工作流进入真实环境</p></div>
+      <div class="panel rv"><span class="r">EXPLORE</span><b>Grokbot</b><p>补充研究、表达和创意探索，快速生成多种可能</p></div>
+    </div>
+  </div>
+  <aside class="notes">工具一定会更新，但这条生产线不会变：输入、工作台、Skill、核验、交付。我们的工作台由三部分组成：Codex 负责执行复杂任务和落地文件，WorkBuddy 负责接入办公和协作，Grokbot 负责研究和创意补充。后面每个模块都沿着这条线走一遍。</aside>
+</section>
+
+<!-- 08 模块一 -->
+<section class="slide" data-sec="模块一 · 工作系统">
+  <div class="bignum">01</div>
+  <div class="inner">
+    <div class="eb rv">Module 01</div>
+    <h2 class="h-xl rv mt-m" style="font-size:120px">工作系统</h2>
+    <p class="lead rv mt-m" style="max-width:900px;font-size:32px">把每天重复的整理、汇总和查找，交给一套系统。</p>
+    <div class="tri rv mt-auto">
+      <div><div class="lab">讲什么</div><ul><li>文件怎么整理成知识库</li><li>每天日报怎么自动生成</li><li>做过的东西怎么变成资产</li></ul></div>
+      <div><div class="lab">现场做 · 作业一</div><ul><li>整理一个真实文件夹</li><li>搭一个能问答的知识库</li><li>配置个人邮件助理</li></ul></div>
+      <div><div class="lab">带走什么</div><ul><li>一套个人知识库</li><li>一个每天可用的邮件助理</li><li>一份日报模板</li></ul></div>
+    </div>
+  </div>
+  <aside class="notes">第一个模块是工作系统。我们从最容易看到收益的事情开始：整理文件、生成日报、整理资产。讲完马上做作业一，最后每个人带走知识库、邮件助理和日报模板。</aside>
+</section>
+
+<!-- 09 文件→知识库 -->
+<section class="slide" data-sec="模块一 · 工作系统">
+  <div class="inner">
+    <div class="eb rv">讲 ① · Files → Knowledge Base</div>
+    <h2 class="h-l rv mt-s">把一堆文件，变成能问答的知识库</h2>
+    <div class="kb mt-m">
+      <div class="pile rv">
+        <div class="f" style="left:10px;top:20px;transform:rotate(-4deg)">合同_final_v3(1).docx</div>
+        <div class="f" style="left:290px;top:70px;transform:rotate(3deg)">IMG_2034.jpg</div>
+        <div class="f" style="left:40px;top:120px;transform:rotate(2deg)">会议纪要-新建.pdf</div>
+        <div class="f" style="left:330px;top:170px;transform:rotate(-3deg)">报价单最终版.xlsx</div>
+        <div class="f" style="left:0;top:225px;transform:rotate(-2deg)">微信聊天记录.txt</div>
+        <div class="f" style="left:260px;top:280px;transform:rotate(4deg)">未命名文档 (7)</div>
+        <div class="f" style="left:60px;top:335px;transform:rotate(-1deg)">客户资料-张总.pptx</div>
+      </div>
+      <div class="arrow rv">→</div>
+      <div class="panel tree rv">
+        <div class="d">知识库/</div>
+        <div>├─ <span class="x">00_索引.md</span> <span class="c"># 每个文件一句话摘要</span></div>
+        <div>├─ 01_客户/ <span class="c"># 张总 · 背景 · 往来</span></div>
+        <div>├─ 02_合同与报价/</div>
+        <div>├─ 03_会议纪要/ <span class="c"># 决策 · 待办</span></div>
+        <div>├─ 04_素材/</div>
+        <div>└─ <span class="x">问答入口</span> <span class="c"># 直接提问，带出处</span></div>
+      </div>
+    </div>
+    <div class="flow rv mt-auto" style="--n:4">
+      <div class="st"><div class="dot"></div><span class="n">STEP 01</span><h4>识别</h4><p>类型、主题、时间、相关人</p></div>
+      <div class="st"><div class="dot"></div><span class="n">STEP 02</span><h4>命名归类</h4><p>统一命名规则和目录结构</p></div>
+      <div class="st"><div class="dot"></div><span class="n">STEP 03</span><h4>摘要索引</h4><p>一句话摘要，生成总索引</p></div>
+      <div class="st"><div class="dot"></div><span class="n">STEP 04</span><h4>问答检索</h4><p>直接提问，答案带出处</p></div>
+    </div>
+  </div>
+  <aside class="notes">知识库不是一个高级概念，就是让你的文件能被找到、能被提问。四步：先让 AI 识别每个文件是什么，再统一命名和目录，然后给每个文件写一句话摘要、生成索引，最后在整理好的资料上直接提问，要求答案带出处。资料结构清楚了，后面的 PPT、内容和网站都会更快。</aside>
+</section>
+
+<!-- 10 日报 + 资产 -->
+<section class="slide" data-sec="模块一 · 工作系统">
+  <div class="inner">
+    <div class="eb rv">讲 ② ③ · Daily Report & Assets</div>
+    <h2 class="h-l rv mt-s">每天的事自动汇总，做过的东西都能再用</h2>
+    <div class="two mt-m">
+      <div class="panel rv">
+        <div class="h-s">每天日报</div>
+        <p class="body" style="margin-top:8px">从聊天记录、邮件和日历里，把今天的事捞出来</p>
+        <div class="src"><span class="chip">群聊记录</span><span class="chip">邮件</span><span class="chip">日历</span><span class="chip">文档改动</span></div>
+        <div class="report">
+          <div class="row"><b>完成</b><span>客户 A 方案初稿已发送</span></div>
+          <div class="row"><b>决策</b><span>报价按 B 档执行，周五前确认</span></div>
+          <div class="row"><b>待办</b><span>补充案例数据 · 约下周二复盘</span></div>
+          <div class="row"><b>风险</b><span>合同条款待法务确认</span></div>
+        </div>
+      </div>
+      <div class="panel rv">
+        <div class="h-s">资产整理</div>
+        <p class="body" style="margin-top:8px">资产 = 下一次能直接调用的成果，而不是躺在硬盘里的文件</p>
+        <div class="asset-grid">
+          <div><b>统一命名</b><span>日期_项目_类型_版本</span></div>
+          <div><b>标签分类</b><span>按客户、项目、用途检索</span></div>
+          <div><b>版本留存</b><span>改过的每一版都能找回</span></div>
+          <div><b>沉淀模板</b><span>好用的 Prompt 和格式写成 Skill</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">日报的本质是信息提取：从聊天记录、邮件、日历里提取出完成了什么、做了什么决策、还有什么待办、有什么风险。资产整理的本质是复用：统一命名、打标签、保留版本，把好用的提示词和格式沉淀成 Skill，下一次直接调用。</aside>
+</section>
+
+<!-- 11 作业一 -->
+<section class="slide" data-sec="模块一 · 工作系统">
+  <div class="inner">
+    <div class="ws">
+      <div style="display:flex;flex-direction:column">
+        <div class="eb rv">现场作业 01 · 约 90 分钟</div>
+        <h2 class="h-l rv mt-s" style="font-size:58px">整理文件 · 知识库 · 个人邮件助理</h2>
+        <div class="steps mt-l">
+          <div class="step rv"><div class="k">A</div><div><h4>整理一个真实文件夹</h4><p>让 AI 识别、改名、归类，并生成总索引</p><div class="chk">✓ 检查：有没有漏文件、摘要有没有说错</div></div></div>
+          <div class="step rv"><div class="k">B</div><div><h4>搭一个知识库入口</h4><p>基于整理好的资料，回答 3 个你工作中的真实问题</p><div class="chk">✓ 检查：每个答案都能找到出处</div></div></div>
+          <div class="step rv"><div class="k">C</div><div><h4>配置个人邮件助理</h4><p>自动分类、摘要、起草回复，并汇总进日报</p><div class="chk">✓ 检查：回复由你确认后再发送</div></div></div>
+        </div>
+      </div>
+      <div class="take rv">
+        <div class="lab">TAKE AWAY</div>
+        <h3>带走什么</h3>
+        <ul>
+          <li><div><b>一个整理好的文件夹</b><span>统一命名 + 总索引</span></div></li>
+          <li><div><b>一个能问答的知识库</b><span>答案带出处，可持续追加</span></div></li>
+          <li><div><b>一个个人邮件助理</b><span>每天自动分类、摘要、起草</span></div></li>
+          <li><div><b>一份日报模板</b><span>明天上班就能用</span></div></li>
+        </ul>
+        <div class="prep">课前准备：一组可公开或已脱敏的文件，以及一个可用于测试的邮箱。</div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">作业一分三步。第一步，拿出一个真实但可以公开的文件夹，让 AI 识别、改名、归类并生成索引。第二步，在整理好的资料上提三个你工作中的真实问题，检查答案能不能找到出处。第三步，配置个人邮件助理：分类、摘要、起草回复，但发送前一定由你确认。</aside>
+</section>
+
+<!-- 12 模块二 -->
+<section class="slide" data-sec="模块二 · 内容表达">
+  <div class="bignum">02</div>
+  <div class="inner">
+    <div class="eb rv">Module 02</div>
+    <h2 class="h-xl rv mt-m" style="font-size:120px">内容表达</h2>
+    <p class="lead rv mt-m" style="max-width:900px;font-size:32px">同一个观点，变成 PPT、海报和视频。</p>
+    <div class="tri rv mt-auto">
+      <div><div class="lab">讲什么</div><ul><li>PPT 与商业表达</li><li>海报与视觉资产</li><li>口播与短视频制作</li></ul></div>
+      <div><div class="lab">现场做 · 作业二 / 三</div><ul><li>做一份 PPT 和一张海报</li><li>做一条数字人口播视频</li></ul></div>
+      <div><div class="lab">带走什么</div><ul><li>一份可修改的 PPT</li><li>一张可发布的海报</li><li>一条 30–60 秒口播视频</li></ul></div>
+    </div>
+  </div>
+  <aside class="notes">第二个模块是内容表达。核心是先确定观点和受众，再选择表达形式。我们会讲 PPT 与商业表达、海报与视觉资产、口播与短视频三部分，配两个现场作业：PPT 加海报，以及数字人口播视频。</aside>
+</section>
+
+<!-- 13 PPT -->
+<section class="slide paper" data-sec="模块二 · 内容表达">
+  <div class="inner">
+    <div class="eb rv">讲 ① · PPT & Business Storytelling</div>
+    <h2 class="h-l rv mt-s">PPT 不是把字搬到页面上</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px" class="mt-l">
+      <div>
+        <div class="small rv mono" style="letter-spacing:.18em">先想清楚这四件事</div>
+        <ul class="vsteps mt-s">
+          <li class="rv"><span class="n">01</span><div><b>观众是谁</b><span>老板、客户、投资人还是同事？</span></div></li>
+          <li class="rv"><span class="n">02</span><div><b>一句话结论</b><span>看完只记住一句话，是哪句？</span></div></li>
+          <li class="rv"><span class="n">03</span><div><b>页面顺序</b><span>问题 → 方案 → 证据 → 行动</span></div></li>
+          <li class="rv"><span class="n">04</span><div><b>配套讲稿</b><span>补充页面上没有的场景和证据</span></div></li>
+        </ul>
+      </div>
+      <div>
+        <div class="small rv mono" style="letter-spacing:.18em">每一页只做一个动作</div>
+        <div class="acts mt-s rv">
+          <div><b>解释</b><span>讲清楚一个概念或问题</span></div>
+          <div><b>比较</b><span>放在一起，让差异自己说话</span></div>
+          <div><b>证明</b><span>数据、案例、截图</span></div>
+          <div style="background:#2a5cff;border-color:#2a5cff;color:#fff"><b>推动决定</b><span style="color:rgba(255,255,255,.8)">告诉观众下一步做什么</span></div>
+        </div>
+        <p class="body rv mt-m">生成之后改两轮：第一轮看逻辑，第二轮看表达。</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">一份 PPT 不是把文字放到页面上。先确定观众、一句话结论和页面顺序，再写讲稿。每页只承担一个动作：解释、比较、证明或推动决定。AI 生成之后要做两轮修改：第一轮看逻辑，第二轮看表达。讲稿不能把页面上的字再读一遍。</aside>
+</section>
+
+<!-- 14 海报 -->
+<section class="slide" data-sec="模块二 · 内容表达">
+  <div class="inner">
+    <div class="poster-wrap">
+      <div class="poster-img rv"><img src="assets/poster.png" alt="AI 实战训练营课程海报"></div>
+      <div style="display:flex;flex-direction:column">
+        <div class="eb rv">讲 ② · Poster & Visual Assets</div>
+        <h2 class="h-l rv mt-s" style="font-size:58px">海报先排信息层级，<br>再让 AI 补氛围</h2>
+        <ul class="layers mt-m">
+          <li class="rv"><span class="n">1</span><div><b>主标题</b><span>一句话说清楚这是什么</span></div></li>
+          <li class="rv"><span class="n">2</span><div><b>关键信息</b><span>时间、地点、形式</span></div></li>
+          <li class="rv"><span class="n">3</span><div><b>价值点</b><span>三个模块，一眼看懂学什么</span></div></li>
+          <li class="rv"><span class="n">4</span><div><b>信任与行动</b><span>团队背景、成果承诺、报名入口</span></div></li>
+        </ul>
+        <div class="rv mt-auto">
+          <div class="small mono" style="letter-spacing:.18em">沉淀成视觉资产库</div>
+          <div class="chips mt-s"><span class="chip on">品牌色</span><span class="chip on">字体</span><span class="chip on">主视觉</span><span class="chip on">版式模板</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">这张海报就是用 AI 做的。但做法不是让模型直接“画一张图”，而是先确定信息层级：主标题、关键信息、价值点、信任与行动，再用视觉模型补足材质和氛围，排版由我们掌控。做完之后，把品牌色、字体、主视觉和版式沉淀成资产库，下一张直接复用。</aside>
+</section>
+
+<!-- 15 口播短视频 -->
+<section class="slide" data-sec="模块二 · 内容表达">
+  <div class="inner">
+    <div class="eb rv">讲 ③ · Voice-over & Short Video</div>
+    <h2 class="h-l rv mt-s">一条 60 秒口播，五段结构</h2>
+    <p class="lead rv mt-s">开头 3 秒决定观众留不留下来，结尾决定观众做不做下一步。</p>
+    <div class="rv mt-l">
+      <div class="vt">
+        <div><span class="tm">0–3s</span><b>钩子</b></div>
+        <div><span class="tm">3–15s</span><b>冲突</b></div>
+        <div><span class="tm">15–40s</span><b>证据 / 方法</b></div>
+        <div><span class="tm">40–52s</span><b>转折</b></div>
+        <div><span class="tm">52–60s</span><b>行动</b></div>
+      </div>
+      <div class="vt-axis"><span>0s</span><span>15s</span><span>30s</span><span>45s</span><span>60s</span></div>
+    </div>
+    <div class="rv mt-auto">
+      <div class="small mono" style="letter-spacing:.18em">制作流水线</div>
+      <div class="pipe mt-s"><span class="chip">选题</span><i>→</i><span class="chip">口播稿</span><i>→</i><span class="chip on">数字人 / 实拍</span><i>→</i><span class="chip">字幕与剪辑</span><i>→</i><span class="chip">发布与复盘</span></div>
+      <p class="body mt-m">避免“AI 味”：用你自己的案例、口吻和数据，而不是模板句。</p>
+    </div>
+  </div>
+  <aside class="notes">短视频的结构可以拆成五段：钩子、冲突、证据或方法、转折、行动。前三秒决定留存，最后几秒决定转化。制作上是一条流水线：选题、口播稿、数字人或实拍、字幕剪辑、发布复盘。避免 AI 味的关键是用你自己的案例和口吻。</aside>
+</section>
+
+<!-- 16 作业二 -->
+<section class="slide" data-sec="模块二 · 内容表达">
+  <div class="inner">
+    <div class="ws">
+      <div style="display:flex;flex-direction:column">
+        <div class="eb rv">现场作业 02 · 约 90 分钟</div>
+        <h2 class="h-l rv mt-s" style="font-size:58px">做一份 PPT 和一张海报</h2>
+        <div class="steps mt-l">
+          <div class="step rv"><div class="k">A</div><div><h4>定观众和一句话结论</h4><p>选一个你真实要讲的主题：产品、项目或课程</p></div></div>
+          <div class="step rv"><div class="k">B</div><div><h4>生成 5 页 PPT 和讲稿</h4><p>先出结构，再出页面，讲稿写进备注</p><div class="chk">✓ 检查：每页只做一个动作</div></div></div>
+          <div class="step rv"><div class="k">C</div><div><h4>改两轮</h4><p>第一轮看逻辑，第二轮看表达</p></div></div>
+          <div class="step rv"><div class="k">D</div><div><h4>同一主题做一张海报</h4><p>先排信息层级，再生成视觉</p><div class="chk">✓ 检查：3 秒内看懂是什么、何时、怎么参加</div></div></div>
+        </div>
+      </div>
+      <div class="take rv">
+        <div class="lab">TAKE AWAY</div>
+        <h3>带走什么</h3>
+        <ul>
+          <li><div><b>一份 5 页 PPT</b><span>可修改，含讲稿</span></div></li>
+          <li><div><b>一张可发布的海报</b><span>朋友圈、社群、活动页都能用</span></div></li>
+          <li><div><b>一套视觉资产</b><span>品牌色、字体、版式模板</span></div></li>
+        </ul>
+        <div class="prep">课前准备：一个你近期真实要讲的主题，以及相关资料或产品图。</div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">作业二，选一个你近期真的要讲的主题。先定观众和一句话结论，再生成 5 页 PPT 和讲稿，改两轮。然后用同一个主题做一张海报，先排信息层级再生成视觉。最后检查：别人 3 秒内能不能看懂这是什么、什么时候、怎么参加。</aside>
+</section>
+
+<!-- 17 作业三 -->
+<section class="slide" data-sec="模块二 · 内容表达">
+  <div class="inner">
+    <div class="ws">
+      <div style="display:flex;flex-direction:column">
+        <div class="eb rv">现场作业 03 · 约 90 分钟</div>
+        <h2 class="h-l rv mt-s" style="font-size:58px">做一条数字人口播视频</h2>
+        <div class="steps mt-l">
+          <div class="step rv"><div class="k">A</div><div><h4>选题，写 60 秒口播稿</h4><p>按“钩子 → 冲突 → 证据 → 转折 → 行动”来写</p></div></div>
+          <div class="step rv"><div class="k">B</div><div><h4>设置数字人形象和声音</h4><p>用自己的形象或授权素材，确认声音和语速</p><div class="chk">✓ 检查：素材有授权，不冒用他人肖像</div></div></div>
+          <div class="step rv"><div class="k">C</div><div><h4>生成、配字幕、剪节奏</h4><p>加上画面素材和字幕，删掉拖沓的地方</p></div></div>
+          <div class="step rv"><div class="k">D</div><div><h4>导出并写好发布文案</h4><p>标题、封面、话题标签一次准备好</p><div class="chk">✓ 检查：前 3 秒能不能让人停下来</div></div></div>
+        </div>
+      </div>
+      <div class="take rv">
+        <div class="lab">TAKE AWAY</div>
+        <h3>带走什么</h3>
+        <ul>
+          <li><div><b>一条 30–60 秒口播视频</b><span>可以直接发布</span></div></li>
+          <li><div><b>一份口播稿模板</b><span>下一条换个选题就能用</span></div></li>
+          <li><div><b>一条内容流水线</b><span>选题到发布，每周稳定产出</span></div></li>
+        </ul>
+        <div class="prep">课前准备：一段 1–2 分钟的个人正面视频（用于数字人形象），或使用平台提供的授权形象。</div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">作业三，每个人做一条数字人口播视频。先按五段结构写 60 秒口播稿，再设置数字人形象和声音，注意素材必须有授权。然后生成视频、配字幕、剪节奏，最后把标题、封面和发布文案一次准备好。</aside>
+</section>
+
+<!-- 18 模块三 -->
+<section class="slide" data-sec="模块三 · 业务增长">
+  <div class="bignum">03</div>
+  <div class="inner">
+    <div class="eb rv">Module 03</div>
+    <h2 class="h-xl rv mt-m" style="font-size:120px">业务增长</h2>
+    <p class="lead rv mt-m" style="max-width:980px;font-size:32px">让客户找得到你、联系得上你、愿意为你付钱。</p>
+    <div class="tri rv mt-auto">
+      <div><div class="lab">讲什么</div><ul><li>GEO 与 SEO</li><li>做网站并部署上线</li><li>B2B 获客 · 自动客服 · 收费交付</li></ul></div>
+      <div><div class="lab">现场做 · 作业四</div><ul><li>做一个业务网站</li><li>部署上线，手机能打开</li><li>接入表单收线索</li></ul></div>
+      <div><div class="lab">带走什么</div><ul><li>一个可访问的线上网址</li><li>一份 SEO / GEO 清单</li><li>一张获客到交付流程图</li></ul></div>
+    </div>
+  </div>
+  <aside class="notes">第三个模块是业务增长。我们不从“做一个很酷的网站”开始，而是从一个真实业务入口开始：客户怎么找到你，怎么联系你，怎么付钱，怎么交付。现场作业是把网站真正部署上线。</aside>
+</section>
+
+<!-- 19 GEO SEO -->
+<section class="slide" data-sec="模块三 · 业务增长">
+  <div class="inner">
+    <div class="eb rv">讲 ① · GEO & SEO</div>
+    <h2 class="h-l rv mt-s">先被找到：SEO 管搜索，GEO 管 AI 回答</h2>
+    <div class="vs rv mt-m">
+      <div>
+        <div class="big">SEO</div>
+        <div class="full">SEARCH ENGINE OPTIMIZATION</div>
+        <dl>
+          <dt>客户在哪</dt><dd>百度、Google、小红书等搜索框</dd>
+          <dt>目标</dt><dd>排名靠前，被点击</dd>
+          <dt>怎么做</dt><dd>关键词、页面标题与结构、加载速度、外部链接</dd>
+        </dl>
+      </div>
+      <div>
+        <div class="big hl">GEO</div>
+        <div class="full">GENERATIVE ENGINE OPTIMIZATION</div>
+        <dl>
+          <dt>客户在哪</dt><dd>直接问 ChatGPT、豆包、Kimi、DeepSeek</dd>
+          <dt>目标</dt><dd>被 AI 引用、被 AI 推荐</dd>
+          <dt>怎么做</dt><dd>清楚的事实、FAQ、案例与数据、可信来源、结构化页面</dd>
+        </dl>
+      </div>
+    </div>
+    <p class="body rv mt-auto">共同的地基：<b style="color:var(--ink)">一个结构清楚、内容真实、持续更新的网站</b> —— 这正是作业四要做的。</p>
+  </div>
+  <aside class="notes">被找到有两条路：SEO 让你在搜索引擎里排得靠前，GEO 让你在 AI 的回答里被引用和推荐。越来越多客户会直接问 AI“哪家做得好”，所以 GEO 很重要。两者的共同地基都是一个结构清楚、内容真实、持续更新的网站，这就是作业四要做的事。</aside>
+</section>
+
+<!-- 20 网站部署 -->
+<section class="slide" data-sec="模块三 · 业务增长">
+  <div class="inner">
+    <div class="eb rv">讲 ② · Build & Deploy</div>
+    <h2 class="h-l rv mt-s">从一句需求，到一个能访问的网址</h2>
+    <p class="lead rv mt-s">今天不追求功能最多，而是追求能演示、能访问、能继续迭代。</p>
+    <div class="flow rv mt-l" style="--n:6">
+      <div class="st"><div class="dot"></div><span class="n">01</span><h4>需求</h4><p>用户是谁，来做什么，留下什么</p></div>
+      <div class="st"><div class="dot"></div><span class="n">02</span><h4>页面结构</h4><p>首屏、服务、案例、FAQ、联系</p></div>
+      <div class="st"><div class="dot"></div><span class="n">03</span><h4>AI 写代码</h4><p>让工作台生成页面和表单</p></div>
+      <div class="st"><div class="dot"></div><span class="n">04</span><h4>本地预览</h4><p>电脑和手机都看一遍，改两轮</p></div>
+      <div class="st"><div class="dot"></div><span class="n">05</span><h4>部署上线</h4><p>推到托管平台，生成网址</p></div>
+      <div class="st"><div class="dot"></div><span class="n">06</span><h4>域名与表单</h4><p>绑定域名，线索进入通知</p></div>
+    </div>
+    <div class="two rv mt-auto" style="flex:none;grid-template-columns:1fr 1fr 1fr;gap:20px">
+      <div class="panel" style="padding:36px 40px"><div class="h-s" style="font-size:32px">静态托管</div><p class="body" style="margin-top:10px">Vercel · Cloudflare Pages · GitHub Pages，几分钟上线</p></div>
+      <div class="panel" style="padding:36px 40px"><div class="h-s" style="font-size:32px">云服务器</div><p class="body" style="margin-top:10px">需要后台、数据库或接口时使用</p></div>
+      <div class="panel" style="padding:36px 40px"><div class="h-s" style="font-size:32px">国内访问</div><p class="body" style="margin-top:10px">使用国内服务器和域名需提前办理 ICP 备案</p></div>
+    </div>
+  </div>
+  <aside class="notes">做网站的完整路径是六步：写清需求、设计页面结构、让 AI 写代码、本地预览修改、部署上线、绑定域名和表单。今天现场用静态托管就能几分钟上线；需要后台和数据库时再用云服务器。如果面向国内用户并使用国内服务器，要提前考虑 ICP 备案。</aside>
+</section>
+
+<!-- 21 获客 客服 收费 -->
+<section class="slide" data-sec="模块三 · 业务增长">
+  <div class="inner">
+    <div class="eb rv">讲 ③ · Leads → Support → Revenue</div>
+    <h2 class="h-l rv mt-s">从线索到收款，连成一条闭环</h2>
+    <div class="loop mt-m">
+      <div class="panel rv"><span class="no">01</span><h4>获客</h4><span class="sub">B2B 获客</span><ul><li>客户画像</li><li>线索池与证据包</li><li>个性化邮件序列</li></ul></div>
+      <div class="panel rv"><span class="no">02</span><h4>承接</h4><span class="sub">自动客服</span><ul><li>基于知识库回答</li><li>7×24 小时响应</li><li>复杂问题转人工</li></ul></div>
+      <div class="panel rv"><span class="no">03</span><h4>成交</h4><span class="sub">收费</span><ul><li>报价单与方案</li><li>合同</li><li>在线收款</li></ul></div>
+      <div class="panel rv"><span class="no">04</span><h4>交付</h4><span class="sub">交付</span><ul><li>交付清单</li><li>进度同步</li><li>验收确认</li></ul></div>
+      <div class="panel rv"><span class="no">05</span><h4>复盘</h4><span class="sub">客户成功</span><ul><li>回复与转化</li><li>客户反馈</li><li>下一轮优化</li></ul></div>
+    </div>
+    <div class="rv mt-m" style="display:flex;align-items:center;gap:18px">
+      <span class="small mono" style="letter-spacing:.18em">护栏</span>
+      <div class="chips"><span class="chip">发送前人工审核</span><span class="chip">退订与限速</span><span class="chip">一键暂停</span><span class="chip">每个动作留记录</span></div>
+    </div>
+  </div>
+  <aside class="notes">网站只是入口，业务增长是一条闭环：获客、承接、成交、交付、复盘。B2B 获客先做客户画像和带证据的线索池，再写个性化邮件；自动客服用模块一做的知识库来回答，复杂问题转人工；成交和交付要有报价、合同、收款和交付清单。所有自动化都要有护栏：人工审核、退订限速、一键暂停、留记录。</aside>
+</section>
+
+<!-- 22 作业四 -->
+<section class="slide" data-sec="模块三 · 业务增长">
+  <div class="inner">
+    <div class="ws">
+      <div style="display:flex;flex-direction:column">
+        <div class="eb rv">现场作业 04 · 约 120 分钟</div>
+        <h2 class="h-l rv mt-s" style="font-size:58px">做一个网站，并上线部署</h2>
+        <div class="steps mt-l">
+          <div class="step rv"><div class="k">A</div><div><h4>写清楚三件事</h4><p>用户是谁、来网站做什么、我们要收集什么信息</p></div></div>
+          <div class="step rv"><div class="k">B</div><div><h4>让 AI 生成首页和表单</h4><p>首屏、服务、案例、FAQ、联系方式</p><div class="chk">✓ 检查：FAQ 写清事实，方便 GEO 被引用</div></div></div>
+          <div class="step rv"><div class="k">C</div><div><h4>本地预览，改两轮</h4><p>电脑和手机各看一遍</p></div></div>
+          <div class="step rv"><div class="k">D</div><div><h4>部署上线</h4><p>生成公开网址，绑定表单通知</p><div class="chk">✓ 检查：用手机打开，提交一条测试线索</div></div></div>
+        </div>
+      </div>
+      <div class="take rv">
+        <div class="lab">TAKE AWAY</div>
+        <h3>带走什么</h3>
+        <ul>
+          <li><div><b>一个可访问的网址</b><span>发给客户就能打开</span></div></li>
+          <li><div><b>一个能收线索的表单</b><span>提交后自动通知你</span></div></li>
+          <li><div><b>一份 SEO / GEO 清单</b><span>回去按清单持续优化</span></div></li>
+          <li><div><b>一张业务闭环图</b><span>获客到交付的下一步计划</span></div></li>
+        </ul>
+        <div class="prep">课前准备：你的业务介绍、2–3 个案例、联系方式；如有域名可一并带来。</div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">作业四，每个人把自己的业务网站真正部署上线。先写清楚用户是谁、来做什么、我们要收集什么；再让 AI 生成首页和表单，FAQ 一定写清事实；本地预览改两轮后部署上线。最后的检查很简单：用手机打开你的网址，提交一条测试线索，看看你能不能收到。</aside>
+</section>
+
+<!-- 23 可靠结果 方法 -->
+<section class="slide paper" data-sec="可靠结果">
+  <div class="inner">
+    <div class="eb rv">Reliable Results</div>
+    <h2 class="h-l rv mt-s">最后一步：怎么让 AI 的结果可靠？</h2>
+    <div style="display:grid;grid-template-columns:1fr 700px;gap:80px;flex:1" class="mt-m">
+      <ul class="vsteps" style="--pad:20px">
+        <li class="rv"><span class="n">01</span><div><b>明确结果，而不是只描述动作</b><span>“写一份给客户的 5 页方案”，而不是“帮我写点东西”</span></div></li>
+        <li class="rv"><span class="n">02</span><div><b>资料带来源，判断带证据</b><span>区分事实、推断和待确认</span></div></li>
+        <li class="rv"><span class="n">03</span><div><b>拆成可检查的步骤</b><span>先出中间结果，再出最终交付</span></div></li>
+        <li class="rv"><span class="n">04</span><div><b>逐项核验</b><span>事实、格式、语气、目标</span></div></li>
+        <li class="rv"><span class="n">05</span><div><b>交给别人能接着用</b><span>有文件、有步骤、有负责人</span></div></li>
+      </ul>
+      <div class="panel contract rv" style="align-self:start">
+        <div class="c"># 一份可靠的 AI 工作指令</div>
+        <div><span class="k">角色</span>  你是我的销售助理</div>
+        <div><span class="k">目标</span>  为客户 A 写 5 页合作方案</div>
+        <div><span class="k">输入</span>  知识库/01_客户/A/*</div>
+        <div><span class="k">约束</span>  不编造数据，不确定就标出</div>
+        <div><span class="k">验收</span>  每个数据带出处</div>
+        <div style="padding-left:84px">先给大纲，确认后再成稿</div>
+        <div class="c" style="margin-top:12px"># 角色 · 目标 · 输入 · 约束 · 验收</div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">前面做了很多成果，最后讲怎么让它们可靠。五步：明确结果、资料带来源、拆成可检查的步骤、逐项核验、交给别人能接着用。右边是一份可靠工作指令的样子：角色、目标、输入、约束、验收。没有来源、没有检查、没有人接手的结果，不能直接进入正式工作。</aside>
+</section>
+
+<!-- 24 标准与边界 -->
+<section class="slide paper" data-sec="可靠结果">
+  <div class="inner">
+    <div class="eb rv">Quality Bar & Boundaries</div>
+    <h2 class="h-l rv mt-s">成果标准：交给别人，也能继续用</h2>
+    <div class="std rv mt-l">
+      <div><span class="n">01</span><b>能用</b><span>在真实场景里完成一次目标</span></div>
+      <div><span class="n">02</span><b>能改</b><span>结构清楚，修改不用推倒重来</span></div>
+      <div><span class="n">03</span><b>能复用</b><span>输入、步骤、模板能迁移</span></div>
+      <div><span class="n">04</span><b>能追溯</b><span>关键判断有来源、有记录</span></div>
+      <div><span class="n">05</span><b>能交接</b><span>下一个人知道从哪里开始</span></div>
+    </div>
+    <div style="display:grid;grid-template-columns:420px 1fr;gap:60px" class="mt-auto">
+      <div class="rv"><div class="h-m">四条红线</div><p class="body mt-s">AI 越强，越需要边界。自动化重复动作，把关键判断留给人。</p></div>
+      <ul class="red rv" style="display:grid;grid-template-columns:1fr 1fr;column-gap:40px">
+        <li>没有来源的判断，不当成事实</li>
+        <li>私密资料，不进入不清楚的数据流</li>
+        <li>自动化流程，必须有暂停开关</li>
+        <li>一次成功，不等于流程稳定</li>
+      </ul>
+    </div>
+  </div>
+  <aside class="notes">判断成果用五个标准：能用、能改、能复用、能追溯、能交接。只在你的聊天窗口里有效的答案不算成果。同时记住四条红线：没有来源的判断不当事实，私密资料不进不清楚的数据流，自动化必须有暂停开关，一次成功不等于流程稳定。</aside>
+</section>
+
+<!-- 25 结营 -->
+<section class="slide" data-sec="结营">
+  <div class="inner">
+    <div class="eb rv">Wrap-up</div>
+    <h2 class="h-l rv mt-s">两天后，你带走的不只是知识</h2>
+    <div class="outs mt-m">
+      <div class="panel rv"><span class="no">作业 01</span><b>工作系统</b><ul><li>整理好的文件夹</li><li>可问答的知识库</li><li>个人邮件助理</li></ul></div>
+      <div class="panel rv"><span class="no">作业 02</span><b>PPT + 海报</b><ul><li>5 页 PPT 与讲稿</li><li>一张可发布海报</li><li>视觉资产模板</li></ul></div>
+      <div class="panel rv"><span class="no">作业 03</span><b>口播视频</b><ul><li>30–60 秒数字人视频</li><li>口播稿模板</li><li>内容流水线</li></ul></div>
+      <div class="panel rv"><span class="no">作业 04</span><b>线上网站</b><ul><li>可访问的网址</li><li>收线索的表单</li><li>SEO / GEO 清单</li></ul></div>
+    </div>
+    <div class="rv mt-auto">
+      <div class="small mono" style="letter-spacing:.18em">结营展示 · 每人 3 分钟</div>
+      <div class="qs mt-s">
+        <div><span>Q1</span>我原来最耗时的工作是什么？</div>
+        <div><span>Q2</span>我搭了哪一个 AI 工作流？</div>
+        <div><span>Q3</span>我现场做出了什么成果？</div>
+        <div><span>Q4</span>未来 7 天，我先把它用在哪？</div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">回顾一下，两天四个作业，每个人带走的是这十几份真实成果。结营时每人 3 分钟，回答四个问题：原来最耗时的工作是什么，搭了哪个工作流，做出了什么成果，未来 7 天先用在哪里。一周后，我们希望大家不是“又试了几个工具”，而是已经有一个真正跑起来的工作流。</aside>
+</section>
+
+<!-- 26 收束 -->
+<section class="slide cover bare" data-sec="结营">
+  <div class="glow" style="opacity:.7"></div>
+  <img class="lens rv" src="assets/lens.png" alt="" style="opacity:.85">
+  <div class="inner" style="justify-content:center;inset:96px 140px 96px">
+    <div class="eb rv">MIMI / AI Practice Series</div>
+    <h2 class="h-xl rv mt-m" style="font-size:112px">把 AI 变成<br><span class="hl">自己的工作系统。</span></h2>
+    <p class="lead rv mt-m" style="max-width:860px">工具会更新，流程会迭代，但真正属于你的工作方式，会越来越清楚。</p>
+    <div class="brand rv" style="margin-top:90px">Codex<em>×</em>WorkBuddy<em>×</em>Grokbot</div>
+  </div>
+  <aside class="notes">AI 不会替你决定业务，但可以把你的经验、资料和方法组织成一套可复用的系统。工具会更新，流程会迭代，但真正属于你的工作方式会越来越清楚。谢谢大家。</aside>
+</section>
+
+</div></div>
+
+<div class="notes-panel" id="notesPanel"><div class="t">SPEAKER NOTES · 按 N 关闭</div><div id="notesText"></div></div>
+<div class="ctrl">
+  <button id="bPrev" title="上一页 ←">←</button>
+  <button id="bNext" title="下一页 →">→</button>
+  <button id="bNotes" title="讲稿 N">N</button>
+  <button id="bFull" title="全屏 F">F</button>
+</div>
+
+<script>
+(()=>{
+  const stage=document.getElementById('stage');
+  const slides=[...stage.querySelectorAll('.slide')];
+  const total=slides.length, pad=n=>String(n).padStart(2,'0');
+  const notesPanel=document.getElementById('notesPanel'), notesText=document.getElementById('notesText');
+  let idx=0;
+
+  slides.forEach((s,i)=>{
+    s.querySelectorAll('.rv').forEach((el,k)=>el.style.setProperty('--i',k));
+    const top=document.createElement('div');
+    top.className='chrome-top';
+    top.innerHTML=`<span><b>MIMI</b> / AI 实战训练营</span><span class="sec">${s.dataset.sec||''}</span>`;
+    const bot=document.createElement('div');
+    bot.className='chrome-bot';
+    bot.innerHTML=`<div class="ticks">${slides.map((_,k)=>`<i class="${k<i?'done':k===i?'now':''}"></i>`).join('')}</div><div class="pageno"><b>${pad(i+1)}</b> / ${pad(total)}</div>`;
+    s.append(top,bot);
+  });
+
+  function fit(){
+    const s=Math.min(innerWidth/1920,innerHeight/1080);
+    stage.style.transform=`translate(${(innerWidth-1920*s)/2}px,${(innerHeight-1080*s)/2}px) scale(${s})`;
+  }
+  function go(i){
+    idx=Math.max(0,Math.min(total-1,i));
+    slides.forEach((s,k)=>s.classList.toggle('active',k===idx));
+    const n=slides[idx].querySelector('.notes');
+    notesText.textContent=n?n.textContent:'（本页无讲稿）';
+    history.replaceState(null,'','#'+(idx+1));
+  }
+  addEventListener('resize',fit);
+  addEventListener('keydown',e=>{
+    if(['ArrowRight','ArrowDown','PageDown',' ','Enter'].includes(e.key)){e.preventDefault();go(idx+1)}
+    else if(['ArrowLeft','ArrowUp','PageUp','Backspace'].includes(e.key)){e.preventDefault();go(idx-1)}
+    else if(e.key==='Home')go(0);
+    else if(e.key==='End')go(total-1);
+    else if(e.key==='n'||e.key==='N')notesPanel.classList.toggle('show');
+    else if(e.key==='f'||e.key==='F')toggleFull();
+  });
+  function toggleFull(){document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen()}
+  document.getElementById('bPrev').onclick=()=>go(idx-1);
+  document.getElementById('bNext').onclick=()=>go(idx+1);
+  document.getElementById('bNotes').onclick=()=>notesPanel.classList.toggle('show');
+  document.getElementById('bFull').onclick=toggleFull;
+  let sx=0,sy=0;
+  addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
+  addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy))go(idx+(dx<0?1:-1))},{passive:true});
+
+  fit();
+  const h=parseInt(location.hash.slice(1),10);
+  go(Number.isFinite(h)?h-1:0);
+})();
+</script>
+</body>
+</html>
