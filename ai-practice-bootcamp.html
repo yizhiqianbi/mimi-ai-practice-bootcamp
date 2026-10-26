@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>AI 实战训练营｜Codex × WorkBuddy × Grokbot</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Familjen+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --stage-bg:#07090e;
+  --slide-bg:#080a10;
+  --bg:#080a10;
+  --bg2:#0d111c;
+  --panel:#111827;
+  --panel2:#151c2a;
+  --ink:#f4f7fb;
+  --muted:#9ca8bd;
+  --subtle:#6c7890;
+  --line:rgba(255,255,255,.14);
+  --line2:rgba(255,255,255,.08);
+  --blue:#4f78ff;
+  --blue2:#82a5ff;
+  --cyan:#8ce8ff;
+  --white:#ffffff;
+  --shadow:0 22px 80px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+body{font-family:"Manrope","Noto Sans SC",sans-serif;color:var(--ink)}
+/* viewport-base.css */
+html,body{width:100%;height:100%;margin:0;overflow:hidden;background:var(--stage-bg,#000)}
+.deck-viewport{position:fixed;inset:0;overflow:hidden;background:var(--stage-bg,#000)}
+.deck-stage{position:absolute;left:0;top:0;width:1920px;height:1080px;overflow:hidden;transform-origin:0 0;background:var(--slide-bg,#fff)}
+.slide{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;display:block;visibility:hidden;opacity:0;pointer-events:none;background:var(--slide-bg,#fff)}
+.slide.active,.slide.visible{visibility:visible;opacity:1;pointer-events:auto;z-index:1}
+img,video,canvas,svg{max-width:100%;max-height:100%}
+.deck-controls{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:1000}
+@media print{html,body{width:1920px;height:auto;overflow:visible;background:#fff}.deck-viewport{position:static;overflow:visible;background:#fff}.deck-stage{position:static;width:auto;height:auto;transform:none!important;background:none}.slide{position:relative;display:block!important;visibility:visible!important;opacity:1!important;pointer-events:auto!important;width:1920px;height:1080px;break-after:page;page-break-after:always}.slide:last-child{break-after:auto;page-break-after:auto}.deck-controls{display:none!important}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.2s!important}}
+
+/* design system */
+.slide::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 84% 16%,rgba(72,116,255,.12),transparent 34%),radial-gradient(circle at 15% 92%,rgba(38,77,180,.08),transparent 30%)}
+.slide::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.32;background-image:linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(180deg,rgba(0,0,0,.8),transparent 90%)}
+.content{position:relative;z-index:2;width:100%;height:100%;padding:78px 110px 74px;display:flex;flex-direction:column}
+.kicker{font-family:"DM Mono",monospace;font-size:20px;letter-spacing:.16em;color:var(--muted);text-transform:uppercase}
+.kicker .dot{color:var(--blue);padding:0 12px}
+.display{font-size:88px;line-height:1.02;letter-spacing:-.055em;font-weight:800;margin:0}
+.h1{font-size:62px;line-height:1.07;letter-spacing:-.04em;font-weight:800;margin:0}
+.h2{font-size:42px;line-height:1.14;letter-spacing:-.03em;font-weight:800;margin:0}
+.h3{font-size:28px;line-height:1.25;font-weight:700;margin:0}
+.lede{font-size:28px;line-height:1.5;color:#d3d9e6;max-width:880px;margin:24px 0 0}
+.muted{color:var(--muted)}
+.blue{color:var(--blue2)}
+.cyan{color:var(--cyan)}
+.mono{font-family:"DM Mono",monospace;letter-spacing:.06em}
+.rule{height:1px;background:var(--line);width:100%}
+.page-no{position:absolute;right:110px;bottom:58px;font-family:"DM Mono",monospace;color:var(--subtle);font-size:17px;letter-spacing:.12em;z-index:3}
+.section-marker{display:inline-flex;align-items:center;gap:16px;font-family:"DM Mono",monospace;color:var(--blue2);font-size:17px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:28px}
+.section-marker::before{content:"";width:36px;height:2px;background:var(--blue)}
+.dark-panel{background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.025));border:1px solid var(--line2);border-radius:24px;box-shadow:var(--shadow)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.pill{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:10px 18px;font-size:18px;color:#dce4f3}
+.eyebrow{font-family:"DM Mono",monospace;color:var(--subtle);font-size:16px;letter-spacing:.13em;text-transform:uppercase}
+.big-num{font-size:104px;line-height:.9;font-weight:800;letter-spacing:-.08em;color:var(--blue);margin-bottom:18px}
+.card{padding:28px 30px;border:1px solid var(--line2);border-radius:22px;background:rgba(255,255,255,.035)}
+.card .label{font-family:"DM Mono",monospace;color:var(--blue2);font-size:15px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.card p{margin:10px 0 0;color:#c4ccdc;font-size:21px;line-height:1.45}
+.bullet-list{display:grid;gap:18px;margin:0;padding:0;list-style:none}
+.bullet-list li{display:grid;grid-template-columns:36px 1fr;gap:16px;align-items:start;font-size:26px;line-height:1.35;color:#dce4f1}
+.bullet-list li::before{content:"";display:block;width:10px;height:10px;border-radius:50%;background:var(--blue);margin-top:14px;box-shadow:0 0 20px rgba(79,120,255,.75)}
+.flow{display:flex;align-items:stretch;gap:14px;margin-top:46px}
+.flow-item{flex:1;min-height:182px;padding:25px 24px;border:1px solid var(--line2);border-radius:20px;background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.02));position:relative}
+.flow-item:not(:last-child)::after{content:"→";position:absolute;right:-22px;top:72px;color:var(--blue2);font-size:30px;z-index:3}
+.flow-no{font-family:"DM Mono",monospace;color:var(--blue);font-size:18px;margin-bottom:18px}
+.flow-title{font-size:29px;font-weight:700;margin-bottom:12px}
+.flow-copy{font-size:19px;line-height:1.38;color:var(--muted)}
+.orbit{position:absolute;right:-130px;top:80px;width:670px;height:670px;border:1px solid rgba(107,150,255,.35);border-radius:50%;transform:rotate(-22deg);box-shadow:0 0 80px rgba(60,111,255,.1),inset 0 0 80px rgba(60,111,255,.06)}
+.orbit::before,.orbit::after{content:"";position:absolute;border:1px solid rgba(107,150,255,.22);border-radius:50%;inset:50px;transform:rotate(58deg)}
+.orbit::after{inset:135px;transform:rotate(-33deg)}
+.orbit-dot{position:absolute;width:13px;height:13px;background:var(--cyan);border-radius:50%;box-shadow:0 0 24px var(--cyan);top:114px;left:72px}
+.hero-title{font-size:122px;line-height:.95;letter-spacing:-.08em;font-weight:800;margin:72px 0 26px;max-width:1120px}
+.hero-title span{color:var(--blue)}
+.hero-sub{font-size:34px;line-height:1.25;color:#d5ddeb;letter-spacing:-.02em}
+.meta-row{display:flex;gap:42px;align-items:center;margin-top:62px;font-size:25px;color:#dce4f3}
+.meta-row .meta{display:flex;align-items:center;gap:14px}
+.meta .mark{width:11px;height:11px;border-radius:50%;background:var(--blue);box-shadow:0 0 18px rgba(79,120,255,.9)}
+.brand-strip{position:absolute;bottom:70px;left:110px;display:flex;align-items:center;gap:22px;font-size:25px;color:#dfe5f1}
+.brand-strip .x{color:var(--blue);font-family:"DM Mono"}
+.small-caps{font-family:"DM Mono",monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--subtle);font-size:15px}
+.quote{font-size:56px;line-height:1.18;letter-spacing:-.045em;font-weight:700;max-width:1120px}
+.quote::before{content:"“";color:var(--blue);font-size:130px;line-height:0;vertical-align:-.34em;margin-right:14px}
+.callout{border-left:3px solid var(--blue);padding:14px 0 14px 24px;color:#dfe8f8;font-size:25px;line-height:1.45}
+.proof-shot{height:430px;border:1px solid rgba(137,168,255,.34);border-radius:20px;overflow:hidden;background:#101722;box-shadow:0 28px 80px rgba(0,0,0,.42);position:relative}
+.proof-shot img{width:100%;height:100%;object-fit:cover;display:block}
+.proof-shot::after{content:"现场屏幕 · 真实素材";position:absolute;bottom:18px;left:18px;padding:8px 13px;border-radius:999px;background:rgba(7,10,15,.72);border:1px solid rgba(255,255,255,.18);font-family:"DM Mono";font-size:14px;color:#d6def0;letter-spacing:.08em}
+.caption{font-size:16px;line-height:1.4;color:var(--subtle);margin-top:14px}
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:14px 24px;margin-top:28px}
+.check{display:flex;gap:14px;align-items:flex-start;font-size:22px;color:#dbe3f0;line-height:1.35}
+.check::before{content:"✓";display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:rgba(79,120,255,.18);border:1px solid rgba(113,150,255,.48);color:var(--blue2);font-size:17px;flex:0 0 auto}
+.tag-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.tag{padding:10px 15px;border-radius:8px;background:rgba(79,120,255,.12);border:1px solid rgba(104,144,255,.25);color:#c9d7ff;font-size:18px}
+.timeline{display:grid;gap:0;margin-top:40px}
+.timeline-row{display:grid;grid-template-columns:180px 1fr 180px;gap:30px;align-items:center;min-height:100px;border-top:1px solid var(--line2)}
+.timeline-row:last-child{border-bottom:1px solid var(--line2)}
+.timeline-row .day{font-family:"DM Mono";color:var(--blue2);font-size:18px;letter-spacing:.12em}
+.timeline-row .phase{font-size:30px;font-weight:700}
+.timeline-row .detail{color:var(--muted);font-size:20px;text-align:right}
+.prism{position:absolute;right:160px;top:180px;width:430px;height:430px;transform:rotate(45deg);border:1px solid rgba(135,170,255,.48);background:linear-gradient(145deg,rgba(84,129,255,.26),rgba(35,48,91,.07));box-shadow:0 0 90px rgba(49,107,255,.22),inset 0 0 80px rgba(128,187,255,.11);border-radius:32px}
+.prism::before{content:"";position:absolute;inset:42px;border:1px solid rgba(129,185,255,.35);border-radius:22px}
+.prism::after{content:"";position:absolute;left:50%;top:-130px;height:680px;width:1px;background:linear-gradient(180deg,transparent,rgba(140,232,255,.55),transparent);transform:rotate(-45deg)}
+.note{position:absolute;right:110px;bottom:70px;max-width:530px;text-align:right;color:var(--muted);font-size:18px;line-height:1.45}
+.editor-bar{position:fixed;top:16px;right:16px;z-index:2000;display:flex;gap:8px;opacity:0;transition:opacity .2s}
+body:hover .editor-bar,body.editing .editor-bar{opacity:1}
+.editor-bar button{border:1px solid rgba(255,255,255,.18);background:rgba(17,24,39,.88);color:#dce7f8;border-radius:10px;padding:9px 12px;font:14px "DM Mono";cursor:pointer}
+.editable{outline:none;border-radius:8px;transition:box-shadow .15s,background .15s}
+body.editing .editable{box-shadow:0 0 0 1px rgba(130,165,255,.5);background:rgba(64,100,180,.1)}
+.speaker-note{display:none}
+
+/* light slides for rhythm */
+.slide.light{--slide-bg:#eef2f8;--ink:#101521;--muted:#526078;--subtle:#77849c;--line:rgba(15,25,44,.16);--line2:rgba(15,25,44,.1);color:#101521;background:#eef2f8}
+.slide.light::before{background:radial-gradient(circle at 85% 12%,rgba(79,120,255,.16),transparent 32%),radial-gradient(circle at 15% 90%,rgba(123,218,255,.12),transparent 28%)}
+.slide.light::after{background-image:linear-gradient(rgba(15,25,44,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(15,25,44,.035) 1px,transparent 1px)}
+.slide.light .card{background:rgba(255,255,255,.64);border-color:rgba(15,25,44,.1);box-shadow:0 16px 40px rgba(40,64,100,.08)}
+.slide.light .card p,.slide.light .bullet-list li,.slide.light .flow-copy{color:#41506a}
+.slide.light .flow-item{background:rgba(255,255,255,.72);border-color:rgba(15,25,44,.1)}
+.slide.light .flow-item:not(:last-child)::after{color:#476cff}
+.slide.light .h1,.slide.light .h2,.slide.light .h3,.slide.light .display{color:#101521}
+.slide.light .lede,.slide.light .quote{color:#2b3850}
+.slide.light .callout{color:#23324a}
+.slide.light .timeline-row{border-color:rgba(15,25,44,.12)}
+.slide.light .check{color:#35445d}.slide.light .check::before{background:rgba(79,120,255,.12);border-color:rgba(79,120,255,.35);color:#315cff}
+
+/* content sizing */
+.s1 .content{padding-top:74px}.s1 .hero-title{max-width:1230px}.s1 .lede{max-width:760px}
+.s2 .content,.s3 .content,.s4 .content,.s5 .content,.s6 .content,.s7 .content,.s8 .content,.s9 .content,.s10 .content,.s11 .content,.s12 .content,.s13 .content,.s14 .content,.s15 .content,.s16 .content,.s17 .content,.s18 .content,.s19 .content,.s20 .content,.s21 .content,.s22 .content,.s23 .content,.s24 .content{padding-top:82px}
+.s2 .h1,.s3 .h1,.s4 .h1,.s5 .h1,.s6 .h1,.s7 .h1,.s8 .h1,.s9 .h1,.s10 .h1,.s11 .h1,.s12 .h1,.s13 .h1,.s14 .h1,.s15 .h1,.s16 .h1,.s17 .h1,.s18 .h1,.s19 .h1,.s20 .h1,.s21 .h1,.s22 .h1,.s23 .h1,.s24 .h1{max-width:1160px}
+.s9 .grid-2,.s11 .grid-2,.s17 .grid-2,.s20 .grid-2{align-items:center;margin-top:46px}
+.s17 .proof-shot{height:520px}
+.s20 .proof-shot{height:520px}
+.s24 .content{align-items:center;justify-content:center;text-align:center}.s24 .brand-strip{position:static;margin-top:64px}.s24 .note{position:static;max-width:820px;text-align:center;margin-top:24px}
+
+/* Hallmark 2.0 direction: Cobalt / technical editorial / material-first */
+:root{
+  --color-paper:#f7f9fc;--color-paper-2:#eef2f8;--color-paper-3:#e5eaf2;
+  --color-ink:#171d2b;--color-ink-2:#35425a;--color-muted:#647089;
+  --color-rule:#d8dee9;--color-rule-2:#bfc8d8;--color-graphite:#171c27;--color-graphite-2:#252c3b;--color-graphite-ink:#f1f4fa;--color-graphite-muted:#a7b1c2;
+  --color-accent:#315be8;--color-accent-2:#7f9cff;--color-accent-wash:#e7edff;--color-accent-ink:#fff;
+  --font-display:"Familjen Grotesk","Noto Sans SC",sans-serif;--font-body:"IBM Plex Sans","Noto Sans SC",sans-serif;--font-outlier:"JetBrains Mono","DM Mono",monospace;
+  --radius-card:8px;--radius-input:6px;--space-unit:8px;
+}
+html,body{overflow-x:clip;overflow-y:clip;background:var(--color-paper)}
+body{font-family:var(--font-body);color:var(--color-ink)}
+.deck-viewport{background:var(--color-paper)}
+.deck-stage{background:var(--color-paper)}
+.slide{background:var(--color-paper);color:var(--color-ink)}
+.slide::before{background:linear-gradient(90deg,transparent 0 7.5%,rgba(49,91,232,.10) 7.5% 7.56%,transparent 7.56% 100%),linear-gradient(180deg,transparent 0 14%,rgba(23,29,43,.08) 14% 14.12%,transparent 14.12% 100%);opacity:.6}
+.slide::after{opacity:.32;background-image:linear-gradient(rgba(23,29,43,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(23,29,43,.035) 1px,transparent 1px);background-size:32px 32px;mask-image:linear-gradient(180deg,rgba(0,0,0,.35),transparent 78%)}
+.slide.light{background:var(--color-paper);color:var(--color-ink)}
+.slide.light::before{background:linear-gradient(90deg,transparent 0 7.5%,rgba(49,91,232,.10) 7.5% 7.56%,transparent 7.56% 100%),linear-gradient(180deg,transparent 0 14%,rgba(23,29,43,.08) 14% 14.12%,transparent 14.12% 100%)}
+.slide.light::after{background-image:linear-gradient(rgba(23,29,43,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(23,29,43,.035) 1px,transparent 1px)}
+.slide:is(.s1,.s24){background:var(--color-graphite);color:var(--color-graphite-ink)}
+.slide:is(.s1,.s24)::before{background:linear-gradient(90deg,transparent 0 7.5%,rgba(127,156,255,.28) 7.5% 7.56%,transparent 7.56% 100%),linear-gradient(180deg,transparent 0 14%,rgba(241,244,250,.18) 14% 14.12%,transparent 14.12% 100%)}
+.slide:is(.s1,.s24)::after{background-image:linear-gradient(rgba(241,244,250,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(241,244,250,.035) 1px,transparent 1px)}
+.content{padding-left:150px;padding-right:150px}
+.kicker,.section-marker,.small-caps,.eyebrow,.card .label,.flow-no{font-family:var(--font-body);font-weight:500;letter-spacing:0;text-transform:lowercase;color:var(--color-muted)}
+.section-marker{gap:12px;margin-bottom:22px;color:var(--color-accent);font-size:18px}
+.section-marker::before{width:26px;height:1px;background:var(--color-accent)}
+.kicker{font-size:18px;color:var(--color-graphite-muted)}
+.display,.h1,.h2,.h3,.hero-title,.quote,.flow-title{font-family:var(--font-display);font-weight:600;letter-spacing:-.03em;color:var(--color-ink);overflow-wrap:break-word;min-width:0}
+.slide:is(.s1,.s24) .display,.slide:is(.s1,.s24) .h1,.slide:is(.s1,.s24) .h2,.slide:is(.s1,.s24) .h3,.slide:is(.s1,.s24) .hero-title,.slide:is(.s1,.s24) .quote,.slide:is(.s1,.s24) .flow-title{color:var(--color-graphite-ink)}
+.lede{font-family:var(--font-body);font-size:27px;line-height:1.45;color:var(--color-ink-2);max-width:860px}
+.slide:is(.s1,.s24) .lede,.slide:is(.s1,.s24) .hero-sub{color:var(--color-graphite-muted)}
+.display{font-size:84px;line-height:1.04}.h1{font-size:60px;line-height:1.1}.h2{font-size:40px;line-height:1.12}.h3{font-size:27px}
+.hero-title{font-size:112px;line-height:.98;margin-top:64px}
+.hero-title span,.blue{color:var(--color-accent)}
+.slide:is(.s1,.s24) .hero-title span,.slide:is(.s1,.s24) .blue{color:var(--color-accent-2)}
+.meta-row{gap:36px;margin-top:54px;color:var(--color-ink-2)}
+.slide:is(.s1,.s24) .meta-row{color:var(--color-graphite-muted)}
+.meta .mark{width:6px;height:6px;border-radius:0;background:var(--color-accent);box-shadow:none}
+.slide:is(.s1,.s24) .meta .mark{background:var(--color-accent-2)}
+.brand-strip{font-family:var(--font-display);letter-spacing:-.02em}.brand-strip .x{color:var(--color-accent)}
+.dark-panel{background:var(--color-graphite);border:1px solid var(--color-rule-2);border-radius:var(--radius-card);box-shadow:none;color:var(--color-graphite-ink)}
+.dark-panel .small-caps,.dark-panel .flow-no{color:var(--color-graphite-muted)}
+.card,.flow-item{border:1px solid var(--color-rule);border-radius:var(--radius-card);background:var(--color-paper);box-shadow:0 1px 2px rgba(23,29,43,.06)}
+.card{padding:27px 28px}.card .label{color:var(--color-muted)}.card p,.flow-copy{color:var(--color-ink-2)}
+.flow-item{background:var(--color-paper-2);min-height:170px}.flow-item:not(:last-child)::after{content:"+";right:-16px;top:66px;color:var(--color-accent);font:500 24px var(--font-outlier)}
+.big-num{font-family:var(--font-display);font-weight:500;color:var(--color-accent);font-size:96px}
+.bullet-list li{font-family:var(--font-body);color:var(--color-ink-2);font-size:24px}.bullet-list li::before{width:8px;height:8px;border-radius:0;background:var(--color-accent);box-shadow:none}
+.check{font-family:var(--font-body);color:var(--color-ink-2);font-size:21px}.check::before{content:"+";border-radius:0;background:transparent;border:1px solid var(--color-rule-2);color:var(--color-accent);font-family:var(--font-outlier)}
+.tag-row{gap:8px}.tag,.pill{border-radius:4px;padding:9px 12px;background:var(--color-accent-wash);border:1px solid #cbd6f5;color:var(--color-ink-2);font-family:var(--font-body);font-size:17px}
+.quote{font-size:48px;color:var(--color-ink)}.quote::before{content:"";display:inline-block;width:28px;height:2px;background:var(--color-accent);vertical-align:.25em;margin-right:16px}
+.callout{border-left:2px solid var(--color-accent);color:var(--color-ink-2);font-size:24px}
+.timeline-row{border-color:var(--color-rule)}.timeline-row .day{font-family:var(--font-body);letter-spacing:0;text-transform:lowercase;color:var(--color-accent)}.timeline-row .phase{font-family:var(--font-display);color:var(--color-ink)}.timeline-row .detail{color:var(--color-muted)}
+.proof-shot{border:1px solid var(--color-rule-2);border-radius:var(--radius-card);box-shadow:0 8px 22px rgba(23,29,43,.12);background:var(--color-paper-2)}
+.proof-shot::after{border-radius:4px;background:var(--color-graphite);border:0;font-family:var(--font-body);font-size:14px;color:var(--color-graphite-ink)}
+.orbit{right:170px;top:170px;width:520px;height:520px;border:1px solid rgba(127,156,255,.38);border-radius:0;transform:rotate(45deg);box-shadow:none;background:repeating-linear-gradient(90deg,transparent 0 31px,rgba(127,156,255,.11) 31px 32px),repeating-linear-gradient(0deg,transparent 0 31px,rgba(127,156,255,.11) 31px 32px);clip-path:polygon(16% 0,84% 0,100% 16%,100% 84%,84% 100%,16% 100%,0 84%,0 16%)}
+.orbit::before,.orbit::after{border:1px solid rgba(127,156,255,.22);border-radius:0}.orbit-dot{width:9px;height:9px;border-radius:0;box-shadow:none;background:var(--color-accent-2)}
+.prism{right:170px;top:190px;width:360px;height:360px;transform:rotate(45deg);border:1px solid rgba(49,91,232,.42);background:var(--color-accent-wash);box-shadow:none;border-radius:0}
+.prism::before{border:1px solid rgba(49,91,232,.28);border-radius:0}.prism::after{background:var(--color-accent);opacity:.4}
+.note{color:var(--color-muted)}
+.page-no{right:150px;color:var(--color-muted);font-family:var(--font-outlier);letter-spacing:0}
+.slide:is(.s1,.s24) .page-no{color:var(--color-graphite-muted)}
+.deck-controls{bottom:24px}.deck-controls>div{border-radius:6px!important;border:1px solid var(--color-rule-2)!important;background:var(--color-graphite)!important;box-shadow:0 3px 0 var(--color-rule-2)!important}.deck-controls button:focus-visible,.editor-bar button:focus-visible{outline:2px solid var(--color-accent-2);outline-offset:3px}
+.editor-bar button{border-radius:4px;border:1px solid var(--color-rule-2);background:var(--color-paper);color:var(--color-ink-2);font-family:var(--font-body)}
+.editable{outline:none}.editable:focus-visible{box-shadow:0 0 0 2px var(--color-accent-wash),0 0 0 3px var(--color-accent)}
+@media (prefers-reduced-motion:reduce){.deck-controls,.orbit,.prism{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="editor-bar" aria-label="编辑工具">
+  <button id="editBtn">编辑文字</button>
+  <button id="saveBtn">保存修改</button>
+  <button id="exportBtn">导出 HTML</button>
+</div>
+<div class="deck-viewport">
+<div class="deck-stage" id="deckStage">
+
+<section class="slide active s1" data-title="AI 实战训练营">
+  <div class="orbit"><span class="orbit-dot"></span></div>
+  <div class="content">
+    <div class="kicker editable">MIMI <span class="dot">/</span> AI PRACTICE SERIES</div>
+    <div class="brand-strip" style="left:auto;right:110px;bottom:auto;top:78px"><span class="editable">Codex</span><span class="x">×</span><span class="editable">WorkBuddy</span><span class="x">×</span><span class="editable">Grokbot</span></div>
+    <h1 class="hero-title editable"><span>AI</span><br>实战训练营</h1>
+    <div class="hero-sub editable">把 AI 变成自己的工作系统</div>
+    <div class="meta-row">
+      <div class="meta"><span class="mark"></span><span class="editable">10.24 — 10.25</span></div>
+      <div class="meta"><span class="mark"></span><span class="editable">深圳 · 线下实战</span></div>
+      <div class="meta"><span class="mark"></span><span class="editable">两天一夜 · 现场指导</span></div>
+    </div>
+    <div class="note editable">从工作台配置开始，走完「资料 → 工作流 → 交付 → 复盘」的完整路径。</div>
+  </div>
+  <div class="page-no">01 / 24</div>
+  <div class="speaker-note">欢迎大家来到 AI 实战训练营。今天我们不把 AI 当成一个聊天工具，而是把它放进真实的工作里：整理文件、做 PPT、做海报、做短视频、搭网站，最后形成可以重复使用的工作系统。</div>
+</section>
+
+<section class="slide light s2" data-title="今天解决什么问题">
+  <div class="content">
+    <div class="section-marker">OPENING / WHY NOW</div>
+    <h2 class="h1 editable">你已经试过 AI，<br>为什么工作方式还没变？</h2>
+    <p class="lede editable">问题通常不在模型，而在任务没有被拆开、资料没有准备好、结果没有被核验，最后也没有沉淀成下一次可复用的流程。</p>
+    <div class="grid-4" style="margin-top:58px">
+      <div class="card"><div class="big-num">01</div><div class="h3 editable">信息太散</div><p class="editable">文件、聊天、网页、表格都在不同地方。</p></div>
+      <div class="card"><div class="big-num">02</div><div class="h3 editable">重复劳动</div><p class="editable">每天都在做同样的整理、汇总和改写。</p></div>
+      <div class="card"><div class="big-num">03</div><div class="h3 editable">不会交付</div><p class="editable">有答案，却没有清晰的文件、流程和下一步。</p></div>
+      <div class="card"><div class="big-num">04</div><div class="h3 editable">无法复用</div><p class="editable">一次对话结束，下一次还得重新开始。</p></div>
+    </div>
+    <div class="callout editable" style="margin-top:42px">今天的目标：把一次性的“会问 AI”，升级成团队可以继续使用的“能完成工作”。</div>
+  </div><div class="page-no">02 / 24</div>
+</section>
+
+<section class="slide s3" data-title="从 Prompt 到 System">
+  <div class="content">
+    <div class="section-marker">CORE MODEL / SYSTEM</div>
+    <h2 class="h1 editable">从 Prompt，走到 System。</h2>
+    <p class="lede editable">一个好结果不是一句神奇提示词带来的，而是一条可以重复运行的小型生产线。</p>
+    <div class="flow">
+      <div class="flow-item"><div class="flow-no">01 / INPUT</div><div class="flow-title editable">输入</div><div class="flow-copy editable">目标、资料、角色、限制条件。</div></div>
+      <div class="flow-item"><div class="flow-no">02 / WORKSPACE</div><div class="flow-title editable">工作台</div><div class="flow-copy editable">Codex、WorkBuddy、Grokbot 与本地文件。</div></div>
+      <div class="flow-item"><div class="flow-no">03 / SKILL</div><div class="flow-title editable">Skill</div><div class="flow-copy editable">把步骤、工具和交付格式写清楚。</div></div>
+      <div class="flow-item"><div class="flow-no">04 / CHECK</div><div class="flow-title editable">核验</div><div class="flow-copy editable">事实、来源、格式和目标逐项检查。</div></div>
+      <div class="flow-item"><div class="flow-no">05 / OUTPUT</div><div class="flow-title editable">交付</div><div class="flow-copy editable">文件、页面、内容或可以继续使用的系统。</div></div>
+    </div>
+    <div class="quote editable" style="margin-top:70px">AI 的价值，不是替你想一遍；是把做过一次的事情变成下一次更快的事情。</div>
+  </div><div class="page-no">03 / 24</div>
+</section>
+
+<section class="slide light s4" data-title="两天一夜路线图">
+  <div class="content">
+    <div class="section-marker">ROADMAP / 2 DAYS</div>
+    <h2 class="h1 editable">两天一夜，沿着一条主线完成四个成果。</h2>
+    <div class="timeline">
+      <div class="timeline-row"><div class="day">DAY 01 · AM</div><div class="phase editable">认识 AI，建立可靠交付</div><div class="detail editable">任务拆解 · 核验 · 标准</div></div>
+      <div class="timeline-row"><div class="day">DAY 01 · PM</div><div class="phase editable">配置工作台与 Skill</div><div class="detail editable">Codex · WorkBuddy · Grokbot</div></div>
+      <div class="timeline-row"><div class="day">DAY 01 · NIGHT</div><div class="phase editable">工作系统实战</div><div class="detail editable">文件 · 日报 · 知识库 · 研究</div></div>
+      <div class="timeline-row"><div class="day">DAY 02 · AM</div><div class="phase editable">内容表达与多端产出</div><div class="detail editable">PPT · 海报 · 视频 · 网站</div></div>
+      <div class="timeline-row"><div class="day">DAY 02 · PM</div><div class="phase editable">业务入口与成果展示</div><div class="detail editable">原型 · 自动化 · 7 天行动</div></div>
+    </div>
+    <div class="tag-row"><span class="tag editable">可演示</span><span class="tag editable">可修改</span><span class="tag editable">可复用</span><span class="tag editable">可追溯</span></div>
+  </div><div class="page-no">04 / 24</div>
+</section>
+
+<section class="slide s5" data-title="先把工作台配置好">
+  <div class="prism"></div>
+  <div class="content">
+    <div class="section-marker">SETUP / WORKSPACE</div>
+    <h2 class="h1 editable">先把工作台配置好，<br>再谈效率。</h2>
+    <p class="lede editable">工具只是入口。真正决定效率的是 Skill、资料和流程能不能连成一条线。</p>
+    <div class="grid-3" style="margin-top:58px;max-width:1290px">
+      <div class="card"><div class="label">01 / THINK</div><div class="h3 editable">Codex</div><p class="editable">处理文件、网页、代码与复杂任务，把结果落成可交付文件。</p></div>
+      <div class="card"><div class="label">02 / CONNECT</div><div class="h3 editable">WorkBuddy</div><p class="editable">接入日常办公和团队协作，让工作流进入真实环境。</p></div>
+      <div class="card"><div class="label">03 / EXPLORE</div><div class="h3 editable">Grokbot</div><p class="editable">补充研究、表达和创意探索，快速生成多种可能。</p></div>
+    </div>
+    <div class="checks" style="max-width:1050px">
+      <div class="check editable">找到你的常用资料</div><div class="check editable">配置一个高频任务</div><div class="check editable">设置清晰的交付标准</div><div class="check editable">保留一键暂停与复盘入口</div>
+    </div>
+  </div><div class="page-no">05 / 24</div>
+</section>
+
+<section class="slide light s6" data-title="模块一：工作系统">
+  <div class="content">
+    <div class="section-marker">ARC 01 / WORK SYSTEM</div>
+    <h2 class="h1 editable">模块一：把重复工作变成系统。</h2>
+    <p class="lede editable">从最容易看到收益的事情开始：整理文件、生成日报、提取聊天记录、建立知识库，再把资料用于研究和决策。</p>
+    <div class="grid-2" style="margin-top:56px;max-width:1450px">
+      <div class="card"><div class="label">THE WORKFLOW</div><div class="flow" style="margin-top:12px;gap:8px;display:grid;grid-template-columns:repeat(4,1fr)"><div class="flow-item" style="min-height:132px;padding:18px"><div class="flow-no">A</div><div class="flow-title" style="font-size:23px">收集</div></div><div class="flow-item" style="min-height:132px;padding:18px"><div class="flow-no">B</div><div class="flow-title" style="font-size:23px">整理</div></div><div class="flow-item" style="min-height:132px;padding:18px"><div class="flow-no">C</div><div class="flow-title" style="font-size:23px">检索</div></div><div class="flow-item" style="min-height:132px;padding:18px"><div class="flow-no">D</div><div class="flow-title" style="font-size:23px">复用</div></div></div><p class="editable" style="margin-top:28px;color:#41506a;font-size:21px;line-height:1.5">资料结构清楚，后面的内容、研究和自动化才会更快。</p></div>
+      <div class="card"><div class="label">LEAVE WITH</div><div class="h2 editable">一份属于自己的<br>工作流说明书</div><div class="tag-row"><span class="tag editable">文件夹结构</span><span class="tag editable">日报模板</span><span class="tag editable">聊天记录</span><span class="tag editable">知识库入口</span></div></div>
+    </div>
+  </div><div class="page-no">06 / 24</div>
+</section>
+
+<section class="slide s7" data-title="模块二：内容表达">
+  <div class="content">
+    <div class="section-marker">ARC 02 / CONTENT</div>
+    <h2 class="h1 editable">模块二：同一个主题，<br>变成一套内容资产。</h2>
+    <p class="lede editable">先确定观点和受众，再选择表达形式。AI 帮你生成多个版本，人负责判断清楚、统一和有行动。</p>
+    <div class="grid-4" style="margin-top:58px">
+      <div class="card"><div class="big-num">01</div><div class="h3 editable">PPT</div><p class="editable">让观点能被讲清楚、被记住、被继续讨论。</p></div>
+      <div class="card"><div class="big-num">02</div><div class="h3 editable">海报</div><p class="editable">用一张画面抓住注意，建立品牌的第一印象。</p></div>
+      <div class="card"><div class="big-num">03</div><div class="h3 editable">口播</div><p class="editable">把复杂内容压缩成可以听懂的 60 秒。</p></div>
+      <div class="card"><div class="big-num">04</div><div class="h3 editable">短视频</div><p class="editable">从脚本到分镜到发布素材，一次做成一组。</p></div>
+    </div>
+    <div class="callout editable" style="margin-top:46px">内容不是越多越好，而是每份内容都应该推动观众完成下一步。</div>
+  </div><div class="page-no">07 / 24</div>
+</section>
+
+<section class="slide light s8" data-title="模块三：业务增长">
+  <div class="content">
+    <div class="section-marker">ARC 03 / GROWTH</div>
+    <h2 class="h1 editable">模块三：从内容表达，走到业务增长。</h2>
+    <p class="lede editable">不从“做一个很酷的网站”开始，而是从一个真实的业务入口开始：客户从哪里来，提交什么信息，谁来跟进，下一步如何自动化。</p>
+    <div class="flow" style="margin-top:64px">
+      <div class="flow-item"><div class="flow-no">01</div><div class="flow-title editable">吸引</div><div class="flow-copy editable">官网、海报、内容和 GEO</div></div>
+      <div class="flow-item"><div class="flow-no">02</div><div class="flow-title editable">承接</div><div class="flow-copy editable">表单、预约、线索池</div></div>
+      <div class="flow-item"><div class="flow-no">03</div><div class="flow-title editable">判断</div><div class="flow-copy editable">资料、证据、客户画像</div></div>
+      <div class="flow-item"><div class="flow-no">04</div><div class="flow-title editable">跟进</div><div class="flow-copy editable">邮件、提醒、团队协作</div></div>
+      <div class="flow-item"><div class="flow-no">05</div><div class="flow-title editable">复盘</div><div class="flow-copy editable">打开、回复、转化和下一步</div></div>
+    </div>
+    <div class="quote editable" style="margin-top:64px">把 AI 接进真实生意，才会知道它到底值多少钱。</div>
+  </div><div class="page-no">08 / 24</div>
+</section>
+
+<section class="slide s9" data-title="一个任务如何变成结果">
+  <div class="content">
+    <div class="section-marker">METHOD / RELIABLE DELIVERY</div>
+    <h2 class="h1 editable">一个任务如何变成结果？</h2>
+    <div class="grid-2">
+      <div>
+        <p class="lede editable">任何任务都先问五个问题：目标是什么？输入在哪里？标准是什么？谁来接手？怎么证明做对了？</p>
+        <div class="checks">
+          <div class="check editable">明确结果，而不是只描述动作</div><div class="check editable">资料带来源，判断带证据</div><div class="check editable">先做中间结果，再做最终交付</div><div class="check editable">事实、格式、语气逐项核验</div>
+        </div>
+        <div class="callout editable" style="margin-top:42px">没有来源、没有检查、没有负责人接手的答案，不能直接进入正式工作。</div>
+      </div>
+      <div class="dark-panel" style="padding:34px">
+        <div class="small-caps">PROMPT CONTRACT</div>
+        <div class="flow" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px">
+          <div class="flow-item" style="min-height:126px"><div class="flow-no">01</div><div class="flow-title" style="font-size:24px">角色</div><div class="flow-copy">谁在做？</div></div>
+          <div class="flow-item" style="min-height:126px"><div class="flow-no">02</div><div class="flow-title" style="font-size:24px">目标</div><div class="flow-copy">要交付什么？</div></div>
+          <div class="flow-item" style="min-height:126px"><div class="flow-no">03</div><div class="flow-title" style="font-size:24px">约束</div><div class="flow-copy">不能做什么？</div></div>
+          <div class="flow-item" style="min-height:126px"><div class="flow-no">04</div><div class="flow-title" style="font-size:24px">验收</div><div class="flow-copy">怎样算完成？</div></div>
+        </div>
+      </div>
+    </div>
+  </div><div class="page-no">09 / 24</div>
+</section>
+
+<section class="slide light s10" data-title="现场项目一：整理一堆文件">
+  <div class="content">
+    <div class="section-marker">LIVE PROJECT 01 / FILES</div>
+    <h2 class="h1 editable">现场项目一：整理一堆文件。</h2>
+    <p class="lede editable">把散乱的文件，变成一个别人一分钟就能找到答案的入口。</p>
+    <div class="flow" style="margin-top:60px">
+      <div class="flow-item"><div class="flow-no">STEP 01</div><div class="flow-title editable">识别</div><div class="flow-copy editable">文件类型、主题、时间和关联人</div></div>
+      <div class="flow-item"><div class="flow-no">STEP 02</div><div class="flow-title editable">归类</div><div class="flow-copy editable">目录、命名、摘要和待办</div></div>
+      <div class="flow-item"><div class="flow-no">STEP 03</div><div class="flow-title editable">检索</div><div class="flow-copy editable">让问题可以被快速定位</div></div>
+      <div class="flow-item"><div class="flow-no">STEP 04</div><div class="flow-title editable">交付</div><div class="flow-copy editable">日报、知识库入口、下一步</div></div>
+    </div>
+    <div class="checks" style="margin-top:56px;max-width:1100px"><div class="check editable">有没有漏文件？</div><div class="check editable">摘要有没有说错事实？</div><div class="check editable">别人能不能快速找到？</div><div class="check editable">下次是否可以直接复用？</div></div>
+  </div><div class="page-no">10 / 24</div>
+</section>
+
+<section class="slide s11" data-title="现场项目二：做一份能用的 PPT">
+  <div class="content">
+    <div class="section-marker">LIVE PROJECT 02 / PRESENTATION</div>
+    <h2 class="h1 editable">现场项目二：做一份能用的 PPT。</h2>
+    <div class="grid-2">
+      <div>
+        <p class="lede editable">页面不是文字的容器。每一页只承担一个动作：解释、比较、证明或推动决定。</p>
+        <div class="flow" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:42px">
+          <div class="flow-item" style="min-height:144px"><div class="flow-no">01</div><div class="flow-title" style="font-size:25px">观点</div><div class="flow-copy">观众是谁？</div></div>
+          <div class="flow-item" style="min-height:144px"><div class="flow-no">02</div><div class="flow-title" style="font-size:25px">结构</div><div class="flow-copy">页面怎么推进？</div></div>
+          <div class="flow-item" style="min-height:144px"><div class="flow-no">03</div><div class="flow-title" style="font-size:25px">页面</div><div class="flow-copy">每页完成什么？</div></div>
+          <div class="flow-item" style="min-height:144px"><div class="flow-no">04</div><div class="flow-title" style="font-size:25px">讲稿</div><div class="flow-copy">现场怎么讲？</div></div>
+        </div>
+      </div>
+      <div class="dark-panel" style="padding:34px">
+        <div class="small-caps">QUALITY LOOP</div>
+        <div style="font-size:28px;line-height:1.45;margin-top:25px" class="editable">生成 → 看逻辑 → 看表达 → 看行动 → 再修改</div>
+        <div class="rule" style="margin:32px 0"></div>
+        <div class="callout editable">讲稿不能把页面上的字重新读一遍。讲稿要补充场景、证据和下一步。</div>
+      </div>
+    </div>
+  </div><div class="page-no">11 / 24</div>
+</section>
+
+<section class="slide light s12" data-title="现场项目三：做一套内容资产">
+  <div class="content">
+    <div class="section-marker">LIVE PROJECT 03 / CONTENT ASSET</div>
+    <h2 class="h1 editable">现场项目三：做一套内容资产。</h2>
+    <p class="lede editable">一条观点，拆成四种媒介；一次准备，服务多次传播。</p>
+    <div class="grid-4" style="margin-top:62px">
+      <div class="card"><div class="label">ATTENTION</div><div class="h2 editable">海报</div><p class="editable">抓住注意，建立品牌第一印象。</p></div>
+      <div class="card"><div class="label">EXPLAIN</div><div class="h2 editable">口播</div><p class="editable">把复杂内容压缩成 60 秒。</p></div>
+      <div class="card"><div class="label">SPREAD</div><div class="h2 editable">短视频</div><p class="editable">脚本、分镜、字幕与发布素材。</p></div>
+      <div class="card"><div class="label">ACTION</div><div class="h2 editable">CTA</div><p class="editable">让观众知道下一步要做什么。</p></div>
+    </div>
+    <div class="callout editable" style="margin-top:56px">最后统一标题、视觉和品牌信息，让每一份内容都像来自同一个团队。</div>
+  </div><div class="page-no">12 / 24</div>
+</section>
+
+<section class="slide s13" data-title="现场项目四：做一个业务入口">
+  <div class="content">
+    <div class="section-marker">LIVE PROJECT 04 / BUSINESS ENTRY</div>
+    <h2 class="h1 editable">现场项目四：做一个业务入口。</h2>
+    <p class="lede editable">可以是网站首页、预约表单、线索收集工具，或者一条自动化工作流。</p>
+    <div class="flow" style="margin-top:56px">
+      <div class="flow-item"><div class="flow-no">USER</div><div class="flow-title editable">用户是谁？</div><div class="flow-copy editable">他现在遇到什么问题？</div></div>
+      <div class="flow-item"><div class="flow-no">ACTION</div><div class="flow-title editable">要完成什么？</div><div class="flow-copy editable">预约、咨询、下载还是购买？</div></div>
+      <div class="flow-item"><div class="flow-no">DATA</div><div class="flow-title editable">收集什么？</div><div class="flow-copy editable">足够判断下一步的资料。</div></div>
+      <div class="flow-item"><div class="flow-no">NEXT</div><div class="flow-title editable">谁来跟进？</div><div class="flow-copy editable">通知、邮件、任务与复盘。</div></div>
+    </div>
+    <div class="grid-3" style="margin-top:54px;max-width:1260px"><div class="card"><div class="label">WEB</div><div class="h3 editable">网站</div><p class="editable">品牌与转化入口。</p></div><div class="card"><div class="label">MOBILE</div><div class="h3 editable">小程序 / iOS</div><p class="editable">把服务带到用户手边。</p></div><div class="card"><div class="label">DESKTOP</div><div class="h3 editable">客户端</div><p class="editable">让团队工作流稳定运行。</p></div></div>
+  </div><div class="page-no">13 / 24</div>
+</section>
+
+<section class="slide light s14" data-title="成果标准">
+  <div class="content">
+    <div class="section-marker">DELIVERY / QUALITY BAR</div>
+    <h2 class="h1 editable">成果标准：不是“看起来完成”，<br>而是“交给别人也能继续用”。</h2>
+    <div class="grid-3" style="margin-top:64px">
+      <div class="card"><div class="big-num">01</div><div class="h3 editable">能用</div><p class="editable">在真实场景中完成一次目标。</p></div>
+      <div class="card"><div class="big-num">02</div><div class="h3 editable">能改</div><p class="editable">结构清楚，下一次修改不会推倒重来。</p></div>
+      <div class="card"><div class="big-num">03</div><div class="h3 editable">能复用</div><p class="editable">输入、步骤和模板可以迁移到下一个任务。</p></div>
+      <div class="card"><div class="big-num">04</div><div class="h3 editable">能追溯</div><p class="editable">关键判断有来源、有时间、有记录。</p></div>
+      <div class="card"><div class="big-num">05</div><div class="h3 editable">能交接</div><p class="editable">下一位使用者知道从哪里开始。</p></div>
+      <div class="card" style="background:linear-gradient(145deg,#dfe8ff,#f9fbff);border-color:#b9c8f7"><div class="big-num" style="color:#2d5cff">06</div><div class="h3 editable" style="color:#101521">能继续增长</div><p class="editable" style="color:#41506a">每次复盘都让下一次更快。</p></div>
+    </div>
+  </div><div class="page-no">14 / 24</div>
+</section>
+
+<section class="slide s15" data-title="常见误区与可靠边界">
+  <div class="content">
+    <div class="section-marker">BOUNDARIES / TRUST</div>
+    <h2 class="h1 editable">AI 越强，越需要边界。</h2>
+    <div class="grid-2" style="margin-top:60px;max-width:1450px">
+      <div class="dark-panel" style="padding:38px"><div class="small-caps">DON'T AUTOMATE BLINDLY</div><div class="bullet-list" style="margin-top:28px"><li class="editable">没有来源的判断，不要当成事实。</li><li class="editable">没有暂停开关的流程，不要持续运行。</li><li class="editable">一次成功，不等于流程稳定。</li><li class="editable">私密资料，不要进入不清楚的数据流。</li></div></div>
+      <div class="dark-panel" style="padding:38px;background:linear-gradient(145deg,rgba(74,113,255,.18),rgba(255,255,255,.03))"><div class="small-caps">KEEP THE HUMAN IN THE LOOP</div><div class="quote editable" style="font-size:42px;margin-top:34px">自动化重复动作，把关键判断、风险检查和最终交付保留下来。</div></div>
+    </div>
+  </div><div class="page-no">15 / 24</div>
+</section>
+
+<section class="slide light s16" data-title="现场示范：从资料到海报">
+  <div class="content">
+    <div class="section-marker">LIVE DEMO / FROM INPUT TO OUTPUT</div>
+    <h2 class="h1 editable">现场示范：从一份资料，走到五种交付。</h2>
+    <div class="flow" style="margin-top:62px">
+      <div class="flow-item"><div class="flow-no">INPUT</div><div class="flow-title editable">一份原始资料</div><div class="flow-copy editable">PDF、网页、会议记录或产品文档。</div></div>
+      <div class="flow-item"><div class="flow-no">STRUCTURE</div><div class="flow-title editable">一个核心观点</div><div class="flow-copy editable">目标用户、价值主张与行动。</div></div>
+      <div class="flow-item"><div class="flow-no">OUTPUT 01</div><div class="flow-title editable">PPT</div><div class="flow-copy editable">讲清楚，方便现场表达。</div></div>
+      <div class="flow-item"><div class="flow-no">OUTPUT 02</div><div class="flow-title editable">海报</div><div class="flow-copy editable">一眼看懂，建立记忆点。</div></div>
+      <div class="flow-item"><div class="flow-no">OUTPUT 03</div><div class="flow-title editable">视频</div><div class="flow-copy editable">口播、字幕与发布素材。</div></div>
+    </div>
+    <div class="callout editable" style="margin-top:55px">同一份资料，不同媒介；同一条主线，多个业务触点。</div>
+  </div><div class="page-no">16 / 24</div>
+</section>
+
+<section class="slide s17" data-title="真实素材：课程海报">
+  <div class="content">
+    <div class="section-marker">CASE / VISUAL OUTPUT</div>
+    <h2 class="h1 editable">真实素材：把课程内容做成可传播的画面。</h2>
+    <div class="grid-2">
+      <div>
+        <p class="lede editable">不是让模型直接“画一张图”，而是先确定信息层级，再用视觉模型补足材质与氛围，最后由我们掌控排版和行动入口。</p>
+        <div class="checks" style="margin-top:44px"><div class="check editable">主标题先说清楚</div><div class="check editable">时间、地点、产出分层</div><div class="check editable">品牌组合固定出现</div><div class="check editable">视觉服务于下一步行动</div></div>
+        <div class="tag-row"><span class="tag editable">深石墨</span><span class="tag editable">钴蓝</span><span class="tag editable">数字员工</span></div>
+      </div>
+      <div class="proof-shot"><img src="assets/poster.png" alt="AI 实战训练营课程海报" /></div>
+    </div>
+  </div><div class="page-no">17 / 24</div>
+</section>
+
+<section class="slide light s18" data-title="短视频与个人 IP">
+  <div class="content">
+    <div class="section-marker">CONTENT PIPELINE / SHORT VIDEO</div>
+    <h2 class="h1 editable">短视频不是“做一个视频”，<br>而是做一条可重复的内容流水线。</h2>
+    <div class="flow" style="margin-top:62px">
+      <div class="flow-item"><div class="flow-no">01</div><div class="flow-title editable">选题</div><div class="flow-copy editable">用户正在问什么？</div></div>
+      <div class="flow-item"><div class="flow-no">02</div><div class="flow-title editable">口播</div><div class="flow-copy editable">一句话先说结果。</div></div>
+      <div class="flow-item"><div class="flow-no">03</div><div class="flow-title editable">分镜</div><div class="flow-copy editable">画面、字幕与节奏。</div></div>
+      <div class="flow-item"><div class="flow-no">04</div><div class="flow-title editable">生成</div><div class="flow-copy editable">数字人、素材、剪辑。</div></div>
+      <div class="flow-item"><div class="flow-no">05</div><div class="flow-title editable">复盘</div><div class="flow-copy editable">看完播、评论和下一条。</div></div>
+    </div>
+    <div class="callout editable" style="margin-top:55px">一条内容只解决一个问题；一组内容，才会形成个人 IP 的记忆点。</div>
+  </div><div class="page-no">18 / 24</div>
+</section>
+
+<section class="slide s19" data-title="多端产品">
+  <div class="content">
+    <div class="section-marker">BUILD / MULTI-PLATFORM</div>
+    <h2 class="h1 editable">不只有网站，<br>还有小程序、iOS 和客户端。</h2>
+    <p class="lede editable">同一套产品逻辑，适配不同入口；从一个能演示的原型开始，再逐步接入真实业务。</p>
+    <div class="grid-4" style="margin-top:60px">
+      <div class="card"><div class="label">WEB</div><div class="h2 editable">网站</div><p class="editable">官网、落地页、控制台。</p></div>
+      <div class="card"><div class="label">MINI PROGRAM</div><div class="h2 editable">小程序</div><p class="editable">预约、查询、轻量服务入口。</p></div>
+      <div class="card"><div class="label">IOS</div><div class="h2 editable">iOS</div><p class="editable">把高频动作带进移动场景。</p></div>
+      <div class="card"><div class="label">DESKTOP</div><div class="h2 editable">客户端</div><p class="editable">让团队日常工作稳定运行。</p></div>
+    </div>
+    <div class="tag-row"><span class="tag editable">同一份产品逻辑</span><span class="tag editable">多种入口</span><span class="tag editable">快速试错</span><span class="tag editable">持续迭代</span></div>
+  </div><div class="page-no">19 / 24</div>
+</section>
+
+<section class="slide light s20" data-title="手把手：从仓库到页面">
+  <div class="content">
+    <div class="section-marker">HANDS-ON / FRONTEND SLIDES</div>
+    <h2 class="h1 editable">手把手：从一个公开仓库，<br>到一套可以演示的 HTML PPT。</h2>
+    <div class="grid-2">
+      <div>
+        <p class="lede editable">我们不只讲“可以做”，现场会打开仓库、读说明、启动页面，再把内容换成自己的课程。</p>
+        <div class="checks" style="margin-top:45px"><div class="check editable">打开仓库，读 README</div><div class="check editable">安装 Skill，确认依赖</div><div class="check editable">替换主题、素材和讲稿</div><div class="check editable">跑一遍导航与手机预览</div></div>
+        <div class="callout editable" style="margin-top:42px">每一步都留下可见结果，学员回去后可以独立复现。</div>
+      </div>
+      <div class="proof-shot"><img src="assets/github-frontend-slides.png" alt="frontend-slides GitHub repository" /></div>
+    </div>
+  </div><div class="page-no">20 / 24</div>
+</section>
+
+<section class="slide s21" data-title="业务增长：从线索到复盘">
+  <div class="content">
+    <div class="section-marker">GROWTH LOOP / LEADS</div>
+    <h2 class="h1 editable">业务增长：从线索到复盘，<br>每一步都有证据。</h2>
+    <div class="flow" style="margin-top:56px">
+      <div class="flow-item"><div class="flow-no">01</div><div class="flow-title editable">线索</div><div class="flow-copy editable">官网、公开数据、客户自有 CRM。</div></div>
+      <div class="flow-item"><div class="flow-no">02</div><div class="flow-title editable">证据包</div><div class="flow-copy editable">企业信息、信号、来源和不确定项。</div></div>
+      <div class="flow-item"><div class="flow-no">03</div><div class="flow-title editable">邮件</div><div class="flow-copy editable">个性化角度、时区、序列与上限。</div></div>
+      <div class="flow-item"><div class="flow-no">04</div><div class="flow-title editable">回执</div><div class="flow-copy editable">打开、回复、退信、退订。</div></div>
+      <div class="flow-item"><div class="flow-no">05</div><div class="flow-title editable">复盘</div><div class="flow-copy editable">下一条更精准，下一轮更可控。</div></div>
+    </div>
+    <div class="checks" style="margin-top:52px;max-width:1200px"><div class="check editable">没有证据的线索，不进入发送队列</div><div class="check editable">退订、退信、投诉进入全局抑制名单</div><div class="check editable">每个动作都留审计记录</div><div class="check editable">租户可以一键暂停全部任务</div></div>
+  </div><div class="page-no">21 / 24</div>
+</section>
+
+<section class="slide light s22" data-title="两天一夜实战工作坊">
+  <div class="content">
+    <div class="section-marker">WORKSHOP / CHOOSE YOUR PROJECT</div>
+    <h2 class="h1 editable">两天一夜，至少带走一个<br>真正属于你的工作系统。</h2>
+    <div class="grid-3" style="margin-top:64px">
+      <div class="card"><div class="label">TRACK 01</div><div class="h2 editable">办公系统</div><p class="editable">整理文件、日报、聊天记录、知识库。</p><div class="tag-row"><span class="tag">文件夹</span><span class="tag">日报</span></div></div>
+      <div class="card"><div class="label">TRACK 02</div><div class="h2 editable">内容资产</div><p class="editable">PPT、海报、口播、短视频。</p><div class="tag-row"><span class="tag">讲稿</span><span class="tag">分镜</span></div></div>
+      <div class="card"><div class="label">TRACK 03</div><div class="h2 editable">业务入口</div><p class="editable">网站、表单、线索、自动化。</p><div class="tag-row"><span class="tag">原型</span><span class="tag">流程</span></div></div>
+    </div>
+    <div class="callout editable" style="margin-top:60px">现场指导的意义，是把“我知道怎么做”变成“我已经做出来了”。</div>
+  </div><div class="page-no">22 / 24</div>
+</section>
+
+<section class="slide s23" data-title="结营：把工作带回去">
+  <div class="content">
+    <div class="section-marker">CLOSE / TAKE IT HOME</div>
+    <h2 class="h1 editable">结营时，你要能讲清楚<br>自己的下一步。</h2>
+    <div class="grid-2" style="margin-top:56px">
+      <div class="dark-panel" style="padding:38px"><div class="small-caps">3-MIN DEMO</div><div class="quote editable" style="font-size:45px;margin-top:28px">我解决了什么问题？我怎么做的？我留下了什么？</div></div>
+      <div>
+        <div class="checks" style="margin-top:0"><div class="check editable">我的目标用户是谁</div><div class="check editable">我的输入资料在哪里</div><div class="check editable">我的 Skill 怎么运行</div><div class="check editable">我的交付标准是什么</div><div class="check editable">回到公司后，第一步做什么</div><div class="check editable">7 天后，如何判断有效</div></div>
+      </div>
+    </div>
+    <div class="tag-row" style="margin-top:58px"><span class="tag editable">可演示</span><span class="tag editable">可交接</span><span class="tag editable">可复盘</span><span class="tag editable">可增长</span></div>
+  </div><div class="page-no">23 / 24</div>
+</section>
+
+<section class="slide s24" data-title="收束">
+  <div class="content">
+    <div class="kicker editable">MIMI <span class="dot">/</span> AI PRACTICE SERIES</div>
+    <h2 class="display editable" style="margin-top:56px">把 AI 变成<br><span class="blue">自己的工作系统。</span></h2>
+    <p class="hero-sub editable" style="margin-top:30px;max-width:900px">工具会更新，流程会迭代，但真正属于你的工作方式，会越来越清楚。</p>
+    <div class="brand-strip"><span class="editable">Codex</span><span class="x">×</span><span class="editable">WorkBuddy</span><span class="x">×</span><span class="editable">Grokbot</span></div>
+    <div class="note editable">两天一夜 · 深圳 · 线下实战 · 0 基础友好 · 成果导向</div>
+  </div><div class="page-no">24 / 24</div>
+</section>
+
+</div>
+</div>
+<div class="deck-controls" aria-label="演示控制">
+  <div style="display:flex;align-items:center;gap:14px;padding:10px 14px;border-radius:999px;background:rgba(8,10,16,.84);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(18px);box-shadow:0 12px 40px rgba(0,0,0,.25)">
+    <button id="prev" style="border:0;background:none;color:#dfe7f4;font-size:22px;cursor:pointer">←</button>
+    <div id="counter" style="font:14px 'DM Mono';color:#9ca8bd;min-width:84px;text-align:center">01 / 24</div>
+    <button id="next" style="border:0;background:none;color:#dfe7f4;font-size:22px;cursor:pointer">→</button>
+  </div>
+</div>
+<script>
+class SlidePresentation{
+  constructor(){
+    this.stage=document.getElementById('deckStage');
+    this.slides=[...document.querySelectorAll('.slide')];
+    this.index=0; this.lock=false; this.editing=false;
+    this.counter=document.getElementById('counter');
+    this.bind(); this.scale(); this.load();
+    window.addEventListener('resize',()=>this.scale());
+  }
+  bind(){
+    window.addEventListener('keydown',e=>{
+      if(e.key==='e'||e.key==='E'){this.toggleEdit();return}
+      if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){e.preventDefault();this.go(this.index+1)}
+      if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();this.go(this.index-1)}
+      if(e.key==='Home'){e.preventDefault();this.go(0)}
+      if(e.key==='End'){e.preventDefault();this.go(this.slides.length-1)}
+    });
+    document.getElementById('prev').onclick=()=>this.go(this.index-1);
+    document.getElementById('next').onclick=()=>this.go(this.index+1);
+    let sx=0,sy=0;
+    window.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
+    window.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy))this.go(this.index+(dx<0?1:-1))},{passive:true});
+    let wheelLock=false;window.addEventListener('wheel',e=>{if(wheelLock)return;if(Math.abs(e.deltaY)<18)return;wheelLock=true;this.go(this.index+(e.deltaY>0?1:-1));setTimeout(()=>wheelLock=false,650)},{passive:true});
+  }
+  scale(){const sx=innerWidth/1920, sy=innerHeight/1080, s=Math.min(sx,sy);const x=(innerWidth-1920*s)/2,y=(innerHeight-1080*s)/2;this.stage.style.transform=`translate(${x}px,${y}px) scale(${s})`;}
+  load(){const m=location.hash.match(/slide=(\d+)/);this.go(m?Number(m[1])-1:0,false);const saved=localStorage.getItem('ai-bootcamp-deck-edits');if(saved){try{const map=JSON.parse(saved);document.querySelectorAll('.editable').forEach((el,i)=>{if(map[i]!=null)el.innerHTML=map[i]})}catch(e){}}
+  }
+  go(i,update=true){i=Math.max(0,Math.min(this.slides.length-1,i));this.slides.forEach((s,n)=>s.classList.toggle('active',n===i));this.index=i;this.counter.textContent=String(i+1).padStart(2,'0')+' / '+String(this.slides.length).padStart(2,'0');if(update)location.hash='slide='+(i+1);}
+  toggleEdit(){this.editing=!this.editing;document.body.classList.toggle('editing',this.editing);document.querySelectorAll('.editable').forEach(el=>{el.contentEditable=this.editing?'true':'false'});document.getElementById('editBtn').textContent=this.editing?'退出编辑':'编辑文字';}
+  save(){const map={};document.querySelectorAll('.editable').forEach((el,i)=>map[i]=el.innerHTML);localStorage.setItem('ai-bootcamp-deck-edits',JSON.stringify(map));const btn=document.getElementById('saveBtn');btn.textContent='已保存';setTimeout(()=>btn.textContent='保存修改',1200)}
+  export(){const html='<!doctype html>\n'+document.documentElement.outerHTML;const blob=new Blob([html],{type:'text/html'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='ai-practice-bootcamp-edited.html';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+}
+const deck=new SlidePresentation();
+document.getElementById('editBtn').onclick=()=>deck.toggleEdit();
+document.getElementById('saveBtn').onclick=()=>deck.save();
+document.getElementById('exportBtn').onclick=()=>deck.export();
+</script>
+</body>
+</html>
