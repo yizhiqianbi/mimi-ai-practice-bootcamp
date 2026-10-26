@@ -28,11 +28,18 @@ html,body{width:100%;height:100%;overflow:hidden;background:#000;font-family:var
 ul{list-style:none}
 
 /* stage */
-.viewport{position:fixed;inset:0;overflow:hidden;background:#000}
-.stage{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0}
-.slide{position:absolute;inset:0;overflow:hidden;visibility:hidden;opacity:0;transition:opacity .45s ease,visibility .45s;
-  background:radial-gradient(1100px 680px at 88% -12%,rgba(59,108,255,.16),transparent 62%),radial-gradient(900px 620px at -8% 112%,rgba(59,108,255,.08),transparent 60%),var(--bg)}
-.slide.active{visibility:visible;opacity:1;z-index:2}
+.viewport{position:fixed;inset:0;overflow:hidden;background:radial-gradient(1400px 900px at 70% 30%,#0b1226,transparent 70%),var(--bg)}
+#fx{position:absolute;inset:0;width:100%;height:100%;display:block}
+.spot{position:fixed;inset:0;pointer-events:none;z-index:5;background:radial-gradient(520px circle at var(--x,50%) var(--y,50%),rgba(77,123,255,.08),transparent 60%)}
+.stage{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0;perspective:2400px}
+.slide{position:absolute;inset:0;overflow:hidden;visibility:hidden;opacity:0;
+  transform:translate3d(9%,0,-520px) rotateY(-24deg);transform-origin:50% 50%;
+  transition:transform 1.05s cubic-bezier(.2,.8,.2,1),opacity .65s ease,visibility 0s linear 1.05s;
+  background:radial-gradient(1100px 680px at 88% -12%,rgba(59,108,255,.13),transparent 62%)}
+.slide.before{transform:translate3d(-9%,0,-520px) rotateY(24deg)}
+.slide.active{visibility:visible;opacity:1;z-index:2;transform:none;transition:transform 1.05s cubic-bezier(.2,.8,.2,1),opacity .65s ease .08s,visibility 0s}
+.slide.statement{background:radial-gradient(1000px 640px at 50% 58%,rgba(42,92,255,.30),transparent 70%)}
+.slide.statement h2{background:linear-gradient(180deg,#fff 30%,#9fb6ff);-webkit-background-clip:text;background-clip:text;color:transparent}
 .slide.paper{--ink:#0d1220;--ink2:#35405a;--muted:#67728c;--dim:#a3acbf;--line:rgba(13,18,32,.12);--line2:rgba(13,18,32,.07);--blue:#2a5cff;--blue2:#2a5cff;
   background:radial-gradient(1000px 600px at 92% -10%,rgba(42,92,255,.10),transparent 60%),var(--paper);color:var(--ink)}
 .slide.cobalt{--ink:#fff;--ink2:rgba(255,255,255,.82);--muted:rgba(255,255,255,.62);--line:rgba(255,255,255,.22);--blue:#fff;--blue2:#dfe6ff;
@@ -89,7 +96,10 @@ ul{list-style:none}
 .flow p{font-size:22px;line-height:1.5;color:var(--muted)}
 
 /* module divider */
-.bignum{position:absolute;right:120px;top:40px;font-size:520px;line-height:1;font-weight:900;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:2px rgba(77,123,255,.45);pointer-events:none}
+.bignum{position:absolute;right:110px;top:60px;display:grid;font-size:500px;line-height:1;font-weight:900;letter-spacing:-.04em;pointer-events:none;transform-style:preserve-3d;animation:bn 9s ease-in-out infinite alternate}
+.bignum span{grid-area:1/1;color:rgba(42,92,255,.07);-webkit-text-stroke:1px rgba(77,123,255,.16);transform:translateZ(calc(var(--z) * -7px))}
+.bignum span:first-child{color:rgba(77,123,255,.10);-webkit-text-stroke:2.5px #8eabff;filter:drop-shadow(0 0 30px rgba(77,123,255,.55))}
+@keyframes bn{from{transform:perspective(1800px) rotateY(-34deg) rotateX(14deg) translateZ(0)}to{transform:perspective(1800px) rotateY(-12deg) rotateX(4deg) translateZ(60px)}}
 .tri{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border-top:1px solid var(--line)}
 .tri>div{padding:34px 40px 0 0}
 .tri>div+div{padding-left:40px;border-left:1px solid var(--line)}
@@ -105,20 +115,43 @@ ul{list-style:none}
 .step h4{font-size:34px;line-height:1.3;font-weight:700}
 .step p{font-size:23px;line-height:1.5;color:var(--ink2);margin-top:6px}
 .step .chk{font-size:20px;color:var(--blue2);margin-top:8px}
-.take{background:#f3f5f9;color:#0d1220;border-radius:28px;padding:52px 50px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+.take{background:linear-gradient(160deg,rgba(59,108,255,.26),rgba(255,255,255,.03) 60%);border:1px solid rgba(77,123,255,.45);color:var(--ink);border-radius:28px;padding:52px 50px;display:flex;flex-direction:column;position:relative;overflow:hidden}
 .take::before{content:"";position:absolute;right:-120px;top:-120px;width:340px;height:340px;border-radius:50%;background:radial-gradient(circle,rgba(42,92,255,.18),transparent 70%)}
-.take .lab{font:500 16px/1 var(--mono);letter-spacing:.2em;color:#2a5cff}
+.take .lab{font:500 16px/1 var(--mono);letter-spacing:.2em;color:var(--blue2)}
 .take h3{font-size:46px;font-weight:800;margin:18px 0 34px}
-.take li{display:grid;grid-template-columns:40px 1fr;gap:16px;padding:20px 0;border-top:1px solid rgba(13,18,32,.1)}
-.take li::before{content:"✓";width:34px;height:34px;border-radius:50%;background:#2a5cff;color:#fff;display:grid;place-items:center;font-size:18px;font-weight:700;margin-top:2px}
+.take li{display:grid;grid-template-columns:40px 1fr;gap:16px;padding:20px 0;border-top:1px solid var(--line)}
+.take li::before{content:"✓";width:34px;height:34px;border-radius:50%;background:#2a5cff;box-shadow:0 0 18px rgba(77,123,255,.8);color:#fff;display:grid;place-items:center;font-size:18px;font-weight:700;margin-top:2px}
 .take li b{display:block;font-size:26px;line-height:1.35}
-.take li span{display:block;font-size:18px;color:#67728c;margin-top:4px}
-.take .prep{margin-top:auto;font-size:18px;line-height:1.5;color:#67728c;padding-top:22px;border-top:1px dashed rgba(13,18,32,.2)}
+.take li span{display:block;font-size:18px;color:var(--muted);margin-top:4px}
+.take .prep{margin-top:auto;font-size:18px;line-height:1.5;color:var(--muted);padding-top:22px;border-top:1px dashed var(--line)}
 
 /* reveal */
-.rv{opacity:0;transform:translateY(22px)}
-.slide.active .rv{animation:rv .7s cubic-bezier(.2,.7,.2,1) forwards;animation-delay:calc(var(--i,0) * 70ms + 80ms)}
-@keyframes rv{to{opacity:1;transform:none}}
+.inner{perspective:1600px}
+.rv{opacity:0;translate:0 40px;rotate:x 28deg;scale:.96;filter:blur(8px)}
+.slide.active .rv{animation:rv 1s cubic-bezier(.2,.8,.2,1) forwards;animation-delay:calc(var(--i,0) * 75ms + 260ms)}
+@keyframes rv{to{opacity:1;translate:0 0;rotate:x 0deg;scale:1;filter:none}}
+
+/* 3D tilt cards */
+.tilt{position:relative;transform:perspective(1000px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s,border-color .3s;will-change:transform}
+.tilt:hover{box-shadow:0 40px 80px -36px rgba(42,92,255,.6),0 0 0 1px rgba(77,123,255,.35) inset}
+.tilt::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(460px circle at var(--mx,50%) var(--my,50%),rgba(160,185,255,.18),transparent 45%);opacity:0;transition:opacity .3s}
+.tilt:hover::after{opacity:1}
+
+/* shimmer */
+.hl{background:linear-gradient(90deg,#4d7bff 0%,#b5caff 35%,#4d7bff 70%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shimmer 5s linear infinite}
+@keyframes shimmer{from{background-position:120% 0}to{background-position:-100% 0}}
+
+/* flow light pulse */
+.flow::after{content:"";position:absolute;top:14px;left:16px;width:200px;height:6px;border-radius:6px;background:linear-gradient(90deg,transparent,#b5caff,transparent);filter:blur(1.5px);animation:run 3.4s cubic-bezier(.5,0,.5,1) infinite}
+@keyframes run{0%{left:0;opacity:0}12%{opacity:1}88%{opacity:1}100%{left:calc(100% - 220px);opacity:0}}
+.flow .dot::before{content:"";position:absolute;inset:-2px;border-radius:50%;border:2px solid var(--blue);animation:ping 2.6s ease-out infinite}
+.flow .st:nth-child(2) .dot::before{animation-delay:.35s}.flow .st:nth-child(3) .dot::before{animation-delay:.7s}
+.flow .st:nth-child(4) .dot::before{animation-delay:1.05s}.flow .st:nth-child(5) .dot::before{animation-delay:1.4s}.flow .st:nth-child(6) .dot::before{animation-delay:1.75s}
+@keyframes ping{from{transform:scale(1);opacity:.85}to{transform:scale(2.3);opacity:0}}
+
+/* lens float */
+.slide.active.cover .lens{animation-name:rv,float!important;animation-duration:1s,9s!important;animation-iteration-count:1,infinite!important;animation-direction:normal,alternate!important;animation-timing-function:cubic-bezier(.2,.8,.2,1),ease-in-out!important}
+@keyframes float{from{transform:translateY(-16px) rotate(-1.5deg)}to{transform:translateY(16px) rotate(1.5deg)}}
 
 /* notes + controls */
 .notes{display:none}
@@ -136,12 +169,13 @@ body:hover .ctrl{opacity:1}
   html,body{overflow:visible;height:auto;background:#000}
   .viewport{position:static}
   .stage{position:static;transform:none!important}
-  .slide{position:relative;visibility:visible;opacity:1;width:1920px;height:1080px;page-break-after:always;break-after:page}
-  .rv{opacity:1;transform:none;animation:none!important}
-  .ctrl,.notes-panel{display:none!important}
+  .slide{position:relative;visibility:visible;opacity:1;width:1920px;height:1080px;page-break-after:always;break-after:page;transform:none!important;background-color:var(--bg)}
+  .rv{opacity:1;translate:none;rotate:none;scale:none;filter:none;animation:none!important}
+  .ctrl,.notes-panel,#fx,.spot{display:none!important}
+  .bignum{animation:none}
   *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
-@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}.slide.active .rv{animation:none}}
+@media (prefers-reduced-motion:reduce){.rv{opacity:1;translate:none;rotate:none;scale:none;filter:none}.slide.active .rv,.bignum,.hl,.flow::after,.flow .dot::before{animation:none}.slide{transition:opacity .3s!important;transform:none!important}}
 
 /* ---------- slide specific ---------- */
 /* cover */
@@ -229,7 +263,7 @@ body:hover .ctrl{opacity:1}
 
 /* ppt */
 .acts{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.acts div{padding:40px 38px;border-radius:18px;border:1px solid var(--line);background:#fff}
+.acts div{padding:40px 38px;border-radius:18px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.015))}
 .acts b{display:block;font-size:52px;font-weight:800}
 .acts span{display:block;font-size:22px;color:var(--muted);margin-top:8px;line-height:1.45}
 .vsteps li{display:grid;grid-template-columns:60px 1fr;gap:18px;padding:var(--pad,28px) 0;border-top:1px solid var(--line)}
@@ -250,7 +284,8 @@ body:hover .ctrl{opacity:1}
 .vt{display:grid;grid-template-columns:5fr 12fr 25fr 12fr 8fr;gap:6px}
 .vt div{height:200px;border-radius:14px;padding:22px 22px;display:flex;flex-direction:column;justify-content:space-between;background:rgba(59,108,255,.12);border:1px solid rgba(77,123,255,.3)}
 .vt div:first-child{background:var(--cobalt);border-color:var(--cobalt)}
-.vt div:last-child{background:#fff;color:#0d1220;border-color:#fff}
+.vt div:last-child{background:linear-gradient(135deg,#2a5cff,#7d9bff);border-color:#9fb6ff;box-shadow:0 0 60px -20px rgba(77,123,255,.8)}
+.vt div:first-child{box-shadow:0 0 60px -20px rgba(77,123,255,.8)}
 .vt .tm{font:500 15px/1 var(--mono);letter-spacing:.06em;opacity:.8}
 .vt b{font-size:34px;font-weight:800;white-space:nowrap}
 .vt-axis{display:flex;justify-content:space-between;font:500 15px/1 var(--mono);color:var(--muted);margin-top:14px}
@@ -271,7 +306,7 @@ body:hover .ctrl{opacity:1}
 /* growth loop */
 .loop{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;flex:1}
 .loop .panel{padding:30px 26px;display:flex;flex-direction:column;position:relative}
-.loop .panel:not(:last-child)::after{content:"→";position:absolute;right:-16px;top:34px;width:18px;text-align:center;color:var(--blue);font-size:22px;z-index:2}
+.loop .panel:not(:last-child)::before{content:"→";position:absolute;right:-16px;top:34px;width:18px;text-align:center;color:var(--blue);font-size:22px;z-index:2}
 .loop .no{font:500 15px/1 var(--mono);letter-spacing:.16em;color:var(--blue2)}
 .loop h4{font-size:42px;font-weight:800;margin:20px 0 6px}
 .loop .sub{font-size:22px;color:var(--blue2);font-weight:600}
@@ -279,11 +314,12 @@ body:hover .ctrl{opacity:1}
 .loop li{font-size:23px;line-height:1.5;color:var(--ink2);padding:16px 0;border-top:1px solid var(--line2)}
 
 /* reliability */
-.contract{padding:34px 40px;font:400 21px/1.9 var(--mono);background:#0d1220!important;color:#c6cedd;border:0!important}
+.contract{padding:34px 40px;font:400 21px/1.9 var(--mono);background:rgba(6,10,20,.85)!important;color:#c6cedd;border:1px solid rgba(77,123,255,.4)!important;box-shadow:0 0 80px -30px rgba(42,92,255,.6)}
 .contract .k{color:#8eabff}
 .contract .c{color:#5d6780}
 .std{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border-top:2px solid var(--ink)}
 .std div{padding:36px 24px 0 0}
+.std b{background:linear-gradient(180deg,#fff,#8eabff);-webkit-background-clip:text;background-clip:text;color:transparent}
 .std div+div{padding-left:24px;border-left:1px solid var(--line)}
 .std .n{font:500 16px/1 var(--mono);color:var(--blue)}
 .std b{display:block;font-size:60px;font-weight:900;margin:18px 0 14px}
@@ -303,12 +339,12 @@ body:hover .ctrl{opacity:1}
 </style>
 </head>
 <body>
-<div class="viewport"><div class="stage" id="stage">
+<div class="viewport"><canvas id="fx"></canvas><div class="stage" id="stage">
 
 <!-- 01 封面 -->
 <section class="slide cover bare" data-sec="开场">
   <div class="glow"></div>
-  <img class="lens rv" src="assets/lens.png" alt="">
+  <img class="lens rv" src="assets/lens-glow.png" alt="">
   <div class="inner" style="inset:96px 140px 96px">
     <div class="eb rv">MIMI / AI Practice Series</div>
     <div class="brand rv mt-m">Codex<em>×</em>WorkBuddy<em>×</em>Grokbot</div>
@@ -344,7 +380,7 @@ body:hover .ctrl{opacity:1}
 </section>
 
 <!-- 03 观点 -->
-<section class="slide cobalt" data-sec="开场">
+<section class="slide statement" data-sec="开场">
   <div class="inner" style="justify-content:center">
     <div class="eb rv">Core Idea</div>
     <h2 class="h-xl rv mt-m" style="font-size:118px">AI 的价值不在聊天，<br>而在把事情做完。</h2>
@@ -578,7 +614,7 @@ body:hover .ctrl{opacity:1}
 </section>
 
 <!-- 13 PPT -->
-<section class="slide paper" data-sec="模块二 · 内容表达">
+<section class="slide" data-sec="模块二 · 内容表达">
   <div class="inner">
     <div class="eb rv">讲 ① · PPT & Business Storytelling</div>
     <h2 class="h-l rv mt-s">PPT 不是把字搬到页面上</h2>
@@ -834,7 +870,7 @@ body:hover .ctrl{opacity:1}
 </section>
 
 <!-- 23 可靠结果 方法 -->
-<section class="slide paper" data-sec="可靠结果">
+<section class="slide" data-sec="可靠结果">
   <div class="inner">
     <div class="eb rv">Reliable Results</div>
     <h2 class="h-l rv mt-s">最后一步：怎么让 AI 的结果可靠？</h2>
@@ -862,7 +898,7 @@ body:hover .ctrl{opacity:1}
 </section>
 
 <!-- 24 标准与边界 -->
-<section class="slide paper" data-sec="可靠结果">
+<section class="slide" data-sec="可靠结果">
   <div class="inner">
     <div class="eb rv">Quality Bar & Boundaries</div>
     <h2 class="h-l rv mt-s">成果标准：交给别人，也能继续用</h2>
@@ -913,7 +949,7 @@ body:hover .ctrl{opacity:1}
 <!-- 26 收束 -->
 <section class="slide cover bare" data-sec="结营">
   <div class="glow" style="opacity:.7"></div>
-  <img class="lens rv" src="assets/lens.png" alt="" style="opacity:.85">
+  <img class="lens rv" src="assets/lens-glow.png" alt="" style="opacity:.85">
   <div class="inner" style="justify-content:center;inset:96px 140px 96px">
     <div class="eb rv">MIMI / AI Practice Series</div>
     <h2 class="h-xl rv mt-m" style="font-size:112px">把 AI 变成<br><span class="hl">自己的工作系统。</span></h2>
@@ -925,6 +961,7 @@ body:hover .ctrl{opacity:1}
 
 </div></div>
 
+<div class="spot" id="spot"></div>
 <div class="notes-panel" id="notesPanel"><div class="t">SPEAKER NOTES · 按 N 关闭</div><div id="notesText"></div></div>
 <div class="ctrl">
   <button id="bPrev" title="上一页 ←">←</button>
@@ -933,6 +970,69 @@ body:hover .ctrl{opacity:1}
   <button id="bFull" title="全屏 F">F</button>
 </div>
 
+
+<script>
+/* 3D particle field: one point cloud that morphs between shapes per slide */
+window.FX=(()=>{
+  const cv=document.getElementById('fx'),ctx=cv.getContext('2d'),stage=document.getElementById('stage');
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const N=720,TAU=Math.PI*2;
+  const rnd=(i,k)=>{const v=Math.sin(i*12.9898+k*78.233)*43758.5453;return v-Math.floor(v)};
+  const shapes={
+    sphere:i=>{const y=1-2*(i+.5)/N,r=Math.sqrt(1-y*y),a=i*2.39996;return[Math.cos(a)*r,y,Math.sin(a)*r]},
+    ring:i=>{const u=TAU*i/N*3,v=TAU*rnd(i,1),R=1+.08*rnd(i,2),r=.05;return[(R+r*Math.cos(v))*Math.cos(u),r*Math.sin(v)*2,(R+r*Math.cos(v))*Math.sin(u)]},
+    torus:i=>{const u=TAU*(i%36)/36,v=TAU*Math.floor(i/36)/20,R=.9,r=.38;return[(R+r*Math.cos(v))*Math.cos(u),r*Math.sin(v),(R+r*Math.cos(v))*Math.sin(u)]},
+    helix:i=>{const t=i/N,s=i%2,a=t*TAU*5+s*Math.PI;return[Math.cos(a)*.55,(t-.5)*2.4,Math.sin(a)*.55]},
+    galaxy:i=>{const t=rnd(i,3),arm=i%3,r=.08+t*1.25,a=arm*TAU/3+r*3+(rnd(i,4)-.5)*.5;return[Math.cos(a)*r,(rnd(i,5)-.5)*.12*(1.3-t),Math.sin(a)*r]},
+    cube:i=>{const f=i%6,a=rnd(i,6)*2-1,b=rnd(i,7)*2-1,s=.78;const p=[[1,a,b],[-1,a,b],[a,1,b],[a,-1,b],[a,b,1],[a,b,-1]][f];return p.map(v=>v*s)},
+    wave:(i,t)=>{const gx=i%36,gz=Math.floor(i/36),x=(gx/35-.5)*2.8,z=(gz/19-.5)*1.7;return[x,.16*Math.sin(x*3+t*1.4)+.1*Math.cos(z*4+t),z]}
+  };
+  const tilt={sphere:.25,ring:1.2,torus:.55,helix:.15,galaxy:.5,cube:.45,wave:.55};
+  const plan=['ring hero','sphere dim','galaxy center','galaxy dim','wave dim','cube dim','helix dim',
+    'torus hero','torus dim','torus dim','torus dim','helix hero','helix dim','helix dim','helix dim','helix dim','helix dim',
+    'wave hero','wave dim','wave dim','wave dim','wave dim','cube dim','cube dim','sphere dim','ring hero'];
+  const modes={hero:{x:.7,y:.36,k:.25,a:1},center:{x:.5,y:.52,k:.62,a:1},dim:{x:.76,y:.56,k:.36,a:.48}};
+  const ringPos={x:.77,y:.5,k:.42,a:1};
+  const P=new Float32Array(N*3);
+  for(let i=0;i<N;i++){const p=shapes.sphere(i);P[i*3]=p[0]*3;P[i*3+1]=p[1]*3;P[i*3+2]=p[2]*3}
+  const stars=Array.from({length:140},(_,i)=>[rnd(i,8)*2-1,rnd(i,9)*2-1,rnd(i,10)]);
+  let shape='sphere',mode=modes.dim,cur={x:.75,y:.5,k:.3,a:0},ry=0,rx=.3,spin=0,mx=0,my=0,t=0,W=0,H=0,dpr=1,last=performance.now();
+  const ease=(e,f)=>1-Math.pow(1-e,f);
+  function size(){dpr=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)}
+  addEventListener('resize',size);size();
+  function frame(){
+    const now=performance.now(),F=Math.min((now-last)/16.67,6);last=now;
+    t+=F/60;spin*=Math.pow(.94,F);ry+=(.0022+spin)*F;
+    rx+=((tilt[shape]||.3)+my*.22-rx)*ease(.05,F);
+    for(const k of ['x','y','k','a'])cur[k]+=(mode[k]-cur[k])*ease(.045,F);
+    const r=stage.getBoundingClientRect();
+    const cx=r.left+r.width*cur.x+mx*18,cy=r.top+r.height*cur.y+my*12,sc=r.height*cur.k;
+    ctx.clearRect(0,0,W,H);
+    ctx.globalCompositeOperation='lighter';
+    for(const s of stars){s[2]-=.0016*F;if(s[2]<=.02)s[2]=1;const q=1/s[2]*.18;const x=W/2+s[0]*W*q,y=H/2+s[1]*H*q;if(x<0||x>W||y<0||y>H){s[2]=1;continue}
+      ctx.fillStyle=`rgba(150,175,255,${(1-s[2])*.55})`;const z=(1-s[2])*2.2;ctx.fillRect(x,y,z,z)}
+    const f=shapes[shape],cy_=Math.cos(ry),sy=Math.sin(ry),cx_=Math.cos(rx),sx=Math.sin(rx+mx*0);
+    for(let i=0;i<N;i++){
+      const g=f(i,t),j=i*3,e=ease(.055+(i%7)*.004,F);
+      P[j]+=(g[0]-P[j])*e;P[j+1]+=(g[1]-P[j+1])*e;P[j+2]+=(g[2]-P[j+2])*e;
+      const x=P[j],y=P[j+1],z=P[j+2];
+      const x1=x*cy_-z*sy,z1=x*sy+z*cy_,y1=y*cx_-z1*sx,z2=y*sx+z1*cx_;
+      const pr=3.2/(3.2+z2),px=cx+x1*sc*pr,py=cy+y1*sc*pr;
+      const near=Math.max(0,Math.min(1,(1.2-z2)/2.4));
+      const a=cur.a*(.25+near*.75),sz=(1+near*2.8)*pr;
+      ctx.fillStyle=`rgba(${70+near*120|0},${110+near*100|0},255,${a})`;
+      ctx.fillRect(px-sz/2,py-sz/2,sz,sz);
+    }
+    ctx.globalCompositeOperation='source-over';
+    if(!reduce)requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+  return{
+    set(i){const [s,m]=(plan[i]||'sphere dim').split(' ');if(s!==shape)spin=.07;else spin=.035;shape=s;mode=s==='ring'?ringPos:modes[m]},
+    mouse(x,y){mx=x;my=y}
+  };
+})();
+</script>
 <script>
 (()=>{
   const stage=document.getElementById('stage');
@@ -958,7 +1058,8 @@ body:hover .ctrl{opacity:1}
   }
   function go(i){
     idx=Math.max(0,Math.min(total-1,i));
-    slides.forEach((s,k)=>s.classList.toggle('active',k===idx));
+    slides.forEach((s,k)=>{s.classList.toggle('active',k===idx);s.classList.toggle('before',k<idx)});
+    window.FX&&FX.set(idx);
     const n=slides[idx].querySelector('.notes');
     notesText.textContent=n?n.textContent:'（本页无讲稿）';
     history.replaceState(null,'','#'+(idx+1));
@@ -980,6 +1081,24 @@ body:hover .ctrl{opacity:1}
   let sx=0,sy=0;
   addEventListener('touchstart',e=>{sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
   addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy))go(idx+(dx<0?1:-1))},{passive:true});
+
+  stage.querySelectorAll('.bignum').forEach(el=>{
+    const t=el.textContent.trim();
+    el.innerHTML=Array.from({length:16},(_,z)=>`<span style="--z:${z}">${t}</span>`).join('');
+  });
+  stage.querySelectorAll('.panel,.take,.acts>div,.asset-grid>div,.poster-img,.vt>div').forEach(el=>{
+    el.classList.add('tilt');
+    el.addEventListener('pointermove',e=>{
+      const r=el.getBoundingClientRect(),px=(e.clientX-r.left)/r.width,py=(e.clientY-r.top)/r.height;
+      el.style.setProperty('--rx',((.5-py)*9).toFixed(2)+'deg');
+      el.style.setProperty('--ry',((px-.5)*11).toFixed(2)+'deg');
+      el.style.setProperty('--mx',(px*100).toFixed(1)+'%');
+      el.style.setProperty('--my',(py*100).toFixed(1)+'%');
+    });
+    el.addEventListener('pointerleave',()=>{el.style.setProperty('--rx','0deg');el.style.setProperty('--ry','0deg')});
+  });
+  const spot=document.getElementById('spot');
+  addEventListener('pointermove',e=>{spot.style.setProperty('--x',e.clientX+'px');spot.style.setProperty('--y',e.clientY+'px');window.FX&&FX.mouse(e.clientX/innerWidth*2-1,e.clientY/innerHeight*2-1)});
 
   fit();
   const h=parseInt(location.hash.slice(1),10);
