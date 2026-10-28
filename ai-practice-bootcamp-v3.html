@@ -558,6 +558,16 @@ body:hover .ctrl{opacity:1}
 .kbt .hd h4{margin:0;font-size:26px}
 .kbt.th .fit{margin-top:10px}
 .kbt.th dt{margin-top:18px}
+.kbt.c5{grid-template-columns:repeat(5,1fr);gap:14px}
+.kbt.c5 .panel{padding:24px 20px 20px}
+.kbt.c5 .thumb{height:200px;margin:-24px -20px 16px}
+.kbt.c5 .lg{width:50px;height:50px}
+.kbt.c5 h4{font-size:27px;margin-top:16px}
+.kbt.c5 .fit{font-size:19px}
+.kbt.c5 dd{font-size:19px}
+.kbt .thumb.wx{display:flex;flex-direction:column;justify-content:center;gap:7px;padding:12px 14px;background:#eef2f8}
+.kbt .thumb.wx div{background:#fff;border:1px solid #dbe2ec;border-radius:10px;padding:7px 12px;color:#1d2433;font-size:17px;line-height:1.3}
+.kbt .thumb.wx b{display:block;font:500 12px/1 var(--mono);letter-spacing:.14em;color:#3b6cff;margin-bottom:5px}
 .kbt.th dd{font-size:20px}
 .sfig{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#fff;box-shadow:0 30px 60px -30px rgba(0,0,0,.85)}
 .sfig>img{display:block;width:100%;height:100%;object-fit:cover;object-position:top left}
@@ -1282,8 +1292,8 @@ body:hover .ctrl{opacity:1}
 <section class="slide" data-sec="模块一 · 工作系统">
   <div class="inner">
     <div class="eb rv">讲 ① · 知识库 · 放在哪</div>
-    <h2 class="h-l rv mt-s">四种做法：按谁来用、资料多敏感来选</h2>
-    <div class="kbt th mt-m">
+    <h2 class="h-l rv mt-s">五种做法：按谁来用、资料多敏感来选</h2>
+    <div class="kbt th c5 mt-m">
       <div class="panel core rv"><span class="core-tag">作业一</span>
         <div class="thumb"><img src="assets/kb/thumb-codex.jpg" alt="Codex 界面"></div>
         <div class="hd"><img class="lg" src="assets/logos/codex.svg" alt=""><img class="lg" src="assets/logos/workbuddy.svg" alt=""><h4>本地文件夹</h4></div>
@@ -1297,6 +1307,12 @@ body:hover .ctrl{opacity:1}
         <dl><dt>好处</dt><dd>按每个人原有权限回答；答案带脚注，点开是原文；可发布成问答知识库给客户用</dd>
         <dt>注意</dt><dd class="warn">超出每人免费额度要另买</dd></dl></div>
       <div class="panel rv">
+        <div class="thumb wx"><div><b>员工</b>企业微信 · 智能机器人</div><div><b>客户</b>微信客服 · 问答库</div><div><b>要大模型回答</b>腾讯云 ADP（元器正迁入）</div></div>
+        <div class="hd"><img class="lg" src="assets/logos/wecom.png" alt=""><h4>微信生态</h4></div>
+        <div class="fit">团队用企业微信 · 客户在微信</div>
+        <dl><dt>好处</dt><dd>员工在群里问机器人；客户在微信客服里问，答不上转人工</dd>
+        <dt>注意</dt><dd class="warn">智能机器人只能进内部群；元器接微信客服后不能转人工</dd></dl></div>
+      <div class="panel rv">
         <div class="thumb"><img src="assets/kb/thumb-ima-side.jpg" alt="ima 网页版"></div>
         <div class="hd"><img class="lg" src="assets/logos/ima.svg" alt=""><h4>腾讯 ima</h4></div>
         <div class="fit">个人收集行业资料</div>
@@ -1309,9 +1325,9 @@ body:hover .ctrl{opacity:1}
         <dl><dt>好处</dt><dd>知识库接进机器人，挂到官网、公众号、企业微信</dd>
         <dt>注意</dt><dd class="warn">资料外的问题设成转人工</dd></dl></div>
     </div>
-    <div class="strip rv mt-m"><span class="tag">怎么选</span>先在本地整理干净，再按需要搬到飞书给团队用、搬到扣子给客户用。整理这一步跑不掉。</div>
+    <div class="strip rv mt-m"><span class="tag">怎么选</span>先在本地整理干净，再按需要搬到飞书、企业微信给团队用，搬到微信客服、扣子给客户用。整理这一步跑不掉。</div>
   </div>
-  <aside class="notes">知识库放在哪，看两件事：谁来用，资料多敏感。第一种，本地文件夹加 Codex 或 WorkBuddy，适合老板自己用、资料敏感的情况，文件不出电脑，整理完直接拿去做 PPT 和网站，作业一就用这种。第二种，飞书知识库加知识问答，适合团队已经在用飞书：它只按每个人原本的权限回答，你看不到的文件它也不会引用；答案带数字脚注，点开就是原文；还可以把知识库发布成问答知识库，给客户用。注意超出每人每月的免费额度要另外买。第三种，腾讯 ima，适合个人收集行业资料，公众号文章、网页、PDF 随手存进去再提问，也能建共享知识库，但合同报价这种内部资料别放。第四种，扣子或者 Dify，适合做对外客服机器人，挂到官网、公众号、企业微信上，但要设好资料外的问题转人工。顺序建议是：先在本地整理干净，再按需要搬到飞书或者扣子，整理这一步哪种工具都跑不掉。</aside>
+  <aside class="notes">知识库放在哪，看两件事：谁来用，资料多敏感。第一种，本地文件夹加 Codex 或 WorkBuddy，适合老板自己用、资料敏感的情况，文件不出电脑，整理完直接拿去做 PPT 和网站，作业一就用这种。第二种，飞书知识库加知识问答，适合团队已经在用飞书：它只按每个人原本的权限回答，你看不到的文件它也不会引用；答案带数字脚注，点开就是原文；还可以把知识库发布成问答知识库，给客户用。注意超出每人每月的免费额度要另外买。第三种，微信生态，适合团队用企业微信、客户在微信里找你：员工用企业微信的智能机器人，把文档和问答对放进知识集，在群里直接问，但它只能进内部群；对客户用微信客服的问答库，问答对加相似问法，答不上的转人工。想让微信里的客服用大模型回答，以前用腾讯元器，元器 10 月发了公告，正在迁到腾讯云智能体开发平台 ADP，新项目直接用 ADP；还要注意元器接进微信客服以后，这个账号的客服全由机器接管，不能再转人工。第四种，腾讯 ima，适合个人收集行业资料，公众号文章、网页、PDF 随手存进去再提问，也能建共享知识库，但合同报价这种内部资料别放。第五种，扣子或者 Dify，适合做对外客服机器人，挂到官网、公众号、企业微信上，但要设好资料外的问题转人工。顺序建议是：先在本地整理干净，再按需要搬到飞书、企业微信或者扣子，整理这一步哪种工具都跑不掉。课后有一个进阶作业，教大家把知识库做成能转人工、每周迭代的客服机器人。</aside>
 </section>
 
 <!-- 24 知识库 飞书 6 步 -->
@@ -2037,7 +2053,7 @@ is its product series.</span></pre></div>
     <h2 class="h-l rv mt-s">网站上线之后：从线索到收款，连成一条闭环</h2>
     <div class="loop mt-m">
       <div class="panel rv"><span class="no">01</span><h4>获客</h4><span class="sub">B2B 获客</span><ul><li>客户画像</li><li>线索池与证据包</li><li>个性化邮件序列</li></ul></div>
-      <div class="panel rv"><span class="no">02</span><h4>承接</h4><span class="sub">自动客服</span><ul><li>基于知识库回答</li><li>7×24 小时响应</li><li>复杂问题转人工</li></ul></div>
+      <div class="panel rv"><span class="no">02</span><h4>承接</h4><span class="sub">自动客服</span><ul><li>基于知识库回答</li><li>7×24 小时响应</li><li>复杂问题转人工</li><li>没答好的每周补回</li></ul></div>
       <div class="panel rv"><span class="no">03</span><h4>成交</h4><span class="sub">收费</span><ul><li>报价单与方案</li><li>合同</li><li>在线收款</li></ul></div>
       <div class="panel rv"><span class="no">04</span><h4>交付</h4><span class="sub">交付</span><ul><li>交付清单</li><li>进度同步</li><li>验收确认</li></ul></div>
       <div class="panel rv"><span class="no">05</span><h4>复盘</h4><span class="sub">客户成功</span><ul><li>回复与转化</li><li>客户反馈</li><li>下一轮优化</li></ul></div>
@@ -2047,7 +2063,7 @@ is its product series.</span></pre></div>
       <div class="chips"><span class="chip">发送前人工审核</span><span class="chip">退订与限速</span><span class="chip">一键暂停</span><span class="chip">每个动作留记录</span></div>
     </div>
   </div>
-  <aside class="notes">铺信源是让更多客户和 AI 找到你；找到之后怎么变成生意，我们就拿大家刚上线的网站来讲。网站只是入口，业务增长是一条闭环：获客、承接、成交、交付、复盘。获客：用作业零的业务卡片做客户画像，用 Grokbot 查到的公开资料做带证据的线索池，再写个性化邮件，把人引到你的网址。承接：自动客服用作业一做的知识库来回答，复杂问题转人工。成交和交付要有报价、合同、收款和交付清单。所有自动化都要有护栏：人工审核、退订限速、一键暂停、留记录。请大家在自己的网站旁边，画出这五步里下一步最该补的是哪一环。</aside>
+  <aside class="notes">铺信源是让更多客户和 AI 找到你；找到之后怎么变成生意，我们就拿大家刚上线的网站来讲。网站只是入口，业务增长是一条闭环：获客、承接、成交、交付、复盘。获客：用作业零的业务卡片做客户画像，用 Grokbot 查到的公开资料做带证据的线索池，再写个性化邮件，把人引到你的网址。承接：自动客服用作业一做的知识库来回答，复杂问题转人工。客服上线不是一次性的：每周把没答上、转了人工的问题捞出来，AI 起草、负责人审核以后补进问答表，再把测试题重跑一遍，这样会越用越准。具体做法在课后的进阶作业里。成交和交付要有报价、合同、收款和交付清单。所有自动化都要有护栏：人工审核、退订限速、一键暂停、留记录。请大家在自己的网站旁边，画出这五步里下一步最该补的是哪一环。</aside>
 </section>
 
 <!-- 53 标准与边界 -->
