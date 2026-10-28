@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>作业一教程｜业务知识库 + 邮件助理｜AI 实战训练营教程</title><style>
+:root{--ac:#2f5d50;--ac2:#e7efec;--ink:#1d1f1e;--mu:#5f6663;--line:#e3e1db;--bg:#fbfaf7;--card:#fff;--warn:#b5532a;--warn2:#fbeee7;--ok:#2f7a4f;--ok2:#e8f4ec;--you:#eef2fb;--you2:#3b5bb5}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:20px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 "Source Han Sans SC","Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--ac)}
+.layout{display:grid;grid-template-columns:260px minmax(0,1fr);max-width:1240px;margin:0 auto;gap:48px;padding:0 32px}
+nav.toc{position:sticky;top:0;align-self:start;max-height:100vh;overflow:auto;padding:36px 0 40px;font-size:14px}
+nav.toc .home{display:block;color:var(--mu);text-decoration:none;font-size:13px;margin-bottom:18px}
+nav.toc .home:hover{color:var(--ac)}
+nav.toc ul{list-style:none;margin:0;padding:0}
+nav.toc>div>ul>li{margin:10px 0}
+nav.toc>div>ul>li>a{font-weight:700;color:var(--ink)}
+nav.toc ul ul{padding-left:12px;border-left:2px solid var(--line);margin:6px 0 4px}
+nav.toc ul ul li{margin:4px 0}
+nav.toc a{text-decoration:none;color:var(--mu)}
+nav.toc a:hover{color:var(--ac)}
+main{padding:36px 0 120px;min-width:0}
+.crumb{font-size:13px;color:var(--mu);letter-spacing:.06em}
+h1{font-size:40px;line-height:1.25;margin:10px 0 18px;letter-spacing:-.01em}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}
+.meta span{display:inline-flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px 14px;font-size:14px;color:var(--mu)}
+.meta img{width:18px;height:18px;object-fit:contain}
+.meta b{color:var(--ink);font-weight:600}
+h2{font-size:28px;line-height:1.35;margin:64px 0 8px;padding-top:28px;border-top:3px solid var(--ink)}
+h2 .t{display:inline-block;background:var(--ac);color:#fff;border-radius:8px;padding:0 10px;margin-right:10px;font-size:22px;vertical-align:3px}
+h3{font-size:20px;margin:40px 0 8px}
+h3::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ac);margin-right:10px;vertical-align:4px}
+h4{font-size:16px;margin:24px 0 6px;color:var(--mu)}
+p{margin:10px 0}
+ul,ol{padding-left:24px}
+li{margin:4px 0}
+code{font-family:"JetBrains Mono","SFMono-Regular",Consolas,monospace;font-size:.88em;background:#f0eee8;border-radius:5px;padding:1px 6px}
+pre{background:#22251f;color:#eef0ea;border-radius:12px;padding:18px 20px;overflow:auto;font-size:14px;line-height:1.7;margin:12px 0}
+pre code{background:none;padding:0;color:inherit;font-size:inherit;white-space:pre-wrap;word-break:break-word}
+.pw{position:relative;margin:14px 0}
+.pw .bar{display:flex;justify-content:space-between;align-items:center;background:#363a32;color:#cfd3c9;border-radius:12px 12px 0 0;padding:8px 14px 8px 18px;font-size:13px}
+.pw .bar+pre{margin-top:0;border-radius:0 0 12px 12px}
+.pw button{font:inherit;font-size:13px;background:#5b8f7e;color:#fff;border:0;border-radius:7px;padding:4px 12px;cursor:pointer}
+.pw button.ok{background:#8aa05a}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14.5px;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:block;overflow-x:auto}
+thead{background:#f2f0ea}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:700;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+blockquote{margin:12px 0;padding:10px 18px;border-left:4px solid var(--line);color:var(--mu);background:#f6f5f1;border-radius:0 8px 8px 0}
+figure{margin:18px 0}
+figure img{display:block;max-width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:0 8px 30px rgba(0,0,0,.06)}
+figure.half img{max-width:420px}
+figure.third img{max-width:300px}
+figcaption{font-size:13px;color:var(--mu);margin-top:8px}
+.row{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start}
+.row figure{margin:8px 0}
+.admonition{border-radius:12px;padding:14px 18px;margin:16px 0;border:1px solid var(--line);background:var(--card)}
+.admonition>p.admonition-title{margin:0 0 6px;font-weight:700;font-size:14px;letter-spacing:.04em}
+.admonition>*:last-child{margin-bottom:0}
+.admonition.you{background:var(--you);border-color:#d5ddf2}
+.admonition.you>.admonition-title{color:var(--you2)}
+.admonition.ai{background:#fff;border-left:5px solid var(--ac)}
+.admonition.ai>.admonition-title{color:var(--ac)}
+.admonition.ai>.admonition-title::after{content:"　参考结果，用木序示例实际做出来的；你那边措辞会不同，看结构和要点";font-weight:400;color:var(--mu);font-size:12.5px;letter-spacing:0}
+.admonition.check{background:var(--ok2);border-color:#cfe6d7}
+.admonition.check>.admonition-title{color:var(--ok)}
+.admonition.warn{background:var(--warn2);border-color:#f0d6c8}
+.admonition.warn>.admonition-title{color:var(--warn)}
+.admonition.tip{background:#fff8e6;border-color:#f1e2b5}
+.admonition.tip>.admonition-title{color:#8a6a12}
+.admonition.note{background:#f4f3ef}
+li.task{list-style:none;margin-left:-22px}
+li.task input{margin-right:8px;transform:scale(1.15);accent-color:var(--ac)}
+.get{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:12px 0 8px}
+.get div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14px}
+.get b{display:block;font-size:15px;margin-bottom:4px}
+.pager{display:flex;justify-content:space-between;margin-top:72px;padding-top:24px;border-top:1px solid var(--line);font-size:15px}
+.pager a{text-decoration:none;font-weight:700}
+kbd{font:12px/1 "JetBrains Mono",monospace;background:#fff;border:1px solid #ccc;border-bottom-width:2px;border-radius:5px;padding:2px 6px}
+@media(max-width:900px){.layout{grid-template-columns:1fr;padding:0 18px}nav.toc{display:none}h1{font-size:30px}}
+@media print{nav.toc,.pw button{display:none}.layout{display:block}h2{break-before:page}body{background:#fff}}
+</style></head>
+<body><div class="layout">
+<nav class="toc"><a class="home" href="index.html">← 教程目录</a><div>
+<ul>
+<li><a href="#A-整理文件夹-30-分钟">A · 整理文件夹（30 分钟）</a><ul>
+<li><a href="#把资料放进-资料">把资料放进 资料/</a></li>
+<li><a href="#让-Codex-盘点">让 Codex 盘点</a></li>
+<li><a href="#看问题清单-你来拍板">看问题清单，你来拍板</a></li>
+<li><a href="#归类-改名-出总索引">归类、改名、出总索引</a></li>
+</ul>
+</li>
+<li><a href="#B-知识库问答-20-分钟">B · 知识库问答（20 分钟）</a><ul>
+<li><a href="#问-3-个客户真问过的问题">问 3 个客户真问过的问题</a></li>
+<li><a href="#用-Grokbot-补一条公开资料">用 Grokbot 补一条公开资料</a></li>
+</ul>
+</li>
+<li><a href="#C-邮件助理-35-分钟">C · 邮件助理（35 分钟）</a><ul>
+<li><a href="#连上测试邮箱">连上测试邮箱</a></li>
+<li><a href="#给它一个独立的工作空间">给它一个独立的工作空间</a></li>
+<li><a href="#先手动跑一次">先手动跑一次</a></li>
+<li><a href="#对照自查-不对就改提示词">对照自查，不对就改提示词</a></li>
+<li><a href="#设成每天-08-30-的定时任务">设成每天 08:30 的定时任务</a></li>
+</ul>
+</li>
+<li><a href="#D-FAQ-素材-20-分钟">D · FAQ 素材（20 分钟）</a></li>
+<li><a href="#进阶版-导入飞书知识库">进阶版：导入飞书知识库</a></li>
+<li><a href="#16-25-小组互查">16:25 小组互查</a></li>
+<li><a href="#交付对照">交付对照</a></li>
+<li><a href="#卡住了">卡住了</a></li>
+</ul>
+
+</div></nav>
+<main>
+<div class="crumb">AI 实战训练营 · 作业包 · 教程</div>
+<h1>作业一教程｜业务知识库 + 邮件助理</h1>
+<div class="meta"><span>⏱ <b>105 分钟，含 15 分钟茶歇（Day 1 14:25–16:25）</b></span><span><img src="img/logos/codex.svg" alt=""><b>Codex</b></span><span><img src="img/logos/grokbot.svg" alt=""><b>Grokbot</b></span><span><img src="img/logos/workbuddy.svg" alt=""><b>WorkBuddy</b></span><span>课件 <b>第 28 页</b></span></div>
+<p>没带资料的同学用 <code>作业一-知识库与邮件助理/示例资料_木序办公家具_虚构/</code>，30 个文件，跟真实公司一样乱。这份教程就是用它做的，每一步的结果都能在 <a href="跟做样例_木序办公家具/"><code>跟做样例_木序办公家具/</code></a> 里找到。</p>
+<div class="get">
+<div><b>一套知识库</b>按类别改好名，有总索引；问它问题能答出来并带出处</div>
+<div><b>一个邮件助理</b>每天 08:30 分类、摘要、起草，推到企业微信；只起草不发送</div>
+<div><b>FAQ 素材 5 问</b>客户最常问的 5 个问题和答案，作业四网站直接用</div>
+</div>
+<h2 id="A-整理文件夹-30-分钟"><span class="t">A</span>整理文件夹（30 分钟）</h2>
+<h3 id="把资料放进-资料">把资料放进 资料/</h3>
+<ul>
+<li>带了自己资料的：复制到业务文件夹的 <code>资料/</code></li>
+<li>没带的：把 <code>示例资料_木序办公家具_虚构/</code> 里的全部文件（含 <code>展会资料/</code> 子文件夹）复制到 <code>资料/</code></li>
+</ul>
+<p><strong>复制，不是剪切。</strong> 原件留在原地，<code>资料/</code> 里放的是副本。示例里 <code>资料/</code> 有 31 个文件：示例资料 30 个，加作业零放进去的 1 封询价。</p>
+<h3 id="让-Codex-盘点">让 Codex 盘点</h3>
+<pre><code class="language-prompt">#! 发给 Codex
+用 organize-files 这个 Skill 整理 资料/
+</code></pre>
+<p>Skill 第 1 步是盘点：它把每个文件打开看一遍，写一句话摘要，先给你看表，不会直接动手。</p>
+<div class="admonition ai">
+<p class="admonition-title">Codex：盘点表（31 行里的 6 行）</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>文件</th>
+<th>一句话内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3</td>
+<td>产品手册2026新版.pdf</td>
+<td>8 个型号；ENF 板材；交期 15 个工作日；钢架板材 5 年</td>
+</tr>
+<tr>
+<td>4</td>
+<td>产品手册2025.pdf</td>
+<td>6 个型号；E0 板材；交期 20 个工作日；整体质保 3 年</td>
+</tr>
+<tr>
+<td>6</td>
+<td>报价单最终版(1).xlsx</td>
+<td>和第 5 个内容完全一样</td>
+</tr>
+<tr>
+<td>15</td>
+<td>案例2.docx</td>
+<td>广州天河律所 120 人，夜间分两期安装，约 32 万；不能放照片</td>
+</tr>
+<tr>
+<td>20</td>
+<td>新建 Microsoft Word 文档.docx</td>
+<td>其实是「交付流程（给新人看）」，9 个环节</td>
+</tr>
+<tr>
+<td>30</td>
+<td>未命名.txt</td>
+<td>快递单号和「交物业费」，是私人备忘</td>
+</tr>
+</tbody>
+</table>
+<p>完整 31 行：<a href="跟做样例_木序办公家具/知识库/整理记录_20261028.md"><code>知识库/整理记录_20261028.md</code></a></p>
+</div>
+<h3 id="看问题清单-你来拍板">看问题清单，你来拍板</h3>
+<p>第 2 步它会列出三类问题：重复、过期、冲突。<strong>这一步最重要</strong>，AI 能找出矛盾，但以哪份为准要你定。</p>
+<div class="admonition ai">
+<p class="admonition-title">Codex：冲突（6 处）</p>
+<table>
+<thead>
+<tr>
+<th>事实</th>
+<th>说法 A</th>
+<th>说法 B</th>
+<th>建议</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>质保</td>
+<td>5 年 / 3 年分部件（2026 条款、2026 手册）</td>
+<td>整体 3 年（旧条款、2025 手册）</td>
+<td>以 2026 版为准</td>
+</tr>
+<tr>
+<td>交期</td>
+<td>15 个工作日（2026 手册、合同）</td>
+<td>20 个工作日（2025 手册）</td>
+<td>以 2026 版为准</td>
+</tr>
+<tr>
+<td>宽工位价格</td>
+<td>820 元（报价单最终版）</td>
+<td>760 元（报价单.xlsx）</td>
+<td>以 2026 价格为准</td>
+</tr>
+<tr>
+<td>大客户折扣</td>
+<td>50 位以上 95 折（会议纪要 0915）</td>
+<td>50 位以上 9 折（销售话术）</td>
+<td><strong>资料里没有答案，要问老板</strong></td>
+</tr>
+<tr>
+<td>客户数</td>
+<td>600 多家（公司介绍.docx）</td>
+<td>500+（简版，2025-11）</td>
+<td>以新的为准</td>
+</tr>
+<tr>
+<td>旧家具回收</td>
+<td>先不做（会议纪要）</td>
+<td>问老板（客户常见问题）</td>
+<td>以会议纪要为准</td>
+</tr>
+</tbody>
+</table>
+<p>另外：<code>未命名.txt</code> 是私人备忘，<code>客户名单_脱敏.csv</code> 是内部数据，建议都不进知识库；销售话术里「送一年延保」老板没批。</p>
+</div>
+<p>逐条看，然后一次性回复你的决定：</p>
+<pre><code class="language-prompt">#! 示例的回复（按你自己的判断改）
+过期和重复的全部作废。冲突都按你的建议，折扣那条标「待确认，问老板」。未命名.txt 和客户名单不进知识库。公司介绍(简版) 作废。展厅图片放案例。竞品对比放 99_其他，文件名加「未核实」。询价邮件放 99_其他。
+</code></pre>
+<div class="admonition warn">
+<p class="admonition-title">别让它直接「全部整理好」</p>
+<p>跳过确认这一步，它会自己挑一份当准，比如把 9 折写进知识库。后面邮件助理、FAQ、网站都会跟着错。</p>
+</div>
+<h3 id="归类-改名-出总索引">归类、改名、出总索引</h3>
+<p>确认后它把保留的文件<strong>复制</strong>到 <code>知识库/</code> 的 7 个类别文件夹，按「类别_主题_日期」改名：</p>
+<pre><code class="language-text">资料/新建 Microsoft Word 文档.docx  →  知识库/06_流程与制度/流程与制度_交付流程_202604.docx
+资料/案例2.docx                     →  知识库/04_案例/案例_广州律所120人_202607.docx
+资料/IMG_4721.jpg                  →  知识库/04_案例/案例_宽工位安装完成示意图_202605.jpg
+资料/报价单最终版.xlsx               →  知识库/02_产品与价格/产品与价格_报价单_2026.xlsx
+</code></pre>
+<p>最后生成 <code>知识库/总索引.md</code>。翻到最后，看总数核对：</p>
+<div class="admonition ai">
+<p class="admonition-title">Codex：总索引最后一段</p>
+<p><strong>总数核对</strong>：资料 31 个 = 保留 23 + 作废 6 + 不收录 2 + 打不开 0 ✓</p>
+<p>完整索引：<a href="跟做样例_木序办公家具/知识库/总索引.md"><code>知识库/总索引.md</code></a></p>
+</div>
+<div class="admonition check">
+<p class="admonition-title">检查</p>
+<ul>
+<li class="task"><input type="checkbox"> 总数核对能对上，<code>资料/</code> 里每个文件都出现在索引里</li>
+<li class="task"><input type="checkbox"> 随手抽 3 条摘要，打开原文对数字（示例抽了 2026 手册的交期、报价单的 820、案例的 13 个工作日）</li>
+<li class="task"><input type="checkbox"> <code>资料/</code> 里的原件一个没少、没被改名</li>
+<li class="task"><input type="checkbox"> 6 处冲突都在「待确认」里，折扣那条写的是「问老板」</li>
+</ul>
+</div>
+<h2 id="B-知识库问答-20-分钟"><span class="t">B</span>知识库问答（20 分钟）</h2>
+<h3 id="问-3-个客户真问过的问题">问 3 个客户真问过的问题</h3>
+<p>写下 3 个客户真的问过你的问题，至少放一个你知道知识库里<strong>没有</strong>答案的，用来测它会不会编。</p>
+<pre><code class="language-prompt">#! 发给 Codex（换成你的 3 个问题）
+角色：你是我的业务资料助理
+目标：回答下面 3 个客户问题，每个答案一段话，附出处
+输入：知识库/（只用这里的内容）；业务卡片.md
+约束：不用你自己的常识补充；两份资料说法冲突时，列出两边并标「待确认」；找不到就写「知识库里没有」
+验收：每个答案都有「文件名 + 段落或行号」；数字和原文一致
+节奏：先列出你打算引用哪几份文件，我确认后再回答
+
+问题：
+1. 你们的家具质保几年？
+2. 成都 150 人的办公室能做吗？运费和安装怎么算，多久能装好？
+3. 你们有没有 ISO 认证？
+</code></pre>
+<div class="admonition ai">
+<p class="admonition-title">Codex：第 2、3 题</p>
+<p><strong>2.</strong> 能做。成都属于「其他省份」：运费按合同额的 8% 收，安装费 80 元 / 位（150 位就是 12,000 元），用视频量尺，由合作安装队安装。交期在标准 15 个工作日上加 5 个工作日。
+出处：<code>02_产品与价格/产品与价格_物流配送范围_2026.xlsx</code> 第 5 行；<code>产品与价格_产品手册_2026.pdf</code>「交付」</p>
+<p><strong>3.</strong> 知识库里没有。没有找到任何 ISO 认证、证书编号或相关描述。【待确认】问老板有没有认证。</p>
+<p>完整 3 题：<a href="跟做样例_木序办公家具/产出/20261028_知识库问答_v1.md"><code>产出/20261028_知识库问答_v1.md</code></a></p>
+</div>
+<p><strong>打开出处文件核对</strong>。第 3 题它说「没有」是对的；如果它编了一个「通过 ISO 9001 认证」，回去在提示词里加一句「找不到必须说找不到」，再问一次。</p>
+<h3 id="用-Grokbot-补一条公开资料">用 Grokbot 补一条公开资料</h3>
+<p>知识库里只有自己的资料。客户、竞品、行业标准这类公开信息，让 Grokbot 去查：</p>
+<pre><code class="language-prompt">#! 发给 Grokbot「业务顾问」
+帮我查 GB/T 39600-2021《人造板及其制品甲醛释放量分级》：现在是否有效、什么时候实施、三个等级的限量值。只用官方或权威来源，给出网址。
+</code></pre>
+<p>它给的网址<strong>自己点开核对</strong>，然后存成 <code>知识库/99_其他/公开资料_主题_日期.md</code>，写清来源网址和查询日期。示例：<a href="跟做样例_木序办公家具/知识库/99_其他/公开资料_GB-T39600甲醛分级_20261028.md"><code>公开资料_GB-T39600甲醛分级_20261028.md</code></a>。</p>
+<div class="admonition check">
+<p class="admonition-title">检查</p>
+<ul>
+<li class="task"><input type="checkbox"> 3 个答案都有「文件名 + 位置」，打开原文能对上</li>
+<li class="task"><input type="checkbox"> 知识库里没有的问题，它说了没有</li>
+<li class="task"><input type="checkbox"> 公开资料文件里有网址和日期，网址你打开过</li>
+</ul>
+</div>
+<h2 id="C-邮件助理-35-分钟"><span class="t">C</span>邮件助理（35 分钟）</h2>
+<h3 id="连上测试邮箱">连上测试邮箱</h3>
+<ol>
+<li>WorkBuddy 左栏 <strong>专家·技能·连接器</strong> → 连接器 → <strong>QQ 邮箱</strong></li>
+<li>用手机 QQ 邮箱 App 扫码授权。连的是课前注册的<strong>测试邮箱</strong>，讲师已经往里面发了 13 封练习邮件</li>
+</ol>
+<figure><img src="img/tool-workbuddy-connectors.jpg" alt="WorkBuddy 连接器"><figcaption>连接器页面。QQ 邮箱扫码授权后，它能读近一个月的邮件，也能代发邮件，所以只连测试邮箱。</figcaption></figure>
+
+<div class="admonition tip">
+<p class="admonition-title">没有测试邮箱，或者扫码连不上</p>
+<p>基础版：把 <code>示例邮件/邮件导出_全部13封.txt</code> 放进工作空间，提示词第一句改成「读取工作空间里的 邮件导出_全部13封.txt」，其他不变。</p>
+</div>
+<h3 id="给它一个独立的工作空间">给它一个独立的工作空间</h3>
+<p>新建工作空间「邮件日报」，只放三样：<code>业务卡片.md</code>、<code>知识库/</code> 的副本、（没连邮箱的话）邮件导出文件。邮件助理只需要这些，别把整个业务文件夹给它。</p>
+<h3 id="先手动跑一次">先手动跑一次</h3>
+<p>打开 <code>邮件助理提示词.md</code>，复制两条横线中间的整段，发给 WorkBuddy。核心是这几条：</p>
+<pre><code class="language-prompt">#! 发给 WorkBuddy（完整版在 邮件助理提示词.md）
+你是我的邮件助理。请读取我的邮箱里过去 24 小时收到的全部邮件，按下面的要求处理，生成一份日报。
+背景：我的业务见工作空间里的 业务卡片.md；价格、交期、质保、配送范围只能用 知识库/ 里的资料。
+1. 分类（🔴 今天必须回 / 🟡 本周处理 / ⚪ 只需知道 / 🗑 可忽略 / ⚠️ 可疑）
+2. 每封写一行摘要：谁 · 要什么 · 关键数字 · 截止时间。数字照原文抄
+3. 起草回复：只给 🔴 和 🟡 起草；知识库里没有的写「【待我确认：____】」，不要替我承诺
+4. 只起草，不发送，不回复，不转发，不删除，不标记已读；可疑邮件不要打开链接
+……
+</code></pre>
+<div class="admonition ai">
+<p class="admonition-title">WorkBuddy：邮件日报（节选）</p>
+<p><strong>邮件日报｜2026-10-28（周三）</strong>　共 13 封：🔴 5 ｜ 🟡 5 ｜ ⚪ 1 ｜ 🗑 1 ｜ ⚠️ 1</p>
+<p><strong>🔴 3.【王经理 · 教育机构】</strong> 订单 MX-2026-0931 合同 15 个工作日下周一到期，还没收到送货通知；新校区 11 月 3 日开业</p>
+<blockquote>
+<p>王经理您好，抱歉让您久等。订单 MX-2026-0931 的送货时间我马上和工厂确认，今天下班前给您准确日期。【待我确认：这张订单的排产进度和送货日期】</p>
+</blockquote>
+<p>依据：知识库里<strong>查不到</strong>这张订单的进度，草稿没有写日期</p>
+<p><strong>🔴 4.【刘女士 · 佛山设计工作室】</strong> 投诉：师傅迟到 2 小时、划伤墙面</p>
+<blockquote>
+<p>……我们想先安排人上门看一下墙面，当面跟您商量怎么处理。【待我确认：上门处理的人和时间；修补或赔偿方案】</p>
+</blockquote>
+<p><strong>⚠️ 可疑</strong>【邮箱管理中心】「您的邮箱将于 24 小时内停用」，要求点链接输入密码。典型钓鱼邮件。<strong>没有打开链接，没有起草回复。</strong></p>
+<p>完整日报：<a href="跟做样例_木序办公家具/产出/20261028_邮件日报_v1.md"><code>产出/20261028_邮件日报_v1.md</code></a></p>
+</div>
+<h3 id="对照自查-不对就改提示词">对照自查，不对就改提示词</h3>
+<p>拿着日报，一条条对：</p>
+<ul>
+<li class="task"><input type="checkbox"> 开头的总数是 13</li>
+<li class="task"><input type="checkbox"> 订单号 MX-2026-0931、45 人、11 月 20 日这些数字和原邮件一模一样</li>
+<li class="task"><input type="checkbox"> 王经理催货那封，草稿<strong>没有编送货日期</strong></li>
+<li class="task"><input type="checkbox"> 刘女士投诉那封，草稿<strong>没有承诺赔偿金额</strong></li>
+<li class="task"><input type="checkbox"> 「邮箱管理中心」那封被单独标成可疑</li>
+<li class="task"><input type="checkbox"> 打开邮箱看：没有任何邮件被发出、删除</li>
+</ul>
+<p>最常见的两个错和改法：</p>
+<table>
+<thead>
+<tr>
+<th>它做错了</th>
+<th>在提示词「规则」里加一句</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>给王经理写了「预计 11 月 2 日送达」</td>
+<td>订单进度、送货日期知识库里没有，一律写【待我确认】，不能估</td>
+</tr>
+<tr>
+<td>给刘女士写了「我们赔偿您 500 元」</td>
+<td>投诉只道歉、约时间处理，不提任何金额和补偿方式</td>
+</tr>
+</tbody>
+</table>
+<p>改完再跑一次，直到 6 条全过。</p>
+<h3 id="设成每天-08-30-的定时任务">设成每天 08:30 的定时任务</h3>
+<ol>
+<li>左栏 <strong>定时任务</strong> → 新建</li>
+<li>按下表填：</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>填什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>名称</td>
+<td>邮件日报</td>
+</tr>
+<tr>
+<td>提示词</td>
+<td>刚才跑通的那一版，一字不改</td>
+</tr>
+<tr>
+<td>工作空间</td>
+<td>邮件日报</td>
+</tr>
+<tr>
+<td>重复</td>
+<td>每天</td>
+</tr>
+<tr>
+<td>时间</td>
+<td>08:30</td>
+</tr>
+<tr>
+<td>消息推送到企业微信</td>
+<td>打开 → 用企业微信扫码绑定机器人</td>
+</tr>
+</tbody>
+</table>
+<ol start="3">
+<li>绑定后<strong>在企业微信里给这个机器人发一条消息</strong>，随便发什么都行。不发的话它找不到该推给谁</li>
+</ol>
+<figure><img src="img/tool-workbuddy-schedule.jpg" alt="WorkBuddy 新建定时任务"><figcaption>新建定时任务窗口。左下角是「消息推送到企业微信」开关。</figcaption></figure>
+
+<div class="admonition warn">
+<p class="admonition-title">本机任务要电脑开着</p>
+<p>选「本机」运行的定时任务，08:30 时电脑必须开机、WorkBuddy 开着。电脑常关的选「云端」。</p>
+</div>
+<div class="admonition check">
+<p class="admonition-title">检查</p>
+<ul>
+<li class="task"><input type="checkbox"> 13 封都出现在日报里，分类和你判断的一致</li>
+<li class="task"><input type="checkbox"> 所有回复都是草稿</li>
+<li class="task"><input type="checkbox"> 定时任务列表里有「邮件日报」，下次运行时间是明天 08:30</li>
+<li class="task"><input type="checkbox"> 企业微信收到过一条测试推送（可以在任务里点「立即运行」试一次）</li>
+</ul>
+</div>
+<h2 id="D-FAQ-素材-20-分钟"><span class="t">D</span>FAQ 素材（20 分钟）</h2>
+<pre><code class="language-prompt">#! 发给 Codex
+从 知识库/ 里挑出客户最常问的 5 个问题，按 FAQ素材模板.md 的格式写进 知识库/FAQ素材.md。问题用客户的原话（看邮件和 客户常见问题 里客户怎么问），答案第一句就是结论，再给依据和数字，每个答案写出处。
+</code></pre>
+<p>先把 <code>作业一-知识库与邮件助理/FAQ素材模板.md</code> 复制到业务文件夹，它才知道格式。</p>
+<div class="admonition ai">
+<p class="admonition-title">Codex：知识库/FAQ素材.md（第 1 问）</p>
+<p><strong>1. 多久能装好？</strong></p>
+<p><strong>答</strong>：确认方案、付 30% 预付款后 15 个工作日内送货安装。
+珠三角（深圳、东莞、广州、惠州、佛山）免费送货安装；其他省份交期加 5 个工作日。</p>
+<ul>
+<li>出处：<code>02_产品与价格/产品与价格_产品手册_2026.pdf</code>「交付」；<code>产品与价格_物流配送范围_2026.xlsx</code> 第 5 行</li>
+<li>客户在哪问过：邮件（林小姐「多久能装好」、赵先生「大概多久」）</li>
+</ul>
+<p>完整 5 问：<a href="跟做样例_木序办公家具/知识库/FAQ素材.md"><code>知识库/FAQ素材.md</code></a></p>
+</div>
+<div class="admonition check">
+<p class="admonition-title">检查</p>
+<ul>
+<li class="task"><input type="checkbox"> 5 个答案每个都有出处</li>
+<li class="task"><input type="checkbox"> 没有一个数字是知识库里找不到的</li>
+<li class="task"><input type="checkbox"> 每个答案第一句就能单独回答问题（AI 搜索常常只摘第一句）</li>
+</ul>
+</div>
+<h2 id="进阶版-导入飞书知识库">进阶版：导入飞书知识库</h2>
+<p>按课件「飞书 6 步」把知识库搬到飞书，让同事也能问：</p>
+<ol>
+<li>飞书 → 知识库 → 新建知识空间，按 7 个类别建目录，把 <code>知识库/</code> 里的文件导入为云文档</li>
+<li>打开 <code>问答对模板.xlsx</code>，把 FAQ 和互查用的问题写成「问题 · 标准答案 · 出处 · 负责人」，导入多维表格</li>
+<li>知识问答限定在这个空间；用一个普通员工账号试一次，看权限对不对</li>
+</ol>
+<div class="row">
+<figure class="half"><img src="img/feishu-wiki.jpg" alt="飞书知识库"><figcaption>飞书知识库目录</figcaption></figure>
+<figure class="half"><img src="img/feishu-qa.jpg" alt="飞书知识问答"><figcaption>知识问答：答案下面带出处</figcaption></figure>
+</div>
+
+<h2 id="16-25-小组互查">16:25 小组互查</h2>
+<p>两两交换，用 <code>互查记录表.md</code>：对方问你 3 个问题（示例资料的标准答案在讲师那里），你当场让 Codex 只根据知识库回答，对方核对出处。重点看两件事：冲突有没有标出来；知识库里没有的，它有没有编。</p>
+<h2 id="交付对照">交付对照</h2>
+<table>
+<thead>
+<tr>
+<th>交付</th>
+<th>你的文件</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>整理好的知识库</td>
+<td><code>知识库/</code> 7 个类别文件夹</td>
+<td><a href="跟做样例_木序办公家具/知识库/">知识库/</a></td>
+</tr>
+<tr>
+<td>总索引</td>
+<td><code>知识库/总索引.md</code></td>
+<td><a href="跟做样例_木序办公家具/知识库/总索引.md">总索引.md</a></td>
+</tr>
+<tr>
+<td>3 个问答</td>
+<td>截图或文字</td>
+<td><a href="跟做样例_木序办公家具/产出/20261028_知识库问答_v1.md">20261028_知识库问答_v1.md</a></td>
+</tr>
+<tr>
+<td>邮件日报 + 定时任务</td>
+<td>截图</td>
+<td><a href="跟做样例_木序办公家具/产出/20261028_邮件日报_v1.md">20261028_邮件日报_v1.md</a></td>
+</tr>
+<tr>
+<td>FAQ 素材</td>
+<td><code>知识库/FAQ素材.md</code></td>
+<td><a href="跟做样例_木序办公家具/知识库/FAQ素材.md">FAQ素材.md</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="卡住了">卡住了</h2>
+<table>
+<thead>
+<tr>
+<th>现象</th>
+<th>怎么办</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Codex 打不开 .docx / .pdf</td>
+<td>让它「先装需要的读取工具」，它会请求批准；还不行就让它把打不开的单独列出来，不要卡住</td>
+</tr>
+<tr>
+<td>图片它说看不懂</td>
+<td>正常。让它按文件名和日期先归到「待确认」，你自己看一眼告诉它是什么</td>
+</tr>
+<tr>
+<td>它把 资料/ 里的原件改名了</td>
+<td>让它恢复：「把 资料/ 恢复原样，只在 知识库/ 里放副本」；再把「资料/ 只读」补进 AGENTS.md 教训</td>
+</tr>
+<tr>
+<td>WorkBuddy 读不到邮件</td>
+<td>连接器里看 QQ 邮箱是不是「已连接」；不行就用基础版的邮件导出文件</td>
+</tr>
+<tr>
+<td>日报漏了几封</td>
+<td>「过去 24 小时」太窄：第一次跑改成「全部邮件」或「最近 3 天」</td>
+</tr>
+<tr>
+<td>企业微信没收到推送</td>
+<td>绑定后要先给机器人发一条消息；再在任务里点「立即运行」</td>
+</tr>
+</tbody>
+</table>
+<div class="pager"><a href="作业零教程.html">← 作业零教程｜工作台就位 · 业务卡片 · 第一个 Skill</a><a href="作业二教程.html">作业二教程｜为你的业务做 PPT 和海报 →</a></div>
+</main></div><script>
+document.querySelectorAll('pre>code.language-prompt').forEach(c=>{
+  const pre=c.parentElement,w=document.createElement('div');w.className='pw';
+  const lab=c.textContent.match(/^#! ?(.*)\n/);let t=c.textContent;let label='复制下面这段';
+  if(lab){label=lab[1];t=t.slice(lab[0].length);c.textContent=t}
+  const bar=document.createElement('div');bar.className='bar';bar.innerHTML='<span></span><button>复制</button>';bar.firstChild.textContent=label;
+  pre.parentNode.insertBefore(w,pre);w.appendChild(bar);w.appendChild(pre);
+  bar.querySelector('button').onclick=e=>{navigator.clipboard.writeText(t.trim()).then(()=>{e.target.textContent='已复制';e.target.classList.add('ok');setTimeout(()=>{e.target.textContent='复制';e.target.classList.remove('ok')},1500)})}
+});
+document.querySelectorAll('li.task input').forEach((b,i)=>{const k=location.pathname+'#'+i;b.checked=localStorage.getItem(k)==='1';b.onchange=()=>localStorage.setItem(k,b.checked?'1':'0')});
+</script></body></html>

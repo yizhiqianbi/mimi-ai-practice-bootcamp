@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>业务介绍｜木序办公家具</title>
+<style>
+/* 改这里：品牌色，和 assets/brand.md 保持一致 */
+:root{
+  --brand:#7a4e2d;      /* 主色：标题强调、数字 */
+  --brand-soft:#f3ebe1; /* 辅色：色块背景 */
+  --ink:#1f1b16;        /* 正文 */
+  --muted:#6e6259;      /* 次要文字 */
+  --bg:#fbf8f3;         /* 页面底色 */
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#222}
+body{font-family:"Source Han Sans SC","Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);overflow:hidden}
+.deck{position:fixed;inset:0;display:grid;place-items:center}
+.slide{position:absolute;width:1600px;height:900px;background:var(--bg);padding:96px 112px;display:none;flex-direction:column;transform-origin:center}
+.slide.on{display:flex}
+.slide .no{position:absolute;right:56px;bottom:40px;font-size:18px;color:var(--muted);letter-spacing:.1em}
+.slide .brand{position:absolute;left:112px;bottom:40px;font-size:18px;color:var(--muted)}
+.eyebrow{font-size:22px;letter-spacing:.2em;color:var(--brand);font-weight:700}
+h1{font-size:84px;line-height:1.15;font-weight:800;margin-top:28px;letter-spacing:-.01em}
+h2{font-size:56px;line-height:1.2;font-weight:800;margin-top:20px}
+.lead{font-size:30px;line-height:1.6;color:var(--muted);margin-top:36px;max-width:1100px}
+.big{font-size:180px;font-weight:800;color:var(--brand);line-height:1;margin-top:auto}
+.big small{font-size:40px;color:var(--ink);margin-left:16px}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:auto}
+.three>div{background:var(--brand-soft);border-radius:20px;padding:40px 36px}
+.three b{display:block;font-size:22px;color:var(--brand);letter-spacing:.1em}
+.three h3{font-size:34px;margin:16px 0 14px}
+.three p{font-size:22px;line-height:1.6;color:var(--muted)}
+.case{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;margin-top:auto;border-top:3px solid var(--ink)}
+.case>div{padding:32px 32px 0 0}
+.case b{font-size:20px;color:var(--muted);letter-spacing:.1em}
+.case p{font-size:28px;line-height:1.5;margin-top:14px}
+.case .num{font-size:72px;font-weight:800;color:var(--brand);margin-top:10px}
+.cta{margin-top:auto;display:flex;gap:56px;align-items:flex-end}
+.cta .qr{width:220px;height:220px;border:2px dashed var(--muted);border-radius:16px;display:grid;place-items:center;color:var(--muted);font-size:20px}
+.cta dl{font-size:30px;line-height:1.9}
+.cta dt{color:var(--muted);font-size:20px;letter-spacing:.1em}
+aside.notes{display:none}
+.notes-on aside.notes{display:block;position:fixed;left:0;right:0;bottom:0;background:rgba(0,0,0,.85);color:#fff;font-size:18px;line-height:1.7;padding:20px 32px;max-height:30vh;overflow:auto}
+.hint{position:fixed;top:12px;right:16px;color:#888;font:13px sans-serif}
+@media print{html,body{background:#fff;overflow:visible}.deck{position:static;display:block}.slide{display:flex!important;position:relative;transform:none!important;page-break-after:always}.hint{display:none}}
+@page{size:1600px 900px;margin:0}
+</style>
+</head>
+<body>
+<div class="hint">← → 翻页 · N 讲稿 · F 全屏 · Ctrl/Cmd+P 导出 PDF</div>
+<div class="deck">
+
+<!-- 第 1 页 · 结论 -->
+<section class="slide on">
+  <div class="eyebrow">木序办公家具 · 东莞 · 办公家具</div>
+  <h1>签合同后 15 个工作日<br>从空办公室到全员入驻</h1>
+  <p class="lead">东莞厚街自有工厂，给深圳、东莞、广州 20–300 人的公司做办公室整体家具：工位、会议桌、文件柜、升降桌。</p>
+  <span class="brand">木序办公家具</span><span class="no">01 / 05</span>
+  <aside class="notes">各位好，我先说结论：找木序做办公室家具，签合同、确认方案以后 15 个工作日，空办公室就能坐满人。我们是东莞厚街的工厂，2016 年开始做，专门给 20 到 300 人的公司做整套办公家具，深圳、东莞、广州的客户最多。</aside>
+</section>
+
+<!-- 第 2 页 · 问题 -->
+<section class="slide">
+  <div class="eyebrow">客户的问题</div>
+  <h2>租约快到期，家具一问交期都要一个月起</h2>
+  <p class="lead">新办公室租好了，旧办公室还有几周就要退。家具没到，几十个人没地方坐。</p>
+  <div class="big">3 周<small>深圳一家 80 人的公司，离搬家只剩这么久</small></div>
+  <span class="brand">木序办公家具</span><span class="no">02 / 05</span>
+  <aside class="notes">很多客户找到我们时都是这种情况：新写字楼签了，旧办公室租约马上到期，这时候才开始找家具。今年 5 月深圳宝安一家 80 人的跨境电商找到我们，离旧租约到期只剩 3 周。家具晚一周到，就是几十个人一周没地方办公。</aside>
+</section>
+
+<!-- 第 3 页 · 方案 -->
+<section class="slide">
+  <div class="eyebrow">我们怎么解决</div>
+  <h2>量尺、方案、生产、安装，一家做完</h2>
+  <div class="three">
+    <div><b>15 个工作日</b><h3>自己工厂排产</h3><p>确认方案、付预付款后 15 个工作日送货安装</p></div>
+    <div><b>48 小时</b><h3>方案不收钱</h3><p>珠三角免费上门量尺，48 小时出 3D 方案</p></div>
+    <div><b>5 年</b><h3>用料放心</h3><p>ENF 级板材，每批附检测报告；钢架板材质保 5 年</p></div>
+  </div>
+  <span class="brand">木序办公家具</span><span class="no">03 / 05</span>
+  <aside class="notes">为什么我们能快？第一，自己有工厂，排产不用等外协，确认方案付了预付款，15 个工作日送货安装。第二，方案不收钱，珠三角免费上门量尺，48 小时出 3D 方案，客户看着图改。第三，快不等于糙：板材全部是 ENF 级，国标里甲醛限量最严的一级，每批有第三方检测报告；钢架和板材质保 5 年。</aside>
+</section>
+
+<!-- 第 4 页 · 证据 -->
+<section class="slide">
+  <div class="eyebrow">真实案例</div>
+  <h2>深圳 80 人跨境电商：13 个工作日交付，提前 1 周</h2>
+  <div class="case">
+    <div><b>原来的问题</b><p>旧办公室 1 个月后到期，3 周内必须搬完；要多屏工位和 3 间视频会议室</p></div>
+    <div><b>我们做了什么</b><p>第 2 天量尺，第 4 天出方案；工厂排产 10 天，周末两天进场装完</p></div>
+    <div><b>结果</b><div class="num">13 天</div><p>签合同到全部交付的工作日，80 个宽工位、3 张会议桌、4 组文件柜</p></div>
+  </div>
+  <span class="brand">木序办公家具</span><span class="no">04 / 05</span>
+  <aside class="notes">还是刚才那家公司。第 2 天我们上门量尺，第 4 天出 3D 方案，改了一版就定了。80 个宽工位加双屏支架、3 张会议桌、4 组文件柜。工厂排产 10 天，周末两天进场安装，不影响他们上班。签合同后 13 个工作日全部交付，比他们要求的提前了一周。后来他们还介绍了同园区的两家公司给我们。</aside>
+</section>
+
+<!-- 第 5 页 · 行动 -->
+<section class="slide">
+  <div class="eyebrow">下一步</div>
+  <h2>约一次免费上门量尺</h2>
+  <p class="lead">珠三角免费上门，48 小时内给你 3D 方案和报价。看完方案再决定，不收任何费用。</p>
+  <div class="cta">
+    <div class="qr">二维码</div>
+    <dl><dt>电话（示例号码）</dt><dd>138-0000-0000 · 周先生</dd><dt>网址</dt><dd>作业四上线后填</dd></dl>
+  </div>
+  <span class="brand">木序办公家具</span><span class="no">05 / 05</span>
+  <aside class="notes">如果你的公司今年明年要搬办公室，先约一次免费上门量尺。珠三角我们免费上门，48 小时给你 3D 方案和报价，看完方案再决定，不收钱。扫这个码，或者直接打周先生电话。</aside>
+</section>
+
+</div>
+<script>
+const S=[...document.querySelectorAll('.slide')];let i=0;
+function fit(){const k=Math.min(innerWidth/1600,innerHeight/900);S.forEach(s=>s.style.transform=`scale(${k})`)}
+function go(n){i=Math.max(0,Math.min(S.length-1,n));S.forEach((s,j)=>s.classList.toggle('on',j===i));location.hash=i+1}
+addEventListener('resize',fit);fit();
+addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key))go(i+1);if(['ArrowLeft','PageUp'].includes(e.key))go(i-1);
+  if(e.key==='n'||e.key==='N')document.body.classList.toggle('notes-on');if(e.key==='f'||e.key==='F')document.documentElement.requestFullscreen?.()});
+addEventListener('click',e=>{if(e.clientX>innerWidth/2)go(i+1);else go(i-1)});
+const h=parseInt(location.hash.slice(1));if(h)go(h-1);
+</script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>作业教程目录｜AI 实战训练营教程</title><style>
+:root{--ac:#2f5d50;--ac2:#e7efec;--ink:#1d1f1e;--mu:#5f6663;--line:#e3e1db;--bg:#fbfaf7;--card:#fff;--warn:#b5532a;--warn2:#fbeee7;--ok:#2f7a4f;--ok2:#e8f4ec;--you:#eef2fb;--you2:#3b5bb5}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:20px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 "Source Han Sans SC","Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--ac)}
+.layout{display:grid;grid-template-columns:260px minmax(0,1fr);max-width:1240px;margin:0 auto;gap:48px;padding:0 32px}
+nav.toc{position:sticky;top:0;align-self:start;max-height:100vh;overflow:auto;padding:36px 0 40px;font-size:14px}
+nav.toc .home{display:block;color:var(--mu);text-decoration:none;font-size:13px;margin-bottom:18px}
+nav.toc .home:hover{color:var(--ac)}
+nav.toc ul{list-style:none;margin:0;padding:0}
+nav.toc>div>ul>li{margin:10px 0}
+nav.toc>div>ul>li>a{font-weight:700;color:var(--ink)}
+nav.toc ul ul{padding-left:12px;border-left:2px solid var(--line);margin:6px 0 4px}
+nav.toc ul ul li{margin:4px 0}
+nav.toc a{text-decoration:none;color:var(--mu)}
+nav.toc a:hover{color:var(--ac)}
+main{padding:36px 0 120px;min-width:0}
+.crumb{font-size:13px;color:var(--mu);letter-spacing:.06em}
+h1{font-size:40px;line-height:1.25;margin:10px 0 18px;letter-spacing:-.01em}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}
+.meta span{display:inline-flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px 14px;font-size:14px;color:var(--mu)}
+.meta img{width:18px;height:18px;object-fit:contain}
+.meta b{color:var(--ink);font-weight:600}
+h2{font-size:28px;line-height:1.35;margin:64px 0 8px;padding-top:28px;border-top:3px solid var(--ink)}
+h2 .t{display:inline-block;background:var(--ac);color:#fff;border-radius:8px;padding:0 10px;margin-right:10px;font-size:22px;vertical-align:3px}
+h3{font-size:20px;margin:40px 0 8px}
+h3::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ac);margin-right:10px;vertical-align:4px}
+h4{font-size:16px;margin:24px 0 6px;color:var(--mu)}
+p{margin:10px 0}
+ul,ol{padding-left:24px}
+li{margin:4px 0}
+code{font-family:"JetBrains Mono","SFMono-Regular",Consolas,monospace;font-size:.88em;background:#f0eee8;border-radius:5px;padding:1px 6px}
+pre{background:#22251f;color:#eef0ea;border-radius:12px;padding:18px 20px;overflow:auto;font-size:14px;line-height:1.7;margin:12px 0}
+pre code{background:none;padding:0;color:inherit;font-size:inherit;white-space:pre-wrap;word-break:break-word}
+.pw{position:relative;margin:14px 0}
+.pw .bar{display:flex;justify-content:space-between;align-items:center;background:#363a32;color:#cfd3c9;border-radius:12px 12px 0 0;padding:8px 14px 8px 18px;font-size:13px}
+.pw .bar+pre{margin-top:0;border-radius:0 0 12px 12px}
+.pw button{font:inherit;font-size:13px;background:#5b8f7e;color:#fff;border:0;border-radius:7px;padding:4px 12px;cursor:pointer}
+.pw button.ok{background:#8aa05a}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14.5px;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:block;overflow-x:auto}
+thead{background:#f2f0ea}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:700;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+blockquote{margin:12px 0;padding:10px 18px;border-left:4px solid var(--line);color:var(--mu);background:#f6f5f1;border-radius:0 8px 8px 0}
+figure{margin:18px 0}
+figure img{display:block;max-width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:0 8px 30px rgba(0,0,0,.06)}
+figure.half img{max-width:420px}
+figure.third img{max-width:300px}
+figcaption{font-size:13px;color:var(--mu);margin-top:8px}
+.row{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start}
+.row figure{margin:8px 0}
+.admonition{border-radius:12px;padding:14px 18px;margin:16px 0;border:1px solid var(--line);background:var(--card)}
+.admonition>p.admonition-title{margin:0 0 6px;font-weight:700;font-size:14px;letter-spacing:.04em}
+.admonition>*:last-child{margin-bottom:0}
+.admonition.you{background:var(--you);border-color:#d5ddf2}
+.admonition.you>.admonition-title{color:var(--you2)}
+.admonition.ai{background:#fff;border-left:5px solid var(--ac)}
+.admonition.ai>.admonition-title{color:var(--ac)}
+.admonition.ai>.admonition-title::after{content:"　参考结果，用木序示例实际做出来的；你那边措辞会不同，看结构和要点";font-weight:400;color:var(--mu);font-size:12.5px;letter-spacing:0}
+.admonition.check{background:var(--ok2);border-color:#cfe6d7}
+.admonition.check>.admonition-title{color:var(--ok)}
+.admonition.warn{background:var(--warn2);border-color:#f0d6c8}
+.admonition.warn>.admonition-title{color:var(--warn)}
+.admonition.tip{background:#fff8e6;border-color:#f1e2b5}
+.admonition.tip>.admonition-title{color:#8a6a12}
+.admonition.note{background:#f4f3ef}
+li.task{list-style:none;margin-left:-22px}
+li.task input{margin-right:8px;transform:scale(1.15);accent-color:var(--ac)}
+.get{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:12px 0 8px}
+.get div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14px}
+.get b{display:block;font-size:15px;margin-bottom:4px}
+.pager{display:flex;justify-content:space-between;margin-top:72px;padding-top:24px;border-top:1px solid var(--line);font-size:15px}
+.pager a{text-decoration:none;font-weight:700}
+kbd{font:12px/1 "JetBrains Mono",monospace;background:#fff;border:1px solid #ccc;border-bottom-width:2px;border-radius:5px;padding:2px 6px}
+@media(max-width:900px){.layout{grid-template-columns:1fr;padding:0 18px}nav.toc{display:none}h1{font-size:30px}}
+@media print{nav.toc,.pw button{display:none}.layout{display:block}h2{break-before:page}body{background:#fff}}
+</style></head>
+<body><div class="layout">
+<nav class="toc"><div>
+<ul>
+<li><a href="#怎么用">怎么用</a></li>
+<li><a href="#跟做样例里有什么">跟做样例里有什么</a></li>
+</ul>
+
+</div></nav>
+<main>
+<div class="crumb">AI 实战训练营 · 作业包 · 教程</div>
+<h1>作业教程目录</h1>
+<div class="meta"><span>⏱ <b>五个作业约 8 小时</b></span><span><img src="img/logos/codex.svg" alt=""><b>Codex</b></span><span><img src="img/logos/workbuddy.svg" alt=""><b>WorkBuddy</b></span><span><img src="img/logos/grokbot.svg" alt=""><b>Grokbot</b></span></div>
+<p>每个作业一份图文教程：点哪里、复制什么发给 AI、会看到什么结果、怎么检查、卡住了怎么办。教程用虚构的「木序办公家具」从头做了一遍，所有产出都在 <a href="跟做样例_木序办公家具/"><code>跟做样例_木序办公家具/</code></a> 里，做的时候打开对照。</p>
+<table>
+<thead>
+<tr>
+<th>作业</th>
+<th>时间</th>
+<th>做完你会有</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="作业零教程.html">作业零｜工作台就位 · 业务卡片 · 第一个 Skill</a></td>
+<td>Day 1 11:30–12:40</td>
+<td>业务文件夹、业务卡片、一个跑通的 Skill</td>
+</tr>
+<tr>
+<td><a href="作业一教程.html">作业一｜业务知识库 + 邮件助理</a></td>
+<td>Day 1 14:25–16:25</td>
+<td>带总索引的知识库、每天 08:30 的邮件日报、FAQ 5 问</td>
+</tr>
+<tr>
+<td><a href="作业二教程.html">作业二｜PPT 和海报</a></td>
+<td>Day 1 19:30–21:00</td>
+<td>5 页 PPT 和讲稿、一张海报、brand.md</td>
+</tr>
+<tr>
+<td><a href="作业三教程.html">作业三｜口播视频</a></td>
+<td>Day 2 09:25–10:55</td>
+<td>60 秒口播视频、字幕、发布文案</td>
+</tr>
+<tr>
+<td><a href="作业四教程.html">作业四｜网站上线</a></td>
+<td>Day 2 13:30–15:30</td>
+<td>公开网址、线索表单、SEO / GEO 清单、三个定时任务</td>
+</tr>
+</tbody>
+</table>
+<h2 id="怎么用">怎么用</h2>
+<ul>
+<li>用浏览器打开教程。灰底黑框里的指令，点右上角「复制」，粘贴给对应的工具</li>
+<li>绿色边框的「参考结果」是用木序示例实际做出来的。你那边 AI 的措辞每次都不一样，看结构和要点对不对</li>
+<li>绿色「检查」框里的勾选会记在浏览器里，刷新也在</li>
+<li>每份教程最后有「卡住了」，先查这里，再举手</li>
+</ul>
+<h2 id="跟做样例里有什么">跟做样例里有什么</h2>
+<p>做完五个作业以后，一个业务文件夹的样子：</p>
+<pre><code class="language-text">跟做样例_木序办公家具/
+├ AGENTS.md                         作业零：规矩 + 两条教训
+├ 业务卡片.md                        作业零
+├ 网站三件事.md                      作业四
+├ 资料/                              原始文件副本（示例资料 30 个 + 询价 1 封）
+├ 知识库/
+│ ├ 01_公司介绍/ … 99_其他/           作业一：23 个文件，按类别改名
+│ ├ 整理记录_20261028.md             作业一：盘点表、问题清单、你的确认
+│ ├ 总索引.md                        作业一
+│ ├ FAQ素材.md                       作业一
+│ └ 事实底稿.md                      作业四
+├ 产出/
+│ ├ 20261028_报价_王经理.md           作业零：Skill 跑出来的结果
+│ ├ 20261028_知识库问答_v1.md         作业一
+│ ├ 20261028_邮件日报_v1.md           作业一
+│ ├ 20261028_业务介绍_v2.html         作业二（+ 出处表）
+│ ├ 20261028_海报_v1.html / .png      作业二
+│ ├ 20261028_口播稿_v1.md             作业三（+ 字幕、分镜、封面、发布文案）
+│ ├ 20261028_SEO自查_v1.md            作业四
+│ └ 20261028_GEO测试问题表_v1.xlsx    作业四
+├ assets/                            brand.md、plan.svg（平面方案图）
+├ site/                              作业四：填好的网站（未部署）
+└ .agents/skills/                    6 个课程 Skill + 作业零改好的 quote
+</code></pre>
+<p>木序办公家具是虚构公司，名称、人名、电话、价格、案例都是编的。示例里没有成片视频，网站也没有部署：这两步要在你自己的电脑和账号上做，教程里写了步骤。</p>
+<div class="pager"><span></span><span></span></div>
+</main></div><script>
+document.querySelectorAll('pre>code.language-prompt').forEach(c=>{
+  const pre=c.parentElement,w=document.createElement('div');w.className='pw';
+  const lab=c.textContent.match(/^#! ?(.*)\n/);let t=c.textContent;let label='复制下面这段';
+  if(lab){label=lab[1];t=t.slice(lab[0].length);c.textContent=t}
+  const bar=document.createElement('div');bar.className='bar';bar.innerHTML='<span></span><button>复制</button>';bar.firstChild.textContent=label;
+  pre.parentNode.insertBefore(w,pre);w.appendChild(bar);w.appendChild(pre);
+  bar.querySelector('button').onclick=e=>{navigator.clipboard.writeText(t.trim()).then(()=>{e.target.textContent='已复制';e.target.classList.add('ok');setTimeout(()=>{e.target.textContent='复制';e.target.classList.remove('ok')},1500)})}
+});
+document.querySelectorAll('li.task input').forEach((b,i)=>{const k=location.pathname+'#'+i;b.checked=localStorage.getItem(k)==='1';b.onchange=()=>localStorage.setItem(k,b.checked?'1':'0')});
+</script></body></html>

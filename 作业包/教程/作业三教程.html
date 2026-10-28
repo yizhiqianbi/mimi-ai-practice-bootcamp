@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>作业三教程｜做一条业务口播视频｜AI 实战训练营教程</title><style>
+:root{--ac:#2f5d50;--ac2:#e7efec;--ink:#1d1f1e;--mu:#5f6663;--line:#e3e1db;--bg:#fbfaf7;--card:#fff;--warn:#b5532a;--warn2:#fbeee7;--ok:#2f7a4f;--ok2:#e8f4ec;--you:#eef2fb;--you2:#3b5bb5}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:20px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 "Source Han Sans SC","Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--ac)}
+.layout{display:grid;grid-template-columns:260px minmax(0,1fr);max-width:1240px;margin:0 auto;gap:48px;padding:0 32px}
+nav.toc{position:sticky;top:0;align-self:start;max-height:100vh;overflow:auto;padding:36px 0 40px;font-size:14px}
+nav.toc .home{display:block;color:var(--mu);text-decoration:none;font-size:13px;margin-bottom:18px}
+nav.toc .home:hover{color:var(--ac)}
+nav.toc ul{list-style:none;margin:0;padding:0}
+nav.toc>div>ul>li{margin:10px 0}
+nav.toc>div>ul>li>a{font-weight:700;color:var(--ink)}
+nav.toc ul ul{padding-left:12px;border-left:2px solid var(--line);margin:6px 0 4px}
+nav.toc ul ul li{margin:4px 0}
+nav.toc a{text-decoration:none;color:var(--mu)}
+nav.toc a:hover{color:var(--ac)}
+main{padding:36px 0 120px;min-width:0}
+.crumb{font-size:13px;color:var(--mu);letter-spacing:.06em}
+h1{font-size:40px;line-height:1.25;margin:10px 0 18px;letter-spacing:-.01em}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}
+.meta span{display:inline-flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px 14px;font-size:14px;color:var(--mu)}
+.meta img{width:18px;height:18px;object-fit:contain}
+.meta b{color:var(--ink);font-weight:600}
+h2{font-size:28px;line-height:1.35;margin:64px 0 8px;padding-top:28px;border-top:3px solid var(--ink)}
+h2 .t{display:inline-block;background:var(--ac);color:#fff;border-radius:8px;padding:0 10px;margin-right:10px;font-size:22px;vertical-align:3px}
+h3{font-size:20px;margin:40px 0 8px}
+h3::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ac);margin-right:10px;vertical-align:4px}
+h4{font-size:16px;margin:24px 0 6px;color:var(--mu)}
+p{margin:10px 0}
+ul,ol{padding-left:24px}
+li{margin:4px 0}
+code{font-family:"JetBrains Mono","SFMono-Regular",Consolas,monospace;font-size:.88em;background:#f0eee8;border-radius:5px;padding:1px 6px}
+pre{background:#22251f;color:#eef0ea;border-radius:12px;padding:18px 20px;overflow:auto;font-size:14px;line-height:1.7;margin:12px 0}
+pre code{background:none;padding:0;color:inherit;font-size:inherit;white-space:pre-wrap;word-break:break-word}
+.pw{position:relative;margin:14px 0}
+.pw .bar{display:flex;justify-content:space-between;align-items:center;background:#363a32;color:#cfd3c9;border-radius:12px 12px 0 0;padding:8px 14px 8px 18px;font-size:13px}
+.pw .bar+pre{margin-top:0;border-radius:0 0 12px 12px}
+.pw button{font:inherit;font-size:13px;background:#5b8f7e;color:#fff;border:0;border-radius:7px;padding:4px 12px;cursor:pointer}
+.pw button.ok{background:#8aa05a}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14.5px;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:block;overflow-x:auto}
+thead{background:#f2f0ea}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:700;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+blockquote{margin:12px 0;padding:10px 18px;border-left:4px solid var(--line);color:var(--mu);background:#f6f5f1;border-radius:0 8px 8px 0}
+figure{margin:18px 0}
+figure img{display:block;max-width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:0 8px 30px rgba(0,0,0,.06)}
+figure.half img{max-width:420px}
+figure.third img{max-width:300px}
+figcaption{font-size:13px;color:var(--mu);margin-top:8px}
+.row{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start}
+.row figure{margin:8px 0}
+.admonition{border-radius:12px;padding:14px 18px;margin:16px 0;border:1px solid var(--line);background:var(--card)}
+.admonition>p.admonition-title{margin:0 0 6px;font-weight:700;font-size:14px;letter-spacing:.04em}
+.admonition>*:last-child{margin-bottom:0}
+.admonition.you{background:var(--you);border-color:#d5ddf2}
+.admonition.you>.admonition-title{color:var(--you2)}
+.admonition.ai{background:#fff;border-left:5px solid var(--ac)}
+.admonition.ai>.admonition-title{color:var(--ac)}
+.admonition.ai>.admonition-title::after{content:"　参考结果，用木序示例实际做出来的；你那边措辞会不同，看结构和要点";font-weight:400;color:var(--mu);font-size:12.5px;letter-spacing:0}
+.admonition.check{background:var(--ok2);border-color:#cfe6d7}
+.admonition.check>.admonition-title{color:var(--ok)}
+.admonition.warn{background:var(--warn2);border-color:#f0d6c8}
+.admonition.warn>.admonition-title{color:var(--warn)}
+.admonition.tip{background:#fff8e6;border-color:#f1e2b5}
+.admonition.tip>.admonition-title{color:#8a6a12}
+.admonition.note{background:#f4f3ef}
+li.task{list-style:none;margin-left:-22px}
+li.task input{margin-right:8px;transform:scale(1.15);accent-color:var(--ac)}
+.get{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:12px 0 8px}
+.get div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14px}
+.get b{display:block;font-size:15px;margin-bottom:4px}
+.pager{display:flex;justify-content:space-between;margin-top:72px;padding-top:24px;border-top:1px solid var(--line);font-size:15px}
+.pager a{text-decoration:none;font-weight:700}
+kbd{font:12px/1 "JetBrains Mono",monospace;background:#fff;border:1px solid #ccc;border-bottom-width:2px;border-radius:5px;padding:2px 6px}
+@media(max-width:900px){.layout{grid-template-columns:1fr;padding:0 18px}nav.toc{display:none}h1{font-size:30px}}
+@media print{nav.toc,.pw button{display:none}.layout{display:block}h2{break-before:page}body{background:#fff}}
+</style></head>
+<body><div class="layout">
+<nav class="toc"><a class="home" href="index.html">← 教程目录</a><div>
+<ul>
+<li><a href="#A-选钩子-写-60-秒口播稿-25-分钟">A · 选钩子，写 60 秒口播稿（25 分钟）</a><ul>
+<li><a href="#让-业务顾问-给-3-个开头">让「业务顾问」给 3 个开头</a></li>
+<li><a href="#让-Codex-写稿">让 Codex 写稿</a></li>
+<li><a href="#大声读一遍-计时">大声读一遍，计时</a></li>
+</ul>
+</li>
+<li><a href="#B-设置形象和声音-15-分钟">B · 设置形象和声音（15 分钟）</a></li>
+<li><a href="#C-生成-配字幕-剪节奏-35-分钟">C · 生成、配字幕、剪节奏（35 分钟）</a><ul>
+<li><a href="#生成">生成</a></li>
+<li><a href="#导入剪映-加字幕">导入剪映，加字幕</a></li>
+<li><a href="#按分镜插真实画面">按分镜插真实画面</a></li>
+<li><a href="#剪节奏">剪节奏</a></li>
+</ul>
+</li>
+<li><a href="#D-发布文案-15-分钟">D · 发布文案（15 分钟）</a></li>
+<li><a href="#交付对照">交付对照</a></li>
+<li><a href="#卡住了">卡住了</a></li>
+</ul>
+
+</div></nav>
+<main>
+<div class="crumb">AI 实战训练营 · 作业包 · 教程</div>
+<h1>作业三教程｜做一条业务口播视频</h1>
+<div class="meta"><span>⏱ <b>90 分钟（Day 2 09:25–10:55）</b></span><span><img src="img/logos/grokbot.svg" alt=""><b>Grokbot</b></span><span><img src="img/logos/codex.svg" alt=""><b>Codex</b></span><span>课件 <b>第 34 页</b></span></div>
+<p>60 秒口播视频，先写稿，再生成，最后剪。稿子决定了八成效果，所以前 25 分钟全花在稿子上。示例的稿子、字幕、分镜、发布文案在 <a href="跟做样例_木序办公家具/产出/"><code>跟做样例_木序办公家具/产出/</code></a>。</p>
+<div class="get">
+<div><b>一条 60 秒视频</b>竖版发短视频，横版放网站；作业四嵌进首页</div>
+<div><b>口播稿 + 字幕</b>五段结构；SRT 字幕每条不超过 16 字</div>
+<div><b>发布文案</b>3 个标题、封面大字、正文、5 个标签</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">示例只做到成片之前</p>
+<p>数字人平台和剪映要在你自己的电脑上操作，示例文件夹里没有成片视频。稿子、字幕、分镜、封面都是完整的，照着做就能出片。</p>
+</div>
+<h2 id="A-选钩子-写-60-秒口播稿-25-分钟"><span class="t">A</span>选钩子，写 60 秒口播稿（25 分钟）</h2>
+<h3 id="让-业务顾问-给-3-个开头">让「业务顾问」给 3 个开头</h3>
+<pre><code class="language-prompt">#! 发给 Grokbot「业务顾问」（换成你的客户和行动）
+我要做一条 60 秒口播视频，讲给「深圳、东莞、广州要搬新办公室的公司行政或老板」听，最后让他们「约一次免费上门量尺」。
+请给我 3 个开头钩子，每个 20 字以内，分别用这三种写法：
+1. 反常识：说一个客户以为对、其实不对的事
+2. 具体数字：用一个我业务里的真实数字开头（从业务卡片里找，没有就标「待确认」）
+3. 点名处境：直接说出客户此刻遇到的情况
+</code></pre>
+<div class="admonition ai">
+<p class="admonition-title">Grokbot「业务顾问」</p>
+<ol>
+<li><strong>反常识</strong>：选办公家具，最该比的不是单价。</li>
+<li><strong>具体数字</strong>：80 人的公司，13 个工作日从空办公室到入驻。</li>
+<li><strong>点名处境</strong>：租约下个月到期，新办公室还是空的？</li>
+</ol>
+</div>
+<p>选一个。示例选了第 3 个：目标客户一听就知道「说的是我」。</p>
+<h3 id="让-Codex-写稿">让 Codex 写稿</h3>
+<pre><code class="language-prompt">#! 发给 Codex
+用 talk-script 这个 Skill 写口播稿，钩子用「租约下个月到期，新办公室还是空的？」，行动指向「约一次免费上门量尺」（网址作业四上线后补）。
+</code></pre>
+<p>它先给稿子，标出每段秒数和字数：</p>
+<div class="admonition ai">
+<p class="admonition-title">Codex：口播稿</p>
+<table>
+<thead>
+<tr>
+<th>段</th>
+<th>稿子</th>
+<th>秒</th>
+<th>字</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>钩子</td>
+<td>租约下个月到期，新办公室还是空的？</td>
+<td>0–3</td>
+<td>15</td>
+</tr>
+<tr>
+<td>冲突</td>
+<td>大多数老板这时候才开始找家具厂，一问交期，一个月起步。旧办公室要退租，新办公室坐不了人，几十号人只能挤在会议室里办公。</td>
+<td>3–15</td>
+<td>53</td>
+</tr>
+<tr>
+<td>证据</td>
+<td>今年 5 月，深圳宝安一家 80 人的跨境电商就遇到了这个情况，离搬家只剩 3 周。我们第 2 天上门量尺，第 4 天出 3D 方案，工厂排产 10 天，再用周末两天进场装完。80 个宽工位、3 间会议室、4 组文件柜，签合同后 13 个工作日全部交付，比他们要求的时间提前了整整一周。</td>
+<td>15–40</td>
+<td>112</td>
+</tr>
+<tr>
+<td>转折</td>
+<td>所以选办公家具，先别急着比单价，先问清楚三件事：多久能出方案，多久能装完，晚了谁负责。</td>
+<td>40–52</td>
+<td>37</td>
+</tr>
+<tr>
+<td>行动</td>
+<td>想知道你的办公室多久能装好，点主页链接，约一次免费上门量尺。</td>
+<td>52–60</td>
+<td>27</td>
+</tr>
+<tr>
+<td>合计</td>
+<td></td>
+<td>60</td>
+<td>244</td>
+</tr>
+</tbody>
+</table>
+<p>证据段出处：<code>知识库/04_案例/案例_深圳跨境电商80人_202605.docx</code></p>
+</div>
+<h3 id="大声读一遍-计时">大声读一遍，计时</h3>
+<p>打开手机秒表，用平时说话的速度读。55–65 秒为准：</p>
+<ul>
+<li>超过 65 秒：删冲突段，证据段的数字别删</li>
+<li>不到 55 秒：证据段补一个细节（示例可以补「加装了双屏支架」）</li>
+</ul>
+<div class="admonition check">
+<p class="admonition-title">检查</p>
+<ul>
+<li class="task"><input type="checkbox"> 读出来 55–65 秒</li>
+<li class="task"><input type="checkbox"> 钩子里没有「大家好，我是」</li>
+<li class="task"><input type="checkbox"> 证据段每个数字都能在知识库找到</li>
+<li class="task"><input type="checkbox"> 结尾只有一个动作</li>
+<li class="task"><input type="checkbox"> 没有「最」「第一」「100%」</li>
+</ul>
+</div>
+<h2 id="B-设置形象和声音-15-分钟"><span class="t">B</span>设置形象和声音（15 分钟）</h2>
+<p>三选一：</p>
+<table>
+<thead>
+<tr>
+<th>版本</th>
+<th>做法</th>
+<th>要准备什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>基础版</td>
+<td>数字人平台里选一个<strong>平台授权的公共形象</strong>，用合成配音</td>
+<td>只要账号</td>
+</tr>
+<tr>
+<td>进阶版</td>
+<td>用开课前 2 天上传的本人形象和声音</td>
+<td>签好的 <code>肖像与声音授权书.md</code></td>
+</tr>
+<tr>
+<td>兜底</td>
+<td>不用数字人：产品图、门店照片或屏幕录制 + 合成配音 + 字幕</td>
+<td>几张自己拍的图</td>
+</tr>
+</tbody>
+</table>
+<p>用哪个数字人平台、额度怎么分，讲师现场通知。平台里通常要设这几项：</p>
+<table>
+<thead>
+<tr>
+<th>设置</th>
+<th>选什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>画面比例</td>
+<td>竖版 9:16（发短视频）；放网站再导一版横版 16:9</td>
+</tr>
+<tr>
+<td>形象</td>
+<td>公共形象选穿着和你行业接近的；别用明星脸</td>
+</tr>
+<tr>
+<td>音色</td>
+<td>和形象性别、年龄一致；先试听钩子那一句</td>
+</tr>
+<tr>
+<td>语速</td>
+<td>每分钟 240–270 字（244 字的稿子大约 1 分钟）</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warn">
+<p class="admonition-title">红线</p>
+<p>用别人的脸和声音必须有本人书面授权。明星、网红、客户的形象一律不用。</p>
+</div>
+<h2 id="C-生成-配字幕-剪节奏-35-分钟"><span class="t">C</span>生成、配字幕、剪节奏（35 分钟）</h2>
+<h3 id="生成">生成</h3>
+<p>把口播稿<strong>按段</strong>贴进平台（钩子、冲突、证据、转折、行动之间空一行，平台会在段落间停顿），生成后下载 mp4。</p>
+<h3 id="导入剪映-加字幕">导入剪映，加字幕</h3>
+<ol>
+<li>剪映专业版 → 开始创作 → 导入刚才的 mp4，拖到时间线</li>
+<li>字幕两种做法，选一种：<ul>
+<li>用 Codex 生成的 SRT：文本 → 本地字幕 → 导入 <code>产出/日期_字幕_v1.srt</code></li>
+<li>文本 → 智能字幕 → 识别字幕，识别完<strong>对照稿子逐条改错字</strong></li>
+</ul>
+</li>
+<li>字幕样式：白字黑描边，放在画面下三分之一，别挡住脸</li>
+</ol>
+<p>不同版本菜单名称略有不同，找「字幕」或「文本」入口。</p>
+<div class="admonition ai">
+<p class="admonition-title">Codex 生成的字幕（前 3 条）</p>
+<pre><code>1
+00:00:00,000 --&gt; 00:00:02,800
+租约下个月到期
+新办公室还是空的？
+
+2
+00:00:03,000 --&gt; 00:00:06,000
+大多数老板这时候才开始找家具厂
+
+3
+00:00:06,100 --&gt; 00:00:08,600
+一问交期，一个月起步
+</code></pre>
+<p>完整 17 条：<a href="跟做样例_木序办公家具/产出/20261028_字幕_v1.srt"><code>产出/20261028_字幕_v1.srt</code></a></p>
+</div>
+<h3 id="按分镜插真实画面">按分镜插真实画面</h3>
+<p>只有数字人一张脸，60 秒会很闷。「证据」段一定要切到真实画面：</p>
+<table>
+<thead>
+<tr>
+<th>段</th>
+<th>秒</th>
+<th>画面</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>钩子</td>
+<td>0–3</td>
+<td>数字人近景，头顶大字「新办公室还是空的？」</td>
+</tr>
+<tr>
+<td>冲突</td>
+<td>3–15</td>
+<td>数字人；第 8 秒切空办公室画面 2 秒</td>
+</tr>
+<tr>
+<td>证据</td>
+<td>15–40</td>
+<td>平面方案图慢慢推近 → 工厂 / 安装现场 → 大字「13 个工作日」</td>
+</tr>
+<tr>
+<td>转折</td>
+<td>40–52</td>
+<td>数字人；三件事逐条弹出</td>
+</tr>
+<tr>
+<td>行动</td>
+<td>52–60</td>
+<td>数字人 + 底部「预约免费上门量尺」</td>
+</tr>
+</tbody>
+</table>
+<p>完整分镜：<a href="跟做样例_木序办公家具/产出/20261028_分镜_v1.md"><code>产出/20261028_分镜_v1.md</code></a></p>
+<div class="row">
+<figure style="max-width:220px"><img src="跟做样例_木序办公家具/产出/20261028_封面_v1.png" alt="封面帧"><figcaption>钩子帧 / 封面</figcaption></figure>
+<figure style="max-width:220px"><img src="img/3-frame-evidence.png" alt="证据段帧"><figcaption>证据段大字帧</figcaption></figure>
+</div>
+
+<h3 id="剪节奏">剪节奏</h3>
+<ul>
+<li>删掉开头的空白、段落之间超过半秒的停顿</li>
+<li>前 3 秒不放 Logo、不放片头，直接是钩子</li>
+<li>导出 1080p。竖版 1080×1920 发短视频，横版 1920×1080 放网站</li>
+</ul>
+<div class="admonition check">
+<p class="admonition-title">检查</p>
+<ul>
+<li class="task"><input type="checkbox"> 静音看前 3 秒，只看字幕能不能让人停下来</li>
+<li class="task"><input type="checkbox"> 字幕没有错字，数字和稿子一致</li>
+<li class="task"><input type="checkbox"> 「证据」段有真实画面</li>
+<li class="task"><input type="checkbox"> 画面里没有客户名称、Logo、人脸</li>
+</ul>
+</div>
+<h2 id="D-发布文案-15-分钟"><span class="t">D</span>发布文案（15 分钟）</h2>
+<p>talk-script 已经顺带写了发布文案，对照 <code>作业三-口播视频/发布文案模板.md</code> 检查一遍：</p>
+<div class="admonition ai">
+<p class="admonition-title">Codex：发布文案</p>
+<p><strong>标题</strong>（选 1）：80 人的公司，13 个工作日从空办公室到入驻
+<strong>封面大字</strong>：新办公室还是空的？
+<strong>正文</strong>：旧办公室要退租，新办公室家具还没到？深圳一家 80 人的公司只剩 3 周，我们签合同后 13 个工作日装完。选办公家具前，先问清楚出方案、装完、延误三件事。约免费上门量尺，点主页链接。
+<strong>标签</strong>：#办公家具 #办公室装修 #公司搬家 #新办公室 #深圳</p>
+<p>完整版（含各平台怎么改）：<a href="跟做样例_木序办公家具/产出/20261028_发布文案_v1.md"><code>产出/20261028_发布文案_v1.md</code></a></p>
+</div>
+<p>发布时，在平台发布页找到「作者声明」或「内容由 AI 生成」，<strong>勾上</strong>。用了数字人、合成配音、AI 画面的都要勾，这是《人工智能生成合成内容标识办法》（2025 年 9 月 1 日起施行）的要求。</p>
+<h2 id="交付对照">交付对照</h2>
+<table>
+<thead>
+<tr>
+<th>交付</th>
+<th>你的文件</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>视频</td>
+<td><code>产出/日期_口播_v1.mp4</code></td>
+<td>示例没有成片</td>
+</tr>
+<tr>
+<td>口播稿</td>
+<td><code>产出/日期_口播稿_v1.md</code></td>
+<td><a href="跟做样例_木序办公家具/产出/20261028_口播稿_v1.md">20261028_口播稿_v1.md</a></td>
+</tr>
+<tr>
+<td>字幕</td>
+<td><code>产出/日期_字幕_v1.srt</code></td>
+<td><a href="跟做样例_木序办公家具/产出/20261028_字幕_v1.srt">20261028_字幕_v1.srt</a></td>
+</tr>
+<tr>
+<td>发布文案</td>
+<td><code>产出/日期_发布文案_v1.md</code></td>
+<td><a href="跟做样例_木序办公家具/产出/20261028_发布文案_v1.md">20261028_发布文案_v1.md</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="卡住了">卡住了</h2>
+<table>
+<thead>
+<tr>
+<th>现象</th>
+<th>怎么办</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>稿子太长，读了 75 秒</td>
+<td>让 Codex「压到 250 字以内，证据段的数字一个都不删」</td>
+</tr>
+<tr>
+<td>数字人念错数字、念错英文</td>
+<td>平台里把「3D」写成「三 D」、「MX-W140」写成「宽工位」；字幕里保留原写法</td>
+</tr>
+<tr>
+<td>数字人平台额度用完</td>
+<td>走兜底：几张照片 + 合成配音 + 字幕，剪映里一样能合成</td>
+</tr>
+<tr>
+<td>字幕和声音对不上</td>
+<td>用「识别字幕」重新生成时间轴，再对照稿子改字</td>
+</tr>
+<tr>
+<td>视频太大放不进网站</td>
+<td>导出时码率选「推荐」；60 秒控制在 20MB 以内，或传到视频号用嵌入代码</td>
+</tr>
+</tbody>
+</table>
+<div class="pager"><a href="作业二教程.html">← 作业二教程｜为你的业务做 PPT 和海报</a><a href="作业四教程.html">作业四教程｜把你的业务网站上线 →</a></div>
+</main></div><script>
+document.querySelectorAll('pre>code.language-prompt').forEach(c=>{
+  const pre=c.parentElement,w=document.createElement('div');w.className='pw';
+  const lab=c.textContent.match(/^#! ?(.*)\n/);let t=c.textContent;let label='复制下面这段';
+  if(lab){label=lab[1];t=t.slice(lab[0].length);c.textContent=t}
+  const bar=document.createElement('div');bar.className='bar';bar.innerHTML='<span></span><button>复制</button>';bar.firstChild.textContent=label;
+  pre.parentNode.insertBefore(w,pre);w.appendChild(bar);w.appendChild(pre);
+  bar.querySelector('button').onclick=e=>{navigator.clipboard.writeText(t.trim()).then(()=>{e.target.textContent='已复制';e.target.classList.add('ok');setTimeout(()=>{e.target.textContent='复制';e.target.classList.remove('ok')},1500)})}
+});
+document.querySelectorAll('li.task input').forEach((b,i)=>{const k=location.pathname+'#'+i;b.checked=localStorage.getItem(k)==='1';b.onchange=()=>localStorage.setItem(k,b.checked?'1':'0')});
+</script></body></html>

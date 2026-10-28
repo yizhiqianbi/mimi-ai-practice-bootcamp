@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>作业零教程｜工作台就位 · 业务卡片 · 第一个 Skill｜AI 实战训练营教程</title><style>
+:root{--ac:#2f5d50;--ac2:#e7efec;--ink:#1d1f1e;--mu:#5f6663;--line:#e3e1db;--bg:#fbfaf7;--card:#fff;--warn:#b5532a;--warn2:#fbeee7;--ok:#2f7a4f;--ok2:#e8f4ec;--you:#eef2fb;--you2:#3b5bb5}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:20px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 "Source Han Sans SC","Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--ac)}
+.layout{display:grid;grid-template-columns:260px minmax(0,1fr);max-width:1240px;margin:0 auto;gap:48px;padding:0 32px}
+nav.toc{position:sticky;top:0;align-self:start;max-height:100vh;overflow:auto;padding:36px 0 40px;font-size:14px}
+nav.toc .home{display:block;color:var(--mu);text-decoration:none;font-size:13px;margin-bottom:18px}
+nav.toc .home:hover{color:var(--ac)}
+nav.toc ul{list-style:none;margin:0;padding:0}
+nav.toc>div>ul>li{margin:10px 0}
+nav.toc>div>ul>li>a{font-weight:700;color:var(--ink)}
+nav.toc ul ul{padding-left:12px;border-left:2px solid var(--line);margin:6px 0 4px}
+nav.toc ul ul li{margin:4px 0}
+nav.toc a{text-decoration:none;color:var(--mu)}
+nav.toc a:hover{color:var(--ac)}
+main{padding:36px 0 120px;min-width:0}
+.crumb{font-size:13px;color:var(--mu);letter-spacing:.06em}
+h1{font-size:40px;line-height:1.25;margin:10px 0 18px;letter-spacing:-.01em}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}
+.meta span{display:inline-flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px 14px;font-size:14px;color:var(--mu)}
+.meta img{width:18px;height:18px;object-fit:contain}
+.meta b{color:var(--ink);font-weight:600}
+h2{font-size:28px;line-height:1.35;margin:64px 0 8px;padding-top:28px;border-top:3px solid var(--ink)}
+h2 .t{display:inline-block;background:var(--ac);color:#fff;border-radius:8px;padding:0 10px;margin-right:10px;font-size:22px;vertical-align:3px}
+h3{font-size:20px;margin:40px 0 8px}
+h3::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ac);margin-right:10px;vertical-align:4px}
+h4{font-size:16px;margin:24px 0 6px;color:var(--mu)}
+p{margin:10px 0}
+ul,ol{padding-left:24px}
+li{margin:4px 0}
+code{font-family:"JetBrains Mono","SFMono-Regular",Consolas,monospace;font-size:.88em;background:#f0eee8;border-radius:5px;padding:1px 6px}
+pre{background:#22251f;color:#eef0ea;border-radius:12px;padding:18px 20px;overflow:auto;font-size:14px;line-height:1.7;margin:12px 0}
+pre code{background:none;padding:0;color:inherit;font-size:inherit;white-space:pre-wrap;word-break:break-word}
+.pw{position:relative;margin:14px 0}
+.pw .bar{display:flex;justify-content:space-between;align-items:center;background:#363a32;color:#cfd3c9;border-radius:12px 12px 0 0;padding:8px 14px 8px 18px;font-size:13px}
+.pw .bar+pre{margin-top:0;border-radius:0 0 12px 12px}
+.pw button{font:inherit;font-size:13px;background:#5b8f7e;color:#fff;border:0;border-radius:7px;padding:4px 12px;cursor:pointer}
+.pw button.ok{background:#8aa05a}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14.5px;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:block;overflow-x:auto}
+thead{background:#f2f0ea}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:700;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+blockquote{margin:12px 0;padding:10px 18px;border-left:4px solid var(--line);color:var(--mu);background:#f6f5f1;border-radius:0 8px 8px 0}
+figure{margin:18px 0}
+figure img{display:block;max-width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:0 8px 30px rgba(0,0,0,.06)}
+figure.half img{max-width:420px}
+figure.third img{max-width:300px}
+figcaption{font-size:13px;color:var(--mu);margin-top:8px}
+.row{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start}
+.row figure{margin:8px 0}
+.admonition{border-radius:12px;padding:14px 18px;margin:16px 0;border:1px solid var(--line);background:var(--card)}
+.admonition>p.admonition-title{margin:0 0 6px;font-weight:700;font-size:14px;letter-spacing:.04em}
+.admonition>*:last-child{margin-bottom:0}
+.admonition.you{background:var(--you);border-color:#d5ddf2}
+.admonition.you>.admonition-title{color:var(--you2)}
+.admonition.ai{background:#fff;border-left:5px solid var(--ac)}
+.admonition.ai>.admonition-title{color:var(--ac)}
+.admonition.ai>.admonition-title::after{content:"　参考结果，用木序示例实际做出来的；你那边措辞会不同，看结构和要点";font-weight:400;color:var(--mu);font-size:12.5px;letter-spacing:0}
+.admonition.check{background:var(--ok2);border-color:#cfe6d7}
+.admonition.check>.admonition-title{color:var(--ok)}
+.admonition.warn{background:var(--warn2);border-color:#f0d6c8}
+.admonition.warn>.admonition-title{color:var(--warn)}
+.admonition.tip{background:#fff8e6;border-color:#f1e2b5}
+.admonition.tip>.admonition-title{color:#8a6a12}
+.admonition.note{background:#f4f3ef}
+li.task{list-style:none;margin-left:-22px}
+li.task input{margin-right:8px;transform:scale(1.15);accent-color:var(--ac)}
+.get{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:12px 0 8px}
+.get div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14px}
+.get b{display:block;font-size:15px;margin-bottom:4px}
+.pager{display:flex;justify-content:space-between;margin-top:72px;padding-top:24px;border-top:1px solid var(--line);font-size:15px}
+.pager a{text-decoration:none;font-weight:700}
+kbd{font:12px/1 "JetBrains Mono",monospace;background:#fff;border:1px solid #ccc;border-bottom-width:2px;border-radius:5px;padding:2px 6px}
+@media(max-width:900px){.layout{grid-template-columns:1fr;padding:0 18px}nav.toc{display:none}h1{font-size:30px}}
+@media print{nav.toc,.pw button{display:none}.layout{display:block}h2{break-before:page}body{background:#fff}}
+</style></head>
+<body><div class="layout">
+<nav class="toc"><a class="home" href="index.html">← 教程目录</a><div>
+<ul>
+<li><a href="#A-工作台就位-15-分钟">A · 工作台就位（15 分钟）</a><ul>
+<li><a href="#复制业务文件夹">复制业务文件夹</a></li>
+<li><a href="#在-Codex-里打开这个文件夹">在 Codex 里打开这个文件夹</a></li>
+<li><a href="#改-AGENTS-md-最上面两行">改 AGENTS.md 最上面两行</a></li>
+<li><a href="#WorkBuddy-建工作空间">WorkBuddy：建工作空间</a></li>
+<li><a href="#Grokbot-建-业务顾问-Bot">Grokbot：建「业务顾问」Bot</a></li>
+</ul>
+</li>
+<li><a href="#B-写业务卡片-25-分钟">B · 写业务卡片（25 分钟）</a><ul>
+<li><a href="#把开场白发给-业务顾问">把开场白发给「业务顾问」</a></li>
+<li><a href="#一问一答-答不上来就说不知道">一问一答，答不上来就说不知道</a></li>
+<li><a href="#整理成业务卡片-改回大白话">整理成业务卡片，改回大白话</a></li>
+</ul>
+</li>
+<li><a href="#C-写第一个-Skill-20-分钟">C · 写第一个 Skill（20 分钟）</a><ul>
+<li><a href="#选一件最耗时的事">选一件最耗时的事</a></li>
+<li><a href="#基础版-从示例改">基础版：从示例改</a></li>
+<li><a href="#进阶版-让-Codex-帮你写">进阶版：让 Codex 帮你写</a></li>
+</ul>
+</li>
+<li><a href="#D-拿真实资料跑一次-10-分钟">D · 拿真实资料跑一次（10 分钟）</a><ul>
+<li><a href="#放资料-叫-Skill">放资料，叫 Skill</a></li>
+<li><a href="#它先给中间结果-你确认">它先给中间结果，你确认</a></li>
+<li><a href="#看结果-按验收逐条对">看结果，按验收逐条对</a></li>
+</ul>
+</li>
+<li><a href="#交付对照">交付对照</a></li>
+<li><a href="#卡住了">卡住了</a></li>
+</ul>
+
+</div></nav>
+<main>
+<div class="crumb">AI 实战训练营 · 作业包 · 教程</div>
+<h1>作业零教程｜工作台就位 · 业务卡片 · 第一个 Skill</h1>
+<div class="meta"><span>⏱ <b>70 分钟（Day 1 11:30–12:40）</b></span><span><img src="img/logos/codex.svg" alt=""><b>Codex</b></span><span><img src="img/logos/workbuddy.svg" alt=""><b>WorkBuddy</b></span><span><img src="img/logos/grokbot.svg" alt=""><b>Grokbot</b></span><span>课件 <b>第 19 页</b></span></div>
+<p>这份教程跟着作业单走，每一步写清楚点哪里、发什么、会看到什么、怎么检查。示例用的是虚构的「木序办公家具」，做完的样子在 <a href="跟做样例_木序办公家具/"><code>跟做样例_木序办公家具/</code></a>，卡住时打开对照。</p>
+<div class="get">
+<div><b>一个业务文件夹</b>在 Codex 里能打开，<code>AGENTS.md</code> 写好了规矩</div>
+<div><b>一份业务卡片</b>8 项都填满，后面四个作业都从这里取内容</div>
+<div><b>你的第一个 Skill</b>用真实资料跑通过一次，结果能直接用</div>
+</div>
+<p>开始前确认三件事：三个工具都已登录（课前装机会做过）；能打开 ChatGPT 桌面应用里的 Codex；手边有一份最近的真实工作资料（一封询价邮件、一段会议记录都行）。</p>
+<h2 id="A-工作台就位-15-分钟"><span class="t">A</span>工作台就位（15 分钟）</h2>
+<h3 id="复制业务文件夹">复制业务文件夹</h3>
+<ol>
+<li>打开作业包，把 <code>工作区模板/我的业务/</code> 整个复制到电脑上你常用的位置，比如桌面或「文档」</li>
+<li>文件夹改成你的业务名。示例里改成了 <code>木序办公家具</code></li>
+</ol>
+<p>复制好以后，文件夹长这样：</p>
+<pre><code class="language-text">木序办公家具/
+├ AGENTS.md          ← 规矩，Codex 每次开工自动读
+├ 业务卡片.md         ← 这节课填
+├ 资料/              ← 原始文件的副本，只读
+├ 知识库/            ← 作业一
+├ 产出/              ← PPT、海报、口播稿
+├ assets/            ← Logo、主视觉、brand.md
+├ site/              ← 作业四网站
+└ .agents/skills/    ← Skill，一个文件夹一个
+</code></pre>
+<div class="admonition warn">
+<p class="admonition-title">看不到 .agents 文件夹</p>
+<p>以点开头的文件夹默认是隐藏的。Mac 在访达里按 <kbd>Cmd</kbd> <kbd>Shift</kbd> <kbd>.</kbd> 显示；Windows 在资源管理器「查看」里勾选「隐藏的项目」。</p>
+</div>
+<h3 id="在-Codex-里打开这个文件夹">在 Codex 里打开这个文件夹</h3>
+<ol>
+<li>打开 ChatGPT 桌面应用，左上角切到 <strong>Codex</strong></li>
+<li>选「打开文件夹」（Open folder），选刚才复制的业务文件夹</li>
+<li>输入框下面有三个设置，按下表选：</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>设置</th>
+<th>选什么</th>
+<th>为什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>权限</td>
+<td><strong>Ask for approval</strong></td>
+<td>它在文件夹里自己做；要联网、要改文件夹外面的东西会先问你</td>
+</tr>
+<tr>
+<td>智能程度</td>
+<td><strong>Medium</strong></td>
+<td>日常够用；做 PPT、网站时再调到 High</td>
+</tr>
+<tr>
+<td>在哪干活</td>
+<td><strong>Work locally</strong></td>
+<td>直接改你电脑上这个文件夹</td>
+</tr>
+</tbody>
+</table>
+<figure><img src="img/tool-codex-pins.png" alt="Codex 界面"><figcaption>④ 权限、⑤ 模型和智能程度、⑥ 在哪干活。截自 OpenAI 官方演示视频，界面细节以你安装的版本为准。</figcaption></figure>
+
+<h3 id="改-AGENTS-md-最上面两行">改 AGENTS.md 最上面两行</h3>
+<p>在 Codex 里直接说，不用自己开文件改：</p>
+<pre><code class="language-prompt">#! 发给 Codex（换成你自己的城市、行业和一句话）
+把 AGENTS.md 最上面的「城市 · 行业」改成「东莞 · 办公家具」，「一句话」改成「东莞厚街自有工厂，为深圳、东莞、广州 20–300 人的公司做办公室整体家具，15 个工作日交付」。其他内容不动。
+</code></pre>
+<p>它会弹出改动对比，确认后点同意。改完打开 <code>AGENTS.md</code> 看一眼，下面的「规矩」一段不用改，这是全班统一的。</p>
+<div class="admonition tip">
+<p class="admonition-title">AGENTS.md 是什么</p>
+<p>相当于给新同事的入职手册：它每次开工都先读一遍。以后它同一个错误犯两次，就让它把教训补到最后的「教训」里。示例的 <a href="跟做样例_木序办公家具/AGENTS.md"><code>AGENTS.md</code></a> 里已经有两条，是作业零、作业一做下来补的。</p>
+</div>
+<h3 id="WorkBuddy-建工作空间">WorkBuddy：建工作空间</h3>
+<ol>
+<li>打开 WorkBuddy，上面的模式选 <strong>日常办公</strong></li>
+<li>左下角「工作空间」→ 新建 → 选文件夹。<strong>选业务文件夹的副本</strong>，不要直接选原件：复制一份叫 <code>木序办公家具_WorkBuddy</code></li>
+<li>权限保持默认</li>
+</ol>
+<figure><img src="img/tool-workbuddy-pins.png" alt="WorkBuddy 界面"><figcaption>② 模式选日常办公；⑤ 工作空间指向副本；⑥ 权限保持默认。WorkBuddy 官方文档截图（5.7 版）。</figcaption></figure>
+
+<h3 id="Grokbot-建-业务顾问-Bot">Grokbot：建「业务顾问」Bot</h3>
+<ol>
+<li>打开 Grok Bot 应用，左上角 <strong>+ New Bot</strong></li>
+<li>名字填「业务顾问」</li>
+<li>先不发消息，下一步再发</li>
+</ol>
+<figure class="half"><img src="img/tool-grokbot.png" alt="Grokbot 示意图"><figcaption>按 xAI 官方文档绘制的示意图，不是真实截图。① 一个 Bot 一个职责。</figcaption></figure>
+
+<div class="admonition check">
+<p class="admonition-title">检查</p>
+<ul>
+<li class="task"><input type="checkbox"> Codex 左上角显示的是你的业务文件夹名</li>
+<li class="task"><input type="checkbox"> <code>AGENTS.md</code> 前两行已经改成你的业务</li>
+<li class="task"><input type="checkbox"> WorkBuddy 工作空间指向的是副本</li>
+<li class="task"><input type="checkbox"> Grokbot 里有一个叫「业务顾问」的 Bot</li>
+</ul>
+</div>
+<div class="admonition warn">
+<p class="admonition-title">网络不通，Codex 或 Grokbot 打不开</p>
+<p>不要卡在这里。Codex 的活用 WorkBuddy 的「代码开发」模式代替；Grokbot 的访谈用豆包或 Kimi 代替，开场白完全一样。</p>
+</div>
+<h2 id="B-写业务卡片-25-分钟"><span class="t">B</span>写业务卡片（25 分钟）</h2>
+<h3 id="把开场白发给-业务顾问">把开场白发给「业务顾问」</h3>
+<p>打开 <code>作业零-工作台与Skill/业务顾问Bot开场白.md</code>，把两条横线中间的整段复制，作为第一句话发给 Bot。开头是这样的：</p>
+<pre><code class="language-prompt">#! 发给 Grokbot「业务顾问」（完整版在 业务顾问Bot开场白.md）
+你是我的业务顾问。接下来帮我填一张「业务卡片」，一共 8 项：
+1. 我是谁
+2. 我的业务一句话
+……
+规则：
+- 一次只问一个问题，等我回答再问下一个
+- 我的回答太空的时候追问……
+- 不要替我编任何事实和数字；我答不上来的，写「待确认」
+……
+准备好了就问我第一个问题。
+</code></pre>
+<h3 id="一问一答-答不上来就说不知道">一问一答，答不上来就说不知道</h3>
+<p>它一次只问一个问题。答得空，它会追问。示例里的一段：</p>
+<div class="admonition ai">
+<p class="admonition-title">Grokbot「业务顾问」</p>
+<p><strong>Bot</strong>：第 5 项，你凭什么能解决客户的问题？先说第一个理由。</p>
+<p><strong>你</strong>：我们快，服务也好。</p>
+<p><strong>Bot</strong>：「快」是多快？从客户签合同到装好，一般多少天？有没有一个具体的客户例子？</p>
+<p><strong>你</strong>：签合同确认方案后 15 个工作日。今年 5 月深圳一家 80 人的跨境电商，3 周内必须搬，我们 13 个工作日就装完了。</p>
+<p><strong>Bot</strong>：好。「服务好」好在哪？比如量尺、出方案、售后，哪一项和同行不一样？</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">怎么答得快</p>
+<p>用语音输入。说大白话、说具体的客户和数字。「服务好」「性价比高」这种词它会一直追问，不如一开始就举例子。</p>
+</div>
+<h3 id="整理成业务卡片-改回大白话">整理成业务卡片，改回大白话</h3>
+<p>8 项问完，它会按格式整理给你。复制进文件夹里的 <code>业务卡片.md</code>，<strong>自己读一遍</strong>。Bot 常常会替你「美化」，看到这种词就改回你的原话：</p>
+<table>
+<thead>
+<tr>
+<th>Bot 写的</th>
+<th>改成</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>专业高效的一站式办公家具服务商</td>
+<td>东莞厚街自有工厂，给 20–300 人的公司做办公室整体家具</td>
+</tr>
+<tr>
+<td>交付速度行业领先</td>
+<td>签合同确认方案后 15 个工作日装好</td>
+</tr>
+<tr>
+<td>获得客户一致好评</td>
+<td>后来介绍了同园区 2 家公司</td>
+</tr>
+</tbody>
+</table>
+<p>示例填完的样子：<a href="跟做样例_木序办公家具/业务卡片.md"><code>业务卡片.md</code></a>。</p>
+<div class="admonition check">
+<p class="admonition-title">检查</p>
+<ul>
+<li class="task"><input type="checkbox"> 8 项都有内容；没有的写了「待确认」，没有编</li>
+<li class="task"><input type="checkbox"> 案例是真实发生的，有客户类型、原来的问题、做了什么、结果数字</li>
+<li class="task"><input type="checkbox"> 读起来像你在跟客户当面说话，没有「赋能」「一站式」「领先」</li>
+</ul>
+</div>
+<h2 id="C-写第一个-Skill-20-分钟"><span class="t">C</span>写第一个 Skill（20 分钟）</h2>
+<h3 id="选一件最耗时的事">选一件最耗时的事</h3>
+<p>看业务卡片最后一项「我现在最耗时的一项工作」。示例写的是「回询价邮件，每封都要翻报价单、配送表算价格」。第一个 Skill 就做这件事。</p>
+<h3 id="基础版-从示例改">基础版：从示例改</h3>
+<ol>
+<li>打开 <code>作业零-工作台与Skill/Skill示例/</code>，里面有三个：<code>meeting-notes</code>（会议纪要）、<code>quote</code>（客户报价）、<code>weekly-report</code>（周报）。挑最接近的，示例挑 <code>quote</code></li>
+<li>把整个 <code>quote</code> 文件夹复制到业务文件夹的 <code>.agents/skills/</code> 下面</li>
+<li>打开 <code>.agents/skills/quote/SKILL.md</code>，<strong>只改三块</strong>：输入、输出、验收。步骤先照抄</li>
+</ol>
+<p>示例改了这些地方：</p>
+<table>
+<thead>
+<tr>
+<th>块</th>
+<th>原来</th>
+<th>改成</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>输入</td>
+<td>价格表：<code>知识库/02_产品与价格/____.xlsx</code></td>
+<td><code>资料/报价单最终版.xlsx</code>（2026 版，只用这一份；<code>报价单.xlsx</code> 是 2025 旧价，不要用）</td>
+</tr>
+<tr>
+<td>步骤（加一条）</td>
+<td>—</td>
+<td>折扣有两种说法（95 折 / 9 折），一律写「待确认」</td>
+</tr>
+<tr>
+<td>输出</td>
+<td>报价明细表 + 回复正文 + 要追问的问题</td>
+<td>四块：询价要点、明细表（带价格表行号）、回复草稿、自查结果</td>
+</tr>
+<tr>
+<td>验收</td>
+<td>每个单价能找到对应行……</td>
+<td>加一条：折扣、老客户优惠、送货日期没有自己承诺</td>
+</tr>
+</tbody>
+</table>
+<p>改完的完整文件：<a href="跟做样例_木序办公家具/.agents/skills/quote/SKILL.md"><code>.agents/skills/quote/SKILL.md</code></a>。</p>
+<div class="admonition warn">
+<p class="admonition-title">description 那一行别删</p>
+<p>文件最上面 <code>description:</code> 那句话，Codex 靠它判断什么时候用这个 Skill。改成你自己的场景，比如「客户发来询价、要报价时用」。</p>
+</div>
+<h3 id="进阶版-让-Codex-帮你写">进阶版：让 Codex 帮你写</h3>
+<p>没有接近的示例，就让 Codex 从零写。它会先问你 3 个问题再动手：</p>
+<pre><code class="language-prompt">#! 发给 Codex（把下划线换成你最耗时的工作）
+角色：你是我的工作流程设计助理
+目标：交付一个 Skill，放在 .agents/skills/&lt;英文名&gt;/SKILL.md，用来处理「____」
+输入：业务卡片.md；参考格式 .agents/skills/_skill模板/SKILL.md
+约束：步骤里要有「先给我中间结果，确认后再继续」；遇到缺数据写「待确认」，不要编
+验收：有输入、步骤、输出格式、验收清单四块；验收清单至少 3 条且能逐条打勾
+节奏：先问我 3 个问题了解这项工作，再写
+</code></pre>
+<h2 id="D-拿真实资料跑一次-10-分钟"><span class="t">D</span>拿真实资料跑一次（10 分钟）</h2>
+<h3 id="放资料-叫-Skill">放资料，叫 Skill</h3>
+<ol>
+<li>把一份真实资料放进 <code>资料/</code>。示例放的是王经理的询价邮件，存成 <code>资料/询价_王经理_20261027.txt</code></li>
+<li>在 Codex 里说：</li>
+</ol>
+<pre><code class="language-prompt">#! 发给 Codex
+用 quote 这个 Skill 处理 资料/询价_王经理_20261027.txt
+</code></pre>
+<h3 id="它先给中间结果-你确认">它先给中间结果，你确认</h3>
+<p>Skill 第 1 步写了「先给我看」，所以它不会直接出报价：</p>
+<div class="admonition ai">
+<p class="admonition-title">Codex</p>
+<p><strong>询价要点</strong>：王经理，教育机构老客户；要约 30 个工位 + 8 人会议桌 1 张，「跟上次一样的款式」；12 月新校区；要老客户优惠。地点邮件没写，<code>客户名单_脱敏.csv</code> 第 4 行「连锁培训机构 · 东莞 · 30 人 · 复购洽谈」很可能是他（推断）。</p>
+<p><strong>要追问客户的问题</strong>：
+1. 上次是标准工位（MX-W120）还是宽工位（MX-W140）？资料里查不到上一单的型号
+2. 新校区在哪个城市？
+3. 12 月几号前要装好？</p>
+<p>两种工位我都按 2026 价格算一遍，可以吗？</p>
+</div>
+<p>你回一句「可以，继续」。</p>
+<h3 id="看结果-按验收逐条对">看结果，按验收逐条对</h3>
+<div class="admonition ai">
+<p class="admonition-title">Codex 生成的 产出/20261028_报价_王经理.md（节选）</p>
+<table>
+<thead>
+<tr>
+<th>方案</th>
+<th>合计（元，含税）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A：标准工位 680 × 30 + 会议桌 3,600</td>
+<td><strong>24,000</strong></td>
+</tr>
+<tr>
+<td>B：宽工位 820 × 30 + 会议桌 3,600</td>
+<td><strong>28,200</strong></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>王经理您好，30 个工位加 1 张 8 人会议桌，按 2026 年价格：如果用标准工位，合计 24,000 元；如果用宽工位，合计 28,200 元，均含 13% 增值税专票……老客户优惠我跟周总确认后再回复您。【待周总确认：给不给、给多少】</p>
+</blockquote>
+<p>完整文件：<a href="跟做样例_木序办公家具/产出/20261028_报价_王经理.md"><code>产出/20261028_报价_王经理.md</code></a></p>
+</div>
+<p>打开 <code>资料/报价单最终版.xlsx</code>，核对第 2、3、5 行的单价，再心算一遍合计。</p>
+<div class="admonition warn">
+<p class="admonition-title">结果不对，改 Skill，别改结果</p>
+<p>示例第一次跑的时候，Skill 的输入还没写死用哪份报价单，它用了 <code>报价单.xlsx</code> 里 2025 年的 760 元。正确做法是回去改 <code>SKILL.md</code> 的输入那一行，再跑一次；同时让 Codex 把这条教训写进 <code>AGENTS.md</code>（下面这句）。</p>
+</div>
+<pre><code class="language-prompt">#! 发给 Codex
+把这条教训补进 AGENTS.md 的「教训」：价格只用 2026 版报价单（宽工位 820 元），报价单.xlsx 是 2025 年旧价，不要用。加上今天的日期。
+</code></pre>
+<div class="admonition check">
+<p class="admonition-title">检查</p>
+<ul>
+<li class="task"><input type="checkbox"> 结果能直接用，不用大改</li>
+<li class="task"><input type="checkbox"> Skill 的验收清单每一条都过了</li>
+<li class="task"><input type="checkbox"> 回复只是草稿，没有发出去</li>
+</ul>
+</div>
+<h2 id="交付对照">交付对照</h2>
+<table>
+<thead>
+<tr>
+<th>交付</th>
+<th>你的文件</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>业务卡片</td>
+<td><code>业务卡片.md</code></td>
+<td><a href="跟做样例_木序办公家具/业务卡片.md">业务卡片.md</a></td>
+</tr>
+<tr>
+<td>你的 Skill</td>
+<td><code>.agents/skills/&lt;名字&gt;/SKILL.md</code></td>
+<td><a href="跟做样例_木序办公家具/.agents/skills/quote/SKILL.md">quote/SKILL.md</a></td>
+</tr>
+<tr>
+<td>Skill 跑出来的结果</td>
+<td><code>产出/</code> 里一份</td>
+<td><a href="跟做样例_木序办公家具/产出/20261028_报价_王经理.md">20261028_报价_王经理.md</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="卡住了">卡住了</h2>
+<table>
+<thead>
+<tr>
+<th>现象</th>
+<th>怎么办</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Codex 说找不到文件</td>
+<td>看左上角打开的是不是业务文件夹；文件名有空格或括号时，直接把文件拖进输入框</td>
+</tr>
+<tr>
+<td>说了「用 quote 这个 Skill」它没用</td>
+<td>检查路径是不是 <code>.agents/skills/quote/SKILL.md</code>（注意 <code>.agents</code> 前面的点）；文件开头 <code>name:</code> 和你说的名字一致</td>
+</tr>
+<tr>
+<td>它一直问你要不要批准</td>
+<td>Ask for approval 就是这样，它要改文件会先问。看清楚改的是不是业务文件夹里的文件，是就批准</td>
+</tr>
+<tr>
+<td>Bot 一次问了好几个问题</td>
+<td>回它：「一次只问一个问题」</td>
+</tr>
+<tr>
+<td>业务卡片里没有真实案例</td>
+<td>写「待确认」继续往下做，课后补；不要编</td>
+</tr>
+</tbody>
+</table>
+<div class="pager"><span></span><a href="作业一教程.html">作业一教程｜业务知识库 + 邮件助理 →</a></div>
+</main></div><script>
+document.querySelectorAll('pre>code.language-prompt').forEach(c=>{
+  const pre=c.parentElement,w=document.createElement('div');w.className='pw';
+  const lab=c.textContent.match(/^#! ?(.*)\n/);let t=c.textContent;let label='复制下面这段';
+  if(lab){label=lab[1];t=t.slice(lab[0].length);c.textContent=t}
+  const bar=document.createElement('div');bar.className='bar';bar.innerHTML='<span></span><button>复制</button>';bar.firstChild.textContent=label;
+  pre.parentNode.insertBefore(w,pre);w.appendChild(bar);w.appendChild(pre);
+  bar.querySelector('button').onclick=e=>{navigator.clipboard.writeText(t.trim()).then(()=>{e.target.textContent='已复制';e.target.classList.add('ok');setTimeout(()=>{e.target.textContent='复制';e.target.classList.remove('ok')},1500)})}
+});
+document.querySelectorAll('li.task input').forEach((b,i)=>{const k=location.pathname+'#'+i;b.checked=localStorage.getItem(k)==='1';b.onchange=()=>localStorage.setItem(k,b.checked?'1':'0')});
+</script></body></html>

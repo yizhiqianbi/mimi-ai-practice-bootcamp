@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>业务介绍｜改成你的业务名</title>
+<style>
+/* 改这里：品牌色，和 assets/brand.md 保持一致 */
+:root{
+  --brand:#2f5d50;      /* 主色：标题强调、数字 */
+  --brand-soft:#e7efec; /* 辅色：色块背景 */
+  --ink:#1d1f1e;        /* 正文 */
+  --muted:#6b716e;      /* 次要文字 */
+  --bg:#fbfaf7;         /* 页面底色 */
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:#222}
+body{font-family:"Source Han Sans SC","Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);overflow:hidden}
+.deck{position:fixed;inset:0;display:grid;place-items:center}
+.slide{position:absolute;width:1600px;height:900px;background:var(--bg);padding:96px 112px;display:none;flex-direction:column;transform-origin:center}
+.slide.on{display:flex}
+.slide .no{position:absolute;right:56px;bottom:40px;font-size:18px;color:var(--muted);letter-spacing:.1em}
+.slide .brand{position:absolute;left:112px;bottom:40px;font-size:18px;color:var(--muted)}
+.eyebrow{font-size:22px;letter-spacing:.2em;color:var(--brand);font-weight:700}
+h1{font-size:84px;line-height:1.15;font-weight:800;margin-top:28px;letter-spacing:-.01em}
+h2{font-size:56px;line-height:1.2;font-weight:800;margin-top:20px}
+.lead{font-size:30px;line-height:1.6;color:var(--muted);margin-top:36px;max-width:1100px}
+.big{font-size:180px;font-weight:800;color:var(--brand);line-height:1;margin-top:auto}
+.big small{font-size:40px;color:var(--ink);margin-left:16px}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:auto}
+.three>div{background:var(--brand-soft);border-radius:20px;padding:40px 36px}
+.three b{display:block;font-size:22px;color:var(--brand);letter-spacing:.1em}
+.three h3{font-size:34px;margin:16px 0 14px}
+.three p{font-size:22px;line-height:1.6;color:var(--muted)}
+.case{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;margin-top:auto;border-top:3px solid var(--ink)}
+.case>div{padding:32px 32px 0 0}
+.case b{font-size:20px;color:var(--muted);letter-spacing:.1em}
+.case p{font-size:28px;line-height:1.5;margin-top:14px}
+.case .num{font-size:72px;font-weight:800;color:var(--brand);margin-top:10px}
+.cta{margin-top:auto;display:flex;gap:56px;align-items:flex-end}
+.cta .qr{width:220px;height:220px;border:2px dashed var(--muted);border-radius:16px;display:grid;place-items:center;color:var(--muted);font-size:20px}
+.cta dl{font-size:30px;line-height:1.9}
+.cta dt{color:var(--muted);font-size:20px;letter-spacing:.1em}
+aside.notes{display:none}
+.notes-on aside.notes{display:block;position:fixed;left:0;right:0;bottom:0;background:rgba(0,0,0,.85);color:#fff;font-size:18px;line-height:1.7;padding:20px 32px;max-height:30vh;overflow:auto}
+.hint{position:fixed;top:12px;right:16px;color:#888;font:13px sans-serif}
+@media print{html,body{background:#fff;overflow:visible}.deck{position:static;display:block}.slide{display:flex!important;position:relative;transform:none!important;page-break-after:always}.hint{display:none}}
+@page{size:1600px 900px;margin:0}
+</style>
+</head>
+<body>
+<div class="hint">← → 翻页 · N 讲稿 · F 全屏 · Ctrl/Cmd+P 导出 PDF</div>
+<div class="deck">
+
+<!-- 第 1 页 · 结论：一句话结论 + 我是谁 -->
+<section class="slide on">
+  <div class="eyebrow">改成：品牌名 · 城市 · 行业</div>
+  <h1>改成你的一句话结论<br>20 字以内，写结论不写名词</h1>
+  <p class="lead">改成：我是谁，做什么，给谁做。一到两行。</p>
+  <span class="brand">品牌名</span><span class="no">01 / 05</span>
+  <aside class="notes">讲稿：30–60 秒的口语。开头直接说结论，再说你是谁。</aside>
+</section>
+
+<!-- 第 2 页 · 问题：客户最头疼的问题，最好有一个数字 -->
+<section class="slide">
+  <div class="eyebrow">客户的问题</div>
+  <h2>改成：客户最头疼的问题，写成一句话</h2>
+  <p class="lead">改成：一个具体场景。比如「租约下个月到期，新办公室还是毛坯，家具最少要等一个月」。</p>
+  <div class="big">00<small>改成：一个能说明问题严重的数字和单位</small></div>
+  <span class="brand">品牌名</span><span class="no">02 / 05</span>
+  <aside class="notes">讲稿：讲一个真实客户遇到这个问题时的样子。数字要有出处。</aside>
+</section>
+
+<!-- 第 3 页 · 方案：3 个理由 -->
+<section class="slide">
+  <div class="eyebrow">我们怎么解决</div>
+  <h2>改成：方案一句话</h2>
+  <div class="three">
+    <div><b>01</b><h3>理由一</h3><p>改成：一句话说明，最好带数字</p></div>
+    <div><b>02</b><h3>理由二</h3><p>改成：一句话说明</p></div>
+    <div><b>03</b><h3>理由三</h3><p>改成：一句话说明</p></div>
+  </div>
+  <span class="brand">品牌名</span><span class="no">03 / 05</span>
+  <aside class="notes">讲稿：三个理由对应业务卡片「我凭什么能解决」。每个理由一句证据。</aside>
+</section>
+
+<!-- 第 4 页 · 证据：1 个真实案例 -->
+<section class="slide">
+  <div class="eyebrow">真实案例</div>
+  <h2>改成：某某类型客户，结果一句话</h2>
+  <div class="case">
+    <div><b>原来的问题</b><p>改成：客户当时的处境</p></div>
+    <div><b>我们做了什么</b><p>改成：2–3 个动作</p></div>
+    <div><b>结果</b><div class="num">00</div><p>改成：数字的含义</p></div>
+  </div>
+  <span class="brand">品牌名</span><span class="no">04 / 05</span>
+  <aside class="notes">讲稿：按「问题、做了什么、结果」讲完这个案例。客户名可以脱敏。</aside>
+</section>
+
+<!-- 第 5 页 · 行动：只给一个动作 -->
+<section class="slide">
+  <div class="eyebrow">下一步</div>
+  <h2>改成：希望观众做的一件事</h2>
+  <p class="lead">改成：做这件事能得到什么。比如「免费上门量尺，48 小时内给 3D 方案」。</p>
+  <div class="cta">
+    <div class="qr">二维码</div>
+    <dl><dt>电话</dt><dd>改成</dd><dt>网址</dt><dd>改成（作业四上线后填）</dd></dl>
+  </div>
+  <span class="brand">品牌名</span><span class="no">05 / 05</span>
+  <aside class="notes">讲稿：再说一遍一句话结论，然后只给一个动作。</aside>
+</section>
+
+</div>
+<script>
+const S=[...document.querySelectorAll('.slide')];let i=0;
+function fit(){const k=Math.min(innerWidth/1600,innerHeight/900);S.forEach(s=>s.style.transform=`scale(${k})`)}
+function go(n){i=Math.max(0,Math.min(S.length-1,n));S.forEach((s,j)=>s.classList.toggle('on',j===i));location.hash=i+1}
+addEventListener('resize',fit);fit();
+addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key))go(i+1);if(['ArrowLeft','PageUp'].includes(e.key))go(i-1);
+  if(e.key==='n'||e.key==='N')document.body.classList.toggle('notes-on');if(e.key==='f'||e.key==='F')document.documentElement.requestFullscreen?.()});
+addEventListener('click',e=>{if(e.clientX>innerWidth/2)go(i+1);else go(i-1)});
+const h=parseInt(location.hash.slice(1));if(h)go(h-1);
+</script>
+</body>
+</html>

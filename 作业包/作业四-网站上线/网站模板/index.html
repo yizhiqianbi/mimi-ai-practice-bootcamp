@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- SEO 第 1 项：标题和描述写进「地区 + 品类 + 品牌」 -->
+<title>改成：品牌名｜城市 + 品类 + 一个卖点</title>
+<meta name="description" content="改成：一两句话，含地区、品类、品牌和最重要的卖点，80 字以内。">
+<link rel="canonical" href="https://example.com/">
+<!-- 分享到微信、WhatsApp、LinkedIn 时显示的卡片 -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="改成：和 title 一样">
+<meta property="og:description" content="改成：和 description 一样">
+<meta property="og:image" content="https://example.com/assets/cover.jpg">
+<meta property="og:url" content="https://example.com/">
+
+<!-- SEO 第 5 项：结构化数据。FAQPage 里的问答必须和页面上的 FAQ 一字不差 -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://example.com/#org",
+      "name": "改成：标准名称",
+      "legalName": "改成：营业执照上的名称",
+      "alternateName": ["改成：其他叫法"],
+      "url": "https://example.com/",
+      "logo": "https://example.com/assets/logo.png",
+      "telephone": "改成：电话",
+      "email": "改成：邮箱",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "改成：街道门牌",
+        "addressLocality": "改成：区",
+        "addressRegion": "改成：城市",
+        "addressCountry": "CN"
+      },
+      "description": "改成：事实底稿里的一句话主营"
+    },
+    {
+      "@type": "Service",
+      "name": "改成：主要产品或服务",
+      "provider": {"@id": "https://example.com/#org"},
+      "areaServed": "改成：服务地区",
+      "description": "改成：一句话说明"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type": "Question", "name": "改成：问题 1？", "acceptedAnswer": {"@type": "Answer", "text": "改成：答案 1，第一句是结论。"}},
+        {"@type": "Question", "name": "改成：问题 2？", "acceptedAnswer": {"@type": "Answer", "text": "改成：答案 2。"}},
+        {"@type": "Question", "name": "改成：问题 3？", "acceptedAnswer": {"@type": "Answer", "text": "改成：答案 3。"}},
+        {"@type": "Question", "name": "改成：问题 4？", "acceptedAnswer": {"@type": "Answer", "text": "改成：答案 4。"}},
+        {"@type": "Question", "name": "改成：问题 5？", "acceptedAnswer": {"@type": "Answer", "text": "改成：答案 5。"}}
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+/* 改这里：品牌色和字体，照 assets/brand.md 填 */
+:root{
+  --brand:#2f5d50;
+  --brand-soft:#e7efec;
+  --accent:#e9b44c;
+  --ink:#1d1f1e;
+  --muted:#5f6663;
+  --bg:#fbfaf7;
+  --line:#e2e0da;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:"Source Han Sans SC","Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif;color:var(--ink);background:var(--bg);line-height:1.7;-webkit-font-smoothing:antialiased}
+img,video{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+section{padding:88px 0;border-top:1px solid var(--line)}
+h2{font-size:clamp(26px,4vw,38px);line-height:1.3;margin-bottom:12px}
+.lead{color:var(--muted);font-size:18px;max-width:720px}
+.btn{display:inline-block;background:var(--brand);color:#fff;text-decoration:none;font-weight:700;padding:14px 28px;border-radius:999px;border:0;font-size:17px;cursor:pointer}
+.btn:hover{filter:brightness(1.1)}
+
+/* 导航 */
+header{position:sticky;top:0;z-index:10;background:rgba(251,250,247,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+header .logo{font-weight:800;font-size:20px;text-decoration:none}
+header nav a{margin-left:24px;text-decoration:none;color:var(--muted);font-size:15px}
+header nav a.btn{color:#fff;padding:9px 18px;font-size:15px}
+@media (max-width:720px){header nav a:not(.btn){display:none}}
+
+/* 首屏 */
+.hero{padding:72px 0 88px;border-top:0}
+.hero .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center}
+.hero .eyebrow{color:var(--brand);font-weight:700;letter-spacing:.12em;font-size:14px}
+.hero h1{font-size:clamp(36px,6vw,64px);line-height:1.15;margin:14px 0 20px;letter-spacing:-.01em}
+.hero p{font-size:19px;color:var(--muted);margin-bottom:32px}
+.hero .visual{aspect-ratio:4/3;border-radius:20px;background:var(--brand-soft) center/cover no-repeat;overflow:hidden}
+@media (max-width:860px){.hero .wrap{grid-template-columns:1fr}.hero{padding-top:40px}}
+
+/* 卖点 */
+.points{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
+.points div{background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px}
+.points b{display:block;font-size:34px;color:var(--brand);line-height:1.2}
+.points h3{font-size:19px;margin:10px 0 6px}
+.points p{color:var(--muted);font-size:15px}
+@media (max-width:720px){.points{grid-template-columns:1fr}}
+
+/* 视频 */
+.video video,.video iframe{width:100%;aspect-ratio:16/9;border-radius:16px;background:#000;border:0;margin-top:32px}
+
+/* 案例 */
+.case{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:36px;border-top:3px solid var(--ink)}
+.case div{padding:24px 24px 0 0}
+.case small{color:var(--muted);letter-spacing:.08em}
+.case .num{font-size:44px;font-weight:800;color:var(--brand);line-height:1.2}
+@media (max-width:720px){.case{grid-template-columns:1fr}}
+
+/* FAQ：用 details，不用 JS，搜索引擎和 AI 都能直接读到答案 */
+.faq details{border-bottom:1px solid var(--line);padding:20px 0}
+.faq details:first-of-type{margin-top:28px;border-top:1px solid var(--line)}
+.faq summary{font-size:18px;font-weight:700;cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:16px}
+.faq summary::after{content:"+";color:var(--brand);font-size:24px;line-height:1}
+.faq details[open] summary::after{content:"−"}
+.faq details p{margin-top:12px;color:var(--muted)}
+
+/* 表单 */
+.contact .wrap{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+.contact dl{margin-top:24px}
+.contact dt{color:var(--muted);font-size:14px;margin-top:16px}
+.contact dd{font-size:18px;font-weight:700}
+form{background:#fff;border:1px solid var(--line);border-radius:20px;padding:32px}
+form label{display:block;font-size:14px;color:var(--muted);margin:16px 0 6px}
+form label:first-child{margin-top:0}
+form input,form select,form textarea{width:100%;font:inherit;font-size:16px;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--bg)}
+form .btn{width:100%;margin-top:24px}
+form .note{font-size:13px;color:var(--muted);margin-top:12px;text-align:center}
+@media (max-width:860px){.contact .wrap{grid-template-columns:1fr}}
+
+footer{padding:32px 0;border-top:1px solid var(--line);color:var(--muted);font-size:14px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#">改成：品牌名</a>
+    <nav>
+      <a href="#why">为什么选我们</a>
+      <a href="#case">案例</a>
+      <a href="#faq">常见问题</a>
+      <a class="btn" href="#contact">改成：按钮文字</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- 首屏：作业二的一句话结论 + 主视觉 -->
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <div class="eyebrow">改成：城市 · 品类</div>
+        <!-- SEO 第 2 项：全页只有这一个 h1 -->
+        <h1>改成：一句话结论</h1>
+        <p>改成：给谁、解决什么，一两行</p>
+        <a class="btn" href="#contact">改成：按钮文字，例「预约免费量尺」</a>
+      </div>
+      <!-- 换成 assets/ 里的主视觉；用 img 时一定写 alt -->
+      <div class="visual" role="img" aria-label="改成：主视觉的文字说明" style="background-image:url('assets/hero.jpg')"></div>
+    </div>
+  </section>
+
+  <!-- 3 个卖点：业务卡片「我凭什么能解决」 -->
+  <section id="why">
+    <div class="wrap">
+      <h2>改成：为什么选我们（写成客户的问题也可以）</h2>
+      <p class="lead">改成：一句话概括</p>
+      <div class="points">
+        <div><b>00 天</b><h3>改成：卖点一</h3><p>改成：一句话依据</p></div>
+        <div><b>免费</b><h3>改成：卖点二</h3><p>改成：一句话依据</p></div>
+        <div><b>0 年</b><h3>改成：卖点三</h3><p>改成：一句话依据</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 视频：作业三。mp4 放 assets/；放在视频号 / B 站的，换成平台给的 iframe 嵌入代码 -->
+  <section class="video">
+    <div class="wrap">
+      <h2>改成：60 秒看懂我们做什么</h2>
+      <video controls preload="metadata" playsinline poster="assets/video-cover.jpg">
+        <source src="assets/video.mp4" type="video/mp4">
+      </video>
+    </div>
+  </section>
+
+  <!-- 案例：业务卡片「真实案例」 -->
+  <section id="case">
+    <div class="wrap">
+      <h2>改成：某类客户，结果一句话</h2>
+      <div class="case">
+        <div><small>原来的问题</small><p>改成</p></div>
+        <div><small>我们做了什么</small><p>改成</p></div>
+        <div><small>结果</small><div class="num">00</div><p>改成：数字的含义</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ：作业一 FAQ素材.md 原文。改这里时，同步改 head 里的 FAQPage -->
+  <section id="faq" class="faq">
+    <div class="wrap">
+      <h2>常见问题</h2>
+      <details open><summary>改成：问题 1？</summary><p>改成：答案 1，第一句是结论。</p></details>
+      <details><summary>改成：问题 2？</summary><p>改成：答案 2。</p></details>
+      <details><summary>改成：问题 3？</summary><p>改成：答案 3。</p></details>
+      <details><summary>改成：问题 4？</summary><p>改成：答案 4。</p></details>
+      <details><summary>改成：问题 5？</summary><p>改成：答案 5。</p></details>
+    </div>
+  </section>
+
+  <!-- 表单 + 联系方式。联系方式照事实底稿抄 -->
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <div>
+        <h2>改成：行动标题，例「约一次免费上门量尺」</h2>
+        <p class="lead">改成：提交后多久联系、联系方式</p>
+        <dl>
+          <dt>电话</dt><dd>改成</dd>
+          <dt>地址</dt><dd>改成</dd>
+        </dl>
+      </div>
+
+      <!--
+        表单两种接法，选一种：
+        A. 第三方表单（金数据、腾讯问卷、飞书表单等）：在表单后台复制「嵌入代码」，替换下面整个 <form>
+        B. 支持直接收 POST 的表单服务：把 action 换成服务给你的地址
+        线索通知在表单服务后台打开（邮件 / 企业微信），或让 WorkBuddy 读通知邮件推到企业微信
+      -->
+      <form action="改成：表单服务给的地址" method="POST">
+        <label for="name">称呼 *</label>
+        <input id="name" name="name" required autocomplete="name">
+        <label for="phone">手机或微信 *</label>
+        <input id="phone" name="phone" required autocomplete="tel">
+        <label for="size">改成：第三个字段，例「公司人数」</label>
+        <select id="size" name="size">
+          <option value="">请选择</option>
+          <option>改成：选项 1</option>
+          <option>改成：选项 2</option>
+        </select>
+        <label for="msg">改成：补充说明</label>
+        <textarea id="msg" name="message" rows="3"></textarea>
+        <button class="btn" type="submit">改成：按钮文字</button>
+        <p class="note">改成：例「工作日 2 小时内电话联系你」</p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">© 2026 改成：法定名称 ｜ 改成：地址 ｜ 改成：电话</div>
+</footer>
+
+</body>
+</html>

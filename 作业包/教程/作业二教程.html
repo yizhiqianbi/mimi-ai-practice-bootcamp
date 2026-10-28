@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>作业二教程｜为你的业务做 PPT 和海报｜AI 实战训练营教程</title><style>
+:root{--ac:#2f5d50;--ac2:#e7efec;--ink:#1d1f1e;--mu:#5f6663;--line:#e3e1db;--bg:#fbfaf7;--card:#fff;--warn:#b5532a;--warn2:#fbeee7;--ok:#2f7a4f;--ok2:#e8f4ec;--you:#eef2fb;--you2:#3b5bb5}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:20px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.75 "Source Han Sans SC","Noto Sans CJK SC","PingFang SC","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--ac)}
+.layout{display:grid;grid-template-columns:260px minmax(0,1fr);max-width:1240px;margin:0 auto;gap:48px;padding:0 32px}
+nav.toc{position:sticky;top:0;align-self:start;max-height:100vh;overflow:auto;padding:36px 0 40px;font-size:14px}
+nav.toc .home{display:block;color:var(--mu);text-decoration:none;font-size:13px;margin-bottom:18px}
+nav.toc .home:hover{color:var(--ac)}
+nav.toc ul{list-style:none;margin:0;padding:0}
+nav.toc>div>ul>li{margin:10px 0}
+nav.toc>div>ul>li>a{font-weight:700;color:var(--ink)}
+nav.toc ul ul{padding-left:12px;border-left:2px solid var(--line);margin:6px 0 4px}
+nav.toc ul ul li{margin:4px 0}
+nav.toc a{text-decoration:none;color:var(--mu)}
+nav.toc a:hover{color:var(--ac)}
+main{padding:36px 0 120px;min-width:0}
+.crumb{font-size:13px;color:var(--mu);letter-spacing:.06em}
+h1{font-size:40px;line-height:1.25;margin:10px 0 18px;letter-spacing:-.01em}
+.meta{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}
+.meta span{display:inline-flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px 14px;font-size:14px;color:var(--mu)}
+.meta img{width:18px;height:18px;object-fit:contain}
+.meta b{color:var(--ink);font-weight:600}
+h2{font-size:28px;line-height:1.35;margin:64px 0 8px;padding-top:28px;border-top:3px solid var(--ink)}
+h2 .t{display:inline-block;background:var(--ac);color:#fff;border-radius:8px;padding:0 10px;margin-right:10px;font-size:22px;vertical-align:3px}
+h3{font-size:20px;margin:40px 0 8px}
+h3::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ac);margin-right:10px;vertical-align:4px}
+h4{font-size:16px;margin:24px 0 6px;color:var(--mu)}
+p{margin:10px 0}
+ul,ol{padding-left:24px}
+li{margin:4px 0}
+code{font-family:"JetBrains Mono","SFMono-Regular",Consolas,monospace;font-size:.88em;background:#f0eee8;border-radius:5px;padding:1px 6px}
+pre{background:#22251f;color:#eef0ea;border-radius:12px;padding:18px 20px;overflow:auto;font-size:14px;line-height:1.7;margin:12px 0}
+pre code{background:none;padding:0;color:inherit;font-size:inherit;white-space:pre-wrap;word-break:break-word}
+.pw{position:relative;margin:14px 0}
+.pw .bar{display:flex;justify-content:space-between;align-items:center;background:#363a32;color:#cfd3c9;border-radius:12px 12px 0 0;padding:8px 14px 8px 18px;font-size:13px}
+.pw .bar+pre{margin-top:0;border-radius:0 0 12px 12px}
+.pw button{font:inherit;font-size:13px;background:#5b8f7e;color:#fff;border:0;border-radius:7px;padding:4px 12px;cursor:pointer}
+.pw button.ok{background:#8aa05a}
+table{border-collapse:collapse;width:100%;margin:14px 0;font-size:14.5px;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:block;overflow-x:auto}
+thead{background:#f2f0ea}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:700;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+blockquote{margin:12px 0;padding:10px 18px;border-left:4px solid var(--line);color:var(--mu);background:#f6f5f1;border-radius:0 8px 8px 0}
+figure{margin:18px 0}
+figure img{display:block;max-width:100%;border-radius:12px;border:1px solid var(--line);box-shadow:0 8px 30px rgba(0,0,0,.06)}
+figure.half img{max-width:420px}
+figure.third img{max-width:300px}
+figcaption{font-size:13px;color:var(--mu);margin-top:8px}
+.row{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-start}
+.row figure{margin:8px 0}
+.admonition{border-radius:12px;padding:14px 18px;margin:16px 0;border:1px solid var(--line);background:var(--card)}
+.admonition>p.admonition-title{margin:0 0 6px;font-weight:700;font-size:14px;letter-spacing:.04em}
+.admonition>*:last-child{margin-bottom:0}
+.admonition.you{background:var(--you);border-color:#d5ddf2}
+.admonition.you>.admonition-title{color:var(--you2)}
+.admonition.ai{background:#fff;border-left:5px solid var(--ac)}
+.admonition.ai>.admonition-title{color:var(--ac)}
+.admonition.ai>.admonition-title::after{content:"　参考结果，用木序示例实际做出来的；你那边措辞会不同，看结构和要点";font-weight:400;color:var(--mu);font-size:12.5px;letter-spacing:0}
+.admonition.check{background:var(--ok2);border-color:#cfe6d7}
+.admonition.check>.admonition-title{color:var(--ok)}
+.admonition.warn{background:var(--warn2);border-color:#f0d6c8}
+.admonition.warn>.admonition-title{color:var(--warn)}
+.admonition.tip{background:#fff8e6;border-color:#f1e2b5}
+.admonition.tip>.admonition-title{color:#8a6a12}
+.admonition.note{background:#f4f3ef}
+li.task{list-style:none;margin-left:-22px}
+li.task input{margin-right:8px;transform:scale(1.15);accent-color:var(--ac)}
+.get{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;margin:12px 0 8px}
+.get div{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14px}
+.get b{display:block;font-size:15px;margin-bottom:4px}
+.pager{display:flex;justify-content:space-between;margin-top:72px;padding-top:24px;border-top:1px solid var(--line);font-size:15px}
+.pager a{text-decoration:none;font-weight:700}
+kbd{font:12px/1 "JetBrains Mono",monospace;background:#fff;border:1px solid #ccc;border-bottom-width:2px;border-radius:5px;padding:2px 6px}
+@media(max-width:900px){.layout{grid-template-columns:1fr;padding:0 18px}nav.toc{display:none}h1{font-size:30px}}
+@media print{nav.toc,.pw button{display:none}.layout{display:block}h2{break-before:page}body{background:#fff}}
+</style></head>
+<body><div class="layout">
+<nav class="toc"><a class="home" href="index.html">← 教程目录</a><div>
+<ul>
+<li><a href="#A-定观众和一句话结论-15-分钟">A · 定观众和一句话结论（15 分钟）</a></li>
+<li><a href="#B-生成-5-页-PPT-和讲稿-30-分钟">B · 生成 5 页 PPT 和讲稿（30 分钟）</a><ul>
+<li><a href="#复制模板-叫-Skill">复制模板，叫 Skill</a></li>
+<li><a href="#先看大纲-再成稿">先看大纲，再成稿</a></li>
+<li><a href="#打开看">打开看</a></li>
+</ul>
+</li>
+<li><a href="#C-改两轮-15-分钟">C · 改两轮（15 分钟）</a><ul>
+<li><a href="#第一轮-只读-5-个标题">第一轮：只读 5 个标题</a></li>
+<li><a href="#第二轮-每页正文不超过-40-字">第二轮：每页正文不超过 40 字</a></li>
+<li><a href="#收一条小组意见">收一条小组意见</a></li>
+</ul>
+</li>
+<li><a href="#D-海报-30-分钟">D · 海报（30 分钟）</a><ul>
+<li><a href="#先排信息层级-不出图">先排信息层级，不出图</a></li>
+<li><a href="#选配色">选配色</a></li>
+<li><a href="#导出-PNG">导出 PNG</a></li>
+<li><a href="#写进-brand-md">写进 brand.md</a></li>
+</ul>
+</li>
+<li><a href="#交付对照">交付对照</a></li>
+<li><a href="#卡住了">卡住了</a></li>
+</ul>
+
+</div></nav>
+<main>
+<div class="crumb">AI 实战训练营 · 作业包 · 教程</div>
+<h1>作业二教程｜为你的业务做 PPT 和海报</h1>
+<div class="meta"><span>⏱ <b>90 分钟（Day 1 19:30–21:00）</b></span><span><img src="img/logos/grokbot.svg" alt=""><b>Grokbot</b></span><span><img src="img/logos/codex.svg" alt=""><b>Codex</b></span><span><img src="img/logos/workbuddy.svg" alt=""><b>WorkBuddy</b></span><span>课件 <b>第 32 页</b></span></div>
+<p>这一节的产出会直接用在作业四的网站上：PPT 的一句话结论是网站首屏，海报的颜色写进 <code>brand.md</code> 后就是网站配色。示例的成品在 <a href="跟做样例_木序办公家具/产出/"><code>跟做样例_木序办公家具/产出/</code></a>。</p>
+<div class="get">
+<div><b>5 页 PPT + 讲稿</b>浏览器里翻页，按 N 看讲稿；每个数字都有出处</div>
+<div><b>一张海报</b>1080×1440，离屏幕 2 米、3 秒内看懂</div>
+<div><b>brand.md</b>品牌色、字体、主视觉，作业四网站首屏直接读</div>
+</div>
+<div class="row">
+<figure class="third"><img src="img/2-ppt-1.png" alt="PPT 第 1 页"><figcaption>示例 PPT 第 1 页</figcaption></figure>
+<figure class="third"><img src="img/2-ppt-4.png" alt="PPT 第 4 页"><figcaption>第 4 页：案例</figcaption></figure>
+<figure style="max-width:150px"><img src="跟做样例_木序办公家具/产出/20261028_海报_v1.png" alt="海报"><figcaption>示例海报</figcaption></figure>
+</div>
+
+<h2 id="A-定观众和一句话结论-15-分钟"><span class="t">A</span>定观众和一句话结论（15 分钟）</h2>
+<p>PPT 做不好，多半是没想清楚讲给谁听。先让「业务顾问」给你 3 个角度，它已经知道你的业务卡片。</p>
+<pre><code class="language-prompt">#! 发给 Grokbot「业务顾问」
+我要做一份 5 页的业务介绍 PPT。请根据你已经知道的我的业务卡片，给我 3 个不同的角度。
+每个角度写：讲给谁听（具体到场合，如「第一次见面的企业行政」）、一句话结论（20 字以内）、5 页每页的标题（写成结论句）。
+3 个角度要真的不同，比如一个讲省钱、一个讲省时间、一个讲风险。
+</code></pre>
+<div class="admonition ai">
+<p class="admonition-title">Grokbot「业务顾问」</p>
+<p><strong>角度 1 · 省时间</strong>　讲给：租约快到期、正在找家具的企业行政
+一句话结论：签合同后 15 个工作日，从空办公室到全员入驻
+标题：① 15 个工作日从空办公室到入驻 ② 租约快到期，家具交期却要一个月起 ③ 量尺、方案、生产、安装一家做完 ④ 80 人公司 13 个工作日交付 ⑤ 约一次免费量尺</p>
+<p><strong>角度 2 · 省心</strong>　讲给：第一次装修办公室的创业公司老板
+一句话结论：不懂家具也不怕，看着 3D 方案改到满意再签</p>
+<p><strong>角度 3 · 少风险</strong>　讲给：要对甲醛、质保负责的行政主管
+一句话结论：ENF 板材每批有检测报告，钢架板材质保 5 年</p>
+</div>
+<p>选一个，把<strong>观众</strong>和<strong>一句话结论</strong>记下来。示例选了角度 1，因为业务卡片里「客户最头疼的问题」就是时间。</p>
+<h2 id="B-生成-5-页-PPT-和讲稿-30-分钟"><span class="t">B</span>生成 5 页 PPT 和讲稿（30 分钟）</h2>
+<h3 id="复制模板-叫-Skill">复制模板，叫 Skill</h3>
+<ol>
+<li>把 <code>作业二-PPT与海报/PPT模板.html</code> 复制到业务文件夹的 <code>产出/</code></li>
+<li>Codex 智能程度调到 <strong>High</strong></li>
+<li>发：</li>
+</ol>
+<pre><code class="language-prompt">#! 发给 Codex
+用 ppt-5pages 这个 Skill 做业务介绍 PPT，观众是「租约快到期、正在找家具的企业行政」，一句话结论是「签合同后 15 个工作日，从空办公室到全员入驻」。模板用 产出/PPT模板.html。
+</code></pre>
+<h3 id="先看大纲-再成稿">先看大纲，再成稿</h3>
+<p>Skill 第 1 步只出大纲。这时候改最便宜：</p>
+<div class="admonition ai">
+<p class="admonition-title">Codex：5 页大纲</p>
+<table>
+<thead>
+<tr>
+<th>页</th>
+<th>标题</th>
+<th>放什么</th>
+<th>出处</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>签合同后 15 个工作日，从空办公室到全员入驻</td>
+<td>我是谁：厚街工厂，20–300 人公司</td>
+<td>公司介绍、2026 手册</td>
+</tr>
+<tr>
+<td>2</td>
+<td>租约快到期，家具一问交期都要一个月起</td>
+<td>大数字「3 周」：80 人公司离搬家只剩的时间</td>
+<td>案例_深圳跨境电商</td>
+</tr>
+<tr>
+<td>3</td>
+<td>我们的三大优势</td>
+<td>15 个工作日 / 48 小时方案 / 5 年质保</td>
+<td>2026 手册、交付流程、售后条款</td>
+</tr>
+<tr>
+<td>4</td>
+<td>深圳 80 人跨境电商：13 个工作日交付</td>
+<td>问题 → 做了什么 → 结果</td>
+<td>案例_深圳跨境电商</td>
+</tr>
+<tr>
+<td>5</td>
+<td>约一次免费上门量尺</td>
+<td>电话、二维码</td>
+<td>公司介绍</td>
+</tr>
+</tbody>
+</table>
+<p>确认后我再填进模板。</p>
+</div>
+<p>示例在这里改了一处：第 3 页「我们的三大优势」是名词，读不出意思，回复「第 3 页标题改成一句结论，说清为什么快」。它改成了「量尺、方案、生产、安装，一家做完」。</p>
+<h3 id="打开看">打开看</h3>
+<p>确认后它把内容填进模板，存成 <code>产出/日期_业务介绍_v1.html</code>。双击用浏览器打开：</p>
+<ul>
+<li><kbd>←</kbd> <kbd>→</kbd> 翻页，<kbd>N</kbd> 显示讲稿，<kbd>F</kbd> 全屏</li>
+<li><kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>P</kbd> 可以导出 PDF</li>
+</ul>
+<figure><img src="img/2-ppt-notes.png" alt="按 N 显示讲稿"><figcaption>按 N，底部出现这一页的讲稿</figcaption></figure>
+
+<div class="row">
+<figure class="third"><img src="img/2-ppt-2.png" alt=""><figcaption>第 2 页：问题</figcaption></figure>
+<figure class="third"><img src="img/2-ppt-3.png" alt=""><figcaption>第 3 页：方案</figcaption></figure>
+<figure class="third"><img src="img/2-ppt-5.png" alt=""><figcaption>第 5 页：行动</figcaption></figure>
+</div>
+
+<div class="admonition check">
+<p class="admonition-title">检查</p>
+<ul>
+<li class="task"><input type="checkbox"> 每页只做一件事</li>
+<li class="task"><input type="checkbox"> 让 Codex 附上出处表，每个数字都能在知识库找到。示例：<a href="跟做样例_木序办公家具/产出/20261028_业务介绍_出处表.md"><code>20261028_业务介绍_出处表.md</code></a></li>
+</ul>
+</div>
+<h2 id="C-改两轮-15-分钟"><span class="t">C</span>改两轮（15 分钟）</h2>
+<h3 id="第一轮-只读-5-个标题">第一轮：只读 5 个标题</h3>
+<p>不看正文，只把 5 个标题连起来读，像不像一段完整的话？示例改完是：</p>
+<blockquote>
+<p>签合同后 15 个工作日，从空办公室到全员入驻 → 租约快到期，家具一问交期都要一个月起 → 量尺、方案、生产、安装，一家做完 → 深圳 80 人跨境电商：13 个工作日交付，提前 1 周 → 约一次免费上门量尺</p>
+</blockquote>
+<h3 id="第二轮-每页正文不超过-40-字">第二轮：每页正文不超过 40 字</h3>
+<pre><code class="language-prompt">#! 发给 Codex
+第二轮：每页正文压到 40 字以内，删掉形容词和「专业」「一站式」这类词，数字不能动。改完存成 _v2。
+</code></pre>
+<h3 id="收一条小组意见">收一条小组意见</h3>
+<p>截图发到小组群（WorkBuddy 连了企业微信的话，可以让它帮你发），收一条意见改掉。示例收到的是「第 5 页没说量尺要不要钱」，于是加了「看完方案再决定，不收任何费用」。</p>
+<p>示例 v1 到 v2 改了什么，记在 <a href="跟做样例_木序办公家具/产出/20261028_业务介绍_出处表.md">出处表的最后</a>。</p>
+<h2 id="D-海报-30-分钟"><span class="t">D</span>海报（30 分钟）</h2>
+<h3 id="先排信息层级-不出图">先排信息层级，不出图</h3>
+<ol>
+<li>把 <code>作业二-PPT与海报/海报模板.html</code> 复制到 <code>产出/</code></li>
+<li>发：</li>
+</ol>
+<pre><code class="language-prompt">#! 发给 Codex
+用 poster 这个 Skill 做一张海报，主题是「15 个工作日装好新办公室」，用于展会和朋友圈。模板用 产出/海报模板.html。
+</code></pre>
+<div class="admonition ai">
+<p class="admonition-title">Codex：信息层级</p>
+<ul>
+<li><strong>第一眼（3 秒）</strong>：15 个工作日装好新办公室</li>
+<li><strong>第二眼</strong>：深圳 · 东莞 · 广州，20–300 人的公司</li>
+<li><strong>第三眼</strong>：48 小时出方案 · 免费上门量尺 · 5 年质保</li>
+<li><strong>最后</strong>：预约免费上门量尺，电话 138-0000-0000，右下角二维码</li>
+</ul>
+<p>展会文案里写的是「15 天」，资料里是「15 个工作日」。海报按资料写「15 个工作日」，避免客户按自然日算。</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">AI 帮你挑出了一个坑</p>
+<p>「15 天」和「15 个工作日」差了将近一周。海报、网站、口播里写的承诺，客户会按字面理解，宁可长一点也要准确。</p>
+</div>
+<h3 id="选配色">选配色</h3>
+<p>确认层级后它给 2 个方向：</p>
+<div class="admonition ai">
+<p class="admonition-title">Codex：2 个配色方向</p>
+<p><strong>A · 胡桃木</strong>：主色 #7a4e2d，辅色 #f3ebe1，背景 #fbf8f3。品牌名里有「木」，暖棕色像实木家具。
+<strong>B · 墨绿</strong>：主色 #2f5d50，辅色 #e7efec，背景 #fbfaf7。偏「环保」，和 ENF 板材呼应。</p>
+</div>
+<p>示例选了 A。主视觉没有现成的产品照片，就让 Codex 画了一张办公室平面方案图（<code>assets/plan.svg</code>），正好对应「免费量尺、出方案」这个卖点，也没有版权问题。</p>
+<h3 id="导出-PNG">导出 PNG</h3>
+<ol>
+<li>浏览器打开海报 HTML</li>
+<li>右键 → 检查，按 <kbd>Ctrl</kbd>/<kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd></li>
+<li>输入 <code>screenshot</code>，选 <strong>Capture node screenshot</strong>，鼠标先在元素面板里选中 <code>&lt;div class="poster"&gt;</code></li>
+</ol>
+<p>或者直接让 Codex 导出：「把 产出/海报_v1.html 截图存成同名 PNG，只截 .poster 这一块」。它要装截图工具时会请求批准。</p>
+<figure class="half"><img src="跟做样例_木序办公家具/产出/20261028_海报_v1.png" alt="示例海报"><figcaption>示例海报，全图约 80 字</figcaption></figure>
+
+<h3 id="写进-brand-md">写进 brand.md</h3>
+<pre><code class="language-prompt">#! 发给 Codex
+把刚才选定的配色、字体、主视觉文件名、一句话结论写进 assets/brand.md。
+</code></pre>
+<p>示例：<a href="跟做样例_木序办公家具/assets/brand.md"><code>assets/brand.md</code></a>。作业四做网站时，Codex 会读这个文件定配色。</p>
+<div class="admonition check">
+<p class="admonition-title">检查</p>
+<ul>
+<li class="task"><input type="checkbox"> 离屏幕 2 米看，3 秒内能说出是什么、给谁、怎么联系</li>
+<li class="task"><input type="checkbox"> 全图文字不超过 80 字</li>
+<li class="task"><input type="checkbox"> 图片和字体都有授权（思源黑体免费商用；网上搜的图不要用）</li>
+<li class="task"><input type="checkbox"> <code>assets/brand.md</code> 填好了</li>
+</ul>
+</div>
+<h2 id="交付对照">交付对照</h2>
+<table>
+<thead>
+<tr>
+<th>交付</th>
+<th>你的文件</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5 页 PPT（第二轮改完）</td>
+<td><code>产出/日期_业务介绍_v2.html</code></td>
+<td><a href="跟做样例_木序办公家具/产出/20261028_业务介绍_v2.html">20261028_业务介绍_v2.html</a></td>
+</tr>
+<tr>
+<td>海报</td>
+<td><code>产出/日期_海报_v1.png</code></td>
+<td><a href="跟做样例_木序办公家具/产出/20261028_海报_v1.png">20261028_海报_v1.png</a></td>
+</tr>
+<tr>
+<td>视觉资产</td>
+<td><code>assets/brand.md</code></td>
+<td><a href="跟做样例_木序办公家具/assets/brand.md">brand.md</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="卡住了">卡住了</h2>
+<table>
+<thead>
+<tr>
+<th>现象</th>
+<th>怎么办</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>它没出大纲直接成稿了</td>
+<td>说「按 Skill 第 1 步，先给大纲」；还这样就检查 Skill 是不是在 <code>.agents/skills/ppt-5pages/</code></td>
+</tr>
+<tr>
+<td>页面文字挤出边框</td>
+<td>说「第 N 页文字超出了，正文压到 40 字以内，不改字号」</td>
+</tr>
+<tr>
+<td>PPT 里出现知识库里没有的数字</td>
+<td>说「第 N 页的 ____ 出处是什么？找不到就删掉」</td>
+</tr>
+<tr>
+<td>想要 10 页</td>
+<td>进阶版：先把 5 页做扎实，再说「在第 3 页和第 4 页之间加 3 页，分别讲 ____」</td>
+</tr>
+<tr>
+<td>海报颜色想换</td>
+<td>打开 HTML，改最上面 <code>:root</code> 里的 4 个色值就行</td>
+</tr>
+</tbody>
+</table>
+<div class="pager"><a href="作业一教程.html">← 作业一教程｜业务知识库 + 邮件助理</a><a href="作业三教程.html">作业三教程｜做一条业务口播视频 →</a></div>
+</main></div><script>
+document.querySelectorAll('pre>code.language-prompt').forEach(c=>{
+  const pre=c.parentElement,w=document.createElement('div');w.className='pw';
+  const lab=c.textContent.match(/^#! ?(.*)\n/);let t=c.textContent;let label='复制下面这段';
+  if(lab){label=lab[1];t=t.slice(lab[0].length);c.textContent=t}
+  const bar=document.createElement('div');bar.className='bar';bar.innerHTML='<span></span><button>复制</button>';bar.firstChild.textContent=label;
+  pre.parentNode.insertBefore(w,pre);w.appendChild(bar);w.appendChild(pre);
+  bar.querySelector('button').onclick=e=>{navigator.clipboard.writeText(t.trim()).then(()=>{e.target.textContent='已复制';e.target.classList.add('ok');setTimeout(()=>{e.target.textContent='复制';e.target.classList.remove('ok')},1500)})}
+});
+document.querySelectorAll('li.task input').forEach((b,i)=>{const k=location.pathname+'#'+i;b.checked=localStorage.getItem(k)==='1';b.onchange=()=>localStorage.setItem(k,b.checked?'1':'0')});
+</script></body></html>
