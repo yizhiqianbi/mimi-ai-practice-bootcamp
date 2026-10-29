@@ -4,7 +4,7 @@
 
 ## 打开
 
-直接打开 `ai-practice-bootcamp-v3.html`（当前版本，56 页），或使用本地静态服务器访问。历史版本：`ai-practice-bootcamp-v2.html`（26 页）、`ai-practice-bootcamp.html`（v1）。
+直接打开 `ai-practice-bootcamp-v3.html`（当前版本，58 页），或使用本地静态服务器访问。历史版本：`ai-practice-bootcamp-v2.html`（26 页）、`ai-practice-bootcamp.html`（v1）。
 
 快捷键：`← / →` 翻页，`N` 显示讲稿，`F` 全屏，可直接用浏览器打印导出 PDF。
 

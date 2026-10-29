@@ -4,3 +4,7 @@ desktop-slide*.png
 hallmark-slide*.png
 phone-slide*.png
 __pycache__/
+
+# 含客户资料或未完全打码，不进仓库
+assets/bxkt*.zip
+assets/image.png
