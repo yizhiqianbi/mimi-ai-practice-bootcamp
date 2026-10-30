@@ -262,6 +262,13 @@ body:hover .ctrl{opacity:1}
 .trio p{font-size:23px;line-height:1.5;color:var(--ink2)}
 
 /* files -> kb */
+.rag2{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.rag2 .panel{padding:42px 48px}
+.rag2 .lv{font:500 15px/1 var(--mono);letter-spacing:.18em;color:var(--blue2)}
+.rag2 h4{font-size:46px;line-height:1.2;font-weight:800;margin:18px 0 14px}
+.rag2 p{font-size:28px;line-height:1.5;color:var(--ink2)}
+.rag2 .fit{margin-top:20px;font-size:22px;color:var(--muted)}
+.rag2 .hot{border-color:rgba(77,123,255,.55);background:linear-gradient(160deg,rgba(59,108,255,.2),rgba(59,108,255,.04))}
 .kb{display:grid;grid-template-columns:640px 120px 1fr;align-items:center;height:400px}
 .pile{position:relative;height:100%}
 .pile .f{position:absolute;display:flex;align-items:center;gap:12px;padding:14px 20px;border-radius:12px;background:#111725;border:1px solid var(--line);font:400 19px/1 var(--mono);color:var(--ink2);white-space:nowrap;box-shadow:0 18px 40px -20px rgba(0,0,0,.8)}
@@ -1335,21 +1342,22 @@ strong{color:var(--ink);font-weight:700}
 <!-- 23 文件→知识库 -->
 <section class="slide" data-sec="模块一 · 工作系统">
   <div class="inner">
-    <div class="eb rv">讲 ① · 知识库 · 本地文件夹做法</div>
+    <div class="eb rv">讲 ① · 知识库 · 入门：Obsidian + Codex</div>
     <h2 class="h-l rv mt-s">把一堆文件，变成能问答的知识库</h2>
-    <div class="kb mt-m">
+    <div class="kb mt-m" style="height:350px">
       <div class="pile rv">
-        <div class="f" style="left:10px;top:20px;transform:rotate(-4deg)">合同_final_v3(1).docx</div>
-        <div class="f" style="left:290px;top:70px;transform:rotate(3deg)">IMG_2034.jpg</div>
-        <div class="f" style="left:40px;top:120px;transform:rotate(2deg)">会议纪要-新建.pdf</div>
-        <div class="f" style="left:330px;top:170px;transform:rotate(-3deg)">报价单最终版.xlsx</div>
-        <div class="f" style="left:0;top:225px;transform:rotate(-2deg)">微信聊天记录.txt</div>
-        <div class="f" style="left:260px;top:280px;transform:rotate(4deg)">未命名文档 (7)</div>
-        <div class="f" style="left:60px;top:335px;transform:rotate(-1deg)">客户资料-张总.pptx</div>
+        <div class="f" style="left:10px;top:10px;transform:rotate(-4deg)">合同_final_v3(1).docx</div>
+        <div class="f" style="left:290px;top:54px;transform:rotate(3deg)">IMG_2034.jpg</div>
+        <div class="f" style="left:40px;top:98px;transform:rotate(2deg)">会议纪要-新建.pdf</div>
+        <div class="f" style="left:330px;top:142px;transform:rotate(-3deg)">报价单最终版.xlsx</div>
+        <div class="f" style="left:0;top:188px;transform:rotate(-2deg)">微信聊天记录.txt</div>
+        <div class="f" style="left:260px;top:232px;transform:rotate(4deg)">未命名文档 (7)</div>
+        <div class="f" style="left:60px;top:276px;transform:rotate(-1deg)">客户资料-张总.pptx</div>
       </div>
       <div class="arrow rv">→</div>
-      <div class="panel tree rv">
-        <div class="d">知识库/</div>
+      <div class="panel tree rv" style="line-height:1.58;padding:24px 36px">
+        <div class="d">知识库/ <span class="c"># 用 Obsidian 打开就能看、能改</span></div>
+        <div>├─ <span class="x">AGENTS.md</span> <span class="c"># 规矩：怎么整理、怎么答</span></div>
         <div>├─ <span class="x">00_索引.md</span> <span class="c"># 每个文件一句话摘要</span></div>
         <div>├─ 01_客户/ <span class="c"># 张总 · 背景 · 往来</span></div>
         <div>├─ 02_合同与报价/</div>
@@ -1364,11 +1372,33 @@ strong{color:var(--ink);font-weight:700}
       <div class="st"><div class="dot"></div><span class="n">STEP 03</span><h4>摘要索引</h4><p>生成总索引</p></div>
       <div class="st"><div class="dot"></div><span class="n">STEP 04</span><h4>问答检索</h4><p>直接提问，答案带出处</p></div>
     </div>
+    <div class="strip rv mt-m"><span class="tag">参考做法</span><span>卡帕西的 <strong>LLM Wiki</strong>：原文只读，AI 写摘要、维护索引和日志，Obsidian 里看关联图</span></div>
   </div>
-  <aside class="notes">知识库不是一个高级概念，就是让你的文件能被找到、能被提问。四步：先让 AI 识别每个文件是什么，再统一命名和目录，然后给每个文件写一句话摘要、生成索引，最后在整理好的资料上直接提问，要求答案带出处。资料结构清楚了，后面的 PPT、内容和网站都会更快。</aside>
+  <aside class="notes">知识库不是一个高级概念，就是让你的文件能被找到、能被提问。最简单的做法完全在本地：资料存成 Markdown 放进一个文件夹，用 Obsidian 打开看和改，免费；让 Codex 在这个文件夹里读、整理、回答。这套做法有个出处：今年 4 月，OpenAI 创始成员、前特斯拉 AI 负责人卡帕西公开了他的 LLM Wiki，用的就是 Codex 这类智能体加 Obsidian。分三层：原始资料只读，AI 不改；AI 自己写摘要页、人物和主题页，维护一份索引和一份日志；再用一份 AGENTS.md 写清楚整理和回答的规矩。平时就三个动作：新资料进来让它收录，有问题直接问，隔一阵让它体检，查矛盾、查过期、查没人链接的页面。他的原文是一份想法文件，直接贴给 Codex 就能照着搭，社区也已经把它做成了 skill。Obsidian 只负责看，关联图一眼看出哪些资料是核心。四步：先让 AI 识别每个文件是什么，再统一命名和目录，然后给每个文件写一句话摘要、生成索引，最后在整理好的资料上直接提问，要求答案带出处。资料结构清楚了，后面的 PPT、内容和网站都会更快。</aside>
 </section>
 
-<!-- 24 知识库 放在哪 -->
+<!-- 24 知识库 进阶 RAG -->
+<section class="slide" data-sec="模块一 · 工作系统">
+  <div class="inner">
+    <div class="eb rv">讲 ① · 知识库 · 进阶：RAG</div>
+    <h2 class="h-l rv mt-s">资料一多，就让 AI 按意思找</h2>
+    <div class="rag2 mt-m">
+      <div class="panel rv"><span class="lv">入门 · 上一页</span><h4>Obsidian + Codex</h4><p>AI 按<strong>文件名、关键词、索引</strong>去翻，像人翻目录</p><div class="fit">几百份以内 · 自己用 · 不用配置</div></div>
+      <div class="panel hot rv"><span class="lv">进阶</span><h4>RAG：先检索，再回答</h4><p>按<strong>意思</strong>找段落：问「多少钱」，也能找到「报价单」</p><div class="fit">上千份 · 扫描件多 · 团队和客户都要问</div></div>
+    </div>
+    <div class="flow rv mt-auto" style="--n:5">
+      <div class="st"><div class="dot"></div><span class="n">STEP 01</span><h4>切块</h4><p>文档拆成一段段</p></div>
+      <div class="st"><div class="dot"></div><span class="n">STEP 02</span><h4>向量化</h4><p>Embedding 把每段的<strong>意思</strong>变成一串数字</p></div>
+      <div class="st"><div class="dot"></div><span class="n">STEP 03</span><h4>入库</h4><p>存进向量库，记住原文位置</p></div>
+      <div class="st"><div class="dot"></div><span class="n">STEP 04</span><h4>检索</h4><p>问题也变成数字，找意思<strong>最近的几段</strong></p></div>
+      <div class="st"><div class="dot"></div><span class="n">STEP 05</span><h4>回答</h4><p>大模型据此回答，<strong>带出处</strong></p></div>
+    </div>
+    <div class="strip rv mt-m"><span class="tag">大厂都在用</span><span>扣子、Dify、阿里云百炼、OpenAI 的知识库都是 RAG；想自建，可以用开源的 <strong>RAGFlow</strong></span></div>
+  </div>
+  <aside class="notes">上一页是入门做法：Obsidian 加 Codex，AI 是按文件名、关键词和索引去翻文件，和人翻目录差不多，几百份资料以内很好用。卡帕西自己也说，规模小时一个索引文件就够，资料多了就得上真正的检索。资料一多，或者要给团队、给客户问，就要用进阶做法，叫 RAG，检索增强生成。原理就五步：第一，把文档切成一段一段；第二，用 Embedding 模型把每一段的意思变成一串数字，意思相近的段落，数字也相近；第三，存进向量库，同时记住每段来自哪个文件哪一页；第四，用户提问时，问题也变成一串数字，去库里找意思最近的几段，所以问“多少钱”也能找到写着“报价”的那段，不用字面一样；第五，把这几段交给大模型，让它只根据这些内容回答，并标出处。这就是现在做企业知识库、智能客服的主流方案，扣子、Dify、阿里云百炼、OpenAI 的知识库都是这一套；想放在自己服务器上，有开源的 RAGFlow，我们给客户做的客服平台就是用它搭的。大家不用自己搭，知道原理就能看懂这些平台的设置：切块大小、用哪个向量模型、检索几段，调的都是这五步。</aside>
+</section>
+
+<!-- 25 知识库 放在哪 -->
 <section class="slide" data-sec="模块一 · 工作系统">
   <div class="inner">
     <div class="eb rv">讲 ① · 知识库 · 放在哪</div>
@@ -1410,7 +1440,7 @@ strong{color:var(--ink);font-weight:700}
   <aside class="notes">知识库放在哪，看两件事：谁来用，资料多敏感。第一种，本地文件夹加 Codex 或 WorkBuddy，适合老板自己用、资料敏感的情况，文件不出电脑，整理完直接拿去做 PPT 和网站，作业一就用这种。第二种，飞书知识库加知识问答，适合团队已经在用飞书：它只按每个人原本的权限回答，你看不到的文件它也不会引用；答案带数字脚注，点开就是原文；还可以把知识库发布成问答知识库，给客户用。注意超出每人每月的免费额度要另外买。第三种，微信生态，适合团队用企业微信、客户在微信里找你：员工用企业微信的智能机器人，把文档和问答对放进知识集，在群里直接问，但它只能进内部群；对客户用微信客服的问答库，问答对加相似问法，答不上的转人工。想让微信里的客服用大模型回答，以前用腾讯元器，元器 10 月发了公告，正在迁到腾讯云智能体开发平台 ADP，新项目直接用 ADP；还要注意元器接进微信客服以后，这个账号的客服全由机器接管，不能再转人工。第四种，腾讯 ima，适合个人收集行业资料，公众号文章、网页、PDF 随手存进去再提问，也能建共享知识库，但合同报价这种内部资料别放。第五种，扣子或者 Dify，适合做对外客服机器人，挂到官网、公众号、企业微信上，但要设好资料外的问题转人工。顺序建议是：先在本地整理干净，再按需要搬到飞书、企业微信或者扣子，整理这一步哪种工具都跑不掉。课后有一个进阶作业，教大家把知识库做成能转人工、每周迭代的客服机器人。</aside>
 </section>
 
-<!-- 25 知识库 飞书 6 步 -->
+<!-- 26 知识库 飞书 6 步 -->
 <section class="slide" data-sec="模块一 · 工作系统">
   <div class="inner">
     <div class="eb rv">讲 ① · 知识库 · 飞书上怎么搭</div>
@@ -1428,7 +1458,7 @@ strong{color:var(--ink);font-weight:700}
   <aside class="notes">以飞书为例，6 步，一个下午能搭出第一版。第一步定范围：只做一类问题，比如产品与报价，或者售后 FAQ，先放二三十份文件；一次全放进去，不同版本的答案会互相打架。第二步清洗：删重复和过期版本，统一命名，每份写上负责人和更新日期，这一步交给 Codex 或 WorkBuddy 批量做。第三步建知识库：飞书里新建知识库空间，目录分产品、价格与合同、案例、FAQ、制度流程，本地文件导入成云文档。第四步写问答对：把客户最常问的 30 个问题做成多维表格，问题、标准答案、出处、负责人四列；可以先让 AI 从聊天记录里捞一版，再由人改。第五步开问答：在知识问答里把范围限定到这个知识库；要做专门的机器人就用飞书 aily，关闭联网搜索，只关联这个知识空间；想给客户用，在知识库设置里发布为问答知识库。第六步测试和维护：用 10 个真实问题去问，答错了回去改原文；再换一个普通员工的账号测一遍，确认他看不到不该看的东西；每月清理一次。规则只有一条：只用带出处的答案，涉及价格、合同、人事的结论回原文确认。作业一我们用本地文件夹做，飞书版放在进阶里，回去照这 6 步做。</aside>
 </section>
 
-<!-- 26 知识库 飞书界面 -->
+<!-- 27 知识库 飞书界面 -->
 <section class="slide" data-sec="模块一 · 工作系统">
   <div class="inner">
     <div class="eb rv">讲 ① · 知识库 · 飞书实际界面</div>
@@ -1455,7 +1485,7 @@ strong{color:var(--ink);font-weight:700}
   <aside class="notes">这是飞书里的实际界面，截图来自飞书官方帮助中心。左边这张是知识库空间：左侧目录树，右侧文档，目录就按第 23 页的分类建，本地的 PDF、Word、表格可以批量上传，自动转成云文档。中间这张是把知识库开成问答以后的样子：输入框里写着“基于当前知识库提问”，意思是只在这个库里找答案；模型可以选豆包或者 DeepSeek-R1；联网搜索别打开，不然它会把网上的内容混进来。右边这张是答案的下半部分：“为你找到 3 篇参考资料”，每篇有编号，点开就是原文；最底下一行小字写着“AI 基于你有权限的资料生成，数据保密仅你可见”，这就是权限继承。现场演示时，我会先用管理员账号问一个问题，再换一个普通员工账号问同样的问题，大家看答案和出处有什么不同。</aside>
 </section>
 
-<!-- 27 日报 + 资产 -->
+<!-- 28 日报 + 资产 -->
 <section class="slide" data-sec="模块一 · 工作系统">
   <div class="inner">
     <div class="eb rv">讲 ② ③ · Daily Report & Assets</div>
@@ -1487,7 +1517,7 @@ strong{color:var(--ink);font-weight:700}
   <aside class="notes">日报的本质是信息提取：从聊天记录、邮件、日历里提取出完成了什么、做了什么决策、还有什么待办、有什么风险。资产整理的本质是复用：统一命名、打标签、保留版本，把好用的提示词和格式沉淀成 Skill，下一次直接调用。</aside>
 </section>
 
-<!-- 28 日报 WorkBuddy 连接器与定时 -->
+<!-- 29 日报 WorkBuddy 连接器与定时 -->
 <section class="slide" data-sec="模块一 · 工作系统">
   <div class="inner">
     <div class="eb rv">讲 ② · 邮件日报 · WorkBuddy 连接器与定时任务</div>
@@ -1505,7 +1535,7 @@ strong{color:var(--ink);font-weight:700}
   <aside class="notes">日报具体怎么配，用 WorkBuddy。它在我们这套系统里负责连接，最常用的就是连接器和定时任务。左边是连接器页面，在左栏「专家·技能·连接器」里，可以看到 QQ 邮箱、企业微信、腾讯文档、腾讯会议、飞书、钉钉这些。QQ 邮箱用手机 App 扫码授权，授权后它能读近一个月的邮件，也能代你发邮件，所以我们用测试邮箱，不用公司邮箱。右边是新建定时任务的窗口：名称、提示词、工作空间、权限、重复频率、时间、有效期，左下角有个「消息推送到企业微信」的开关。课上就配三步：第一，连上 QQ 测试邮箱。第二，打开推送开关，用企业微信扫码绑定机器人，绑定后一定要在企业微信里给这个机器人发一条消息，否则它找不到推给谁。第三，建一个每天 8 点半的任务：汇总昨天的邮件，分类、摘要、起草回复，提示词里写明只起草不发送。注意两点：本机的定时任务要电脑开着、客户端开着；它默认权限下遇到敏感操作会停下来等你确认，人不在电脑前就卡住了，所以官方建议定时任务用完全访问权限，我们的做法是给它一个独立的工作空间，再在提示词里限制它不发送。</aside>
 </section>
 
-<!-- 29 作业一 -->
+<!-- 30 作业一 -->
 <section class="slide" data-sec="模块一 · 工作系统">
   <div class="inner">
     <div class="ws">
@@ -1538,7 +1568,7 @@ strong{color:var(--ink);font-weight:700}
   <aside class="notes">作业一分四步，整理的都是你业务卡片上那个业务的资料。第一步，用 Codex 识别、改名、归类并生成索引。第二步，在整理好的资料上提三个关于你业务的真实问题，检查答案能不能找到出处；再用 Grokbot 补一两条客户或竞品的公开资料。第三步，用 WorkBuddy 配置邮件助理：连接器里扫码连上 QQ 测试邮箱，再按上一页建一个每天 08:30 的定时任务，分类、摘要、起草回复，推到企业微信；提示词写明只起草不发送，发送前一定由你确认。第四步，从知识库里挑出客户最常问的五个问题和答案，存成 FAQ 素材，作业四做网站时直接用。基础版用测试邮箱，企业邮箱不建议现场授权；没带资料的同学先用讲师准备的脱敏示例文件夹。做得快的同学走进阶：把整理好的知识库按飞书 6 步导入飞书，开知识问答，用一个同事的账号测一遍权限。</aside>
 </section>
 
-<!-- 30 模块二 -->
+<!-- 31 模块二 -->
 <section class="slide" data-sec="模块二 · 内容表达">
   <div class="bignum">02</div>
   <div class="inner">
@@ -1554,7 +1584,7 @@ strong{color:var(--ink);font-weight:700}
   <aside class="notes">第二个模块是内容表达。核心是先确定观点和受众，再选择表达形式。我们会讲 PPT 与商业表达、海报与视觉资产、口播与短视频三部分，配两个现场作业：为你的业务做 PPT 加海报，以及一条业务口播视频。内容全部来自你的业务卡片和知识库，海报的主视觉和口播视频，明天都会放进你的网站。</aside>
 </section>
 
-<!-- 31 PPT -->
+<!-- 32 PPT -->
 <section class="slide" data-sec="模块二 · 内容表达">
   <div class="inner">
     <div class="eb rv">讲 ① · PPT & Business Storytelling</div>
@@ -1584,7 +1614,7 @@ strong{color:var(--ink);font-weight:700}
   <aside class="notes">一份 PPT 不是把文字放到页面上。先确定观众、一句话结论和页面顺序，再写讲稿。每页只承担一个动作：解释、比较、证明或推动决定。AI 生成之后要做两轮修改：第一轮看逻辑，第二轮看表达。讲稿不能把页面上的字再读一遍。</aside>
 </section>
 
-<!-- 32 海报 -->
+<!-- 33 海报 -->
 <section class="slide" data-sec="模块二 · 内容表达">
   <div class="inner">
     <div class="poster-wrap">
@@ -1608,7 +1638,7 @@ strong{color:var(--ink);font-weight:700}
   <aside class="notes">这张海报就是用 AI 做的。但做法不是让模型直接“画一张图”，而是先确定信息层级：主标题、关键信息、价值点、信任与行动，再用视觉模型补足材质和氛围，排版由我们掌控。做完之后，把品牌色、字体、主视觉和版式沉淀成资产库，下一张直接复用。</aside>
 </section>
 
-<!-- 33 作业二 -->
+<!-- 34 作业二 -->
 <section class="slide" data-sec="模块二 · 内容表达">
   <div class="inner">
     <div class="ws">
@@ -1640,7 +1670,7 @@ strong{color:var(--ink);font-weight:700}
   <aside class="notes">作业二，主题就是你自己的业务。先从业务卡片出发，让 Grokbot 给出三个角度，选一个定下观众和一句话结论；再用 Codex 生成 5 页 PPT 和讲稿，页面上的数据和案例只能来自知识库。改两轮，第一轮看逻辑，第二轮看表达，可以发到小组群里让同学挑毛病。然后用同一个主题做一张海报，先排信息层级再生成视觉，最后把品牌色、字体和主视觉存进 assets 文件夹，明天网站首屏直接用。基础版用海报模板，卡住了就用讲师提供的 PPT 和海报模板 Skill。</aside>
 </section>
 
-<!-- 34 口播短视频 -->
+<!-- 35 口播短视频 -->
 <section class="slide" data-sec="模块二 · 内容表达">
   <div class="inner">
     <div class="eb rv">讲 ③ · Voice-over & Short Video</div>
@@ -1665,7 +1695,7 @@ strong{color:var(--ink);font-weight:700}
   <aside class="notes">第二天上午先讲口播。短视频的结构可以拆成五段：钩子、冲突、证据或方法、转折、行动。前三秒决定留存，最后几秒决定转化。制作上是一条流水线：选题、口播稿、数字人或实拍、字幕剪辑、发布复盘。避免 AI 味的关键是用你自己的案例和口吻。</aside>
 </section>
 
-<!-- 35 作业三 -->
+<!-- 36 作业三 -->
 <section class="slide" data-sec="模块二 · 内容表达">
   <div class="inner">
     <div class="ws">
@@ -1697,7 +1727,7 @@ strong{color:var(--ink);font-weight:700}
   <aside class="notes">作业三，每个人为自己的业务做一条 60 秒口播视频。先让 Grokbot 给出三个开头钩子，选一个，再按钩子、冲突、证据、转折、行动五段写口播稿，最后的“行动”要指向你明天上线的网站。然后设置形象和声音，素材必须有授权。接着生成视频、配字幕、剪节奏，最后把标题、封面和发布文案一次准备好。基础版用平台授权形象和合成配音；如果数字人平台排队或出问题，就改用图片或录屏加配音加字幕，用剪辑工具合成，一样能交付。</aside>
 </section>
 
-<!-- 36 模块三 -->
+<!-- 37 模块三 -->
 <section class="slide" data-sec="模块三 · 业务增长">
   <div class="bignum">03</div>
   <div class="inner">
@@ -1713,7 +1743,7 @@ strong{color:var(--ink);font-weight:700}
   <aside class="notes">第三个模块是业务增长。我们不从“做一个很酷的网站”开始，而是从一个真实业务入口开始：客户怎么找到你，怎么联系你，怎么付钱，怎么交付。前面三个作业的产出，海报主视觉、口播视频、FAQ 素材，在这里全部组装进一个网站，并真正部署上线。</aside>
 </section>
 
-<!-- 37 GEO SEO -->
+<!-- 38 GEO SEO -->
 <section class="slide" data-sec="模块三 · 业务增长">
   <div class="inner">
     <div class="eb rv">讲 ① · GEO & SEO</div>
@@ -1726,7 +1756,7 @@ strong{color:var(--ink);font-weight:700}
           <dt>客户在哪</dt><dd>百度、Google、Bing 的搜索框</dd>
           <dt>客户看到什么</dt><dd>一排链接，点进来才算数</dd>
           <dt>能带来什么</dt><dd class="gain">搜「地区 + 品类」时<strong>看到你</strong>，长期免费</dd>
-          <dt>怎么做</dt><dd>8 项基本功 → 第 40 页</dd>
+          <dt>怎么做</dt><dd>8 项基本功 → 第 41 页</dd>
         </dl>
       </div>
       <div>
@@ -1736,7 +1766,7 @@ strong{color:var(--ink);font-weight:700}
           <dt>客户在哪</dt><dd>直接问豆包、DeepSeek、元宝</dd>
           <dt>客户看到什么</dt><dd>一段答案，推荐了几家</dd>
           <dt>能带来什么</dt><dd class="gain">问「哪家靠谱」时<strong>你进名单</strong>，还被说对</dd>
-          <dt>怎么做</dt><dd>GEO 5 步 → 第 42 页</dd>
+          <dt>怎么做</dt><dd>GEO 5 步 → 第 43 页</dd>
         </dl>
       </div>
     </div>
@@ -1745,7 +1775,7 @@ strong{color:var(--ink);font-weight:700}
   <aside class="notes">被找到有两条路。SEO 管搜索引擎：客户在百度、Google 的搜索框里搜，看到一排链接，点进你的网站才算数；做好了，有人搜“地区加品类”的时候能看到你，这部分流量长期不用付费。GEO 管 AI 回答：客户直接问豆包、DeepSeek、元宝，看到的是一段写好的答案，里面推荐了几家；做好了，客户问“哪家靠谱”时你在候选名单里，而且公司是做什么的、在哪、有什么产品，被说对了。为什么现在要做：中国互联网络信息中心 2026 年 9 月的报告，生成式 AI 用户超过 7 亿，76% 的人用它来回答问题；QuestMobile 统计 AI 搜索每月被使用 38.5 亿次。你的客户已经在问 AI 了，问题是 AI 说到你的时候说了什么。两件事的地基都是一个结构清楚、内容真实、持续更新的网站，也就是作业四要做的东西。后面三页分别讲：AI 从哪里找答案、SEO 怎么做、GEO 怎么做。</aside>
 </section>
 
-<!-- 38 AI 信源 -->
+<!-- 39 AI 信源 -->
 <section class="slide" data-sec="模块三 · 业务增长">
   <div class="inner">
     <div class="eb rv">讲 ① · AI 从哪里找答案</div>
@@ -1773,7 +1803,7 @@ strong{color:var(--ink);font-weight:700}
   <aside class="notes">GEO 第一件事是搞清楚 AI 从哪里找答案。第三方机构 2026 年做了几百万次提问、统计了几千万条引用来源，结论是每家 AI 偏好差别很大。豆包最爱引用抖音和今日头条，两者合计接近一半，官网只占 6% 到 10%，所以主攻豆包要在字节系发真实场景内容。元宝偏微信公众号，官网占 27%，官网和公众号要一起做。DeepSeek 的来源最分散，官网占三分之一，是最吃官网质量的平台。Kimi 偏长文档、白皮书和研报。千问和文心更看权威媒体，文心偏百度自家的百家号和百科。先想清楚你的客户主要用哪个 AI，再决定把力气花在哪。有一点是共同的：各家都会拿百度百科、企查查和官网交叉核对，公司名、地址、电话、主营如果几处写得不一样，AI 就不敢确定，或者说错。这些数字来自第三方监测，平台也在不断调整，看方向就好。</aside>
 </section>
 
-<!-- 39 GEO 实测 秘塔 -->
+<!-- 40 GEO 实测 秘塔 -->
 <section class="slide" data-sec="模块三 · 业务增长">
   <div class="inner">
     <div class="eb rv">讲 ① · 实测 · 2026.10.27</div>
@@ -1801,7 +1831,7 @@ strong{color:var(--ink);font-weight:700}
   <aside class="notes">光讲方法不够，我拿自己的样例实测了一次。今天，2026 年 10 月 27 日，在秘塔 AI 搜索里问了两道题。第一道是品类题：“佛山有哪些户外移动空调生产厂家”。好消息是 AI 找到了佛山瀚泱智能制造，就是 HAFYOUNG 的公司；问题是品牌写成了 HYZ，所有信息都来自 1688 的商品页，官网一次都没被引用。第二道是点名题：“HAFYOUNG SpaceCool 是哪家公司的品牌”。AI 认出了 HAFYOUNG 属于佛山瀚泱，但它把 SpaceCool 当成了日本一家叫 SPACECOOL 的公司，那家做辐射冷却材料，然后得出结论说这是两个不同公司的品牌。这就是 GEO 第二步要写事实底稿的原因：AI 不知道 HAFYOUNG 和 SpaceCool 是什么关系，它就自己猜。修法是在官网上把这句话写清楚，FAQ、llms.txt、结构化数据三处一致，再把 1688 上的品牌名统一。说明一点：这两道题是新官网上线前问的。上线当晚我又问了一遍，答案还没变，后面讲师样例最后一页会讲为什么。下一页看具体怎么写。</aside>
 </section>
 
-<!-- 40 SEO 8 项 -->
+<!-- 41 SEO 8 项 -->
 <section class="slide" data-sec="模块三 · 业务增长">
   <div class="inner">
     <div class="eb rv">讲 ① · SEO 怎么做</div>
@@ -1821,7 +1851,7 @@ strong{color:var(--ink);font-weight:700}
   <aside class="notes">SEO 不神秘，网站上线前查这 8 项就够了。一，每一页都有自己的标题和描述，写清地区、品类、品牌，比如“佛山户外移动空调工厂，HAFYOUNG”。二，每页只有一个 H1，下面的 H2 按客户的问题分段，搜索引擎和 AI 都靠这个判断页面讲什么。三，手机能打开、三秒内加载完，图片压缩，视频先放封面。四，HTTPS、sitemap 和 robots 这三样要有，robots 别把搜索引擎和 AI 的爬虫挡在外面。五，加结构化数据，就是在网页里用固定格式写明“这是一家公司、这是一个产品、这是常见问题”，机器不用猜。六，关键信息写成文字，参数和电话只放在图片里，机器读不到。七，主动提交收录：国内用百度搜索资源平台，做海外用 Google Search Console 和 Bing。八，页面之间互相链接，联系方式全站一致。这 8 项不用自己一项项查，把下面这句话交给 Codex，它会逐项检查、直接改，改完你看一遍就行。作业四网站做好以后就跑这一句。</aside>
 </section>
 
-<!-- 41 落到文件 -->
+<!-- 42 落到文件 -->
 <section class="slide" data-sec="模块三 · 业务增长">
   <div class="inner">
     <div class="eb rv">讲 ① · 落到网站文件里</div>
@@ -1868,7 +1898,7 @@ is its product series.</span></pre></div>
   <aside class="notes">上一页 AI 搞混的那句话，新官网里写了三处，这是真实文件里的内容。左边是页面上的 FAQ 区块，给客户看，第一问就是“What is SpaceCool”，答案写明 SpaceCool 是 HAFYOUNG 做的便携户外空调系列，HAFYOUNG 的法定名称是佛山瀚泱。中间是结构化数据，给搜索引擎看：Organization 里写了品牌名、法定名称、中文名和旗下品牌 SpaceCool；FAQPage 把同一个问答按固定格式再写一遍。右边是两份站点文件：robots.txt 告诉爬虫可以抓、sitemap 在哪；llms.txt 是一份写给 AI 的网站说明，最后一句直接写“HAFYOUNG 是公司，SpaceCool 是它的产品系列”。llms.txt 现在还不是所有 AI 都会读，但写一份只要几分钟，顺手就做了。三处说的是同一件事，口径完全一致，AI 不用再猜。这些不用自己写代码，作业一整理的 FAQ 素材交给 Codex，一句话就能生成。</aside>
 </section>
 
-<!-- 42 GEO 5 步 -->
+<!-- 43 GEO 5 步 -->
 <section class="slide" data-sec="模块三 · 业务增长">
   <div class="inner">
     <div class="eb rv">讲 ① · GEO 怎么做</div>
@@ -1877,7 +1907,7 @@ is its product series.</span></pre></div>
       <div class="panel rv"><span class="n">STEP 01</span><h4>测现状</h4><p>20 个客户会问的问题，分<em>点名</em>、<em>品类</em>、<em>比较</em>几类，各家 AI 问一遍</p><div class="ai"><img class="lg" src="assets/logos/grokbot.svg" alt="">Grokbot 批量跑，存成表格</div></div>
       <div class="panel rv"><span class="n">STEP 02</span><h4>写事实底稿</h4><p>名称、主体、主营、<em>不做什么</em>、资质、案例、联系方式</p><div class="ai"><img class="lg" src="assets/logos/codex.svg" alt="">从作业一知识库里提取</div></div>
       <div class="panel rv"><span class="n">STEP 03</span><h4>补官网</h4><p>FAQ 用客户原话：问题 → 结论 → 依据 → 数据</p><div class="ai"><img class="lg" src="assets/logos/codex.svg" alt="">Codex 按这个格式改写</div></div>
-      <div class="panel rv"><span class="n">STEP 04</span><h4>铺信源</h4><p>按 AI 爱引用的平台铺，名称和简介都和底稿一致 → 第 50 页</p><div class="ai"><img class="lg" src="assets/logos/workbuddy.svg" alt="">一篇稿改成各平台版本</div></div>
+      <div class="panel rv"><span class="n">STEP 04</span><h4>铺信源</h4><p>按 AI 爱引用的平台铺，名称和简介都和底稿一致 → 第 51 页</p><div class="ai"><img class="lg" src="assets/logos/workbuddy.svg" alt="">一篇稿改成各平台版本</div></div>
       <div class="panel core rv"><span class="n">STEP 05</span><h4>复测</h4><p>同一组问题每月再问：<em>提到你没有</em>、<em>说得对不对</em>、<em>引用了谁</em></p><div class="ai"><span class="timer">每周一</span>交给 Grokbot 竞品观察员</div></div>
     </div>
     <div class="strip rv mt-m"><span class="tag">别买</span><span>「7 天上豆包推荐」的服务。没人能控制 AI 推荐谁，只能让它<strong>更容易找到你、核实你</strong>。</span></div>
@@ -1885,7 +1915,7 @@ is its product series.</span></pre></div>
   <aside class="notes">GEO 分 5 步，每月循环一次。第一步测现状：写 20 个客户真会问的问题，分四类，点名题，比如“某某公司靠谱吗”；品类题，比如“佛山有哪些户外空调工厂”；比较题；追问来源题，“你这个说法出自哪里”。在豆包、DeepSeek、元宝、Kimi 各问一遍，把回答和引用来源都存下来，这一步交给 Grokbot 批量跑。第二步写事实底稿：公司标准名称、主体、主营什么、不做什么、服务哪些地区、资质、案例、联系方式，所有公开页面都照这份写，作业一的知识库里基本都有。第三步补官网：每一页只负责一件事，FAQ 用客户的原话，案例写清楚数字和条件，写法是问题、结论、依据、数据。第四步铺信源：按 AI 的引用偏好选平台，同时把 1688、社交媒体、百度百科、企查查、地图上的信息改成和底稿一致，这部分放到作业四之后专门讲。第五步复测：每月用同一组问题再问一遍，看有没有提到你、说得对不对、引用了谁，哪里说错就回第二、三步改。复测可以交给作业四建的竞品观察员，每周一顺手跑。最后提醒：承诺七天上豆包推荐的服务别买，没人能控制 AI 推荐谁。</aside>
 </section>
 
-<!-- 43 网站部署 -->
+<!-- 44 网站部署 -->
 <section class="slide" data-sec="模块三 · 业务增长">
   <div class="inner">
     <div class="eb rv">讲 ② · Build & Deploy</div>
@@ -1908,7 +1938,7 @@ is its product series.</span></pre></div>
   <aside class="notes">做网站的完整路径是六步：写清需求、设计页面结构、让 AI 写代码、本地预览修改、部署上线、绑定域名和表单。这一页讲完，我现场从头到尾演示一次部署，下午大家照着做。今天现场用静态托管就能几分钟上线；需要后台和数据库时再用云服务器。面向国内用户要注意两点：海外托管平台在国内访问可能不稳定，现场用我们课前实测过的平台；使用国内服务器并绑定域名需要 ICP 备案，所以今天不要求绑定域名。</aside>
 </section>
 
-<!-- 44 讲师样例 官网前后对比 -->
+<!-- 45 讲师样例 官网前后对比 -->
 <section class="slide" data-sec="模块三 · 讲师样例">
   <div class="inner">
     <div class="eb rv">讲师样例 · HAFYOUNG 官网改版</div>
@@ -1937,7 +1967,7 @@ is its product series.</span></pre></div>
   <aside class="notes">下午动手之前，先看一个我自己做的真实样例：佛山一家做便携空调的工厂 HAFYOUNG 的官网。左边是线上的原网站，截图取自 2026 年 10 月 27 日：一打开就是一个弹窗表单，桌面端挡住首屏，手机上整屏都被盖住，客户第一眼看不到产品；页面标题只有公司中文名，而这是一个英文站，也没有页面描述；整页唯一的 H1 是底部的“Questions or Consulting”，搜索引擎和 AI 都抓不到它到底卖什么。右边是用 AI 重做的版本：首屏直接是产品、三个卖点和四个型号；标题和描述写清楚品牌和品类；H1 就是一句话卖点，下面嵌入一条 44 秒宣传片。这就是作业四要做的事：先把业务讲清楚，再让客户和 AI 都能找到你。</aside>
 </section>
 
-<!-- 45 讲师样例 SEO GEO 分数 -->
+<!-- 46 讲师样例 SEO GEO 分数 -->
 <section class="slide" data-sec="模块三 · 讲师样例">
   <div class="inner">
     <div class="eb rv">讲师样例 · 按清单改完之后</div>
@@ -1956,7 +1986,7 @@ is its product series.</span></pre></div>
   <aside class="notes">回到 HAFYOUNG，按刚才的清单改完以后是这个结果。左边是打分：SEO 从 39 分到 80 分，GEO 从 38 分到 73 分。这张评分表是按常见审核项自己定的，两轮用同一张表，用来看前后变化，不是行业统一标准。右边更直观，是在 Google 搜索结果里的样子：旧站标题只有中文公司名，没有描述，海外买家看不懂；更糟的是旧站一个分类页的标题被建站平台的 AI 写成了“宠物用品”。新站标题写清楚了品类、品牌和 OEM/ODM，描述里列出四个型号和产地。下面三个数：Google 官方测速工具 Lighthouse，手机端性能分从 29 到 68，电脑端从 28 到 93；SEO 分手机和电脑都到了 100；旧站的 26 个网址全部 301 跳到新站对应的位置，原来已经被收录的页面不会丢。</aside>
 </section>
 
-<!-- 46 讲师样例 AI 能答几题 -->
+<!-- 47 讲师样例 AI 能答几题 -->
 <section class="slide" data-sec="模块三 · 讲师样例">
   <div class="inner">
     <div class="eb rv">讲师样例 · 买家的问题，网站答不答得上</div>
@@ -1970,7 +2000,7 @@ is its product series.</span></pre></div>
   <aside class="notes">这一页看 GEO 最关心的问题：买家问的问题，网站上有没有一句可以直接拿来回答的话。左边是 9 个海外买家常问的问题，比如 HAFYOUNG 是谁、SpaceCool 是什么、POG-2 要不要排水管、哪几个型号能制热、支不支持 OEM。旧站只有“怎么询价”这一题能在网站上找到完整答案，新站能答 7 题，答案就是上一页 FAQ 里写的那些话。右边是 10 个海外买家常用的搜索词，看它们出现在网站的什么位置：旧站 4 个出现在标题、描述这些重要位置，新站 10 个全部做到。要说明的是，这两项测的是网站本身有没有给出信号，不等于实际排名，排名还要看外链、域名历史和竞争对手。最后两题，制冷量和认证，新旧站都答不上来，因为网站上没有任何参数和认证数据，这只能企业自己提供。这也是给大家的提醒：AI 能帮你把结构做满，事实得你自己给。</aside>
 </section>
 
-<!-- 47 讲师样例 已上线 -->
+<!-- 48 讲师样例 已上线 -->
 <section class="slide" data-sec="模块三 · 讲师样例">
   <div class="inner">
     <div class="eb rv">讲师样例 · 已上线</div>
@@ -1994,7 +2024,7 @@ is its product series.</span></pre></div>
   <aside class="notes">前面几页讲的东西，最后都落在这个网址上：www.hafyoung-cooling.com，课堂上可以直接打开。左边是首页。右边是同一页的四个语言版本，中文、日文、阿拉伯文、德文，一共 9 种语言，每种语言有自己的网址，页面里用 hreflang 互相指向，阿拉伯文是从右往左排的。下面三个地方可以现场演示：在网址后面加 /llms.txt，就是专门写给 AI 看的那一页，公司是谁、四个型号、常见问题，一句话写清楚 HAFYOUNG 是公司、SpaceCool 是产品系列；加 /sitemap.xml，是交给 Google 和 Bing 的网址清单；再随便打开一个旧站的产品网址，它会 301 跳到新站对应的型号，原来的收录不会丢。注意，网站上线不等于 AI 马上知道，AI 搜索重新抓取要几天到几周，所以上线后按 GEO 第 5 步每周复测。</aside>
 </section>
 
-<!-- 48 讲师样例 宣传片 -->
+<!-- 49 讲师样例 宣传片 -->
 <section class="slide" data-sec="模块三 · 讲师样例">
   <div class="inner">
     <div class="eb rv">讲师样例 · Brand Film</div>
@@ -2016,7 +2046,7 @@ is its product series.</span></pre></div>
   <aside class="notes">这是嵌在新官网首屏下方的宣传片，44 秒，没有旁白。可以先放一遍。做法和作业三是同一条流程，只是形式从口播换成了品牌片：第一步，先写三个结构备选，产品规格表、一天的时间表、“网格与例外”，最后选了第三个，用一个自由移动的蓝色方块代表冷风，穿过严格的制造网格；第二步，画面上出现的所有事实只来自官网文案，不编造参数，这就是可靠工作指令里的“约束”；第三步，写分镜表和节拍表，每个画面切换都卡在音乐节拍上；第四步，配乐和音效也是代码合成的，没有采样和录音；最后，视频放回网站首屏下方，也能单独发到社媒。产品图、工厂图和 Logo 用的是企业自己的素材，并经过企业确认。</aside>
 </section>
 
-<!-- 49 作业四 -->
+<!-- 50 作业四 -->
 <section class="slide" data-sec="模块三 · 业务增长">
   <div class="inner">
     <div class="ws">
@@ -2048,7 +2078,7 @@ is its product series.</span></pre></div>
   <aside class="notes">作业四，把前面所有成果组装成你的业务网站，并真正部署上线。先写清楚用户是谁、来做什么、我们要收集什么；再让 Codex 生成首页和表单：首屏用作业二的主视觉，中间嵌入作业三的口播视频，FAQ 直接用作业一整理的素材，可以让 Grokbot 帮你把 FAQ 改得更像客户会问的问题。本地预览改两轮，再把 SEO 8 项那句话交给 Codex 自查修复，然后部署上线，部署要联网，Codex 会弹出请求，你看清楚再批准；表单线索通过 WorkBuddy 推到企业微信。做完再在 Grokbot 里建一个「竞品观察员」，把 GEO 第一步写的 20 个问题交给它，设成每周一 9 点自动巡检竞品官网、在各家 AI 里复测；在 Codex 里设每周五更新知识库索引。到这里，串联表里的三个定时任务就都配齐了。最后的检查很简单：用手机打开你的网址，提交一条测试线索，看看你能不能收到。卡住的同学直接用讲师准备的网站模板仓库，只替换内容。</aside>
 </section>
 
-<!-- 50 铺信源 五类平台 -->
+<!-- 51 铺信源 五类平台 -->
 <section class="slide" data-sec="模块三 · 业务增长">
   <div class="inner">
     <div class="eb rv">讲 ③ · 网站之外</div>
@@ -2060,7 +2090,7 @@ is its product series.</span></pre></div>
       <div class="mod"><b>短视频 · 资讯</b></div><div class="pf">抖音 · 今日头条 · 视频号</div>
       <div>豆包近一半引用来自这里</div><div class="do">企业号认证，发场景和测评</div>
       <div class="mod"><b>图文 · 问答</b></div><div class="pf">公众号 · 小红书 · 知乎</div>
-      <div>客户搜口碑；元宝偏公众号</div><div class="do">FAQ 和案例改写成文章 <a>→ 第 52 页</a></div>
+      <div>客户搜口碑；元宝偏公众号</div><div class="do">FAQ 和案例改写成文章 <a>→ 第 53 页</a></div>
       <div class="mod"><b>百科 · 企业信息</b></div><div class="pf">百度百科 · 百家号 · 企查查</div>
       <div>客户和 AI 拿来核实你</div><div class="do">和事实底稿逐字核对</div>
       <div class="mod"><b>地图 · 海外</b></div><div class="pf">高德 · 大众点评｜LinkedIn · YouTube</div>
@@ -2071,7 +2101,7 @@ is its product series.</span></pre></div>
   <aside class="notes">网站上线了，但 GEO 不只是官网。客户和 AI 认识你，至少经过五类平台。第一类，B2B 平台：1688、阿里巴巴国际站、中国制造网，采购商在这比价找工厂，AI 也经常直接引用商品页，HAFYOUNG 就是例子，下一页细讲。第二类，短视频和资讯：抖音、今日头条、视频号，豆包的引用接近一半来自抖音和头条，先做企业号认证，发工厂、使用场景、测评这类真实内容。第三类，图文和问答：公众号、小红书、知乎，客户在这搜口碑做决定，元宝偏公众号，把 FAQ 和案例改写成文章、笔记和回答。第四类，百科和企业信息：百度百科、百家号、企查查，客户和 AI 都拿它核实你是不是真的，词条和工商信息要和事实底稿逐字对一遍。第五类，地图和海外：开门店的做高德、大众点评；做外贸的做 LinkedIn、YouTube，然后在官网的结构化数据里用 sameAs 把这些账号链起来，AI 就知道这些都是同一家公司。不用五类都做，按你的客户在哪、客户用哪个 AI 来选。但有一条必须做到：名称、简介、官网链接、联系方式，所有平台一字不差。</aside>
 </section>
 
-<!-- 51 1688 平台店铺 -->
+<!-- 52 1688 平台店铺 -->
 <section class="slide" data-sec="模块三 · 业务增长">
   <div class="inner">
     <div class="eb rv">讲 ③ · B2B 平台</div>
@@ -2099,7 +2129,7 @@ is its product series.</span></pre></div>
   <aside class="notes">很多工厂老板最在意的其实是 1688 和国际站。HAFYOUNG 的实测说明了一件事：秘塔回答“佛山有哪些户外移动空调厂家”时，信息全部来自 1688 的商品页。店里品牌写的是 HYZ，AI 就写 HYZ；官网写的是 HAFYOUNG，它根本没读到。平台上怎么写，AI 嘴里的你就是什么样。另外官网也缺了 sameAs，没有链到国际站、LinkedIn、YouTube，审计里扣了大约 5 分。右边是 B2B 店铺的 8 项：第一，公司名和品牌名跟官网、事实底稿一字不差。第二，标题写品类词加核心卖点加型号，别把同一个词重复堆十遍。第三，类目选准，属性全部填满，平台的搜索和 AI 读的都是这些结构化字段。第四，主图要有白底产品图、使用场景、细节和工厂，再加一条主图视频，作业三的口播或宣传片剪一版就能用。第五，详情页把参数表和常见问答写成文字放在前面，只做成长图的话，平台搜索和 AI 都看不见里面的字。第六，店铺简介写清谁、做什么、在哪，和官网用同一句话。第七，认证、验厂报告、产线视频这些工厂实力材料要上传，平台的工厂类标识按它的规则去申请。第八，回复速度、发货时效、复购会影响站内排序，这部分靠运营，AI 帮不了你偷懒。</aside>
 </section>
 
-<!-- 52 社媒 一稿多发 -->
+<!-- 53 社媒 一稿多发 -->
 <section class="slide" data-sec="模块三 · 业务增长">
   <div class="inner">
     <div class="eb rv">讲 ③ · 社交媒体</div>
@@ -2126,7 +2156,7 @@ is its product series.</span></pre></div>
   <aside class="notes">社交媒体不用每个平台从头写，前面作业里的素材就够用。左边是三份素材：作业三的口播视频、作业一的 FAQ、业务卡片里的真实案例；上面是四类平台。口播视频：抖音和视频号直接发原片，标题和文案前两行放客户会搜的词；小红书截 6 张关键画面做图文，标题写成客户的问题；公众号和知乎把口播稿扩成长文，用问题、结论、依据、数据的写法；做外贸的加英文字幕发 LinkedIn 和 YouTube。FAQ 五个问题：每问一条 30 秒短视频、一篇笔记，公众号合成一篇“采购前要问的 5 个问题”，知乎去对应的问题下面逐条回答。案例：拍现场和交付过程，小红书放前后对比图和数字，公众号写长文。改写这件事交给 Codex，分发和归档交给 WorkBuddy。三条规则：第一，账号资料一套，名称、头像、简介、认证、官网链接各平台一样。第二，每条内容都能单独成立，写清谁、做什么、在哪、多少，AI 只摘一句话也不会说错。第三，抖音、小红书都有站内搜索，这本身就是 SEO，让 Grokbot 查各平台的搜索词，放进标题和前两行。发之前照样过一遍广告法用词，用了 AI 生成的内容要打标识。</aside>
 </section>
 
-<!-- 53 获客 客服 收费 -->
+<!-- 54 获客 客服 收费 -->
 <section class="slide" data-sec="模块三 · 业务增长">
   <div class="inner">
     <div class="eb rv">讲 ③ · Leads → Support → Revenue</div>
@@ -2146,7 +2176,7 @@ is its product series.</span></pre></div>
   <aside class="notes">铺信源是让更多客户和 AI 找到你；找到之后怎么变成生意，我们就拿大家刚上线的网站来讲。网站只是入口，业务增长是一条闭环：获客、承接、成交、交付、复盘。获客：用作业零的业务卡片做客户画像，用 Grokbot 查到的公开资料做带证据的线索池，再写个性化邮件，把人引到你的网址。承接：自动客服用作业一做的知识库来回答，复杂问题转人工。客服上线不是一次性的：每周把没答上、转了人工的问题捞出来，AI 起草、负责人审核以后补进问答表，再把测试题重跑一遍，这样会越用越准。具体做法在课后的进阶作业里。成交和交付要有报价、合同、收款和交付清单。所有自动化都要有护栏：人工审核、退订限速、一键暂停、留记录。请大家在自己的网站旁边，画出这五步里下一步最该补的是哪一环。</aside>
 </section>
 
-<!-- 54 获客实例 Outlook 操作电脑 -->
+<!-- 55 获客实例 Outlook 操作电脑 -->
 <section class="slide" data-sec="模块三 · 业务增长">
   <div class="inner">
     <div class="eb rv">讲 ③ · 获客实例 · Computer Use</div>
@@ -2171,7 +2201,7 @@ is its product series.</span></pre></div>
   <aside class="notes">上一页闭环的第一步是获客，这一页看一个真实例子：让 AI 直接操作电脑上的 Outlook，把一批开发信发出去。用的是智能体的 Computer Use 能力，也就是操作电脑：它看屏幕截图，自己移动鼠标、点按钮、打字，跟人坐在电脑前操作一样。左边是 Outlook 的“已发送”，收件人都是德国的空调租赁、经销和批发公司，12 点 17 分到 20 分，一封接一封发出去。邮件是德语写的，大意是：我们在柏林有一批移动空调库存，经过检验、原包装，总共约 85 立方米，想找长期合作的经销伙伴，而不是低价清仓；合作方式有三种，整批或部分接手、寄售代销、或者走 B2B、线上和租赁渠道；产品清单、CE 认证和物流信息在简单沟通后提供，也可以来看货。做法分三步：先交代任务，给它一张名单表和一封范本；然后它自己打开 Outlook，新建邮件、填收件人和主题、贴正文、点发送；最后它到已发送里逐封核对。为什么不用邮件接口或者群发平台？因为这样不用做任何配置，发出去的就是你自己邮箱、你自己的签名，客户回信直接进你的收件箱；没有接口的老系统，比如 ERP、报关系统，也能用同样的方法操作。代价是比接口慢，电脑要一直开着，所以前两封一定要盯着它发，确认没填错再放手。护栏和上一页一样：先发一封给自己看，每批限量、间隔发送，别一次轰几百封，容易被当成垃圾邮件。发往德国和欧盟的，先确认当地对商业推广邮件的规定，那边比国内严。</aside>
 </section>
 
-<!-- 55 标准与边界 -->
+<!-- 56 标准与边界 -->
 <section class="slide" data-sec="结营">
   <div class="inner">
     <div class="eb rv">Quality Bar & Boundaries</div>
@@ -2196,7 +2226,7 @@ is its product series.</span></pre></div>
   <aside class="notes">第一天上午学的可靠工作指令，这两天每个作业都在用。展示之前，用五个标准检查一遍自己的成果包：能用、能改、能复用、能追溯、能交接。只在你的聊天窗口里有效的答案不算成果。同时记住四条红线：没有来源的判断不当事实，私密资料不进不清楚的数据流，自动化必须有暂停开关，一次成功不等于流程稳定。</aside>
 </section>
 
-<!-- 56 结营 -->
+<!-- 57 结营 -->
 <section class="slide" data-sec="结营">
   <div class="inner">
     <div class="eb rv">Wrap-up</div>
@@ -2221,7 +2251,7 @@ is its product series.</span></pre></div>
   <aside class="notes">回顾一下，两天、一个业务、四个作业，每个人带走的是一个完整的业务成果包。展示分组进行，4 到 5 人一组，每人 3 分钟，用手机打开自己的网址，回答四个问题：原来最耗时的工作是什么，搭了哪个工作流，打开网址看看现场做出了什么，未来 7 天先用在哪里。每组推选一位同学上台。一周后，我们希望大家不是“又试了几个工具”，而是已经有一个真正跑起来的工作流，网址已经发给了第一个客户。</aside>
 </section>
 
-<!-- 57 收束 -->
+<!-- 58 收束 -->
 <section class="slide cover bare" data-sec="结营">
   <div class="glow" style="opacity:.7"></div>
   <img class="lens rv" src="assets/lens-glow.png" alt="" style="opacity:.85">
@@ -2234,7 +2264,7 @@ is its product series.</span></pre></div>
   <aside class="notes">AI 不会替你决定业务，但可以把你的经验、资料和方法组织成一套可复用的系统。工具会更新，流程会迭代，但真正属于你的工作方式会越来越清楚。谢谢大家。</aside>
 </section>
 
-<!-- 58 附录 课前准备 -->
+<!-- 59 附录 课前准备 -->
 <section class="slide" data-sec="附录 · 课前准备">
   <div class="inner">
     <div class="eb rv">Before Class</div>
