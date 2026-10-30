@@ -412,6 +412,9 @@ body:hover .ctrl{opacity:1}
 .cl li>i{width:34px;height:34px;border-radius:50%;background:var(--cobalt);color:#fff;font:700 18px/34px var(--mono);text-align:center;font-style:normal}
 .cl li b{display:block;color:var(--ink);font-size:22px;font-weight:700;margin-bottom:2px}
 .cl li em{font-style:normal;color:var(--blue2)}
+.cl.big{gap:30px;padding-top:8px}
+.cl.big li{font-size:21px}
+.cl.big li b{font-size:25px;margin-bottom:4px}
 .cfg3{display:grid;grid-template-columns:1fr 1fr 1.05fr;gap:22px;flex:1}
 .cfg3 .panel{padding:30px 30px 26px;display:flex;flex-direction:column}
 .cfg3 .r{font:500 15px/1 var(--mono);letter-spacing:.2em;color:var(--blue2)}
@@ -440,6 +443,12 @@ body:hover .ctrl{opacity:1}
 .matrix .ok{color:#7ee2a8;font-weight:600}
 .matrix .warn{color:#ffb86b;font-weight:600}
 .matrix>div.hd{display:flex;align-items:center;gap:10px;font-family:inherit;font-size:19px;font-weight:700;letter-spacing:.02em;color:var(--ink)}
+.matrix.roomy{grid-template-columns:250px repeat(4,1fr);grid-template-rows:auto;grid-auto-rows:minmax(178px,auto)}
+.matrix.roomy>div{display:flex;flex-direction:column;justify-content:center;font-size:24px;padding:24px 26px}
+.matrix.roomy>div:nth-child(-n+5){font-size:16px;padding:20px 26px;justify-content:flex-start}
+.matrix.roomy .mod b{font-size:28px}
+.matrix.roomy small{font-size:17px;margin-top:8px}
+.matrix.roomy .timer{align-self:flex-start;font-size:15px;padding:6px 8px;margin:0 0 10px}
 .timer{display:inline-block;font:500 12px/1 var(--mono);letter-spacing:.08em;padding:4px 6px;border-radius:5px;background:#e8a23a;color:#1a1300;margin-right:6px;vertical-align:2px}
 .gb{display:grid;grid-template-columns:230px 1fr;height:560px;border-radius:16px;overflow:hidden;background:#fbfbfc;color:#1b1d22;font-size:15px;position:relative;box-shadow:0 30px 70px -30px rgba(0,0,0,.7)}
 .gb-side{background:#f0f1f4;padding:16px 12px;display:flex;flex-direction:column;gap:4px;border-right:1px solid #e3e5ea}
@@ -1012,7 +1021,7 @@ strong{color:var(--ink);font-weight:700}
   <div class="inner">
     <div class="eb rv">工具上手 ① · 开工前</div>
     <h2 class="h-m rv mt-s">开工前：三个工具装好、登上、连通</h2>
-    <div class="matrix c5 tl rv mt-m">
+    <div class="matrix c5 tl roomy rv mt-m">
       <div>工具</div><div>装在哪 · 怎么登录</div><div>费用</div><div>网络环境</div><div>电脑要一直开着吗</div>
       <div class="mod"><b><img class="lg" src="assets/logos/codex.svg" alt="">Codex</b><small>执行</small></div>
       <div>ChatGPT 桌面应用，切到 Codex</div>
@@ -1053,7 +1062,7 @@ strong{color:var(--ink);font-weight:700}
         </div>
         <div class="cap">OpenAI 官方演示截帧，界面以你安装的版本为准。</div>
       </div>
-      <ul class="cl rv">
+      <ul class="cl big rv">
         <li><i>1</i><div><b>左栏</b>Plugins 连外部应用；Scheduled 管定时任务</div></li>
         <li><i>2</i><div><b>对话列表</b>一件事一个对话</div></li>
         <li><i>3</i><div><b>执行过程</b>读了什么、改了什么，文件点开就看</div></li>
@@ -1189,7 +1198,7 @@ strong{color:var(--ink);font-weight:700}
   <div class="inner">
     <div class="eb rv">工具上手 ⑥ · 定时任务</div>
     <h2 class="h-m rv mt-s">让它们按时自己干活：三种定时任务</h2>
-    <div class="matrix c5 tl rv mt-m">
+    <div class="matrix c5 tl roomy rv mt-m">
       <div>工具</div><div>在哪设</div><div>电脑要开着吗</div><div>结果去哪 · 权限</div><div>这两天配这一个</div>
       <div class="mod"><b><img class="lg" src="assets/logos/codex.svg" alt="">Codex</b></div>
       <div>左栏 Scheduled → 新建</div>
@@ -1198,7 +1207,7 @@ strong{color:var(--ink);font-weight:700}
       <div class="out"><span class="timer">每周五 17:00</span>更新知识库索引</div>
       <div class="mod"><b><img class="lg" src="assets/logos/workbuddy.svg" alt="">WorkBuddy</b></div>
       <div>左栏「定时任务」→ 新建</div>
-      <div>本机要；<span class="ok">云端不用</span></div>
+      <div><span>本机要；<span class="ok">云端不用</span></span></div>
       <div>推到企业微信；只起草不发送</div>
       <div class="out"><span class="timer">每天 08:30</span>邮件和线索日报</div>
       <div class="mod"><b><img class="lg" src="assets/logos/grokbot.svg" alt="">Grokbot</b></div>
