@@ -5,6 +5,10 @@ description: 按 SEO 上线前 8 项检查 site/ 网站，逐项写通过或不�
 
 # SEO 8 项自查与修复
 
+## 一句话调用
+
+> 用 seo-check 检查 site/，不过关的直接改
+
 ## 输入
 
 - `site/`
