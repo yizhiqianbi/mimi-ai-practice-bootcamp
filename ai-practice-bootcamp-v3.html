@@ -60,11 +60,11 @@ ul{list-style:none}
 .chrome-top .sec{display:flex;align-items:center;gap:12px}
 .chrome-top .sec::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--blue)}
 .chrome-bot{position:absolute;bottom:50px;left:140px;right:140px;display:flex;justify-content:space-between;align-items:center;z-index:3}
-.ticks{display:flex;gap:5px}
-.ticks i{display:block;width:16px;height:3px;border-radius:2px;background:var(--line)}
+.ticks{display:flex;gap:4px}
+.ticks i{display:block;width:12px;height:3px;border-radius:2px;background:var(--line)}
 .ticks i.done{background:var(--dim)}
 .ticks i.now{background:var(--blue);width:34px}
-.pageno{font:500 16px/1 var(--mono);letter-spacing:.12em;color:var(--muted)}
+.pageno{white-space:nowrap;font:500 16px/1 var(--mono);letter-spacing:.12em;color:var(--muted)}
 .pageno b{color:var(--ink);font-weight:500}
 .slide.bare .chrome-top,.slide.bare .chrome-bot{display:none}
 
@@ -834,6 +834,31 @@ strong{color:var(--ink);font-weight:700}
 .c1do q{display:block;margin-top:14px;font-size:22px;line-height:1.55;color:var(--ink2);quotes:"「" "」"}
 .c1do p{margin-top:auto;padding-top:12px;border-top:1px dashed var(--line);font-size:19px;line-height:1.5;color:var(--muted)}
 .c1do p b{color:var(--blue2);font-weight:500}
+.c1s{display:grid;grid-template-columns:960px 1fr;gap:44px;flex:1;min-height:0}
+.c1s .c1q{margin-top:16px;padding:16px 22px}
+.c1s .c1q p{margin-top:8px;font-size:19px;line-height:1.55}
+.c1rt{display:flex;flex-direction:column;gap:18px;min-height:0}
+.c1rt .c1lbl{display:block;margin-bottom:10px}
+.c1f{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.c1f div{padding:9px 14px;border:1px solid var(--line);border-radius:10px;font-size:19px;line-height:1.35;background:rgba(255,255,255,.025)}
+.c1f b{display:block;font:500 13px/1 var(--mono);letter-spacing:.14em;color:var(--muted);margin-bottom:6px}
+.c1f .on2{border-color:rgba(77,123,255,.55);background:rgba(59,108,255,.1)}
+.c1kw{display:flex;flex-wrap:wrap;gap:8px}
+.c1kw code{font:500 15px/1.25 var(--mono);padding:8px 10px;border-radius:8px;border:1px solid var(--line);color:var(--ink2)}
+.c1kw code i{font-style:normal;color:var(--blue2);margin-right:6px}
+.c1ln{list-style:none}
+.c1ln li{display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:start;padding:10px 0;border-top:1px solid var(--line);font-size:19px;line-height:1.45;color:var(--ink2)}
+.c1ln li:first-child{border-top:0;padding-top:0}
+.c1ln .t{display:inline-grid;place-items:center;width:28px;height:24px;border-radius:6px;font:700 14px/1 var(--sans);color:#fff;background:#2a5cff;margin-top:1px}
+.c1ln .t.B{background:#14a37f}.c1ln .t.C{background:#6b7489}.c1ln .t.ok{background:#14a37f}.c1ln .t.q{background:#c98a12}
+.c1ln b{color:var(--ink)}
+.c1ln em{font-style:normal;color:#ffd27a}
+.c1ck{padding:13px 18px;border-radius:12px;border:1px solid rgba(255,210,122,.45);background:rgba(255,210,122,.07);color:#ffe2a6;font-size:19px;line-height:1.5}
+.c1flow{display:flex;align-items:center;flex-wrap:wrap;gap:8px;font-size:19px}
+.c1flow span{padding:8px 14px;border-radius:9px;border:1px solid rgba(77,123,255,.5);background:rgba(59,108,255,.12)}
+.c1flow i{font-style:normal;color:var(--muted)}
+.c1d{display:grid;grid-template-columns:1fr 520px;gap:44px;flex:1;min-height:0}
+.c1paper .tbd{background:#fff1b8;border:1px dashed #d19a1f;border-radius:4px;padding:1px 5px;color:#7a5a00;font-family:var(--sans)}
 </style>
 </head>
 <body>
@@ -2430,28 +2455,78 @@ is its product series.</span></pre></div>
     <div class="c1o mt-m">
       <div class="rv">
         <video class="film" controls preload="metadata" playsinline poster="assets/cases/case1-flow.jpg"><source src="assets/cases/case1-flow.mp4" type="video/mp4"></video>
-        <div class="chips mt-s"><span class="chip">86 秒 · 1920×1080</span><span class="chip">无旁白</span><span class="chip on">流程复现，名单、信、发送记录、回信都是真实材料</span></div>
+        <div class="chips mt-s"><span class="chip">3 分 09 秒 · 中文解说</span><span class="chip">每一步另有单独短片</span><span class="chip on">名单、信、发送记录、回信是真实材料</span></div>
       </div>
       <div class="rv">
         <div class="c1bg"><b>背景</b>约 85 m³ 便携空调压在柏林，换季卖不动。要找<b>有仓库</b>的商家：帮我们存货，再<b>寄售代销、分润</b>。</div>
         <ol class="c1st">
-          <li><span class="n">01</span><b>一句话交代</b><em>任务卡</em></li>
-          <li><span class="n">02</span><b>查公开资料</b><em>21 家，附来源</em></li>
-          <li><span class="n">03</span><b>分档</b><em>A 5 · B 6 · C 10</em></li>
-          <li><span class="n">04</span><b>写德语信</b><em>1 封范本，你确认</em></li>
-          <li><span class="n">05</span><b>操作 Outlook 发</b><em>约 3 分钟发完</em></li>
-          <li><span class="n">06</span><b>读回信</b><em>仓容够，想看货</em></li>
+          <li><span class="n">01</span><b>一句话交代</b><em>任务卡 + 搜索词 · 第 60 页</em></li>
+          <li><span class="n">02</span><b>查公开资料</b><em>证据卡 + 21 家 · 第 61 页</em></li>
+          <li><span class="n">03</span><b>分档</b><em>A 5 · B 6 · C 10 · 第 63 页</em></li>
+          <li><span class="n">04</span><b>写德语信</b><em>范本 + 自测 · 第 64 页</em></li>
+          <li><span class="n">05</span><b>操作 Outlook 发</b><em>约 3 分钟 · 第 66 页</em></li>
+          <li><span class="n">06</span><b>读回信</b><em>跟进表 + 草稿 · 第 68 页</em></li>
         </ol>
       </div>
     </div>
   </div>
-  <aside class="notes">前面讲了获客闭环，接下来看一个完整的真实案例，后面几页一步一个结果。背景是：我们有一批便携式移动空调，大约 85 立方米，压在柏林；换季了卖不动，自己在当地也没有仓库和销售团队。我们要找的不是买尾货的人，而是有仓库的商家：先帮我们把货存起来，再用他们的渠道卖，卖出去分润。先放一遍视频，86 秒，没有旁白，我边放边讲。一共六步：第一步，一句话把货、量、地点、想找什么样的人交代清楚；第二步，AI 查公开资料，一家家核对有没有仓库，出 21 家名单，每家都附来源；第三步，按匹配度分 A、B、C 三档；第四步，写德语开发信，先给老板审；第五步，AI 自己操作 Outlook 一封接一封发出去；第六步，回信进来，AI 读完整理成下一步。说明一下：视频是流程复现，不是实时录屏，但里面的名单、信件、发送记录和回信都是这次真实跑出来的材料，公司名和邮箱已经打码。</aside>
+  <aside class="notes">前面讲了获客闭环，接下来看一个完整的真实案例，后面几页一步一个结果。背景是：我们有一批便携式移动空调，大约 85 立方米，压在柏林；换季了卖不动，自己在当地也没有仓库和销售团队。我们要找的不是买尾货的人，而是有仓库的商家：先帮我们把货存起来，再用他们的渠道卖，卖出去分润。先放一遍视频，3 分钟，有中文解说，可以直接放；后面每一步还有一段单独的短片，放在那一步的页面上。一共六步：第一步，一句话把货、量、地点、想找什么样的人交代清楚；第二步，AI 查公开资料，一家家核对有没有仓库，出 21 家名单，每家都附来源；第三步，按匹配度分 A、B、C 三档；第四步，写德语开发信，先给老板审；第五步，AI 自己操作 Outlook 一封接一封发出去；第六步，回信进来，AI 读完整理成下一步。说明一下：视频是流程复现，不是实时录屏。名单、信件、发送记录和回信是这次真实跑出来的材料，公司名和邮箱已经打码；任务卡、搜索词、自测邮件、跟进表和回信草稿是按流程重做的中间结果，画面上标了「复现」。</aside>
 </section>
 
-<!-- 60 案例1 名单 -->
+<!-- 60 案例1 第1步 一句话 -->
 <section class="slide" data-sec="模块三 · 案例 1 获客系统">
   <div class="inner">
-    <div class="eb rv">案例 1 · 第 1–3 步结果 · Lead List</div>
+    <div class="eb rv">案例 1 · 第 1 步 · Brief</div>
+    <h2 class="h-l rv mt-s" style="font-size:54px">第 1 步：一句话，AI 拆成任务卡和搜索词</h2>
+    <div class="c1s mt-m">
+      <div class="rv">
+        <video class="film" controls preload="metadata" playsinline poster="assets/cases/case1-step1.jpg"><source src="assets/cases/case1-step1.mp4" type="video/mp4"></video>
+        <div class="c1q"><span class="lv">你说的一句话</span><p>「用 <code>lead-hunt</code>：柏林有约 85 m³ 移动空调，换季卖不动。找柏林及周边有仓库、能帮存货再分润代销的商家。只用公开资料，每家写清仓储证据和来源，分 A/B/C 档，出 Excel。先别联系。」</p></div>
+      </div>
+      <div class="c1rt rv">
+        <div><span class="c1lbl">AI 交回 ① 任务卡</span>
+          <div class="c1f"><div><b>货</b>移动单体空调（Monoblock）</div><div><b>量 · 在哪</b>约 85 m³ · 柏林</div><div class="on2"><b>找谁</b>柏林及周边、有仓库、卖空调的商家</div><div class="on2"><b>怎么合作</b>帮存货 + 寄售代销 · 分润</div><div><b>不要</b>低价清仓；这一步先不联系</div><div><b>交付</b>Excel：证据 + 来源 + 分档</div></div></div>
+        <div><span class="c1lbl">AI 交回 ② 搜索词 · 德语 6 + 英语 2</span>
+          <div class="c1kw"><code><i>DE</i>mobile Klimageräte Großhandel Berlin</code><code><i>DE</i>Monoblock Klimagerät Händler Berlin</code><code><i>DE</i>Klimagerät mieten Berlin</code><code><i>DE</i>Kältetechnik Großhandel Berlin Brandenburg</code><code><i>DE</i>Klimageräte ab Lager Berlin</code><code><i>DE</i>Fulfillment Dropshipping Klimageräte</code><code><i>EN</i>portable air conditioner distributor Berlin</code><code><i>EN</i>portable AC wholesale Germany warehouse</code></div></div>
+        <div class="c1ck">⏸ 检查点：任务卡和搜索词你点头了，它才去搜</div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">第一步只做一件事：用一句话把任务交代清楚。货是什么、有多少、在哪、要找什么样的人、要什么证据，最后一句“先别联系”。左边这段视频 30 秒左右，有解说，可以直接放。AI 收到以后不会马上去搜，先交回两样东西给你看：一是任务卡，把你这句话拆成货、量和地点、找谁、怎么合作、不要什么、交付什么六格，你一眼就能看出它有没有理解错，比如“怎么合作”写的是帮存货加寄售分润，而不是采购；二是搜索词，德语六组、英语两组，按批发、电商、租赁、暖通贸易四类去搜。你点头了它才去搜。这一步的意义是：方向错了，后面全白干，所以先对齐。任务卡和搜索词是按流程复现的，下一步的证据都来自实际名单。</aside>
+</section>
+
+<!-- 61 案例1 第2步 查证据 -->
+<section class="slide" data-sec="模块三 · 案例 1 获客系统">
+  <div class="inner">
+    <div class="eb rv">案例 1 · 第 2 步 · Evidence</div>
+    <h2 class="h-l rv mt-s" style="font-size:54px">第 2 步：一家家打开官网，摘出仓库证据</h2>
+    <div class="c1s mt-m">
+      <div class="rv">
+        <video class="film" controls preload="metadata" playsinline poster="assets/cases/case1-step2.jpg"><source src="assets/cases/case1-step2.mp4" type="video/mp4"></video>
+        <div class="c1q"><span class="lv">你要做的</span><p>看证据卡；亲手点开至少 3 家的来源，确认原话真在页面上。</p></div>
+      </div>
+      <div class="c1rt rv">
+        <div><span class="c1lbl">AI 交回：每家一张证据卡（A 档 5 家）</span>
+          <ol class="c1ln">
+            <li><span class="t ok">✓</span><span>本地门店 + 电商：<b>「门店旁有仓库（公司自述）」</b></span></li>
+            <li><span class="t ok">✓</span><span>家电批发 + 电商代发：<b>「柏林中央仓 / 物流伙伴仓」</b></span></li>
+            <li><span class="t ok">✓</span><span>便携空调专营电商：<b>「官网写明从柏林仓库发货」</b></span></li>
+            <li><span class="t ok">✓</span><span>柏林 B2B 批发：<b>「官网写 ab Lager Berlin」</b></span></li>
+            <li><span class="t q">?</span><span>销售 + 租赁 + 活动：<em>「柏林配送 / 自提，仓容未公开」</em></span></li>
+          </ol></div>
+        <div><span class="c1lbl">每家只查 3 样</span>
+          <div class="c1flow"><span>卖不卖这类货</span><span>仓库证据（摘原话）</span><span>公开的邮箱、电话</span></div></div>
+        <div class="c1ck">找不到证据就写「未公开」，不猜；第 5 家标了「待确认」</div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">第二步是 AI 自己干活：按四类分头搜，一家家打开官网核对。每家只查三样：卖不卖移动空调这类货；有没有仓库的证据，而且要把原话摘下来；有没有公开的邮箱电话。右边是 A 档五家的证据卡，证据都来自实际名单，公司名打了码。注意第五家：它销售和租赁移动空调，品类很对口，但官网只写了柏林配送和自提，仓容没公开，AI 就标了问号“待确认”，而不是替它编一个“有仓库”。这就是我们要的习惯：找不到就写未公开。你在这一步要做的，是亲手点开至少三家的来源，确认那句原话真的在页面上。</aside>
+</section>
+
+<!-- 62 案例1 名单 -->
+<section class="slide" data-sec="模块三 · 案例 1 获客系统">
+  <div class="inner">
+    <div class="eb rv">案例 1 · 第 2–3 步结果 · Lead List</div>
     <h2 class="h-l rv mt-s" style="font-size:56px">一句话，交回 21 家带仓储证据的名单</h2>
     <div class="c1l mt-m">
       <div class="rv">
@@ -2468,7 +2543,66 @@ is its product series.</span></pre></div>
   <aside class="notes">第一到第三步的结果是一张表。左边是交代任务的那一句话，要素只有五个：什么货、多少、在哪、要找什么样的人、要什么证据；最后一句“先别联系”很重要，这一步只查不发。右边是 AI 交回来的 Excel，21 家，每家一行：渠道类型，是批发、电商、租赁还是暖通贸易；对便携空调的匹配度；仓储证据；城市；邮箱；来源链接。老板看这张表只需要看一列：仓储证据。比如“官网写明从柏林仓库发货”“约 11,000 平方米室内仓”，每条后面都有来源，点开就能核对，不是 AI 编的。分档的规则也写在表里：A 档是卖移动空调、在柏林、有仓库证据的，首批先联系；B 档是全国批发和仓配，仓不一定在柏林；C 档是仓容或者品类还没核实的，只谈租赁或小批量。还有一句提醒写在表的说明页：公开资料只能证明对方有仓库，不能证明对方愿意接 85 立方米，所以要写进信里问。</aside>
 </section>
 
-<!-- 61 案例1 德语开发信 -->
+<!-- 63 案例1 第3步 分档 -->
+<section class="slide" data-sec="模块三 · 案例 1 获客系统">
+  <div class="inner">
+    <div class="eb rv">案例 1 · 第 3 步 · Tiers</div>
+    <h2 class="h-l rv mt-s" style="font-size:54px">第 3 步：分 A/B/C 三档，每家附下一步</h2>
+    <div class="c1s mt-m">
+      <div class="rv">
+        <video class="film" controls preload="metadata" playsinline poster="assets/cases/case1-step3.jpg"><source src="assets/cases/case1-step3.mp4" type="video/mp4"></video>
+        <div class="c1q"><span class="lv">你要做的</span><p>看分档对不对；A 档 5 家就是第一批要联系的。</p></div>
+      </div>
+      <div class="c1rt rv">
+        <div><span class="c1lbl">AI 交回 ① 分档</span>
+          <ol class="c1ln">
+            <li><span class="t">A</span><span><b>5 家</b> 在柏林、卖移动空调、有仓库证据，首批联系</span></li>
+            <li><span class="t B">B</span><span><b>6 家</b> 全国批发和仓配，仓不一定在柏林</span></li>
+            <li><span class="t C">C</span><span><b>10 家</b> 仓容或品类待核实，只谈小批量或租赁</span></li>
+          </ol></div>
+        <div><span class="c1lbl">AI 交回 ② A 档每家的「建议下一步」</span>
+          <ol class="c1ln">
+            <li><span class="t">A</span><span>先确认可用仓容、是否接受第三方库存和寄售</span></li>
+            <li><span class="t">A</span><span>询问把 85 方移入中央仓、按订单分销的条件</span></li>
+            <li><span class="t">A</span><span>确认是否接第三方品牌库存或联合销售</span></li>
+          </ol></div>
+        <div class="c1ck">说明页还写好了：首次沟通问什么、资料包备什么</div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">第三步分档。A 档五家：在柏林、卖移动空调、有仓库证据，首批联系；B 档六家：全国批发和仓配，仓不一定在柏林；C 档十家：仓容或品类还没核实，只谈小批量或者租赁。光分档还不够，名单里每家还有一列“建议下一步”，右下是 A 档其中三家的，比如先确认可用仓容、是否接受第三方库存和寄售；询问把 85 方移入中央仓、按订单分销的条件。这一列直接决定了开发信该问什么。表的说明页还写好了首次沟通要问清的五件事，和要提前备好的资料包，型号、EAN、托盘数、CE 证书这些。后面回信里对方要的东西，这里基本都提前列到了。以上内容都来自实际名单。</aside>
+</section>
+
+<!-- 64 案例1 第4步 写信 -->
+<section class="slide" data-sec="模块三 · 案例 1 获客系统">
+  <div class="inner">
+    <div class="eb rv">案例 1 · 第 4 步 · Letter</div>
+    <h2 class="h-l rv mt-s" style="font-size:54px">第 4 步：AI 写德语信，老板审完，先发给自己</h2>
+    <div class="c1s mt-m">
+      <div class="rv">
+        <video class="film" controls preload="metadata" playsinline poster="assets/cases/case1-step4.jpg"><source src="assets/cases/case1-step4.mp4" type="video/mp4"></video>
+        <div class="c1q"><span class="lv">你说的一句话</span><p>「用 <code>outreach</code> 给名单写一封德语开发信范本：不提清仓，给三种合作方式，结尾问能不能存 85 m³。附中文对照。」</p></div>
+      </div>
+      <div class="c1rt rv">
+        <div><span class="c1lbl">AI 交回 ① 范本 + 中文对照</span>
+          <ol class="c1ln">
+            <li><span class="t">1</span><span><b>不说清仓</b>，对方不会按尾货压价</span></li>
+            <li><span class="t">2</span><span><b>三种合作方式</b>：整批接手、存仓寄售、走对方渠道</span></li>
+            <li><span class="t">3</span><span><b>结尾问</b>：能不能存 85 m³、走什么渠道</span></li>
+          </ol></div>
+        <div><span class="c1lbl">AI 交回 ② 发给自己的自测邮件</span>
+          <ol class="c1ln">
+            <li><span class="t ok">✓</span><span>ä ö ü ß 没乱码，手机上分段清楚</span></li>
+            <li><span class="t ok">✓</span><span>签名、联系方式对；收件人只有自己</span></li>
+          </ol></div>
+        <div class="c1ck">⏸ 检查点：老板逐句看中文对照，确认了才发</div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">第四步写信。这一句话里写清楚了三件事：哪些话不能说，不提清仓；要给什么选择，三种合作方式；结尾要问什么，能不能存 85 立方米。AI 交回一封德语范本，旁边附中文对照，老板不懂德语也能逐句审。审完不要马上群发，先让它发一封给你自己，用手机看：德语的变音字母有没有乱码、分段清不清楚、签名和联系方式对不对。下一页是这封信的全文和每句为什么这么写。自测邮件是按流程复现的画面。</aside>
+</section>
+
+<!-- 65 案例1 德语开发信 -->
 <section class="slide" data-sec="模块三 · 案例 1 获客系统">
   <div class="inner">
     <div class="eb rv">案例 1 · 第 4 步结果 · Outreach Letter</div>
@@ -2503,7 +2637,34 @@ Eine Produktliste mit Modellen, Mengen, Fotos, technischen Unterlagen, CE/DoC, E
   <aside class="notes">第四步的结果是一封信。左边是德语原文，一封范本，名单上每一家都发这一封；黄色是关键句，右边是它为什么这么写。第一，明确说不是低价清仓，原话是“keine Restpostenabwicklung zu Niedrigstpreisen”，这样对方不会把它当尾货压价。第二，给三种合作方式：整批或部分接手；存在对方仓库，卖出去再结算，也就是寄售；或者走对方的 B2B、线上、租赁渠道。对方挑一个就能谈，不用来回问。第三，产品清单、CE 证书这些，简短沟通之后再给，先筛掉不认真的。第四，结尾问三个问题：短期内能不能存 85 立方米、用什么渠道卖、更想采购还是寄售；对方只要回一封信，我们就能判断他属于哪一档。第五，可以来柏林看货，降低信任门槛。这封信是 AI 写的，但发出去之前有一个检查点：老板先看中文对照，确认，再先发一封给自己，看排版和签名。注意：信件正文是按已发出的原信复原的，截图里有部分被打码，个别词可能和原信略有不同。</aside>
 </section>
 
-<!-- 62 案例1 Outlook 操作电脑 -->
+<!-- 66 案例1 第5步 发送 -->
+<section class="slide" data-sec="模块三 · 案例 1 获客系统">
+  <div class="inner">
+    <div class="eb rv">案例 1 · 第 5 步 · Computer Use</div>
+    <h2 class="h-l rv mt-s" style="font-size:54px">第 5 步：AI 操作 Outlook，前两封停下来给你看</h2>
+    <div class="c1s mt-m">
+      <div class="rv">
+        <video class="film" controls preload="metadata" playsinline poster="assets/cases/case1-step5.jpg"><source src="assets/cases/case1-step5.mp4" type="video/mp4"></video>
+        <div class="c1q"><span class="lv">你说的一句话</span><p>「用 <code>outlook-send</code> 按名单逐封发，前两封停下来给我看，每封间隔一会儿，发完到「已发送」核对。」</p></div>
+      </div>
+      <div class="c1rt rv">
+        <div><span class="c1lbl">它在屏幕上做的，每封都一样</span>
+          <div class="c1flow"><span>新建</span><i>→</i><span>填收件人</span><i>→</i><span>填主题</span><i>→</i><span>贴正文</span><i>→</i><span>发送</span></div></div>
+        <div><span class="c1lbl">护栏</span>
+          <ol class="c1ln">
+            <li><span class="t q">⏸</span><span>前两封各停一次，截图给你看，你说「继续」才往下</span></li>
+            <li><span class="t q">⏸</span><span>弹出登录、验证码、安全提示，停下叫你</span></li>
+            <li><span class="t q">⏸</span><span>限量、间隔发；发错不撤回不补发，先停</span></li>
+          </ol></div>
+        <div><span class="c1lbl">AI 交回：发送记录表</span>
+          <div class="c1ck" style="color:var(--ink2);border-color:var(--line);background:rgba(255,255,255,.03)">12:17–12:20 · 截图可见 11 封（名单第 11–21 家）· 逐封核对收件人和主题，一致</div></div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">第五步发送。AI 用 Computer Use，也就是自己看屏幕、动鼠标、打字，操作你电脑上的 Outlook。每一封都是同样五个动作：新建、填收件人、填主题、贴正文、发送。关键是护栏：前两封各停一次，截图给你看，你说继续它才往下；弹出任何登录、验证码、安全提示，它停下来叫你，不自己点；每批限量、间隔发，发错了不撤回也不补发，先停下来。全部发完，它到“已发送”里逐封核对，交回一张发送记录表。实际截图里能看到 12 点 17 分到 20 分发出的 11 封，正好是名单第 11 到 21 家，说明是按名单顺序一封接一封发的。下一页是 Outlook 的实际截图。</aside>
+</section>
+
+<!-- 67 案例1 Outlook 操作电脑 -->
 <section class="slide" data-sec="模块三 · 案例 1 获客系统">
   <div class="inner">
     <div class="eb rv">案例 1 · 第 5 步结果 · Computer Use</div>
@@ -2528,7 +2689,33 @@ Eine Produktliste mit Modellen, Mengen, Fotos, technischen Unterlagen, CE/DoC, E
   <aside class="notes">信写好、老板确认过，第五步是发出去：让 AI 直接操作电脑上的 Outlook，把这批开发信一封封发掉。用的是智能体的 Computer Use 能力，也就是操作电脑：它看屏幕截图，自己移动鼠标、点按钮、打字，跟人坐在电脑前操作一样。左边是 Outlook 的“已发送”，收件人都是德国的空调租赁、经销和批发公司，12 点 17 分到 20 分，一封接一封发出去。邮件是德语写的，大意是：我们在柏林有一批移动空调库存，经过检验、原包装，总共约 85 立方米，想找长期合作的经销伙伴，而不是低价清仓；合作方式有三种，整批或部分接手、寄售代销、或者走 B2B、线上和租赁渠道；产品清单、CE 认证和物流信息在简单沟通后提供，也可以来看货。做法分三步：先交代任务，给它一张名单表和一封范本；然后它自己打开 Outlook，新建邮件、填收件人和主题、贴正文、点发送；最后它到已发送里逐封核对。为什么不用邮件接口或者群发平台？因为这样不用做任何配置，发出去的就是你自己邮箱、你自己的签名，客户回信直接进你的收件箱；没有接口的老系统，比如 ERP、报关系统，也能用同样的方法操作。代价是比接口慢，电脑要一直开着，所以前两封一定要盯着它发，确认没填错再放手。护栏和上一页一样：先发一封给自己看，每批限量、间隔发送，别一次轰几百封，容易被当成垃圾邮件。发往德国和欧盟的，先确认当地对商业推广邮件的规定，那边比国内严。</aside>
 </section>
 
-<!-- 63 案例1 回信 -->
+<!-- 68 案例1 第6步 回信 -->
+<section class="slide" data-sec="模块三 · 案例 1 获客系统">
+  <div class="inner">
+    <div class="eb rv">案例 1 · 第 6 步 · Reply Triage</div>
+    <h2 class="h-l rv mt-s" style="font-size:54px">第 6 步：读回信，交回跟进表和回信草稿</h2>
+    <div class="c1s mt-m">
+      <div class="rv">
+        <video class="film" controls preload="metadata" playsinline poster="assets/cases/case1-step6.jpg"><source src="assets/cases/case1-step6.mp4" type="video/mp4"></video>
+        <div class="c1q"><span class="lv">你说的一句话</span><p>「用 <code>reply-triage</code> 读这几天的回信：对方要什么、我们缺什么，起草回信，更新跟进表。」</p></div>
+      </div>
+      <div class="c1rt rv">
+        <div><span class="c1lbl">AI 交回 ① 跟进表（一行一家）</span>
+          <ol class="c1ln">
+            <li><span class="t">A</span><span><b>柏林便携空调电商</b> · 03:27 回信 · 态度：<em>“sufficient warehouse capacity”</em></span></li>
+            <li><span class="t ok">→</span><span>对方要 6 样；下一步：寄资料包 → 资格电话 → 柏林看货</span></li>
+          </ol></div>
+        <div><span class="c1lbl">AI 交回 ② 资料包对照 12 项</span>
+          <div class="c1kw"><code>型号</code><code>EAN</code><code>数量</code><code>托盘数</code><code>箱规 / 毛重</code><code>总货值</code><code>R290 / R32</code><code>CE / DoC</code><code>能效 / EPREL</code><code>德文说明书</code><code>保修</code><code>照片</code></div>
+          <p class="small" style="margin-top:8px">每项「□有 □缺」，由老板来勾</p></div>
+        <div class="c1ck">③ 英文回信草稿：价格、货源、质保写「待我确认」，AI 不替老板答应</div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">第六步，回信来了。用 reply-triage 读回信，它交回三样东西。第一，跟进表，一行一家：是哪一档、几点回的、态度怎么样，摘一句原话，这里是“仓容足够考虑这个规模的合作”；对方要什么、下一步做什么，寄资料包、约资格沟通电话、请对方来柏林看货。第二，资料包对照：把对方要的和我们第三步就列好的十二项资料包对上，每一项有没有，由老板来勾，AI 不替你说“有”。第三，英文回信草稿：资料附上、约电话和看货；价格、货源证明、质保这几处写“待我确认”，AI 不替老板答应任何条款。下一页是回信的实际截图，再下一页是这封草稿。跟进表和草稿是按实际回信复现的。</aside>
+</section>
+
+<!-- 69 案例1 回信 -->
 <section class="slide" data-sec="模块三 · 案例 1 获客系统">
   <div class="inner">
     <div class="eb rv">案例 1 · 第 6 步结果 · Reply</div>
@@ -2555,7 +2742,45 @@ Eine Produktliste mit Modellen, Mengen, Fotos, technischen Unterlagen, CE/DoC, E
   <aside class="notes">第六步，回信。左边是真实回信的截图，来自名单里 A 档的一家柏林便携空调电商，发件人和收件人都打了码。我们发的是德语，对方用英语回的。最关键的一句在右上角：“我们的仓容通常足够考虑这个规模的合作”，85 立方米能接。然后对方列了要看的东西，AI 读完整理成六样：产品清单，包括厂家、型号、数量、照片；技术资料、CE/DoC 和能效数据；物流信息，单台包装和托盘尺寸；整批和部分的价格预期；货源和所有权证明；质保、退货和坏件怎么处理。这一封回信等于告诉了我们下一步要准备什么。右下是我们这边的资料包，这份清单在第二步出名单的时候就已经写在表的说明页里了：型号、EAN、数量、托盘数、箱规毛重、总货值、冷媒是 R290 还是 R32、CE 和 DoC、能效标签和 EPREL 注册、德文说明书、保修和照片。下一步就是寄资料包、约一个资格沟通电话、请对方来柏林看货，最后谈寄售和分润的条件。到这里 AI 的活是起草回信和整理清单，价格和条款由老板来定。</aside>
 </section>
 
-<!-- 64 案例1 照着做 -->
+<!-- 70 案例1 回信草稿 -->
+<section class="slide" data-sec="模块三 · 案例 1 获客系统">
+  <div class="inner">
+    <div class="eb rv">案例 1 · 第 6 步结果 · Draft</div>
+    <h2 class="h-l rv mt-s" style="font-size:56px">AI 起草的回信：资料它备，价格你定</h2>
+    <div class="c1d mt-m">
+      <div class="c1paper rv">
+        <div class="hd">主题 · 英文草稿 · 未发送<b>Re: Vertriebspartnerschaft für mobile Klimageräte in Berlin</b></div>
+        <div class="bd">Dear ████,
+
+thank you for your quick reply and your interest.
+
+Attached you will find our product list with manufacturers, model numbers, quantities and photos, together with the technical documentation, CE/DoC, energy data and the packaging and pallet dimensions.
+
+Price expectation for the entire stock or partial quantities: <span class="tbd">【待我确认：整批 / 部分价格】</span>
+Origin and proof of ownership: <span class="tbd">【待我确认：可提供的文件】</span>
+Warranty and returns: <span class="tbd">【待我确认：质保和坏件处理】</span>
+
+We would be glad to arrange a short call — would ██ or ██ suit you? A visit to the stock in Berlin can be arranged at your convenience.
+
+Best regards</div>
+      </div>
+      <div class="c1rt rv">
+        <span class="c1lbl">中文要点</span>
+        <ol class="c1ln">
+          <li><span class="t ok">✓</span><span><b>用对方的语言回</b>：对方用英语回，草稿就用英语</span></li>
+          <li><span class="t ok">✓</span><span><b>对方要的资料逐项回应</b>：清单、技术资料、CE/DoC、包装托盘</span></li>
+          <li><span class="t q">?</span><span><b>价格：待我确认</b>，AI 不写任何数字</span></li>
+          <li><span class="t q">?</span><span><b>货源证明、质保：待我确认</b>，只附真实文件</span></li>
+          <li><span class="t ok">✓</span><span><b>约电话、约看货</b>：给两个时间让对方选</span></li>
+        </ol>
+        <div class="c1ck mt-auto">草稿只起草不发送。黄色三处由老板填完，再按第 5 步发出</div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes">这是第六步交回的回信草稿，按实际回信复现，没有发送。对方用英语回的，草稿就用英语。结构很简单：先谢对方回信；对方要的资料逐项回应，清单、技术资料、CE 和 DoC、包装和托盘尺寸，作为附件；然后是三处黄色：整批和部分的价格预期、货源和所有权证明、质保和坏件处理，AI 一律写“待我确认”，不写任何数字、不替老板承诺；最后约一个简短的电话，给两个时间让对方选，并且欢迎来柏林看货。老板把黄色三处填好，再按第五步的方法发出去。这就是整个获客闭环里人和 AI 的分工：查、写、发、整理交给 AI，价格和条款永远在人手里。</aside>
+</section>
+
+<!-- 71 案例1 照着做 -->
 <section class="slide" data-sec="模块三 · 案例 1 获客系统">
   <div class="inner">
     <div class="eb rv">案例 1 · 操作流程 · Playbook</div>
@@ -2573,7 +2798,7 @@ Eine Produktliste mit Modellen, Mengen, Fotos, technischen Unterlagen, CE/DoC, E
   <aside class="notes">这一页是操作流程，六段话，照着换成自己的产品就能跑。第一段出名单，用 lead-hunt：填上你在哪、有什么货、要找什么样的商家，要求只用公开资料、每家写证据和来源、分档出 Excel，并且先别联系。第二段核名单：让它把 A 档的来源一家家打开给你看，证据对不上的降档；这一步你至少亲手点开三家。第三段写信，用 outreach，告诉它写给谁、用什么语言、哪些话不能说、结尾要问什么，要求附中文对照，你逐句看完再往下。第四段自测，先发一封给自己，用手机看排版、签名和退订说明。第五段发送，用 outlook-send，让它按名单逐封发，前两封停下来给你看，每封间隔一会儿，发完到已发送里核对。第六段读回信，用 reply-triage，它会告诉你对方要什么、我们缺什么，起草回信，更新跟进表；价格、独家、合同条款永远由你来定。三个新 Skill 已经放进 Skill 包，整套提示词、名单模板和信件范本在作业包的案例文件夹里。</aside>
 </section>
 
-<!-- 65 标准与边界 -->
+<!-- 72 标准与边界 -->
 <section class="slide" data-sec="结营">
   <div class="inner">
     <div class="eb rv">Quality Bar & Boundaries</div>
@@ -2598,7 +2823,7 @@ Eine Produktliste mit Modellen, Mengen, Fotos, technischen Unterlagen, CE/DoC, E
   <aside class="notes">第一天上午学的可靠工作指令，这两天每个作业都在用。展示之前，用五个标准检查一遍自己的成果包：能用、能改、能复用、能追溯、能交接。只在你的聊天窗口里有效的答案不算成果。同时记住四条红线：没有来源的判断不当事实，私密资料不进不清楚的数据流，自动化必须有暂停开关，一次成功不等于流程稳定。</aside>
 </section>
 
-<!-- 66 结营 -->
+<!-- 73 结营 -->
 <section class="slide" data-sec="结营">
   <div class="inner">
     <div class="eb rv">Wrap-up</div>
@@ -2623,7 +2848,7 @@ Eine Produktliste mit Modellen, Mengen, Fotos, technischen Unterlagen, CE/DoC, E
   <aside class="notes">回顾一下，两天、一个业务、四个作业，每个人带走的是一个完整的业务成果包，还有一套 Skill 包：回去以后同类工作一句话交给 Codex。展示分组进行，4 到 5 人一组，每人 3 分钟，用手机打开自己的网址，回答四个问题：原来最耗时的工作是什么，搭了哪个工作流，打开网址看看现场做出了什么，未来 7 天先用在哪里。每组推选一位同学上台。一周后，我们希望大家不是“又试了几个工具”，而是已经有一个真正跑起来的工作流，网址已经发给了第一个客户。</aside>
 </section>
 
-<!-- 67 收束 -->
+<!-- 74 收束 -->
 <section class="slide cover bare" data-sec="结营">
   <div class="glow" style="opacity:.7"></div>
   <img class="lens rv" src="assets/lens-glow.png" alt="" style="opacity:.85">
@@ -2636,7 +2861,7 @@ Eine Produktliste mit Modellen, Mengen, Fotos, technischen Unterlagen, CE/DoC, E
   <aside class="notes">AI 不会替你决定业务，但可以把你的经验、资料和方法组织成一套可复用的系统。工具会更新，流程会迭代，但真正属于你的工作方式会越来越清楚。谢谢大家。</aside>
 </section>
 
-<!-- 68 附录 课前准备 -->
+<!-- 75 附录 课前准备 -->
 <section class="slide" data-sec="附录 · 课前准备">
   <div class="inner">
     <div class="eb rv">Before Class</div>

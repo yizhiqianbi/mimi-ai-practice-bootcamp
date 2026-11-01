@@ -2,7 +2,7 @@
 
 > 换季库存压在柏林，找到愿意帮存、帮卖的仓库
 
-课件第 59–64 页。流程视频：`../../../assets/cases/case1-flow.mp4`（86 秒，无旁白）。
+课件第 59–71 页。完整视频：`../../../assets/cases/case1-flow.mp4`（3 分 09 秒，中文解说）；每一步的短片：`../../../assets/cases/case1-step1.mp4` … `case1-step6.mp4`。
 
 ## 背景
 
