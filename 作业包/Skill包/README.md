@@ -1,6 +1,6 @@
 # Skill 包：一句话，一个结果
 
-13 个 Skill，每个解决老板身边一件天天发生的事。装好以后，对 Codex 说一句话，结果直接落在 `产出/`。
+13 个基础 Skill，每个解决老板身边一件天天发生的事；另有 9 个组合技，把剪映、LibTV、企业微信接进来。装好以后，对 Codex 说一句话，结果直接落在 `产出/`。
 
 ## 怎么装
 
@@ -29,6 +29,24 @@
 | `cs-kb` | 用 cs-kb 把知识库整理成客服问答表 | 30 条问答对 + 机器人规则 + 50 道测试题 | 进阶 | `产出/20261028_客服问答表_v1.xlsx` |
 
 木序样例在 `教程/跟做样例_木序办公家具/`（虚构的公司），上课前可以先打开看结果长什么样。
+
+## 组合技：一句话出大活
+
+下面 9 个是「智能体 + 专业工具」的组合：Codex 或 WorkBuddy 负责想和排，剪映、LibTV、企业微信负责出片、出图、送到人。效果最打眼，但要先装好对应的工具或账号（「需要」那一列）。
+
+| Skill | 组合 | 一句话这样说 | 你拿到什么 | 需要 | 木序样例的结果 |
+|---|---|---|---|---|---|
+| `jianying-draft` | Codex + 剪映 | 用 jianying-draft 把 产出/口播稿 和 素材/ 剪成剪映草稿 | 打开剪映就是排好的时间线：分段画面、逐句字幕、推近、转场，只剩点导出 | 剪映专业版、`pip install pyJianYingDraft` | `产出/20261028_剪辑表_v1.json`、`产出/20261028_剪映时间线_v1.png` |
+| `clip-factory` | Codex + 剪映 | 用 clip-factory 把 素材/____.mp4 切成 5 条短视频 | 5 个竖版剪映草稿，带字幕和标题，外加发布文案 | 剪映专业版、转写（通义听悟或本机 whisper） | — |
+| `libtv-ad` | WorkBuddy + LibTV | 用 libtv-ad 给 ____ 做 15 秒广告片，先出 3 个方向 | 3 个方向的分镜，选中的那个直接生成镜头和成片，推到企业微信 | LibTV 账号和 Access Key、`libtv-skills` | — |
+| `product-shots` | WorkBuddy + LibTV | 用 product-shots 给 素材/产品/____.jpg 出一套 1688 主图和场景图 | 6 张套图：主图、场景、细节、尺寸、卖点，产品外观逐张核对 | 同上 | — |
+| `boss-dashboard` | Codex + 表格 → WorkBuddy | 用 boss-dashboard 把 资料/销售明细.xlsx 做成经营看板 | 手机能打开的看板 + 这个月最该做的三件事，可每周一自动推 | 无 | `产出/20261028_经营看板_v1.html` |
+| `contract-review` | Codex | 用 contract-review 审一下 资料/____合同.docx | 红黄绿风险表、可直接粘贴的改法、回复邮件草稿 | 无 | — |
+| `call-coach` | 听悟 + Codex → WorkBuddy | 用 call-coach 复盘 素材/录音/____.m4a | 客户信息卡、五项打分、三句改法、跟进消息草稿 | 转写工具 | — |
+| `competitor-watch` | WorkBuddy 定时 + 浏览器 | 用 competitor-watch 盯 资料/竞品清单.md 里的 5 家 | 每周一只报变化：降价、新品、活动，附网址截图和建议 | WorkBuddy 浏览器技能、企业微信 | — |
+| `voice-to-tasks` | WorkBuddy + 企业微信 | （发语音）用 voice-to-tasks 把这段话拆成待办 | 一人一条带 @ 的待办，记进总表，每天追进度 | WorkBuddy 连企业微信 | — |
+
+剪映的两个只适配国内版剪映专业版；Mac 上生成草稿后在剪映里手动点导出。LibTV 按积分计费，Skill 默认先出 1 个方向的样片，你点头再批量。
 
 ## 每个 Skill 都一样的四件事
 
