@@ -4,6 +4,8 @@
 
 成片：[`assets/cases/talk-hafyoung.mp4`](../../../assets/cases/talk-hafyoung.mp4)，课件网站上是 https://yizhiqianbi.github.io/mimi-ai-practice-bootcamp/assets/cases/talk-hafyoung.mp4
 
+课件第 41–49 页：总览与带解说的流程视频（`talk-flow.mp4`）、成片、6 步各一页（`talk-step1.mp4` … `talk-step6.mp4`）、6 句话操作流程。
+
 ## 结果
 
 | 步 | 交回什么 | 文件 |

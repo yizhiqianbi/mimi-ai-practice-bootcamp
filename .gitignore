@@ -8,3 +8,6 @@ __pycache__/
 # 含客户资料或未完全打码，不进仓库
 assets/bxkt*.zip
 assets/image.png
+
+# 本地原始截图（可能带公司水印），不进仓库
+/image*.png
