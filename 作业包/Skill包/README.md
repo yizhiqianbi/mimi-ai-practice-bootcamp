@@ -1,6 +1,6 @@
 # Skill 包：一句话，一个结果
 
-13 个基础 Skill，每个解决老板身边一件天天发生的事；另有 9 个组合技，把剪映、LibTV、企业微信接进来；还有 3 个获客 Skill，和 `outreach` 连成一套获客流程。装好以后，对 Codex 说一句话，结果直接落在 `产出/`。
+13 个基础 Skill，每个解决老板身边一件天天发生的事；另有 10 个组合技，把剪映、LibTV、企业微信接进来；还有 3 个获客 Skill，和 `outreach` 连成一套获客流程。装好以后，对 Codex 说一句话，结果直接落在 `产出/`。
 
 ## 怎么装
 
@@ -21,7 +21,7 @@
 | `weekly-report` | 用 weekly-report 汇总 资料/本周/ | 一份周报，和上周说要做的事逐条对照 | 作业零 | — |
 | `ppt-5pages` | 用 ppt-5pages 给我的业务做 5 页 PPT | 5 页 PPT + 逐页讲稿 + 出处表 | 作业二 | `产出/20261028_业务介绍_v2.html` |
 | `poster` | 用 poster 做一张业务海报 | 1080×1440 竖版海报，可导出 PNG | 作业二 | `产出/20261028_海报_v1.png` |
-| `talk-script` | 用 talk-script 写 60 秒口播稿 | 口播稿 + 字幕 + 发布文案 | 作业三 | `产出/20261028_口播稿_v1.md` |
+| `talk-script` | 用 talk-script 写 60 秒口播稿 | 口播稿 + 字幕 + 发布文案（要直接出成片用组合技 `talk-video`） | 作业三 | `产出/20261028_口播稿_v1.md` |
 | `site-build` | 用 site-build 做我的官网 | 手机优先的官网：一句话、卖点、视频、案例、FAQ、表单 | 作业四 | `site/index.html` |
 | `seo-check` | 用 seo-check 检查 site/ | SEO 8 项逐项过，不过关的直接改，补齐 robots / sitemap / llms.txt | 作业四 | `产出/20261028_SEO自查_v1.md` |
 | `geo-test` | 用 geo-test 测 AI 怎么回答我的业务 | 20 个问题的测试表 + 三个数 + 这周该改的一件事 | 作业四 | `产出/20261028_GEO测试问题表_v1.xlsx` |
@@ -32,10 +32,11 @@
 
 ## 组合技：一句话出大活
 
-下面 9 个是「智能体 + 专业工具」的组合：Codex 或 WorkBuddy 负责想和排，剪映、LibTV、企业微信负责出片、出图、送到人。效果最打眼，但要先装好对应的工具或账号（「需要」那一列）。
+下面 10 个是「智能体 + 专业工具」的组合：Codex 或 WorkBuddy 负责想和排，剪映、LibTV、企业微信负责出片、出图、送到人。效果最打眼，但要先装好对应的工具或账号（「需要」那一列）。
 
 | Skill | 组合 | 一句话这样说 | 你拿到什么 | 需要 | 木序样例的结果 |
 |---|---|---|---|---|---|
+| `talk-video` | Codex + 剪映 | 用 talk-video 给我的业务做一条 60 秒口播视频，讲给「____」听，最后让他们「____」 | 事实底稿、钩子、口播稿、配音、字幕、竖版成片、封面、剪映草稿、发布文案，一条龙；数字人和真人都不用 | `ffmpeg`、`pip install edge-tts playwright`；要剪映草稿再装 `pyJianYingDraft` | 瀚泱样例：`../案例/作业三_口播_瀚泱/` |
 | `jianying-draft` | Codex + 剪映 | 用 jianying-draft 把 产出/口播稿 和 素材/ 剪成剪映草稿 | 打开剪映就是排好的时间线：分段画面、逐句字幕、推近、转场，只剩点导出 | 剪映专业版、`pip install pyJianYingDraft` | `产出/20261028_剪辑表_v1.json`、`产出/20261028_剪映时间线_v1.png` |
 | `clip-factory` | Codex + 剪映 | 用 clip-factory 把 素材/____.mp4 切成 5 条短视频 | 5 个竖版剪映草稿，带字幕和标题，外加发布文案 | 剪映专业版、转写（通义听悟或本机 whisper） | — |
 | `libtv-ad` | WorkBuddy + LibTV | 用 libtv-ad 给 ____ 做 15 秒广告片，先出 3 个方向 | 3 个方向的分镜，选中的那个直接生成镜头和成片，推到企业微信 | LibTV 账号和 Access Key、`libtv-skills` | — |

@@ -1,0 +1,97 @@
+{
+ "name": "瀚泱口播_v1",
+ "brand": {
+  "bg": "#ECEAE4", "ink": "#111214", "accent": "#2E5BFF", "muted": "#7C7E83", "line": "#D8D5CC", "card": "#E2DFD8",
+  "logo": "素材/logo-mark.svg", "right": "SpaceCool · Shunde, Foshan", "font_file": "素材/Archivo.ttf"
+ },
+ "voice": {"name": "zh-CN-YunyangNeural", "rate": "+8%"},
+ "bgm": {"src": "素材/宣传片原声.m4a", "fit": "stretch", "lufs": -29},
+ "cover": "s1@0.5",
+ "sentences": [
+  {"id": "s1", "seg": "钩子", "scene": "hook", "text": "一台帐篷空调，[15 天]内出货。", "say": "一台帐篷空调，十五天内出货。", "src": "官网 Company：ships on time within 15 days"},
+  {"id": "s2", "seg": "冲突", "scene": "fear", "text": "做露营空调的品牌和跨境卖家，就怕三件事："},
+  {"id": "s3", "seg": "冲突", "scene": "fear", "text": "[旺季交不了货]，[起订量太高]，[样品和大货不一样]。"},
+  {"id": "s4", "seg": "证据", "scene": "who", "text": "我们是佛山顺德的瀚泱，SpaceCool 系列自己设计、自己生产。", "src": "官网首段：designs and manufactures SpaceCool … in Shunde, Foshan"},
+  {"id": "s5", "seg": "证据", "scene": "factory", "text": "工厂 [5 万平方米]，每天 [2000 多台]，压缩机[自己研发]。", "say": "工厂五万平方米，每天两千多台，压缩机自己研发。", "src": "官网 Company：50,000 m²、2,000+ units/day、in-house developed compressor"},
+  {"id": "s6", "seg": "证据", "scene": "models", "text": "官网主推 4 款，[3000 到 6000BTU]，大的够 [8 到 10 平方米]的帐篷。", "say": "官网主推四款，三千到六千 BTU，大的够八到十平方米的帐篷。", "src": "官网 Products 4 款；Specifications：3000 / 5000 / 6000BTU，8–10 m²"},
+  {"id": "s7", "seg": "证据", "scene": "c18", "text": "C18 [不用接排水管]，接水盘满了[自动停机]。", "say": "C 十八不用接排水管，接水盘满了自动停机。", "src": "官网 Specifications：C18 drainage-free; 1300ml tray, full-tank alarm and auto stop"},
+  {"id": "s8", "seg": "转折", "scene": "moq", "text": "不定制，[没有起订量]；定制包装，[100 台起]。", "say": "不定制，没有起订量；定制包装，一百台起。", "src": "官网 Company：MOQ 100 units with custom packaging; no minimum without customization"},
+  {"id": "s9", "seg": "转折", "scene": "lead", "text": "100 台以内的常规单，[大约 3 天]发货。", "say": "一百台以内的常规单，大约三天发货。", "src": "官网 Company：about 3 days under 100 units"},
+  {"id": "s10", "seg": "转折", "scene": "custom", "text": "Logo、说明书、外箱[免费改]；整机[保修一年]。", "src": "官网 Company：Logo, manual and carton customization is free; Warranty 1 year"},
+  {"id": "s11", "seg": "转折", "scene": "visit", "text": "担心样品和大货不一样，可以[预约]来顺德[看厂]。", "src": "官网 Company：Factory visits by appointment"},
+  {"id": "s12", "seg": "行动", "scene": "cta", "text": "参数和报价，上瀚泱官网，[hafyoung-cooling.com]。", "say": "参数和报价，上瀚泱官网。", "src": "官网"}
+ ],
+ "scenes": {
+  "hook": {"top": 170, "blocks": [
+   {"type": "hero", "value": "15", "unit": "天内出货", "sub": "一台帐篷空调", "image": "素材/c18.png"}
+  ]},
+  "fear": {"top": 250, "blocks": [
+   {"type": "title", "text": "露营空调品牌\n跨境卖家", "size": 92},
+   {"type": "title", "text": "就怕[三]件事", "size": 140, "at": "s2.1"},
+   {"type": "rows", "numbered": true, "mt": 30, "items": [
+    {"text": "旺季交不了货", "at": "s3.0"}, {"text": "起订量太高", "at": "s3.1"}, {"text": "样品 ≠ 大货", "at": "s3.2"}]}
+  ]},
+  "who": {"top": 230, "blocks": [
+   {"type": "photo", "src": "素材/hafyoung-shunde-foshan-center.webp", "h": 640, "chip": "佛山顺德 · Shunde, Foshan"},
+   {"type": "logo", "src": "素材/logo-mark.svg", "w": 640, "at": "+0.35", "mt": 20},
+   {"type": "title", "text": "SpaceCool 自己设计 · 自己生产", "size": 62, "at": "s4.1"}
+  ]},
+  "factory": {"top": 200, "gap": 34, "blocks": [
+   {"type": "photo", "full": true, "h": 720, "kb": [1, 1.1], "anim": "fade", "srcs": [
+    "素材/hafyoung-factory-assembly-line.webp",
+    {"src": "素材/hafyoung-factory-cnc-machining.webp", "at": "s5.1"},
+    {"src": "素材/hafyoung-factory-mold-inspection.webp", "at": "s5.2"}]},
+   {"type": "rows", "items": [
+    {"big": "50,000", "unit": "m²", "text": "工厂面积", "at": "s5.0"},
+    {"big": "2,000+", "accent": true, "text": "台 / 天", "at": "s5.1"},
+    {"text": "压缩机自研", "at": "s5.2"}]}
+  ]},
+  "models": {"top": 230, "gap": 40, "blocks": [
+   {"type": "grid", "items": [
+    {"src": "素材/c18.png", "name": "C18", "spec": "6000BTU · 8–10 m²"},
+    {"src": "素材/pog2.png", "name": "POG-2", "spec": "6000BTU · 8–10 m²"},
+    {"src": "素材/cog2.png", "name": "COG-2", "spec": "3000BTU · 5–8 m²"},
+    {"src": "素材/pog1.png", "name": "POG-1", "spec": "5000BTU · 8–10 m²"}]},
+   {"type": "banner", "text": "3000–6000BTU · 大的够 8–10 m²", "at": "s6.1"}
+  ]},
+  "c18": {"top": 220, "gap": 20, "blocks": [
+   {"type": "kicker", "text": "SpaceCool C18"},
+   {"type": "cutout", "src": "素材/c18.png", "h": 660, "kb": [1.06, 1]},
+   {"type": "bullets", "items": [
+    {"text": "免排水，不用接管", "at": "s7.0"}, {"text": "1300 ml 接水盘", "at": "s7.1"}, {"text": "满水报警 · 自动停机", "at": "s7.1+0.35"}]}
+  ]},
+  "moq": {"top": 260, "gap": 26, "blocks": [
+   {"type": "kicker", "text": "不定制", "at": "s8.0"},
+   {"type": "title", "text": "无起订量", "size": 180, "at": "s8.1"},
+   {"type": "line", "at": "s8.2", "anim": "fade", "mt": 20},
+   {"type": "kicker", "text": "定制包装", "at": "s8.2", "mt": 20},
+   {"type": "number", "value": "100", "unit": "台起", "size": 380, "usize": 120, "at": "s8.3"}
+  ]},
+  "lead": {"top": 250, "gap": 20, "blocks": [
+   {"type": "kicker", "text": "常规单发货"},
+   {"type": "title", "text": "100 台以内", "size": 110, "at": "s9.0"},
+   {"type": "number", "pre": "约", "value": "3", "unit": "天", "size": 330, "usize": 110, "at": "s9.1"},
+   {"type": "bars", "at": "s9.1+0.3", "anim": "fade", "mt": 30, "items": [
+    {"label": "< 100 台", "value": 3, "text": "约 3 天"}, {"label": "100–500", "value": 5, "text": "约 5 天"},
+    {"label": "500–1,000", "value": 7, "text": "约 7 天"}, {"label": "1,000 以上", "value": 10, "text": "7–10 天"}]},
+   {"type": "note", "text": "大单、定制单以合同为准 · 来源：官网", "at": "s9.1+0.3", "anim": "fade"}
+  ]},
+  "custom": {"top": 300, "gap": 50, "blocks": [
+   {"type": "cards", "items": ["Logo", "说明书", "外箱"]},
+   {"type": "title", "text": "免费改", "size": 170, "accent": true, "at": "s10.0+0.9"},
+   {"type": "line", "at": "s10.1", "anim": "fade"},
+   {"type": "number", "pre": "整机保修", "value": "1", "unit": "年", "size": 300, "usize": 96, "accent": false, "at": "s10.1"}
+  ]},
+  "visit": {"top": 200, "gap": 50, "blocks": [
+   {"type": "photo", "full": true, "h": 720, "src": "素材/hafyoung-factory-mold-workshop.webp", "anim": "fade"},
+   {"type": "title", "text": "样品 = 大货？", "size": 96, "at": "s11.0"},
+   {"type": "title", "text": "预约来顺德看厂", "size": 110, "accent": true, "at": "s11.1"}
+  ]},
+  "cta": {"top": 300, "gap": 44, "blocks": [
+   {"type": "logo", "src": "素材/logo-mark.svg", "w": 860},
+   {"type": "kicker", "text": "参数 · 报价", "at": "s12.0", "mt": 30},
+   {"type": "url", "text": "hafyoung-cooling.com", "at": "s12.1"},
+   {"type": "images", "at": "s12.1+0.4", "mt": 40, "srcs": ["素材/c18.png", "素材/pog2.png", "素材/cog2.png", "素材/pog1.png"]}
+  ]}
+ }
+}

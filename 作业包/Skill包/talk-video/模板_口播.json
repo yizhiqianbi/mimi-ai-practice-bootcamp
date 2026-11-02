@@ -1,0 +1,53 @@
+{
+ "name": "20261029_口播_v1",
+ "brand": {
+  "bg": "#F4F2EE", "ink": "#16181D", "accent": "#2E5BFF", "muted": "#7C7E83", "line": "#DAD7D0", "card": "#E6E3DC",
+  "logo": "素材/logo.png", "right": "你的品牌 · 城市"
+ },
+ "voice": {"name": "zh-CN-YunyangNeural", "rate": "+8%"},
+ "bgm": {"src": "素材/bgm.m4a", "fit": "stretch", "lufs": -29},
+ "cover": "s1@0.5",
+ "sentences": [
+  {"id": "s1", "seg": "钩子", "scene": "hook", "text": "____，[__ 天]____。", "say": "____（数字写成汉字）", "src": "底稿 #__"},
+  {"id": "s2", "seg": "冲突", "scene": "pain", "text": "做____的老板，就怕三件事："},
+  {"id": "s3", "seg": "冲突", "scene": "pain", "text": "[____]，[____]，[____]。"},
+  {"id": "s4", "seg": "证据", "scene": "proof", "text": "____，[____]，[____]。", "say": "____", "src": "底稿 #__"},
+  {"id": "s5", "seg": "证据", "scene": "product", "text": "____[____]，____[____]。", "src": "底稿 #__"},
+  {"id": "s6", "seg": "转折", "scene": "terms", "text": "____，[____]；____，[____]。", "say": "____", "src": "底稿 #__"},
+  {"id": "s7", "seg": "转折", "scene": "terms", "text": "____[____]；____[____]。", "src": "底稿 #__"},
+  {"id": "s8", "seg": "行动", "scene": "cta", "text": "____，上____官网，[www.____.com]。", "say": "____，上____官网。", "src": "作业四网站"}
+ ],
+ "scenes": {
+  "hook": {"top": 170, "blocks": [
+   {"type": "hero", "value": "__", "unit": "____", "sub": "____", "image": "素材/产品.png"}
+  ]},
+  "pain": {"top": 250, "blocks": [
+   {"type": "title", "text": "做____的\n老板", "size": 92},
+   {"type": "title", "text": "就怕[三]件事", "size": 140, "at": "s2.1"},
+   {"type": "rows", "numbered": true, "mt": 30, "items": [
+    {"text": "____", "at": "s3.0"}, {"text": "____", "at": "s3.1"}, {"text": "____", "at": "s3.2"}]}
+  ]},
+  "proof": {"top": 200, "blocks": [
+   {"type": "photo", "full": true, "h": 720, "anim": "fade", "srcs": ["素材/现场1.jpg", {"src": "素材/现场2.jpg", "at": "s4.1"}]},
+   {"type": "rows", "items": [
+    {"big": "____", "unit": "", "text": "____", "at": "s4.0"},
+    {"big": "____", "accent": true, "text": "____", "at": "s4.1"}]}
+  ]},
+  "product": {"top": 220, "gap": 20, "blocks": [
+   {"type": "kicker", "text": "____（产品名）"},
+   {"type": "cutout", "src": "素材/产品.png", "h": 660},
+   {"type": "bullets", "items": [{"text": "____", "at": "s5.0"}, {"text": "____", "at": "s5.1"}]}
+  ]},
+  "terms": {"top": 260, "gap": 26, "blocks": [
+   {"type": "kicker", "text": "____", "at": "s6.0"},
+   {"type": "title", "text": "____", "size": 160, "at": "s6.1"},
+   {"type": "line", "at": "s7", "anim": "fade"},
+   {"type": "number", "pre": "____", "value": "__", "unit": "____", "size": 300, "usize": 96, "at": "s7.1"}
+  ]},
+  "cta": {"top": 300, "gap": 44, "blocks": [
+   {"type": "logo", "src": "素材/logo.png", "w": 700},
+   {"type": "kicker", "text": "____", "at": "s8.0", "mt": 30},
+   {"type": "url", "text": "www.____.com", "at": "s8.1"}
+  ]}
+ }
+}

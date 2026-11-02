@@ -311,15 +311,15 @@ body:hover .ctrl{opacity:1}
 .skuse .tag{font:500 15px/1 var(--mono);letter-spacing:.16em;color:var(--blue2);margin-right:4px}
 .skuse .say{font-size:20px;color:var(--muted)}
 .skuse code{font:500 18px/1 var(--mono);padding:9px 14px;border:1px solid rgba(77,123,255,.45);border-radius:999px;color:var(--ink);background:rgba(59,108,255,.12)}
-.combo{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));gap:18px;flex:1;min-height:0}
-.combo .panel{padding:20px 24px;display:flex;flex-direction:column;position:relative}
-.combo .pair{display:flex;align-items:center;gap:8px;font-size:17px;color:var(--muted)}
+.combo{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:22px 18px;flex:1;min-height:0}
+.combo .panel{padding:24px 22px 22px;display:flex;flex-direction:column;position:relative}
+.combo .pair{display:flex;align-items:center;gap:8px;font-size:16px;color:var(--muted);white-space:nowrap}
 .combo .pair img{width:30px;height:30px;border-radius:8px;object-fit:contain;background:rgba(255,255,255,.06)}
 .combo .pair i{font-style:normal;color:var(--blue2)}
-.combo code{display:block;margin-top:14px;font:600 23px/1.2 var(--mono);color:var(--ink)}
-.combo .q{margin-top:8px;font-size:21px;line-height:1.4;color:var(--blue2)}
-.combo b{margin-top:auto;font-size:25px;line-height:1.35}
-.combo .ran{position:absolute;right:18px;top:18px;font:500 13px/1 var(--mono);letter-spacing:.1em;padding:7px 10px;border-radius:999px;background:rgba(63,154,91,.18);color:#8fdba6;border:1px solid rgba(63,154,91,.5)}
+.combo code{display:block;margin-top:18px;font:600 22px/1.2 var(--mono);color:var(--ink)}
+.combo .q{margin-top:10px;font-size:20px;line-height:1.45;color:var(--blue2)}
+.combo b{margin-top:auto;font-size:23px;line-height:1.4}
+.combo .ran{position:absolute;right:16px;top:-13px;font:500 13px/1 var(--mono);letter-spacing:.1em;padding:6px 10px;border-radius:999px;background:#17331f;color:#8fdba6;border:1px solid rgba(63,154,91,.6)}
 .demo2{display:grid;grid-template-columns:minmax(0,1fr) 440px;gap:28px;flex:1;min-height:0}
 .demo2 .panel{padding:22px 26px;display:flex;flex-direction:column;min-height:0}
 .demo2 .q{font-size:22px;font-weight:600;color:var(--blue2)}
@@ -1205,6 +1205,7 @@ strong{color:var(--ink);font-weight:700}
     <h2 class="h-l rv mt-s">组合技：一句话，出一个大活</h2>
     <p class="lead rv mt-s">智能体负责想和排，<strong>剪映、LibTV、企业微信</strong>负责出片、出图、送到人。</p>
     <div class="combo mt-m">
+      <div class="panel rv"><span class="ran">瀚泱已跑</span><div class="pair"><img src="assets/logos/codex.svg" alt=""><img src="assets/logos/jianying.png" alt=""><i>Codex + 剪映</i></div><code>talk-video</code><div class="q">「给我的业务做一条 60 秒口播成片」</div><b>配音、字幕、竖版成片 + 剪映草稿</b></div>
       <div class="panel rv"><span class="ran">木序已跑</span><div class="pair"><img src="assets/logos/codex.svg" alt=""><img src="assets/logos/jianying.png" alt=""><i>Codex + 剪映</i></div><code>jianying-draft</code><div class="q">「把口播稿和素材剪成剪映草稿」</div><b>打开剪映就是排好的时间线</b></div>
       <div class="panel rv"><div class="pair"><img src="assets/logos/codex.svg" alt=""><img src="assets/logos/jianying.png" alt=""><i>Codex + 剪映</i></div><code>clip-factory</code><div class="q">「把这场直播切成 5 条短视频」</div><b>5 个带字幕的竖版草稿 + 文案</b></div>
       <div class="panel rv"><div class="pair"><img src="assets/logos/workbuddy.svg" alt=""><img src="assets/logos/libtv.png" alt=""><i>WorkBuddy + LibTV</i></div><code>libtv-ad</code><div class="q">「给新品做 15 秒广告片，先出 3 个方向」</div><b>分镜 + 成片，推到企业微信挑</b></div>
@@ -1216,7 +1217,7 @@ strong{color:var(--ink);font-weight:700}
       <div class="panel rv"><div class="pair"><img src="assets/logos/wecom.png" alt=""><img src="assets/logos/workbuddy.svg" alt=""><i>企业微信 + WorkBuddy</i></div><code>voice-to-tasks</code><div class="q">（发一段语音）「拆成待办」</div><b>一人一条 @，每天下午追进度</b></div>
     </div>
   </div>
-  <aside class="notes">基础的 13 个 Skill 解决天天发生的小事，这 9 个组合技是让人眼前一亮的大活：智能体负责想和排，专业工具负责出东西。剪映这两个：Codex 用开源的 pyJianYingDraft 直接写剪映草稿，老板打开剪映就是排好的时间线，字幕、转场、推近都在，只剩点导出；长视频切片是同一个原理，一场直播切 5 条。LibTV 这两个：LibTV 官方出了给智能体用的 Skill，WorkBuddy 上传就能用，一句话出 15 秒广告片的分镜和成片，或者一张白底图出一整套 1688 主图，结果推到企业微信让你挑；它按积分计费，Skill 默认先出一个方向的样片，你点头再批量。经营看板把 ERP 导出的表变成手机能看的看板，并且直接告诉你这个月该管哪三件事。合同初审、通话复盘、竞品周报、语音派活，都是老板身边天天在发生的事。标了「木序已跑」的两个，下一页给大家看真跑出来的样子。</aside>
+  <aside class="notes">基础的 13 个 Skill 解决天天发生的小事，这 10 个组合技是让人眼前一亮的大活：智能体负责想和排，专业工具负责出东西。剪映这三个：口播成片是一句话从官网事实一路做到 60 秒竖版视频，配音、字幕、画面、剪映草稿全出来，不用数字人，瀚泱那条就是它跑的，作业三细讲；Codex 用开源的 pyJianYingDraft 直接写剪映草稿，老板打开剪映就是排好的时间线，字幕、转场、推近都在，只剩点导出；长视频切片是同一个原理，一场直播切 5 条。LibTV 这两个：LibTV 官方出了给智能体用的 Skill，WorkBuddy 上传就能用，一句话出 15 秒广告片的分镜和成片，或者一张白底图出一整套 1688 主图，结果推到企业微信让你挑；它按积分计费，Skill 默认先出一个方向的样片，你点头再批量。经营看板把 ERP 导出的表变成手机能看的看板，并且直接告诉你这个月该管哪三件事。合同初审、通话复盘、竞品周报、语音派活，都是老板身边天天在发生的事。标了「木序已跑」的两个，下一页给大家看真跑出来的样子。</aside>
 </section>
 
 <!-- 14 组合技 演示 -->
@@ -1977,7 +1978,7 @@ strong{color:var(--ink);font-weight:700}
           <div class="step rv"><div class="k">C</div><div><h4>生成、配字幕、剪节奏</h4><p>加字幕，删拖沓</p></div></div>
           <div class="step rv"><div class="k">D</div><div><h4>写好发布文案<span class="tool"><img class="lg" src="assets/logos/codex.svg" alt="">Codex</span></h4><p>标题、封面、话题标签</p><div class="chk">✓ 前 3 秒能让人停下来</div></div></div>
         </div>
-        <div class="skuse rv mt-auto"><span class="tag">SKILL 包</span><code>talk-script</code><span class="say">「用 talk-script 写 60 秒口播稿」</span></div>
+        <div class="skuse rv mt-auto"><span class="tag">SKILL 包</span><code>talk-video</code><span class="say">「用 talk-video 给我的业务做一条 60 秒口播成片」</span></div>
       </div>
       <div class="take compact rv">
         <div class="lab">DELIVERABLES</div>
@@ -1994,7 +1995,7 @@ strong{color:var(--ink);font-weight:700}
       </div>
     </div>
   </div>
-  <aside class="notes">作业三，每个人为自己的业务做一条 60 秒口播视频。先让 Grokbot 给出三个开头钩子，选一个，再按钩子、冲突、证据、转折、行动五段写口播稿，最后的“行动”要指向你明天上线的网站。然后设置形象和声音，素材必须有授权。接着生成视频、配字幕、剪节奏，最后把标题、封面和发布文案一次准备好。基础版用平台授权形象和合成配音；如果数字人平台排队或出问题，就改用图片或录屏加配音加字幕，用剪辑工具合成，一样能交付。</aside>
+  <aside class="notes">作业三，每个人为自己的业务做一条 60 秒口播视频。先让 Grokbot 给出三个开头钩子，选一个，再按钩子、冲突、证据、转折、行动五段写口播稿，最后的“行动”要指向你明天上线的网站。然后设置形象和声音，素材必须有授权。接着生成视频、配字幕、剪节奏，最后把标题、封面和发布文案一次准备好。基础版用平台授权形象和合成配音；如果数字人平台排队或出问题，就改用图片或录屏加配音加字幕，一样能交付。不想用数字人的，直接对 Codex 说一句「用 talk-video 给我的业务做一条 60 秒口播成片」：它先摘事实底稿、给三个钩子，写稿、配音、字幕、画面一路做完，钩子、稿子、镜头总览三处停下来让你点头，最后出竖版成片和剪映草稿。瀚泱那条 57 秒的口播就是这么跑出来的。</aside>
 </section>
 
 <!-- 41 模块三 -->
@@ -2829,7 +2830,7 @@ Best regards</div>
     <div class="eb rv">Wrap-up</div>
     <h2 class="h-l rv mt-s">两天后，你带走一个业务成果包和一套 Skill 包</h2>
     <div class="outs mt-m" style="grid-template-columns:repeat(5,1fr)">
-      <div class="panel rv"><span class="no">作业 00</span><b>业务卡片</b><ul><li>业务一句话</li><li>Skill 包（13 + 9 + 3 个）</li><li>改出自己的 Skill</li></ul></div>
+      <div class="panel rv"><span class="no">作业 00</span><b>业务卡片</b><ul><li>业务一句话</li><li>Skill 包（13 + 10 + 3 个）</li><li>改出自己的 Skill</li></ul></div>
       <div class="panel rv"><span class="no">作业 01</span><b>知识库</b><ul><li>业务知识库</li><li>邮件助理</li><li>FAQ 素材</li></ul></div>
       <div class="panel rv"><span class="no">作业 02</span><b>PPT + 海报</b><ul><li>5 页 PPT 与讲稿</li><li>一张海报</li><li>视觉资产</li></ul></div>
       <div class="panel rv"><span class="no">作业 03</span><b>口播视频</b><ul><li>60 秒口播视频</li><li>口播稿模板</li></ul></div>
