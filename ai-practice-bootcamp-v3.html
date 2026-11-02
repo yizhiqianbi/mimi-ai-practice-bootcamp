@@ -631,7 +631,8 @@ strong{color:var(--ink);font-weight:700}
 .matrix.src4 .pct{font:700 36px/1.1 var(--mono);color:var(--ink)}
 .matrix.src4 .pct small{display:block;font:400 14px/1.4 var(--sans,inherit);color:var(--muted);margin-top:6px}
 .strip.tall{height:auto;padding:16px 28px;line-height:1.5}
-.inq{display:grid;grid-template-columns:1.08fr 1fr;gap:28px;flex:1;min-height:0}
+.inq{display:grid;grid-template-columns:1.15fr 1fr;grid-template-rows:minmax(0,1fr);gap:28px;flex:1;min-height:0}
+.inq>.panel{min-height:0;overflow:hidden}
 .inq .panel{padding:30px 36px;display:flex;flex-direction:column}
 .inq h4{display:flex;justify-content:space-between;align-items:baseline;font-size:24px;font-weight:800}
 .inq h4 small{font:500 14px/1 var(--mono);letter-spacing:.12em;color:var(--muted)}
@@ -650,6 +651,11 @@ strong{color:var(--ink);font-weight:700}
 .tl li.ok b{color:#7ee8b4}
 .inq .re{margin-top:auto;display:flex;gap:12px;flex-wrap:wrap}
 .inq .re span{font:500 15px/1 var(--mono);padding:10px 14px;border-radius:999px;border:1px solid var(--line);color:var(--ink2)}
+.inq .shot{margin-top:14px;flex:1;min-height:0;border-radius:12px;overflow:hidden;background:#fbfaf8;border:1px solid var(--line)}
+.inq .shot img{width:100%;height:100%;object-fit:contain;object-position:top;display:block}
+.inq .shot.wide{flex:none}
+.inq .shot.wide img{height:auto}
+.inq .panel .re{margin-top:14px}
 .cmp.audit li{font-size:24px;padding:19px 0}
 .cmp.audit .h-s{display:flex;align-items:center;gap:14px;font-size:28px;padding-bottom:6px}
 .cmp.audit .h-s span{font:500 14px/1 var(--mono);letter-spacing:.14em;color:var(--blue2)}
@@ -2565,22 +2571,15 @@ is its product series.</span></pre></div>
     <h2 class="h-l rv mt-s" style="font-size:58px">上线 15 小时，第一条海外询盘来了</h2>
     <div class="inq mt-m">
       <div class="panel rv">
-        <h4>谁来读了官网<small>统计开通 2 天 · 已剔除自测</small></h4>
-        <table class="bots">
-          <tr><td>bingbot</td><td><i class="s">搜索引擎</i></td><td>44</td><td>robots · 首页 · /zh/</td></tr>
-          <tr><td>Amazonbot</td><td><i>AI 训练</i></td><td>34</td><td>/es/ · /fr/ · /de/</td></tr>
-          <tr><td>ClaudeBot</td><td><i>AI 训练</i></td><td>30</td><td>robots · sitemap · 型号页</td></tr>
-          <tr><td>GPTBot</td><td><i>AI 训练</i></td><td>25</td><td>4 个型号页 · 3 篇指南</td></tr>
-          <tr><td>Googlebot</td><td><i class="s">搜索引擎</i></td><td>11</td><td>robots · 型号页</td></tr>
-          <tr><td>OAI-SearchBot</td><td><i>ChatGPT 搜索</i></td><td>6</td><td>robots</td></tr>
-        </table>
-        <div class="re"><span>AI 爬虫合计 95 次</span><span>GPTBot 读完 7 个新页面 + 9 个语言版</span></div>
+        <h4>谁来读了官网<small>平台后台截图 · 11/02</small></h4>
+        <div class="shot"><img src="assets/geo/hafyoung-bots-top.jpg" alt="HAFYOUNG 官网爬虫来访统计"></div>
+        <div class="re"><span>剔除自测后 AI 爬虫 95 次</span><span>GPTBot 读完 7 个新页面</span></div>
       </div>
       <div class="panel rv">
         <h4>询盘时间线<small>北京时间</small></h4>
+        <div class="shot wide"><img src="assets/geo/hafyoung-inquiry.jpg" alt="最近的询盘动作：提交询盘表单、点询价按钮"></div>
         <ul class="tl">
           <li><b>11/01 19:54</b><span>型号页、参数表、3 篇买家指南上线，提交 Bing</span></li>
-          <li><b>当晚</b><span>Bing 几分钟内就抓取了新型号页</span></li>
           <li class="hot"><b>11/02 11:03</b><span>新加坡访客在<strong>阿拉伯语页</strong>点「询价」</span></li>
           <li class="hot"><b>11/02 12:37</b><span>同一位访客回到首页，<strong>提交询盘表单</strong></span></li>
           <li class="ok"><b>企业确认</b><span>真实海外买家</span></li>
